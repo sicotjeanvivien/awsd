@@ -1,0 +1,7 @@
+baseURL: "https://jean-vivien.dev/"  # Remplace par ton domaine final
+buildDrafts: false
+buildFuture: false
+enableRobotsTXT: true
+minify:
+  disableXML: false
+  minifyOutput: true
