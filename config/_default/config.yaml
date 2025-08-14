@@ -2,6 +2,7 @@ baseURL: "http://localhost/"
 languageCode: "fr-fr"
 title: "AWSD"
 theme: "PaperMod"
+
 pagination:
   disableAliases: false
   pagerSize: 10
@@ -14,31 +15,6 @@ permalinks:
 taxonomies:
   tag: "tags"
   category: "categories"
-
-params:
-  author: "Jean-Vivien Sicot"
-  defaultTheme: "auto"
-  ShowReadingTime: true
-  ShowToc: true
-  ShowPostNavLinks: true
-
-menu:
-  main:
-    - name: "Portfolio"
-      url: "/projets/"
-      weight: 1
-    - name: "Blog"
-      url: "/blog/"
-      weight: 2
-    - name: "Compétences"
-      url: "/competences/"
-      weight: 3
-    - name: "À propos"
-      url: "/a-propos/"
-      weight: 4
-    - name: "Contact"
-      url: "/contact/"
-      weight: 5
 
 outputs:
   home: ["HTML", "RSS", "JSON"]

@@ -1,0 +1,16 @@
+profileMode:
+  enabled: true
+  title: "Jean‑Vivien Sicot"
+  subtitle: "Développeur web — Portfolio & Journal technique"
+  imageUrl: "/images/avatar.jpg"
+  imageWidth: 300
+  imageHeight: 350
+  buttons:
+    - { name: "Portfolio", url: "/projets/" }
+    - { name: "Blog", url: "/blog/" }
+
+homeInfoParams:
+  Title: ""
+  Content: >
+    Bienvenue sur mon site. Vous y trouverez mon portfolio et un journal
+    technique où je documente mes projets complexes (ex : ORM).

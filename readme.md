@@ -1,4 +1,4 @@
-# 🌐 Site Hugo — Portfolio & Blog
+²# 🌐 Site Hugo — Portfolio & Blog
 
 Ce site est construit avec [Hugo](https://gohugo.io/) et utilise le thème [PaperMod](https://github.com/adityatelange/hugo-PaperMod).  
 Il sert à la fois de **portfolio professionnel** et de **blog technique / journal de développement**.
