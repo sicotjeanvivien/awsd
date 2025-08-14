@@ -5,8 +5,7 @@
     <link>http://localhost:1313/contact/</link>
     <description>Recent content in Contact on AWSD</description>
     <generator>Hugo -- 0.148.2</generator>
-    <language>fr-fr</language>
-    <lastBuildDate></lastBuildDate>
+    <language>fr</language>
     <atom:link href="http://localhost:1313/contact/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

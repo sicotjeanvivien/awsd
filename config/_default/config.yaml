@@ -1,7 +1,13 @@
 baseURL: "http://localhost/"
-languageCode: "fr-fr"
 title: "AWSD"
 theme: "PaperMod"
+languageCode: "fr-FR"          # utile pour RSS/SEO (tu peux laisser fr-FR)
+defaultContentLanguage: fr      # << clé qui pilote .Site.Language.Lang
+
+languages:
+  fr:
+    languageName: "Français"
+    weight: 1
 
 pagination:
   disableAliases: false
