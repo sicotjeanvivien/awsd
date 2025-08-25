@@ -1,0 +1,25 @@
+{{ define "main" }}
+{{ $all := where site.RegularPages "Section" "blog" }}
+{{ $paginator := .Paginate (sort $all "Date" "desc") }}
+
+{{ partial "blog-filters.html" (dict "pages" $all) }}
+
+{{ range $paginator.Pages }}
+<article class="post-entry">
+  <header class="entry-header">
+    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+  </header>
+  <section class="entry-content">
+    <p>{{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary }}{{ end }}</p>
+  </section>
+  <footer class="entry-footer">
+    <span>{{ .Date | time.Format "2006-01-02" }}</span>
+    {{ with .Params.categories }} · <span>{{ delimit . ", " }}</span>{{ end }}
+    {{ with .ReadingTime }} · <span>{{ . }} min</span>{{ end }}
+  </footer>
+  <a class="entry-link" aria-label="post link to {{ .Title }}" href="{{ .RelPermalink }}"></a>
+</article>
+{{ end }}
+
+{{ partial "pagination.html" . }}
+{{ end }}

@@ -23,4 +23,4 @@ vous pouvez me joindre par e‑mail. Je réponds en général sous **48 h**.
 - Contexte technique (stack, contraintes)
 - Périmètre / budget indicatif / délais
 
-<small>Vos informations ne sont utilisées **que** pour vous répondre. Aucune prospection, aucun partage à des tiers.</small>
+_Vos informations ne sont utilisées **que** pour vous répondre. Aucune prospection, aucun partage à des tiers._

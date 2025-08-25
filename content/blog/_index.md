@@ -1,15 +1,15 @@
 ---
-date: '2025-08-14T06:08:10+02:00'
+title: "Blog"
+description: "Derniers billets (journal & articles), triés par date."
 draft: true
-title: 'Posts'
 showToc: true
+cascade:
+  ShowReadingTime: true
+  ShowToc: true
+  ShowCodeCopyButtons: true
+  hideSummary: false
 ---
 
-## Section 1
-Texte...
-
-## Section 2
-Texte...
-
-### Sous-section 2.1
-Texte...
+Filtres rapides :
+- [Journal de développement](/categories/journal-de-développement/)
+- [Articles techniques](/categories/articles-techniques/)

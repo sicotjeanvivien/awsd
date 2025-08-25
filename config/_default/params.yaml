@@ -1,15 +1,16 @@
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowReadingTime: true
-showtoc: true
+ShowCodeCopyButtons: true
+Showtoc: true
 TocOpen: true
 
 hideSummary: false
 ShowRssButtonInSectionTermList: true
 ShowPageNums: true
 
-ShowCodeCopyButtons: true
 DisableSpecial1stPost: true
+mainSections: ["blog"]
 
 profileMode:
   enabled: true

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Symfony on AWSD</title>
+    <link>http://localhost:1313/tags/symfony/</link>
+    <description>Recent content in Symfony on AWSD</description>
+    <generator>Hugo -- 0.148.2</generator>
+    <language>fr</language>
+    <lastBuildDate>Thu, 21 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/symfony/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mon premier article</title>
+      <link>http://localhost:1313/blog/mon-premier-article/</link>
+      <pubDate>Thu, 21 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/mon-premier-article/</guid>
+      <description>Résumé court qui sera affiché dans les aperçus.</description>
+    </item>
+  </channel>
+</rss>

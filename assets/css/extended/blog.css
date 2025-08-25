@@ -1,0 +1,54 @@
+/* Conteneur des deux blocs, en "space-around" */
+.awsd-blog-filters {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+/* Blocs gauche/droite */
+.awsd-blog-filters .filters-left,
+.awsd-blog-filters .filters-right {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+/* Rangs d’items */
+.awsd-blog-filters .cat-row,
+.awsd-blog-filters .tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+/* Catégories : on garde le chip PaperMod (.tag) mais on espace mieux */
+.awsd-blog-filters .cat-row .tag {
+  margin: 0; /* PaperMod met déjà un style, on neutralise les marges éventuelles */
+}
+
+/* Tags : style discret "lien texte" en plus petit, sans bouton */
+.awsd-blog-filters .tags-row .awsd-tag {
+  font-size: 0.9rem;               /* plus petit que les catégories */
+  text-decoration: none;
+  border: none;
+  background: none;
+  padding: 0;
+  box-shadow: none;
+  opacity: .85;
+}
+.awsd-blog-filters .tags-row .awsd-tag:hover {
+  text-decoration: underline;
+  opacity: 1;
+}
+
+/* Responsive : garde le "space-around" mais sur plusieurs lignes */
+@media (max-width: 768px) {
+  .awsd-blog-filters {
+    gap: .75rem;
+  }
+}

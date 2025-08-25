@@ -3,21 +3,50 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://localhost:1313/</loc>
-    <lastmod>2025-08-14T06:09:29+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/contact/</loc>
-    <lastmod>2025-08-14T06:09:29+02:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projets/</loc>
-    <lastmod>2025-08-14T06:09:02+02:00</lastmod>
+    <lastmod>2025-08-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/blog/</loc>
-    <lastmod>2025-08-14T06:08:10+02:00</lastmod>
+    <lastmod>2025-08-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
+    <lastmod>2025-08-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/about-me/</loc>
+    <loc>http://localhost:1313/categories/d%C3%A9veloppement/</loc>
+    <lastmod>2025-08-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/mon-premier-article/</loc>
+    <lastmod>2025-08-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/php/</loc>
+    <lastmod>2025-08-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/rust/</loc>
+    <lastmod>2025-08-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/symfony/</loc>
+    <lastmod>2025-08-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2025-08-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/architecture-logicielle/</loc>
+    <lastmod>2025-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/articles-techniques/</loc>
+    <lastmod>2025-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/articles/orm-architecture/</loc>
+    <lastmod>2025-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/orm/</loc>
+    <lastmod>2025-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/projets/</loc>
+  </url><url>
+    <loc>http://localhost:1313/contact/</loc>
+  </url><url>
+    <loc>http://localhost:1313/blog/journal/</loc>
+  </url><url>
+    <loc>http://localhost:1313/about-me/</loc>
   </url>
 </urlset>

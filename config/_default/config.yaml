@@ -1,8 +1,8 @@
 baseURL: "http://localhost/"
 title: "AWSD"
 theme: "PaperMod"
-languageCode: "fr-FR"          # utile pour RSS/SEO (tu peux laisser fr-FR)
-defaultContentLanguage: fr      # << clé qui pilote .Site.Language.Lang
+languageCode: "fr-FR"
+defaultContentLanguage: fr
 
 languages:
   fr:
@@ -23,4 +23,5 @@ taxonomies:
   category: "categories"
 
 outputs:
-  home: ["HTML", "RSS", "JSON"]
+  home:    [HTML, RSS, JSON]
+  section: [HTML, RSS]
