@@ -6,14 +6,6 @@
     <description>Recent content in Articles Techniques on AWSD</description>
     <generator>Hugo -- 0.148.2</generator>
     <language>fr</language>
-    <lastBuildDate>Fri, 15 Aug 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/articles-techniques/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Concevoir un ORM maison en PHP 8.4 : bonnes pratiques</title>
-      <link>http://localhost:1313/blog/articles/orm-architecture/</link>
-      <pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/articles/orm-architecture/</guid>
-      <description>Retour d’expérience sur la conception d’un ORM modulaire en PHP 8.4.</description>
-    </item>
   </channel>
 </rss>

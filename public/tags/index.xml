@@ -6,41 +6,97 @@
     <description>Recent content in Tags on AWSD</description>
     <generator>Hugo -- 0.148.2</generator>
     <language>fr</language>
-    <lastBuildDate>Thu, 21 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 25 Aug 2025 10:30:00 +0200</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>PHP</title>
-      <link>http://localhost:1313/tags/php/</link>
-      <pubDate>Thu, 21 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/php/</guid>
+      <title>Apprentissage</title>
+      <link>http://localhost:1313/tags/apprentissage/</link>
+      <pubDate>Mon, 25 Aug 2025 10:30:00 +0200</pubDate>
+      <guid>http://localhost:1313/tags/apprentissage/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Développement</title>
+      <link>http://localhost:1313/tags/d%C3%A9veloppement/</link>
+      <pubDate>Mon, 25 Aug 2025 10:30:00 +0200</pubDate>
+      <guid>http://localhost:1313/tags/d%C3%A9veloppement/</guid>
       <description></description>
     </item>
     <item>
       <title>Rust</title>
       <link>http://localhost:1313/tags/rust/</link>
-      <pubDate>Thu, 21 Aug 2025 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 25 Aug 2025 10:30:00 +0200</pubDate>
       <guid>http://localhost:1313/tags/rust/</guid>
       <description></description>
     </item>
     <item>
-      <title>Symfony</title>
-      <link>http://localhost:1313/tags/symfony/</link>
-      <pubDate>Thu, 21 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/symfony/</guid>
+      <title>Architecture</title>
+      <link>http://localhost:1313/tags/architecture/</link>
+      <pubDate>Mon, 25 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/architecture/</guid>
       <description></description>
     </item>
     <item>
-      <title>Architecture Logicielle</title>
-      <link>http://localhost:1313/tags/architecture-logicielle/</link>
-      <pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/architecture-logicielle/</guid>
+      <title>Censure</title>
+      <link>http://localhost:1313/tags/censure/</link>
+      <pubDate>Mon, 25 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/censure/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>DDD</title>
+      <link>http://localhost:1313/tags/ddd/</link>
+      <pubDate>Mon, 25 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/ddd/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Doctrine</title>
+      <link>http://localhost:1313/tags/doctrine/</link>
+      <pubDate>Mon, 25 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/doctrine/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Internet</title>
+      <link>http://localhost:1313/tags/internet/</link>
+      <pubDate>Mon, 25 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/internet/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Laravel</title>
+      <link>http://localhost:1313/tags/laravel/</link>
+      <pubDate>Mon, 25 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/laravel/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Liberté</title>
+      <link>http://localhost:1313/tags/libert%C3%A9/</link>
+      <pubDate>Mon, 25 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/libert%C3%A9/</guid>
       <description></description>
     </item>
     <item>
       <title>ORM</title>
       <link>http://localhost:1313/tags/orm/</link>
-      <pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 25 Aug 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/orm/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>PHP</title>
+      <link>http://localhost:1313/tags/php/</link>
+      <pubDate>Mon, 25 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/php/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Réseau</title>
+      <link>http://localhost:1313/tags/r%C3%A9seau/</link>
+      <pubDate>Mon, 25 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/r%C3%A9seau/</guid>
       <description></description>
     </item>
   </channel>

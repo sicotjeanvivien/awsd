@@ -3,6 +3,8 @@ title: "AWSD"
 theme: "PaperMod"
 languageCode: "fr-FR"
 defaultContentLanguage: fr
+enableRobotsTXT: true
+canonifyURLs: true
 
 languages:
   fr:
@@ -23,5 +25,6 @@ taxonomies:
   category: "categories"
 
 outputs:
-  home:    [HTML, RSS, JSON]
-  section: [HTML, RSS]
+  home: ["HTML", "RSS", "JSON"]
+  section: ["HTML", "RSS"]
+  taxonomy: ["HTML", "RSS"]

@@ -1,54 +1,44 @@
-/* Conteneur des deux blocs, en "space-around" */
+/* Conteneur global du bloc filtres */
 .awsd-blog-filters {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-bottom: 2rem;
+  margin-bottom: 2rem; /* espace avec la liste des articles */
 }
 
-/* Blocs gauche/droite */
-.awsd-blog-filters .filters-left,
-.awsd-blog-filters .filters-right {
+/* Ligne du haut: Articles (gauche) / Journal (droite) */
+.awsd-filter-top {
   display: flex;
+  justify-content: space-between;  /* demandé: flex-between */
   align-items: center;
-  gap: .5rem;
-  flex-wrap: wrap;
-  max-width: 100%;
+  gap: 1rem;
+  margin-bottom: 0.75rem;          /* petit espace avec les tags */
 }
 
-/* Rangs d’items */
-.awsd-blog-filters .cat-row,
-.awsd-blog-filters .tags-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .5rem;
-}
-
-/* Catégories : on garde le chip PaperMod (.tag) mais on espace mieux */
-.awsd-blog-filters .cat-row .tag {
-  margin: 0; /* PaperMod met déjà un style, on neutralise les marges éventuelles */
-}
-
-/* Tags : style discret "lien texte" en plus petit, sans bouton */
-.awsd-blog-filters .tags-row .awsd-tag {
-  font-size: 0.9rem;               /* plus petit que les catégories */
+/* Liens "pills" du haut (style neutre, pas bouton flashy) */
+.awsd-pill {
+  font-weight: 600;
   text-decoration: none;
-  border: none;
-  background: none;
-  padding: 0;
-  box-shadow: none;
+  padding: .25rem 0;
+  border-bottom: 2px solid transparent;
+}
+.awsd-pill:hover {
+  border-bottom-color: currentColor;
+}
+
+/* Ligne des tags: wrap + #tag discret */
+.awsd-filter-tags {
+  display: flex;
+  flex-wrap: wrap;                  /* demandé: wrap */
+  gap: .5rem .75rem;
+  margin-bottom: 1rem;              /* espace avant la liste d’articles */
+}
+.awsd-tag {
+  font-size: 0.9rem;                /* plus petit que le haut */
+  text-decoration: none;
   opacity: .85;
 }
-.awsd-blog-filters .tags-row .awsd-tag:hover {
-  text-decoration: underline;
-  opacity: 1;
+.awsd-tag:hover { text-decoration: underline; opacity: 1; }
+
+/* Responsive: au besoin, la ligne du haut reste lisible en wrap */
+@media (max-width: 600px) {
+  .awsd-filter-top { gap: .5rem; }
 }
 
-/* Responsive : garde le "space-around" mais sur plusieurs lignes */
-@media (max-width: 768px) {
-  .awsd-blog-filters {
-    gap: .75rem;
-  }
-}

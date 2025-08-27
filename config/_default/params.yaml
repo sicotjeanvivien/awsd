@@ -3,7 +3,7 @@ ShowPostNavLinks: true
 ShowReadingTime: true
 ShowCodeCopyButtons: true
 Showtoc: true
-TocOpen: true
+TocOpen: false
 
 hideSummary: false
 ShowRssButtonInSectionTermList: true
@@ -11,6 +11,20 @@ ShowPageNums: true
 
 DisableSpecial1stPost: true
 mainSections: ["blog"]
+
+assets:
+  favicon: "favicon.ico"
+  favicon16x16: "favicon-16x16.png"
+  favicon32x32: "favicon-32x32.png"
+  apple_touch_icon: "apple-touch-icon.png"
+  css: 
+    - "css/extended/layout-wide.css"   # global (largeur)
+    - "css/extended/blog-images.css"   # blog (images)
+    - "css/extended/services.css"      # services (cartes)
+label:
+  text: "AWSD"
+  icon: "favicon-32x32.png"
+  iconHeight: 32
 
 profileMode:
   enabled: true

@@ -5,7 +5,7 @@ draft: true
 
 # Contenu & taxonomies
 tags: []
-categories: ["Articles techniques"]
+categories: ["Articles"]
 summary: ""
 description: ""
 

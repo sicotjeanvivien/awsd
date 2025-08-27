@@ -1,64 +1,67 @@
 {{/* Attend .pages : les pages de la section blog */}}
 {{ $pages := .pages }}
 
-{{/* Catégories */}}
-{{ $cats := dict }}
+{{/* CATÉGORIES : map slug -> {name, slug, url, count} */}}
+{{ $catMap := dict }}
 {{ range $p := $pages }}
   {{ with $p.Params.categories }}
     {{ range . }}
       {{ $name := . }}
-      {{ $key := $name | urlize }}
-      {{ $cur := index $cats $key }}
+      {{ $slug := $name | urlize }}
+      {{ $cur := index $catMap $slug }}
       {{ if $cur }}
-        {{ $cats = merge $cats (dict $key (merge $cur (dict "count" (add (index $cur "count") 1)))) }}
+        {{ $catMap = merge $catMap (dict $slug (merge $cur (dict "count" (add (index $cur "count") 1)))) }}
       {{ else }}
-        {{ $cats = merge $cats (dict $key (dict "name" $name "url" (printf "/categories/%s/" $key) "count" 1)) }}
+        {{ $catMap = merge $catMap (dict $slug (dict "name" $name "slug" $slug "url" (printf "/categories/%s/" $slug) "count" 1)) }}
       {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}
 
-{{/* Tags */}}
-{{ $tags := dict }}
-{{ range $p := $pages }}
-  {{ with $p.Params.tags }}
-    {{ range . }}
-      {{ $name := . }}
-      {{ $key := $name | urlize }}
-      {{ $cur := index $tags $key }}
-      {{ if $cur }}
-        {{ $tags = merge $tags (dict $key (merge $cur (dict "count" (add (index $cur "count") 1)))) }}
-      {{ else }}
-        {{ $tags = merge $tags (dict $key (dict "name" $name "url" (printf "/tags/%s/" $key) "count" 1)) }}
+{{/* catMap -> slice */}}
+{{ $catList := slice }} {{ range $k, $v := $catMap }} {{ $catList = $catList | append $v }} {{ end }}
+
+{{/* Détection automatique des 2 cibles */}}
+{{ $articlesURL := "" }}
+{{ $journalURL := "" }}
+{{ range $cat := $catList }}
+  {{ $ln := lower $cat.name }}
+  {{ if and (eq $articlesURL "") (in $ln "article") }} {{ $articlesURL = $cat.url }} {{ end }}
+  {{ if and (eq $journalURL "")  (in $ln "journal")  }} {{ $journalURL  = $cat.url }} {{ end }}
+{{ end }}
+
+{{/* Fallback : top catégories par count */}}
+{{ if or (eq $articlesURL "") (eq $journalURL "") }}
+  {{ $sorted := sort $catList "count" "desc" }}
+  {{ if and (eq $articlesURL "") (ge (len $sorted) 1) }} {{ $articlesURL = (index $sorted 0).url }} {{ end }}
+  {{ if and (eq $journalURL "")  (ge (len $sorted) 2) }} {{ $journalURL  = (index $sorted 1).url }} {{ end }}
+{{ end }}
+
+<div class="awsd-blog-filters">
+  <!-- Ligne 1 : Articles (gauche) / Journal (droite) -->
+  <div class="awsd-filter-top">
+    <a class="awsd-pill" href="{{ $articlesURL | default "/categories/" }}">⬅ Articles</a>
+    <a class="awsd-pill" href="{{ $journalURL  | default "/categories/" }}">Journal ➡</a>
+  </div>
+
+  <!-- TAGS : #tag en wrap -->
+  {{ $tagMap := dict }}
+  {{ range $p := $pages }}
+    {{ with $p.Params.tags }}
+      {{ range . }}
+        {{ $name := . }}
+        {{ $slug := $name | urlize }}
+        {{ if not (index $tagMap $slug) }}
+          {{ $tagMap = merge $tagMap (dict $slug (dict "name" $name "url" (printf "/tags/%s/" $slug))) }}
+        {{ end }}
       {{ end }}
     {{ end }}
   {{ end }}
-{{ end }}
+  {{ $tagList := slice }} {{ range $k, $v := $tagMap }} {{ $tagList = $tagList | append $v }} {{ end }}
 
-{{/* Maps -> slices triables */}}
-{{ $catList := slice }} {{ range $k, $v := $cats }} {{ $catList = $catList | append $v }} {{ end }}
-{{ $tagList := slice }} {{ range $k, $v := $tags }} {{ $tagList = $tagList | append $v }} {{ end }}
-
-{{ if or (gt (len $catList) 0) (gt (len $tagList) 0) }}
-  <div class="awsd-blog-filters awsd-around">
-    {{ if gt (len $catList) 0 }}
-    <div class="filters-left">
-      <div class="terms-tags cat-row">
-        {{ range sort $catList "name" }}
-          <a class="tag" href="{{ .url }}">{{ .name }} ({{ .count }})</a>
-        {{ end }}
-      </div>
-    </div>
-    {{ end }}
-
-    {{ if gt (len $tagList) 0 }}
-    <div class="filters-right">
-      <div class="terms-tags tags-row">
-        {{ range sort $tagList "name" }}
-          <a class="awsd-tag" href="{{ .url }}">#{{ .name }}</a>
-        {{ end }}
-      </div>
-    </div>
+  <div class="awsd-filter-tags">
+    {{ range sort $tagList "name" }}
+      <a class="awsd-tag" href="{{ .url }}">#{{ .name }}</a>
     {{ end }}
   </div>
-{{ end }}
+</div>

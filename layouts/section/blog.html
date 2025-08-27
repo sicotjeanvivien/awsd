@@ -2,6 +2,7 @@
 {{ $all := where site.RegularPages "Section" "blog" }}
 {{ $paginator := .Paginate (sort $all "Date" "desc") }}
 
+{{ $all := where site.RegularPages "Section" "blog" }}
 {{ partial "blog-filters.html" (dict "pages" $all) }}
 
 {{ range $paginator.Pages }}

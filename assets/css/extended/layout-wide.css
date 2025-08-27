@@ -1,0 +1,13 @@
+/* Élargit la zone principale du site (Pages, Listes, Singles) */
+.main, .page-content, .post-content {
+  max-width: 1000px;      /* 1000–1200px est un bon range */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Empêche le texte de devenir trop long en desktop très large */
+.post-content {
+  line-height: 1.7;
+}

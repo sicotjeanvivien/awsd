@@ -1,0 +1,48 @@
+/* Limite la taille des images dans le contenu des articles */
+.post-content img {
+  max-width: 900px !important;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+  border-radius: 8px;   /* optionnel */
+}
+
+/* Évite de limiter des images annotées comme "pleine largeur" si tu en as */
+.post-content img.wide,
+.post-content figure.wide img {
+  max-width: 100%;
+}
+
+/* Figures + légendes (si tu utilises <figure><figcaption>) */
+.post-content figure {
+  margin: 1.2rem auto;
+  text-align: center;
+}
+.post-content figcaption {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  margin-top: 0.35rem;
+}
+
+/* N’affecte pas les emojis/icônes inline éventuels */
+.post-content p img.emoji,
+.post-content li img.emoji {
+  max-width: 1.2em;
+  margin: 0;
+  display: inline;
+}
+
+/* Montrer la cover en ENTIER (pas de crop) */
+.entry-cover {
+  overflow: visible !important;  /* ne masque plus rien */
+  max-width: 70vh;             /* optionnel : borne la largeur de la cover */
+  margin: 0 auto;                /* centre la cover si bornée */
+}
+
+.entry-cover img {
+  width: 100%;
+  height: auto;
+  object-fit: contain !important; /* affiche l’image entière dans le bloc */
+  border-radius: 12px;            /* optionnel */
+}
