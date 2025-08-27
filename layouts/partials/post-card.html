@@ -1,0 +1,36 @@
+{{/* expects . = page */}}
+{{ $p := . }}
+{{ $cover := "" }}
+{{ if $p.Params.cover.image }}
+  {{ $cover = $p.Params.cover.image | absURL }}
+{{ else if $p.Resources.GetMatch "cover*" }}
+  {{ $img := $p.Resources.GetMatch "cover*" }}{{ $cover = $img.Permalink }}
+{{ else if $p.Params.images }}
+  {{ $cover = (index $p.Params.images 0) | absURL }}
+{{ end }}
+
+<article class="post-entry post-card">
+  <a class="post-card__media {{ if eq $p.Params.cover.fit "contain" }}is-contain{{ end }}" href="{{ $p.RelPermalink }}" aria-label="{{ $p.Title }}">
+    {{ with $cover }}
+      <img src="{{ . }}" loading="lazy" alt="{{ $p.Params.cover.alt | default $p.Title }}">
+    {{ else }}
+      <div class="post-card__placeholder" aria-hidden="true"></div>
+    {{ end }}
+  </a>
+
+  <header class="entry-header">
+    <h2 class="post-card__title"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h2>
+  </header>
+
+  <section class="entry-content">
+    <p>{{ with $p.Params.summary }}{{ . }}{{ else }}{{ $p.Summary }}{{ end }}</p>
+  </section>
+
+  <footer class="entry-footer">
+    <span>{{ $p.Date | time.Format "2006-01-02" }}</span>
+    {{ with $p.Params.categories }} · <span>{{ delimit . ", " }}</span>{{ end }}
+    {{ with $p.ReadingTime }} · <span>{{ . }} min</span>{{ end }}
+  </footer>
+
+  <a class="entry-link" aria-label="post link to {{ $p.Title }}" href="{{ $p.RelPermalink }}"></a>
+</article>

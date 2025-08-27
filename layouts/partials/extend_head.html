@@ -1,0 +1,2 @@
+{{- $cards := resources.Get "css/blog-cards.css" | minify | fingerprint -}}
+<link rel="stylesheet" href="{{ $cards.RelPermalink }}" integrity="{{ $cards.Data.Integrity }}">

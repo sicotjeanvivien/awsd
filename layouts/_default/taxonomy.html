@@ -1,0 +1,20 @@
+{{ define "main" }}
+
+  {{ if site.Params.ShowBreadCrumbs }}
+    {{ partial "breadcrumbs.html" . }}
+  {{ end }}
+
+  <header class="page-header">
+    <h1>{{ .Title }}</h1>
+    {{ with .Data.Term }}<p class="taxonomy-desc">Filtré par : <strong>{{ . }}</strong></p>{{ end }}
+  </header>
+
+  {{ $paginator := .Paginate .Pages.ByDate.Reverse }}
+  <section class="posts-grid">
+    {{ range $paginator.Pages }}
+      {{ partial "post-card.html" . }}
+    {{ end }}
+  </section>
+
+  {{ partial "pagination.html" . }}
+{{ end }}

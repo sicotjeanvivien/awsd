@@ -1,0 +1,19 @@
+{{ define "main" }}
+
+  {{ if site.Params.ShowBreadCrumbs }}
+    {{ partial "breadcrumbs.html" . }}
+  {{ end }}
+
+  <header class="page-header">
+    <h1>{{ .Title }}</h1>
+  </header>
+
+  <ul class="terms-cloud">
+    {{ range .Data.Terms.Alphabetical }}
+      <li>
+        <a href="{{ .Page.RelPermalink }}">#{{ .Term }}</a>
+        <span class="terms-count">({{ .Count }})</span>
+      </li>
+    {{ end }}
+  </ul>
+{{ end }}

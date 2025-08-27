@@ -2,7 +2,6 @@
 title: ""
 date: ""
 description: "Courte description du projet."
-tags: ["PHP", "ORM"]
 image: "images/projects/placeholder.jpg"   # chemin relatif à /assets/ ou /static/
 links:
   github: "https://github.com/tonrepo/tonprojet"
