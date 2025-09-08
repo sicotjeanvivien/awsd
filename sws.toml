@@ -1,0 +1,9 @@
+# sws.toml
+[advanced]
+
+# Rediriger tout le trafic de www.awsd.fr -> https://awsd.fr (301)
+[[advanced.redirects]]
+host = "www.awsd.fr"
+source = "/{*}"
+destination = "https://awsd.fr/$1"
+kind = 301
