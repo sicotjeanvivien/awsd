@@ -1,4 +1,4 @@
-baseURL: "https://app-ac7c1d75-3286-4a14-bb73-5717a2c9201a.cleverapps.io"  # Remplace par ton domaine final
+baseURL: "https://www.awsd.fr"  # Remplace par ton domaine final
 buildDrafts: false
 buildFuture: false
 enableRobotsTXT: true
