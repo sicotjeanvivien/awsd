@@ -1,0 +1,8 @@
+# hugo.yaml à la racine
+baseURL: "https://awsd.cleverapps.io/"
+contentDir: "content"
+layoutDir: "layouts"
+assetDir: "assets"
+publishDir: "public"
+themesDir: "themes"
+theme: "PaperMod"

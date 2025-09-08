@@ -1,4 +1,4 @@
-baseURL: "https://jean-vivien.dev/"  # Remplace par ton domaine final
+baseURL: "https://awsd.fr/"  # Remplace par ton domaine final
 buildDrafts: false
 buildFuture: false
 enableRobotsTXT: true

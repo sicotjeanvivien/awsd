@@ -1,0 +1,12 @@
+{
+  "apps": [
+    {
+      "app_id": "app_ac7c1d75-3286-4a14-bb73-5717a2c9201a",
+      "org_id": "user_f4c237de-c081-41fa-9932-290b43b91a43",
+      "deploy_url": "https://push-n3-par-clevercloud-customers.services.clever-cloud.com/app_ac7c1d75-3286-4a14-bb73-5717a2c9201a.git",
+      "git_ssh_url": "git+ssh://git@push-n3-par-clevercloud-customers.services.clever-cloud.com/app_ac7c1d75-3286-4a14-bb73-5717a2c9201a.git",
+      "name": "awsd",
+      "alias": "awsd"
+    }
+  ]
+}
