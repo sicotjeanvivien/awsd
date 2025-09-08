@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="fr" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>👨‍👨‍👧‍👦 Attaques sur l’identité et l’humain (Ingénierie sociale) | AWSD</title>
+<meta name="keywords" content="ingénierie sociale, identité, phishing, fraude, humain">
+<meta name="description" content="Phishing, vishing, smishing, fraude au président, tailgating… Tour d’horizon des attaques qui exploitent les faiblesses humaines et sociales pour contourner la sécurité technique.">
+<meta name="author" content="Jean-Vivien Sicot">
+<link rel="canonical" href="http://localhost:1313/blog/articles/attaques-ingenierie-sociale/">
+<link crossorigin="anonymous" href="http://localhost:1313/assets/css/stylesheet.4c4d394febed31c30ab21b1578f631ffae89f9be36ded464f922d06db45e30e2.css" integrity="sha256-TE05T&#43;vtMcMKshsVePYx/66J&#43;b423tRk&#43;SLQbbReMOI=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="fr" href="http://localhost:1313/blog/articles/attaques-ingenierie-sociale/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><link rel="stylesheet" href="http://localhost:1313/css/blog-cards.min.48d78ddb211625a7cca964a2bb0389f3a581e1fe32ba9f0154693250a4ea9a2b.css" integrity="sha256-SNeN2yEWJafMqWSiuwOJ86WB4f4yup8BVGkyUKTqmis=">
+
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="AWSD (Alt + H)">
+                <img src="http://localhost:1313/favicon-32x32.png" alt="" aria-label="logo"
+                    height="32">AWSD</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/blog/" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/projets/" title="Portfolio">
+                    <span>Portfolio</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/services/" title="Services">
+                    <span>Services</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about-me/" title="Qui suis-je ?">
+                    <span>Qui suis-je ?</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/contact/" title="Contact">
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Accueil</a>&nbsp;»&nbsp;<a href="http://localhost:1313/blog/">Blogs</a></div>
+    <h1 class="post-title entry-hint-parent">
+      👨‍👨‍👧‍👦 Attaques sur l’identité et l’humain (Ingénierie sociale)
+    </h1>
+    <div class="post-description">
+      Phishing, vishing, smishing, fraude au président, tailgating… Tour d’horizon des attaques qui exploitent les faiblesses humaines et sociales pour contourner la sécurité technique.
+    </div>
+    <div class="post-meta"><span title='2025-08-28 00:00:00 +0000 UTC'>août 28, 2025</span>&nbsp;·&nbsp;9 min&nbsp;·&nbsp;Jean-Vivien Sicot
+
+</div>
+  </header> 
+<figure class="entry-cover">
+        <img loading="eager" src="http://localhost:1313/images/articles/social-engineering-cover.png" alt="Illustration abstraite représentant les attaques d’ingénierie sociale">
+        <figcaption>L’humain reste le maillon le plus faible de la sécurité.</figcaption>
+</figure><div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table des matières</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#attaques-sur-lidentit%c3%a9-et-lhumain-ing%c3%a9nierie-sociale" aria-label="Attaques sur l’identité et l’humain (Ingénierie sociale)">Attaques sur l’identité et l’humain (Ingénierie sociale)</a><ul>
+                        
+                <li>
+                    <a href="#1-phishing" aria-label="1. Phishing">1. Phishing</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-formation-des-utilisateurs" aria-label="✅ Formation des utilisateurs">✅ Formation des utilisateurs</a></li>
+                <li>
+                    <a href="#-authentification-forte" aria-label="✅ Authentification forte">✅ Authentification forte</a></li>
+                <li>
+                    <a href="#-filtres-anti-phishing" aria-label="✅ Filtres anti-phishing">✅ Filtres anti-phishing</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#2-spear-phishing" aria-label="2. Spear Phishing">2. Spear Phishing</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-1" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-1" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-1" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-1" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-1" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-sensibilisation-renforc%c3%a9e" aria-label="✅ Sensibilisation renforcée">✅ Sensibilisation renforcée</a></li>
+                <li>
+                    <a href="#-v%c3%a9rification-syst%c3%a9matique" aria-label="✅ Vérification systématique">✅ Vérification systématique</a></li>
+                <li>
+                    <a href="#-dlp-et-sandbox" aria-label="✅ DLP et sandbox">✅ DLP et sandbox</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#3-vishing-voice-phishing" aria-label="3. Vishing (Voice Phishing)">3. Vishing (Voice Phishing)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-2" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-2" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-2" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-2" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-2" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-proc%c3%a9dures-internes" aria-label="✅ Procédures internes">✅ Procédures internes</a></li>
+                <li>
+                    <a href="#-formation-%c3%a0-la-reconnaissance" aria-label="✅ Formation à la reconnaissance">✅ Formation à la reconnaissance</a></li>
+                <li>
+                    <a href="#-caller-id-et-filtrage" aria-label="✅ Caller ID et filtrage">✅ Caller ID et filtrage</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#4-smishing-sms-phishing" aria-label="4. Smishing (SMS Phishing)">4. Smishing (SMS Phishing)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-3" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-3" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-3" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-3" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-3" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-v%c3%a9rification-hors-bande" aria-label="✅ Vérification hors bande">✅ Vérification hors bande</a></li>
+                <li>
+                    <a href="#-sensibilisation" aria-label="✅ Sensibilisation">✅ Sensibilisation</a></li>
+                <li>
+                    <a href="#-filtrage-op%c3%a9rateur" aria-label="✅ Filtrage opérateur">✅ Filtrage opérateur</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#5-pretexting-usurpation-de-r%c3%b4le" aria-label="5. Pretexting (usurpation de rôle)">5. Pretexting (usurpation de rôle)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-4" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-4" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-4" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-4" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-4" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-proc%c3%a9dures-dauthentification-interne" aria-label="✅ Procédures d’authentification interne">✅ Procédures d’authentification interne</a></li>
+                <li>
+                    <a href="#-sensibilisation-%c3%a0-lautorit%c3%a9" aria-label="✅ Sensibilisation à l’autorité">✅ Sensibilisation à l’autorité</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#6-quid-pro-quo" aria-label="6. Quid pro quo">6. Quid pro quo</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-5" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-5" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-5" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-5" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-5" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-politique-stricte-dinstallation-logicielle" aria-label="✅ Politique stricte d’installation logicielle">✅ Politique stricte d’installation logicielle</a></li>
+                <li>
+                    <a href="#-sensibilisation-%c3%a0-la-manipulation" aria-label="✅ Sensibilisation à la manipulation">✅ Sensibilisation à la manipulation</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#7-fraude-au-pr%c3%a9sident-business-email-compromise" aria-label="7. Fraude au président (Business Email Compromise)">7. Fraude au président (Business Email Compromise)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-6" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-6" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-6" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-6" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-6" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-proc%c3%a9dure-de-validation-des-paiements" aria-label="✅ Procédure de validation des paiements">✅ Procédure de validation des paiements</a></li>
+                <li>
+                    <a href="#-sensibilisation-aux-faux-emails" aria-label="✅ Sensibilisation aux faux emails">✅ Sensibilisation aux faux emails</a></li>
+                <li>
+                    <a href="#-simulation-de-phishing-interne" aria-label="✅ Simulation de phishing interne">✅ Simulation de phishing interne</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#8-faux-support-technique-tech-support-scam" aria-label="8. Faux support technique (tech support scam)">8. Faux support technique (tech support scam)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-7" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-7" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-7" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-7" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-7" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-proc%c3%a9dures-officielles-de-support" aria-label="✅ Procédures officielles de support">✅ Procédures officielles de support</a></li>
+                <li>
+                    <a href="#-limiter-les-droits-dadmin" aria-label="✅ Limiter les droits d’admin">✅ Limiter les droits d’admin</a></li>
+                <li>
+                    <a href="#-formation-par-jeux-de-r%c3%b4le" aria-label="✅ Formation par jeux de rôle">✅ Formation par jeux de rôle</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#9-tailgating-intrusion-physique-par-suivi" aria-label="9. Tailgating (intrusion physique par suivi)">9. Tailgating (intrusion physique par suivi)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-8" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-8" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-8" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-8" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-8" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-politique-no-tailgating" aria-label="✅ Politique “no tailgating”">✅ Politique “no tailgating”</a></li>
+                <li>
+                    <a href="#-vid%c3%a9osurveillance-et-contr%c3%b4les" aria-label="✅ Vidéosurveillance et contrôles">✅ Vidéosurveillance et contrôles</a></li>
+                <li>
+                    <a href="#-sensibilisation-%c3%a0-ling%c3%a9nierie-sociale-physique" aria-label="✅ Sensibilisation à l’ingénierie sociale physique">✅ Sensibilisation à l’ingénierie sociale physique</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#10-dumpster-diving-fouille-de-poubelles" aria-label="10. Dumpster Diving (fouille de poubelles)">10. Dumpster Diving (fouille de poubelles)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-9" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-9" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-9" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-9" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-9" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-broyeurs-de-documents" aria-label="✅ Broyeurs de documents">✅ Broyeurs de documents</a></li>
+                <li>
+                    <a href="#-effacement-s%c3%a9curis%c3%a9-des-disques" aria-label="✅ Effacement sécurisé des disques">✅ Effacement sécurisé des disques</a></li>
+                <li>
+                    <a href="#-politique-de-gestion-des-d%c3%a9chets" aria-label="✅ Politique de gestion des déchets">✅ Politique de gestion des déchets</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#11-shoulder-surfing-observation-visuelle" aria-label="11. Shoulder Surfing (observation visuelle)">11. Shoulder Surfing (observation visuelle)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-10" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-10" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-10" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-10" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-10" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-filtres-de-confidentialit%c3%a9-sur-%c3%a9crans" aria-label="✅ Filtres de confidentialité sur écrans">✅ Filtres de confidentialité sur écrans</a></li>
+                <li>
+                    <a href="#-posture-discr%c3%a8te" aria-label="✅ Posture discrète">✅ Posture discrète</a></li>
+                <li>
+                    <a href="#-sensibilisation-1" aria-label="✅ Sensibilisation">✅ Sensibilisation</a></li></ul>
+                </li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#conclusion" aria-label="Conclusion">Conclusion</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="attaques-sur-lidentité-et-lhumain-ingénierie-sociale">Attaques sur l’identité et l’humain (Ingénierie sociale)<a hidden class="anchor" aria-hidden="true" href="#attaques-sur-lidentité-et-lhumain-ingénierie-sociale">#</a></h1>
+<p>Les attaques sur l’identité et l’humain ne reposent pas sur une faille technique, mais sur
+les <strong>faiblesses psychologiques et comportementales</strong>.<br>
+L’attaquant exploite la confiance, la curiosité, la peur, la politesse ou l’autorité pour
+obtenir des informations sensibles, pousser une action non voulue ou accéder à un système.</p>
+<p>Elles se déclinent sous de nombreuses formes : emails frauduleux (phishing, spear phishing),
+appels téléphoniques (vishing), SMS (smishing), faux supports techniques, ou encore intrusion
+physique (tailgating, dumpster diving, shoulder surfing).<br>
+Leur efficacité repose sur un point central : <strong>l’humain est souvent le maillon le plus faible
+de la sécurité</strong>.</p>
+<hr>
+<h2 id="1-phishing">1. Phishing<a hidden class="anchor" aria-hidden="true" href="#1-phishing">#</a></h2>
+<h3 id="1-situation-de-départ">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ">#</a></h3>
+<p>Un utilisateur reçoit un email semblant venir de sa banque :<br>
+“Votre compte est bloqué, cliquez ici pour réactiver”.</p>
+<h3 id="2-ce-que-fait-lattaquant">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant">#</a></h3>
+<ul>
+<li>Le mail contient un lien vers un faux site imitant le vrai.</li>
+<li>L’utilisateur entre ses identifiants de connexion.</li>
+</ul>
+<h3 id="3-conséquence">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence">#</a></h3>
+<ul>
+<li>Vol des identifiants.</li>
+<li>Accès illégitime au compte bancaire.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible">#</a></h3>
+<ul>
+<li>Les emails peuvent facilement usurper une identité visuelle.</li>
+<li>Les utilisateurs font confiance à ce qu’ils reconnaissent (logo, style).</li>
+</ul>
+<h3 id="5-contre-mesures">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures">#</a></h3>
+<h4 id="-formation-des-utilisateurs">✅ Formation des utilisateurs<a hidden class="anchor" aria-hidden="true" href="#-formation-des-utilisateurs">#</a></h4>
+<ul>
+<li>Expliquer comment repérer les signaux (URL différente, fautes d’orthographe).</li>
+<li><strong>Pourquoi ça protège</strong> : réduit les chances que l’utilisateur tombe dans le piège.</li>
+</ul>
+<h4 id="-authentification-forte">✅ Authentification forte<a hidden class="anchor" aria-hidden="true" href="#-authentification-forte">#</a></h4>
+<ul>
+<li>MFA (SMS, TOTP, clé physique).</li>
+<li><strong>Pourquoi ça protège</strong> : même si le mot de passe est volé, l’accès reste bloqué.</li>
+</ul>
+<h4 id="-filtres-anti-phishing">✅ Filtres anti-phishing<a hidden class="anchor" aria-hidden="true" href="#-filtres-anti-phishing">#</a></h4>
+<ul>
+<li>Passerelles mail avec détection d’URL suspectes.</li>
+<li><strong>Pourquoi ça protège</strong> : bloque ou marque les mails avant qu’ils atteignent l’utilisateur.</li>
+</ul>
+<hr>
+<h2 id="2-spear-phishing">2. Spear Phishing<a hidden class="anchor" aria-hidden="true" href="#2-spear-phishing">#</a></h2>
+<h3 id="1-situation-de-départ-1">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-1">#</a></h3>
+<p>Un employé reçoit un mail personnalisé :<br>
+“Bonjour Jean, voici la facture pour le projet X dont vous avez parlé avec Paul”.</p>
+<h3 id="2-ce-que-fait-lattaquant-1">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-1">#</a></h3>
+<ul>
+<li>Utilise des informations personnelles récupérées sur LinkedIn ou réseaux sociaux.</li>
+<li>Rend l’email crédible et ciblé.</li>
+</ul>
+<h3 id="3-conséquence-1">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-1">#</a></h3>
+<ul>
+<li>L’utilisateur clique ou ouvre la pièce jointe.</li>
+<li>Vol d’identifiants, installation d’un malware.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-1">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-1">#</a></h3>
+<ul>
+<li>Les attaquants collectent facilement des infos publiques.</li>
+<li>Les utilisateurs ne s’attendent pas à ce niveau de personnalisation.</li>
+</ul>
+<h3 id="5-contre-mesures-1">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-1">#</a></h3>
+<h4 id="-sensibilisation-renforcée">✅ Sensibilisation renforcée<a hidden class="anchor" aria-hidden="true" href="#-sensibilisation-renforcée">#</a></h4>
+<ul>
+<li>Expliquer aux employés que même un mail crédible peut être piégé.</li>
+<li><strong>Pourquoi ça protège</strong> : augmente la vigilance face aux mails personnalisés.</li>
+</ul>
+<h4 id="-vérification-systématique">✅ Vérification systématique<a hidden class="anchor" aria-hidden="true" href="#-vérification-systématique">#</a></h4>
+<ul>
+<li>Avant d’exécuter une demande sensible (paiement, virement), confirmer par téléphone ou canal différent.</li>
+<li><strong>Pourquoi ça protège</strong> : empêche qu’un simple mail trompe un employé.</li>
+</ul>
+<h4 id="-dlp-et-sandbox">✅ DLP et sandbox<a hidden class="anchor" aria-hidden="true" href="#-dlp-et-sandbox">#</a></h4>
+<ul>
+<li>Scanner les pièces jointes et liens avant ouverture.</li>
+<li><strong>Pourquoi ça protège</strong> : limite l’exécution de malwares via pièces jointes piégées.</li>
+</ul>
+<hr>
+<h2 id="3-vishing-voice-phishing">3. Vishing (Voice Phishing)<a hidden class="anchor" aria-hidden="true" href="#3-vishing-voice-phishing">#</a></h2>
+<h3 id="1-situation-de-départ-2">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-2">#</a></h3>
+<p>Un employé reçoit un appel téléphonique d’un “support technique Microsoft”.</p>
+<h3 id="2-ce-que-fait-lattaquant-2">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-2">#</a></h3>
+<ul>
+<li>Il explique que l’ordinateur est infecté.</li>
+<li>Il demande à installer un logiciel de prise en main à distance.</li>
+</ul>
+<h3 id="3-conséquence-2">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-2">#</a></h3>
+<ul>
+<li>L’attaquant prend le contrôle du poste.</li>
+<li>Vol de données, installation de ransomware.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-2">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-2">#</a></h3>
+<ul>
+<li>La voix donne une impression de légitimité et d’urgence.</li>
+<li>Les utilisateurs veulent souvent “aider” ou résoudre vite un problème.</li>
+</ul>
+<h3 id="5-contre-mesures-2">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-2">#</a></h3>
+<h4 id="-procédures-internes">✅ Procédures internes<a hidden class="anchor" aria-hidden="true" href="#-procédures-internes">#</a></h4>
+<ul>
+<li>Avoir un canal officiel pour le support technique.</li>
+<li><strong>Pourquoi ça protège</strong> : évite de faire confiance à un appel spontané.</li>
+</ul>
+<h4 id="-formation-à-la-reconnaissance">✅ Formation à la reconnaissance<a hidden class="anchor" aria-hidden="true" href="#-formation-à-la-reconnaissance">#</a></h4>
+<ul>
+<li>Expliquer les signaux d’alerte (demande d’installer un logiciel, urgence).</li>
+<li><strong>Pourquoi ça protège</strong> : permet à l’utilisateur de raccrocher sans culpabilité.</li>
+</ul>
+<h4 id="-caller-id-et-filtrage">✅ Caller ID et filtrage<a hidden class="anchor" aria-hidden="true" href="#-caller-id-et-filtrage">#</a></h4>
+<ul>
+<li>Outils pour identifier et bloquer les numéros frauduleux.</li>
+<li><strong>Pourquoi ça protège</strong> : réduit la probabilité d’exposition.</li>
+</ul>
+<hr>
+<h2 id="4-smishing-sms-phishing">4. Smishing (SMS Phishing)<a hidden class="anchor" aria-hidden="true" href="#4-smishing-sms-phishing">#</a></h2>
+<h3 id="1-situation-de-départ-3">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-3">#</a></h3>
+<p>Un utilisateur reçoit un SMS :<br>
+“Votre colis est en attente, cliquez ici pour payer 1€ de frais”.</p>
+<h3 id="2-ce-que-fait-lattaquant-3">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-3">#</a></h3>
+<ul>
+<li>Le lien mène à un faux site de livraison.</li>
+<li>L’utilisateur entre ses infos bancaires.</li>
+</ul>
+<h3 id="3-conséquence-3">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-3">#</a></h3>
+<ul>
+<li>Vol de carte bancaire.</li>
+<li>Fraudes financières.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-3">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-3">#</a></h3>
+<ul>
+<li>Les SMS paraissent venir d’un numéro connu (ex. La Poste).</li>
+<li>Les utilisateurs font confiance aux messages courts et urgents.</li>
+</ul>
+<h3 id="5-contre-mesures-3">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-3">#</a></h3>
+<h4 id="-vérification-hors-bande">✅ Vérification hors bande<a hidden class="anchor" aria-hidden="true" href="#-vérification-hors-bande">#</a></h4>
+<ul>
+<li>Contacter directement le service concerné via leur site officiel.</li>
+<li><strong>Pourquoi ça protège</strong> : on évite de cliquer sur le lien frauduleux.</li>
+</ul>
+<h4 id="-sensibilisation">✅ Sensibilisation<a hidden class="anchor" aria-hidden="true" href="#-sensibilisation">#</a></h4>
+<ul>
+<li>Expliquer que les organismes ne demandent jamais d’infos sensibles par SMS.</li>
+<li><strong>Pourquoi ça protège</strong> : l’utilisateur identifie la fraude plus facilement.</li>
+</ul>
+<h4 id="-filtrage-opérateur">✅ Filtrage opérateur<a hidden class="anchor" aria-hidden="true" href="#-filtrage-opérateur">#</a></h4>
+<ul>
+<li>Certains opérateurs bloquent déjà les SMS suspects.</li>
+<li><strong>Pourquoi ça protège</strong> : réduit l’exposition en amont.</li>
+</ul>
+<hr>
+<h2 id="5-pretexting-usurpation-de-rôle">5. Pretexting (usurpation de rôle)<a hidden class="anchor" aria-hidden="true" href="#5-pretexting-usurpation-de-rôle">#</a></h2>
+<h3 id="1-situation-de-départ-4">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-4">#</a></h3>
+<p>Un attaquant appelle un employé en se faisant passer pour le service informatique.</p>
+<h3 id="2-ce-que-fait-lattaquant-4">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-4">#</a></h3>
+<ul>
+<li>Il invente un scénario crédible : “nous faisons une mise à jour de sécurité, j’ai besoin de vos identifiants”.</li>
+<li>L’utilisateur, rassuré, coopère.</li>
+</ul>
+<h3 id="3-conséquence-4">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-4">#</a></h3>
+<ul>
+<li>Vol de mots de passe.</li>
+<li>Accès direct aux systèmes internes.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-4">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-4">#</a></h3>
+<ul>
+<li>Les humains ont tendance à faire confiance à une autorité perçue.</li>
+<li>Pas de procédure formelle pour vérifier l’identité du demandeur.</li>
+</ul>
+<h3 id="5-contre-mesures-4">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-4">#</a></h3>
+<h4 id="-procédures-dauthentification-interne">✅ Procédures d’authentification interne<a hidden class="anchor" aria-hidden="true" href="#-procédures-dauthentification-interne">#</a></h4>
+<ul>
+<li>Exiger un code interne ou une vérification par un autre canal.</li>
+<li><strong>Pourquoi ça protège</strong> : empêche qu’un simple appel suffise.</li>
+</ul>
+<h4 id="-sensibilisation-à-lautorité">✅ Sensibilisation à l’autorité<a hidden class="anchor" aria-hidden="true" href="#-sensibilisation-à-lautorité">#</a></h4>
+<ul>
+<li>Former les employés à résister aux pressions d’autorité.</li>
+<li><strong>Pourquoi ça protège</strong> : réduit la manipulation psychologique.</li>
+</ul>
+<hr>
+<h2 id="6-quid-pro-quo">6. Quid pro quo<a hidden class="anchor" aria-hidden="true" href="#6-quid-pro-quo">#</a></h2>
+<h3 id="1-situation-de-départ-5">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-5">#</a></h3>
+<p>Un employé reçoit un appel : “Nous offrons une carte cadeau Amazon si vous installez ce logiciel de test”.</p>
+<h3 id="2-ce-que-fait-lattaquant-5">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-5">#</a></h3>
+<ul>
+<li>Il propose un “service” en échange d’une action.</li>
+<li>L’utilisateur installe un logiciel malveillant.</li>
+</ul>
+<h3 id="3-conséquence-5">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-5">#</a></h3>
+<ul>
+<li>Infection du poste.</li>
+<li>Accès non autorisé aux systèmes internes.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-5">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-5">#</a></h3>
+<ul>
+<li>Les humains aiment recevoir une récompense pour un petit effort.</li>
+<li>L’offre semble anodine.</li>
+</ul>
+<h3 id="5-contre-mesures-5">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-5">#</a></h3>
+<h4 id="-politique-stricte-dinstallation-logicielle">✅ Politique stricte d’installation logicielle<a hidden class="anchor" aria-hidden="true" href="#-politique-stricte-dinstallation-logicielle">#</a></h4>
+<ul>
+<li>Interdire toute installation non validée par l’IT.</li>
+<li><strong>Pourquoi ça protège</strong> : même si l’employé est tenté, l’installation échoue.</li>
+</ul>
+<h4 id="-sensibilisation-à-la-manipulation">✅ Sensibilisation à la manipulation<a hidden class="anchor" aria-hidden="true" href="#-sensibilisation-à-la-manipulation">#</a></h4>
+<ul>
+<li>Expliquer que “cadeaux” et “bonus” peuvent cacher une attaque.</li>
+<li><strong>Pourquoi ça protège</strong> : l’utilisateur hésite avant d’accepter.</li>
+</ul>
+<hr>
+<h2 id="7-fraude-au-président-business-email-compromise">7. Fraude au président (Business Email Compromise)<a hidden class="anchor" aria-hidden="true" href="#7-fraude-au-président-business-email-compromise">#</a></h2>
+<h3 id="1-situation-de-départ-6">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-6">#</a></h3>
+<p>Une assistante comptable reçoit un mail du “PDG” de son entreprise :<br>
+“Je suis en déplacement à l’étranger, c’est urgent : fais un virement de 50 000 € à ce compte fournisseur”.</p>
+<h3 id="2-ce-que-fait-lattaquant-6">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-6">#</a></h3>
+<ul>
+<li>Le mail imite l’adresse du PDG (ex. <code>ceo@entreprlse.com</code> avec un “l” remplacé par un “i”).</li>
+<li>Il joue sur l’urgence et l’autorité.</li>
+<li>Il demande de contourner les procédures habituelles (“ne parle à personne, c’est confidentiel”).</li>
+</ul>
+<h3 id="3-conséquence-6">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-6">#</a></h3>
+<ul>
+<li>L’employée effectue le virement.</li>
+<li>L’argent est perdu et difficilement récupérable.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-6">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-6">#</a></h3>
+<ul>
+<li>L’humain est sensible à l’autorité (surtout venant du PDG).</li>
+<li>Pression du temps → absence de vérification.</li>
+<li>Pas de procédure de double validation pour les virements.</li>
+</ul>
+<h3 id="5-contre-mesures-6">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-6">#</a></h3>
+<h4 id="-procédure-de-validation-des-paiements">✅ Procédure de validation des paiements<a hidden class="anchor" aria-hidden="true" href="#-procédure-de-validation-des-paiements">#</a></h4>
+<ul>
+<li>Tout virement doit être validé par deux personnes.</li>
+<li><strong>Pourquoi ça protège</strong> : empêche qu’une seule personne, manipulée, exécute la fraude.</li>
+</ul>
+<h4 id="-sensibilisation-aux-faux-emails">✅ Sensibilisation aux faux emails<a hidden class="anchor" aria-hidden="true" href="#-sensibilisation-aux-faux-emails">#</a></h4>
+<ul>
+<li>Montrer des exemples concrets de domaines usurpés.</li>
+<li><strong>Pourquoi ça protège</strong> : habitue l’employé à vérifier attentivement l’adresse.</li>
+</ul>
+<h4 id="-simulation-de-phishing-interne">✅ Simulation de phishing interne<a hidden class="anchor" aria-hidden="true" href="#-simulation-de-phishing-interne">#</a></h4>
+<ul>
+<li>Organiser des tests contrôlés pour mesurer la réaction des employés.</li>
+<li><strong>Pourquoi ça protège</strong> : entraîne les réflexes en conditions réalistes.</li>
+</ul>
+<hr>
+<h2 id="8-faux-support-technique-tech-support-scam">8. Faux support technique (tech support scam)<a hidden class="anchor" aria-hidden="true" href="#8-faux-support-technique-tech-support-scam">#</a></h2>
+<h3 id="1-situation-de-départ-7">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-7">#</a></h3>
+<p>Un employé reçoit un appel d’un “technicien Microsoft” :<br>
+“Votre ordinateur envoie des erreurs, nous devons intervenir immédiatement”.</p>
+<h3 id="2-ce-que-fait-lattaquant-7">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-7">#</a></h3>
+<ul>
+<li>Il demande à installer un logiciel de prise de contrôle à distance (ex. TeamViewer).</li>
+<li>Il affiche volontairement de faux messages d’erreur pour convaincre la victime.</li>
+</ul>
+<h3 id="3-conséquence-7">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-7">#</a></h3>
+<ul>
+<li>L’attaquant prend le contrôle complet du poste.</li>
+<li>Il peut voler des fichiers, installer un ransomware.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-7">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-7">#</a></h3>
+<ul>
+<li>L’humain fait confiance à une personne qui paraît compétente et utilise du jargon technique.</li>
+<li>Le sentiment d’urgence empêche de réfléchir.</li>
+</ul>
+<h3 id="5-contre-mesures-7">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-7">#</a></h3>
+<h4 id="-procédures-officielles-de-support">✅ Procédures officielles de support<a hidden class="anchor" aria-hidden="true" href="#-procédures-officielles-de-support">#</a></h4>
+<ul>
+<li>Communiquer aux employés le seul canal légitime du support interne.</li>
+<li><strong>Pourquoi ça protège</strong> : ils savent immédiatement qu’un appel externe est suspect.</li>
+</ul>
+<h4 id="-limiter-les-droits-dadmin">✅ Limiter les droits d’admin<a hidden class="anchor" aria-hidden="true" href="#-limiter-les-droits-dadmin">#</a></h4>
+<ul>
+<li>Les utilisateurs n’ont pas le droit d’installer des logiciels.</li>
+<li><strong>Pourquoi ça protège</strong> : même si manipulé, l’employé ne peut pas donner la main.</li>
+</ul>
+<h4 id="-formation-par-jeux-de-rôle">✅ Formation par jeux de rôle<a hidden class="anchor" aria-hidden="true" href="#-formation-par-jeux-de-rôle">#</a></h4>
+<ul>
+<li>Simuler des appels de faux techniciens lors de formations.</li>
+<li><strong>Pourquoi ça protège</strong> : habitue les utilisateurs à dire “non” sans culpabiliser.</li>
+</ul>
+<hr>
+<h2 id="9-tailgating-intrusion-physique-par-suivi">9. Tailgating (intrusion physique par suivi)<a hidden class="anchor" aria-hidden="true" href="#9-tailgating-intrusion-physique-par-suivi">#</a></h2>
+<h3 id="1-situation-de-départ-8">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-8">#</a></h3>
+<p>Une entreprise utilise un badge pour entrer dans les bureaux.</p>
+<h3 id="2-ce-que-fait-lattaquant-8">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-8">#</a></h3>
+<ul>
+<li>Il attend qu’un employé ouvre la porte.</li>
+<li>Il se glisse derrière en tenant un café ou en parlant au téléphone.</li>
+<li>L’employé, par politesse, ne lui demande pas de badger.</li>
+</ul>
+<h3 id="3-conséquence-8">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-8">#</a></h3>
+<ul>
+<li>L’attaquant accède physiquement aux bureaux.</li>
+<li>Vol de matériel, branchement d’un keylogger, récupération de documents imprimés.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-8">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-8">#</a></h3>
+<ul>
+<li>La politesse et la confiance sont des biais humains forts.</li>
+<li>Les employés n’osent pas “jouer à la police”.</li>
+</ul>
+<h3 id="5-contre-mesures-8">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-8">#</a></h3>
+<h4 id="-politique-no-tailgating">✅ Politique “no tailgating”<a hidden class="anchor" aria-hidden="true" href="#-politique-no-tailgating">#</a></h4>
+<ul>
+<li>Former les employés à fermer les portes derrière eux.</li>
+<li><strong>Pourquoi ça protège</strong> : réduit la possibilité de suivre quelqu’un sans badge.</li>
+</ul>
+<h4 id="-vidéosurveillance-et-contrôles">✅ Vidéosurveillance et contrôles<a hidden class="anchor" aria-hidden="true" href="#-vidéosurveillance-et-contrôles">#</a></h4>
+<ul>
+<li>Caméras et personnel de sécurité.</li>
+<li><strong>Pourquoi ça protège</strong> : dissuade et permet d’identifier une intrusion.</li>
+</ul>
+<h4 id="-sensibilisation-à-lingénierie-sociale-physique">✅ Sensibilisation à l’ingénierie sociale physique<a hidden class="anchor" aria-hidden="true" href="#-sensibilisation-à-lingénierie-sociale-physique">#</a></h4>
+<ul>
+<li>Expliquer que l’attaquant utilisera la politesse comme arme.</li>
+<li><strong>Pourquoi ça protège</strong> : déculpabilise l’employé qui ose demander un badge.</li>
+</ul>
+<hr>
+<h2 id="10-dumpster-diving-fouille-de-poubelles">10. Dumpster Diving (fouille de poubelles)<a hidden class="anchor" aria-hidden="true" href="#10-dumpster-diving-fouille-de-poubelles">#</a></h2>
+<h3 id="1-situation-de-départ-9">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-9">#</a></h3>
+<p>Une entreprise jette ses brouillons, factures ou vieux disques durs sans précaution.</p>
+<h3 id="2-ce-que-fait-lattaquant-9">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-9">#</a></h3>
+<ul>
+<li>Il fouille les poubelles ou récupère des disques jetés.</li>
+<li>Il y trouve des informations sensibles (numéros clients, logins, données financières).</li>
+</ul>
+<h3 id="3-conséquence-9">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-9">#</a></h3>
+<ul>
+<li>Vol d’informations confidentielles.</li>
+<li>Préparation d’attaques ciblées (phishing crédible).</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-9">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-9">#</a></h3>
+<ul>
+<li>Les documents ou supports ne sont pas détruits correctement.</li>
+<li>Les employés considèrent la poubelle comme “sécurisée”.</li>
+</ul>
+<h3 id="5-contre-mesures-9">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-9">#</a></h3>
+<h4 id="-broyeurs-de-documents">✅ Broyeurs de documents<a hidden class="anchor" aria-hidden="true" href="#-broyeurs-de-documents">#</a></h4>
+<ul>
+<li>Détruire tous les papiers sensibles avant de les jeter.</li>
+<li><strong>Pourquoi ça protège</strong> : rend la reconstitution impossible.</li>
+</ul>
+<h4 id="-effacement-sécurisé-des-disques">✅ Effacement sécurisé des disques<a hidden class="anchor" aria-hidden="true" href="#-effacement-sécurisé-des-disques">#</a></h4>
+<ul>
+<li>Utiliser des outils de wipe ou destruction physique.</li>
+<li><strong>Pourquoi ça protège</strong> : empêche la récupération de données effacées.</li>
+</ul>
+<h4 id="-politique-de-gestion-des-déchets">✅ Politique de gestion des déchets<a hidden class="anchor" aria-hidden="true" href="#-politique-de-gestion-des-déchets">#</a></h4>
+<ul>
+<li>Définir clairement quoi jeter, où, et comment.</li>
+<li><strong>Pourquoi ça protège</strong> : réduit les fuites accidentelles.</li>
+</ul>
+<hr>
+<h2 id="11-shoulder-surfing-observation-visuelle">11. Shoulder Surfing (observation visuelle)<a hidden class="anchor" aria-hidden="true" href="#11-shoulder-surfing-observation-visuelle">#</a></h2>
+<h3 id="1-situation-de-départ-10">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-10">#</a></h3>
+<p>Un employé travaille dans un café ou un open space.</p>
+<h3 id="2-ce-que-fait-lattaquant-10">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-10">#</a></h3>
+<ul>
+<li>Il s’assoit derrière ou à côté.</li>
+<li>Il observe les mots de passe tapés ou lit les infos affichées.</li>
+</ul>
+<h3 id="3-conséquence-10">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-10">#</a></h3>
+<ul>
+<li>Vol d’identifiants.</li>
+<li>Divulgation d’informations sensibles.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-10">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-10">#</a></h3>
+<ul>
+<li>Les écrans sont visibles par des personnes non autorisées.</li>
+<li>Aucun filtre visuel.</li>
+</ul>
+<h3 id="5-contre-mesures-10">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-10">#</a></h3>
+<h4 id="-filtres-de-confidentialité-sur-écrans">✅ Filtres de confidentialité sur écrans<a hidden class="anchor" aria-hidden="true" href="#-filtres-de-confidentialité-sur-écrans">#</a></h4>
+<ul>
+<li>Limite l’angle de vision.</li>
+<li><strong>Pourquoi ça protège</strong> : seul l’utilisateur en face peut lire.</li>
+</ul>
+<h4 id="-posture-discrète">✅ Posture discrète<a hidden class="anchor" aria-hidden="true" href="#-posture-discrète">#</a></h4>
+<ul>
+<li>Tourner l’écran vers un mur ou un angle discret.</li>
+<li><strong>Pourquoi ça protège</strong> : réduit les risques d’espionnage accidentel.</li>
+</ul>
+<h4 id="-sensibilisation-1">✅ Sensibilisation<a hidden class="anchor" aria-hidden="true" href="#-sensibilisation-1">#</a></h4>
+<ul>
+<li>Expliquer que l’espionnage peut être aussi simple qu’un regard discret.</li>
+<li><strong>Pourquoi ça protège</strong> : incite à plus de vigilance en public.</li>
+</ul>
+<hr>
+<h1 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h1>
+<p>Les attaques d’ingénierie sociale rappellent que la sécurité ne dépend pas uniquement des machines
+et des protocoles, mais aussi de la vigilance des personnes.<br>
+En usurpant une identité, en jouant sur l’urgence ou en exploitant la politesse, un attaquant peut
+obtenir plus qu’avec une attaque technique complexe.</p>
+<p>Trois axes majeurs se dégagent :</p>
+<ul>
+<li><strong>Sensibilisation et formation</strong> → donner aux utilisateurs les bons réflexes.</li>
+<li><strong>Procédures claires</strong> → exiger des validations multiples, définir des canaux officiels.</li>
+<li><strong>Culture de sécurité</strong> → déculpabiliser les employés qui doutent ou refusent une demande suspecte.</li>
+</ul>
+<p>En résumé, la défense face à ces attaques repose moins sur la technologie que sur l’<strong>hygiène
+comportementale</strong> et la <strong>maturité collective</strong> face aux manipulations.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/ing%C3%A9nierie-sociale/">Ingénierie Sociale</a></li>
+      <li><a href="http://localhost:1313/tags/identit%C3%A9/">Identité</a></li>
+      <li><a href="http://localhost:1313/tags/phishing/">Phishing</a></li>
+      <li><a href="http://localhost:1313/tags/fraude/">Fraude</a></li>
+      <li><a href="http://localhost:1313/tags/humain/">Humain</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/blog/articles/attaques-reseaux/">
+    <span class="title">« Précédent</span>
+    <br>
+    <span>🌐 Attaques Réseau : comprendre et se protéger</span>
+  </a>
+  <a class="next" href="http://localhost:1313/blog/articles/panorame-attaque-cybersecurite/">
+    <span class="title">Suivant »</span>
+    <br>
+    <span>Panorama des principales attaques en cybersécurité</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">AWSD</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'Copier';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'Copié !';
+            setTimeout(() => {
+                copybutton.innerHTML = 'Copier';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

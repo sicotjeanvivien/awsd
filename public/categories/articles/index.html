@@ -152,6 +152,600 @@
 
 
 <article class="post-entry post-card">
+  <a class="post-card__media " href="http://localhost:1313/blog/articles/owasp_top_10/" aria-label="OWASP Top 10 (2021)">
+    
+      <img src="http://localhost:1313/images/articles/owasp-top10-cover.png" loading="lazy" alt="OWASP Top 10 - Logo officiel de la guêpe">
+    
+  </a>
+
+  <header class="entry-header">
+    <h2 class="post-card__title"><a href="http://localhost:1313/blog/articles/owasp_top_10/">OWASP Top 10 (2021)</a></h2>
+  </header>
+
+  <section class="entry-content">
+    <p><h1 id="-owasp-top-10--2021">🛡️ OWASP Top 10 – 2021</h1>
+<p>Le <strong>OWASP Top 10</strong> est le classement des risques de sécurité applicative les plus critiques.<br>
+Il sert de référence aux développeurs, pentesters et responsables sécurité.</p>
+<hr>
+<h2 id="a01-broken-access-control"><strong>A01: Broken Access Control</strong></h2>
+<ul>
+<li><strong>Définition</strong> : Les contrôles d’accès sont absents, mal implémentés ou contournables.</li>
+<li><strong>Mécanisme</strong> :
+<ul>
+<li>Contrôles uniquement côté client.</li>
+<li>Références directes non sécurisées (<code>/user?id=124</code>).</li>
+<li>Bypass de contrôles via paramètres cachés.</li>
+</ul>
+</li>
+<li><strong>Exemples</strong> :
+<ul>
+<li>Accès à <code>/admin</code> sans être administrateur.</li>
+<li>Téléchargement de fichiers appartenant à d’autres utilisateurs.</li>
+</ul>
+</li>
+<li><strong>Impacts</strong> :
+<ul>
+<li>Exposition de données sensibles.</li>
+<li>Escalade de privilèges.</li>
+</ul>
+</li>
+<li><strong>Mitigation</strong> :
+<ul>
+<li>Vérifications <strong>côté serveur</strong> obligatoires.</li>
+<li>Politiques d’accès centralisées.</li>
+<li>Principe du <strong>moindre privilège</strong>.</li>
+<li>Tests automatiques sur les autorisations.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="a02-cryptographic-failures"><strong>A02: Cryptographic Failures</strong></h2>
+<ul>
+<li><strong>Définition</strong> : Mauvaise protection des données sensibles.</li>
+<li><strong>Mécanisme</strong> :
+<ul>
+<li>Stockage en clair.</li>
+<li>Protocole faible (MD5, SHA1, SSLv3).</li>
+<li>Mauvaise gestion des clés ou certificats.</li>
+</ul>
+</li>
+<li><strong>Exemples</strong> :
+<ul>
+<li>Mots de passe stockés en MD5.</li>
+<li>Site en HTTP intercepté (attaque <em>Man-in-the-Middle</em>).</li>
+<li>Clés API dans un repo GitHub public.</li>
+</ul>
+</li>
+<li><strong>Impacts</strong> :
+<ul>
+<li>Fuite d’identifiants, données médicales ou bancaires.</li>
+<li>Responsabilité légale (RGPD, PCI DSS).</li>
+</ul>
+</li>
+<li><strong>Mitigation</strong> :
+<ul>
+<li>TLS 1.2+ obligatoire (HSTS).</li>
+<li>Hashage fort des mots de passe (bcrypt, Argon2).</li>
+<li>Rotation et protection des clés.</li>
+<li>Ne jamais stocker plus de données que nécessaire.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="a03-injection"><strong>A03: Injection</strong></h2>
+<ul>
+<li><strong>Définition</strong> : L’application interprète les données utilisateur comme du code.</li>
+<li><strong>Mécanisme</strong> :
+<ul>
+<li>Entrées concaténées dans des requêtes.</li>
+<li>Absence de validation/échappement.</li>
+</ul>
+</li>
+<li><strong>Exemples</strong> :
+<ul>
+<li><strong>SQL Injection</strong> :
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> users <span style="color:#66d9ef">WHERE</span> name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#66d9ef">OR</span> <span style="color:#e6db74">&#39;1&#39;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;1&#39;</span>;
+</span></span></code></pre></div></li>
+<li><strong>Command Injection</strong> :<br>
+<code>ping 8.8.8.8 &amp;&amp; rm -rf /</code></li>
+<li><strong>LDAP Injection</strong>.</li>
+</ul>
+</li>
+<li><strong>Impacts</strong> :
+<ul>
+<li>Fuite massive de données.</li>
+<li>Exécution de commandes arbitraires.</li>
+<li>Contrôle total de l’application.</li>
+</ul>
+</li>
+<li><strong>Mitigation</strong> :
+<ul>
+<li>Requêtes préparées.</li>
+<li>Validation stricte des entrées.</li>
+<li>Principe &ldquo;deny by default&rdquo;.</li>
+<li>WAF en complément.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="a04-insecure-design"><strong>A04: Insecure Design</strong></h2>
+<ul>
+<li><strong>Définition</strong> : Vulnérabilités liées à la conception de l’application.</li>
+<li><strong>Mécanisme</strong> :
+<ul>
+<li>Pas de <em>threat modeling</em>.</li>
+<li>Règles métier insuffisantes.</li>
+<li>Pas de limite d’utilisation des ressources.</li>
+</ul>
+</li>
+<li><strong>Exemples</strong> :
+<ul>
+<li>API bancaire sans limite de virement journalier.</li>
+<li>Application sans MFA prévue dès le design.</li>
+</ul>
+</li>
+<li><strong>Impacts</strong> :
+<ul>
+<li>Attaques exploitables même avec du code “propre”.</li>
+<li>Défauts structurels impossibles à corriger rapidement.</li>
+</ul>
+</li>
+<li><strong>Mitigation</strong> :
+<ul>
+<li><strong>Security by design</strong>.</li>
+<li>Scénarios d’attaque dès la phase projet.</li>
+<li>Revues d’architecture.</li>
+<li>Défense en profondeur.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="a05-security-misconfiguration"><strong>A05: Security Misconfiguration</strong></h2>
+<ul>
+<li><strong>Définition</strong> : Paramétrage non sécurisé ou défaut par défaut.</li>
+<li><strong>Mécanisme</strong> :
+<ul>
+<li>Services inutiles activés.</li>
+<li>Erreurs trop verbeuses.</li>
+<li>Ports ou consoles admin exposés.</li>
+</ul>
+</li>
+<li><strong>Exemples</strong> :
+<ul>
+<li>Tomcat Manager accessible sans restriction.</li>
+<li>Stack-trace affichée en production.</li>
+</ul>
+</li>
+<li><strong>Impacts</strong> :
+<ul>
+<li>Attaques automatisées faciles.</li>
+<li>Compromission rapide d’un serveur.</li>
+</ul>
+</li>
+<li><strong>Mitigation</strong> :
+<ul>
+<li><strong>Hardening</strong> des environnements.</li>
+<li>Configurations standardisées (infrastructure as code).</li>
+<li>Suppression des services inutiles.</li>
+<li>Tests de configuration réguliers.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="a06-vulnerable-and-outdated-components"><strong>A06: Vulnerable and Outdated Components</strong></h2>
+<ul>
+<li><strong>Définition</strong> : Utilisation de composants tiers vulnérables ou non maintenus.</li>
+<li><strong>Mécanisme</strong> :
+<ul>
+<li>Dépendances obsolètes.</li>
+<li>Libs open-source non mises à jour.</li>
+</ul>
+</li>
+<li><strong>Exemples</strong> :
+<ul>
+<li>Faille Apache Struts → Equifax.</li>
+<li>jQuery 1.x vulnérable à XSS.</li>
+</ul>
+</li>
+<li><strong>Impacts</strong> :
+<ul>
+<li>Exploitation de failles connues publiques.</li>
+<li>Chaîne de dépendances compromise.</li>
+</ul>
+</li>
+<li><strong>Mitigation</strong> :
+<ul>
+<li>Inventaire des dépendances.</li>
+<li>Outils SCA (OWASP Dependency-Check, Snyk).</li>
+<li>Mises à jour régulières.</li>
+<li>Suppression des dépendances inutiles.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="a07-identification-and-authentication-failures"><strong>A07: Identification and Authentication Failures</strong></h2>
+<ul>
+<li><strong>Définition</strong> : Failles dans l’authentification et gestion de session.</li>
+<li><strong>Mécanisme</strong> :
+<ul>
+<li>Sessions non sécurisées.</li>
+<li>MFA absent.</li>
+<li>Identifiants par défaut laissés.</li>
+</ul>
+</li>
+<li><strong>Exemples</strong> :
+<ul>
+<li>Attaque brute force sans limite de tentatives.</li>
+<li>JWT sans expiration.</li>
+<li>Cookies sans <code>HttpOnly</code> ni <code>Secure</code>.</li>
+</ul>
+</li>
+<li><strong>Impacts</strong> :
+<ul>
+<li>Compromission de comptes utilisateurs/admin.</li>
+<li>Usurpation d’identité.</li>
+</ul>
+</li>
+<li><strong>Mitigation</strong> :
+<ul>
+<li>MFA obligatoire.</li>
+<li>Politique de mots de passe robustes.</li>
+<li>Expiration/renouvellement des sessions.</li>
+<li>Tokens signés et vérifiés.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="a08-software-and-data-integrity-failures"><strong>A08: Software and Data Integrity Failures</strong></h2>
+<ul>
+<li><strong>Définition</strong> : Données ou code non protégés contre modification.</li>
+<li><strong>Mécanisme</strong> :
+<ul>
+<li>Dépendances non vérifiées.</li>
+<li>CI/CD non sécurisé.</li>
+</ul>
+</li>
+<li><strong>Exemples</strong> :
+<ul>
+<li>Dépendance npm compromise (<code>event-stream</code>).</li>
+<li>Update non signée d’un logiciel.</li>
+</ul>
+</li>
+<li><strong>Impacts</strong> :
+<ul>
+<li>Exécution de code malveillant.</li>
+<li>Supply Chain Attack.</li>
+</ul>
+</li>
+<li><strong>Mitigation</strong> :
+<ul>
+<li>Signatures numériques obligatoires.</li>
+<li>CI/CD sécurisé avec contrôle d’intégrité.</li>
+<li>Contrôle d’origine des dépendances.</li>
+<li>Séparation des environnements.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="a09-security-logging-and-monitoring-failures"><strong>A09: Security Logging and Monitoring Failures</strong></h2>
+<ul>
+<li><strong>Définition</strong> : Manque de surveillance et de journalisation efficace.</li>
+<li><strong>Mécanisme</strong> :
+<ul>
+<li>Absence de logs.</li>
+<li>Logs insuffisants ou non surveillés.</li>
+</ul>
+</li>
+<li><strong>Exemples</strong> :
+<ul>
+<li>Attaques brute force non détectées.</li>
+<li>Absence d’alerte sur des accès critiques.</li>
+</ul>
+</li>
+<li><strong>Impacts</strong> :
+<ul>
+<li>Détection tardive (voire inexistante) des attaques.</li>
+<li>Investigation impossible.</li>
+</ul>
+</li>
+<li><strong>Mitigation</strong> :
+<ul>
+<li>Centralisation des logs (ELK, Splunk).</li>
+<li>SIEM avec alertes.</li>
+<li>Tests de <em>incident response</em>.</li>
+<li>Rétention des logs sécurisée.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="a10-server-side-request-forgery-ssrf"><strong>A10: Server-Side Request Forgery (SSRF)</strong></h2>
+<ul>
+<li><strong>Définition</strong> : L’application récupère des ressources externes sans contrôle.</li>
+<li><strong>Mécanisme</strong> :
+<ul>
+<li>L’attaquant fournit une URL malveillante.</li>
+<li>Le serveur fait la requête à sa place.</li>
+</ul>
+</li>
+<li><strong>Exemples</strong> :
+<ul>
+<li>App qui va chercher <code>http://localhost:8080/admin</code>.</li>
+<li>Accès aux métadonnées AWS via <code>http://169.254.169.254/</code>.</li>
+</ul>
+</li>
+<li><strong>Impacts</strong> :
+<ul>
+<li>Accès non autorisé aux services internes.</li>
+<li>Mouvement latéral dans le réseau.</li>
+</ul>
+</li>
+<li><strong>Mitigation</strong> :
+<ul>
+<li><strong>Whitelist</strong> des domaines.</li>
+<li>Bloquer les plages IP internes.</li>
+<li>Timeout stricts.</li>
+<li>Filtrage DNS et proxy.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="-synthèse">🚨 Synthèse</h1>
+<ul>
+<li>Le <strong>Top 10 OWASP est une base minimale</strong> pour toute organisation.</li>
+<li>Il couvre 3 grands axes :
+<ol>
+<li><strong>Failles techniques</strong> (injection, SSRF, crypto).</li>
+<li><strong>Failles humaines/organisationnelles</strong> (config, logs, design).</li>
+<li><strong>Chaîne logicielle</strong> (dépendances, CI/CD, supply chain).</li>
+</ol>
+</li>
+<li>C’est une <strong>référence mondiale</strong> utilisée dans les normes (ISO, PCI DSS, etc.).</li>
+</ul>
+<p><img alt="Schéma OWASP Top 10" loading="lazy" src="http://localhost:1313/images/articles/owasp-top10-mindmap.png" title="OWASP Mindmap"></p></p>
+  </section>
+
+  <footer class="entry-footer">
+    <span>2025-09-03</span>
+     · <span>Articles</span>
+     · <span>4 min</span>
+  </footer>
+
+  <a class="entry-link" aria-label="post link to OWASP Top 10 (2021)" href="http://localhost:1313/blog/articles/owasp_top_10/"></a>
+</article>
+
+    
+      
+
+
+
+  
+
+
+<article class="post-entry post-card">
+  <a class="post-card__media " href="http://localhost:1313/blog/articles/attaques-communications-vie-privee/" aria-label="🗣 Attaques sur les communications et la vie privée">
+    
+      <img src="http://localhost:1313/images/articles/chat-cyberhacker-privacy-attacks.png" loading="lazy" alt="Illustration abstraite représentant les attaques sur la vie privée">
+    
+  </a>
+
+  <header class="entry-header">
+    <h2 class="post-card__title"><a href="http://localhost:1313/blog/articles/attaques-communications-vie-privee/">🗣 Attaques sur les communications et la vie privée</a></h2>
+  </header>
+
+  <section class="entry-content">
+    <p>Les attaques sur les communications exploitent les faiblesses des protocoles et la surexposition des données personnelles. Découvrez comment elles compromettent la vie privée (IMSI catcher, rogue Wi-Fi, OSINT, doxxing) et comment s’en protéger.</p>
+  </section>
+
+  <footer class="entry-footer">
+    <span>2025-08-28</span>
+     · <span>Articles</span>
+     · <span>9 min</span>
+  </footer>
+
+  <a class="entry-link" aria-label="post link to 🗣 Attaques sur les communications et la vie privée" href="http://localhost:1313/blog/articles/attaques-communications-vie-privee/"></a>
+</article>
+
+    
+      
+
+
+
+  
+
+
+<article class="post-entry post-card">
+  <a class="post-card__media " href="http://localhost:1313/blog/articles/attaques-applicatives/" aria-label="📲 Attaques Applicatives">
+    
+      <img src="http://localhost:1313/images/articles/chat-cyberhacker-app-attacks.png" loading="lazy" alt="Illustration abstraite représentant les attaques applicatives">
+    
+  </a>
+
+  <header class="entry-header">
+    <h2 class="post-card__title"><a href="http://localhost:1313/blog/articles/attaques-applicatives/">📲 Attaques Applicatives</a></h2>
+  </header>
+
+  <section class="entry-content">
+    <p>Les attaques applicatives ciblent directement le code métier, les API et les frameworks. Découvrez les vecteurs classiques (injection, XSS, CSRF) et modernes (GraphQL, JWT, API abuse), ainsi que les meilleures pratiques de défense.</p>
+  </section>
+
+  <footer class="entry-footer">
+    <span>2025-08-28</span>
+     · <span>Articles</span>
+     · <span>17 min</span>
+  </footer>
+
+  <a class="entry-link" aria-label="post link to 📲 Attaques Applicatives" href="http://localhost:1313/blog/articles/attaques-applicatives/"></a>
+</article>
+
+    
+      
+
+
+
+  
+
+
+<article class="post-entry post-card">
+  <a class="post-card__media " href="http://localhost:1313/blog/articles/attaques-physiques-materielles/" aria-label="💪 Attaques physiques et matérielles">
+    
+      <img src="http://localhost:1313/images/articles/chat-cyberhacker-physical-attacks.png" loading="lazy" alt="Illustration abstraite représentant les attaques matérielles">
+    
+  </a>
+
+  <header class="entry-header">
+    <h2 class="post-card__title"><a href="http://localhost:1313/blog/articles/attaques-physiques-materielles/">💪 Attaques physiques et matérielles</a></h2>
+  </header>
+
+  <section class="entry-content">
+    <p>Les attaques physiques et matérielles exploitent l’accès direct aux équipements ou les propriétés des composants (laptops, processeurs, bus internes, badges RFID). Découvrez leurs techniques (Evil Maid, Cold Boot, implants matériels, side-channels) et les contre-mesures pour renforcer la sécurité.</p>
+  </section>
+
+  <footer class="entry-footer">
+    <span>2025-08-28</span>
+     · <span>Articles</span>
+     · <span>17 min</span>
+  </footer>
+
+  <a class="entry-link" aria-label="post link to 💪 Attaques physiques et matérielles" href="http://localhost:1313/blog/articles/attaques-physiques-materielles/"></a>
+</article>
+
+    
+      
+
+
+
+  
+
+
+<article class="post-entry post-card">
+  <a class="post-card__media " href="http://localhost:1313/blog/articles/attaques-identite-humain/" aria-label="👨‍👨‍👧‍👦 Attaques sur l’identité et l’humain (Ingénierie sociale)">
+    
+      <img src="http://localhost:1313/images/articles/chat-cyberhacker-social-engineering.png" loading="lazy" alt="Illustration abstraite représentant les attaques d’ingénierie sociale">
+    
+  </a>
+
+  <header class="entry-header">
+    <h2 class="post-card__title"><a href="http://localhost:1313/blog/articles/attaques-identite-humain/">👨‍👨‍👧‍👦 Attaques sur l’identité et l’humain (Ingénierie sociale)</a></h2>
+  </header>
+
+  <section class="entry-content">
+    <p>Les attaques d’ingénierie sociale visent l’humain plus que la machine. Découvrez les principales techniques (phishing, vishing, smishing, fraude au président, etc.) et les contre-mesures pour renforcer la vigilance et la culture sécurité.</p>
+  </section>
+
+  <footer class="entry-footer">
+    <span>2025-08-28</span>
+     · <span>Articles</span>
+     · <span>9 min</span>
+  </footer>
+
+  <a class="entry-link" aria-label="post link to 👨‍👨‍👧‍👦 Attaques sur l’identité et l’humain (Ingénierie sociale)" href="http://localhost:1313/blog/articles/attaques-identite-humain/"></a>
+</article>
+
+    
+      
+
+
+
+  
+
+
+<article class="post-entry post-card">
+  <a class="post-card__media " href="http://localhost:1313/blog/articles/attaques-reseaux/" aria-label="🌐 Attaques Réseau : comprendre et se protéger">
+    
+      <img src="http://localhost:1313/images/articles/chat-cyberhacker-network-attacks.png" loading="lazy" alt="Illustration abstraite de la cybersécurité réseau">
+    
+  </a>
+
+  <header class="entry-header">
+    <h2 class="post-card__title"><a href="http://localhost:1313/blog/articles/attaques-reseaux/">🌐 Attaques Réseau : comprendre et se protéger</a></h2>
+  </header>
+
+  <section class="entry-content">
+    <p>Sniffing, MITM, DDoS, DNS spoofing, BGP hijacking : découvrez les attaques qui visent directement la circulation des données et les solutions pour protéger vos réseaux.</p>
+  </section>
+
+  <footer class="entry-footer">
+    <span>2025-08-28</span>
+     · <span>Articles</span>
+     · <span>7 min</span>
+  </footer>
+
+  <a class="entry-link" aria-label="post link to 🌐 Attaques Réseau : comprendre et se protéger" href="http://localhost:1313/blog/articles/attaques-reseaux/"></a>
+</article>
+
+    
+      
+
+
+
+  
+
+
+<article class="post-entry post-card">
+  <a class="post-card__media " href="http://localhost:1313/blog/articles/attaques-systemes/" aria-label="⚙️ Attaques sur les systèmes : comprendre et prévenir">
+    
+      <img src="http://localhost:1313/images/articles/chat-cyberhacker-attaque-systeme.png" loading="lazy" alt="Illustration abstraite représentant la sécurité des systèmes">
+    
+  </a>
+
+  <header class="entry-header">
+    <h2 class="post-card__title"><a href="http://localhost:1313/blog/articles/attaques-systemes/">⚙️ Attaques sur les systèmes : comprendre et prévenir</a></h2>
+  </header>
+
+  <section class="entry-content">
+    <p>Des malwares aux attaques sur la chaîne CI/CD : découvrez les principales menaces qui visent le cœur des systèmes informatiques et les meilleures pratiques pour s’en protéger.</p>
+  </section>
+
+  <footer class="entry-footer">
+    <span>2025-08-28</span>
+     · <span>Articles</span>
+     · <span>21 min</span>
+  </footer>
+
+  <a class="entry-link" aria-label="post link to ⚙️ Attaques sur les systèmes : comprendre et prévenir" href="http://localhost:1313/blog/articles/attaques-systemes/"></a>
+</article>
+
+    
+      
+
+
+
+  
+
+
+<article class="post-entry post-card">
+  <a class="post-card__media " href="http://localhost:1313/blog/articles/panorame-attaque-cybersecurite/" aria-label="Panorama des principales attaques en cybersécurité">
+    
+      <img src="http://localhost:1313/images/articles/chat-cyberhacker.png" loading="lazy" alt="Schéma des grandes familles d&#39;attaques en cybersécurité">
+    
+  </a>
+
+  <header class="entry-header">
+    <h2 class="post-card__title"><a href="http://localhost:1313/blog/articles/panorame-attaque-cybersecurite/">Panorama des principales attaques en cybersécurité</a></h2>
+  </header>
+
+  <section class="entry-content">
+    <p>Comprendre les grandes familles d’attaques : réseau, applicatif, humain, systèmes, physique et communications. Une cartographie claire pour débuter.</p>
+  </section>
+
+  <footer class="entry-footer">
+    <span>2025-08-27</span>
+     · <span>Articles</span>
+     · <span>2 min</span>
+  </footer>
+
+  <a class="entry-link" aria-label="post link to Panorama des principales attaques en cybersécurité" href="http://localhost:1313/blog/articles/panorame-attaque-cybersecurite/"></a>
+</article>
+
+    
+      
+
+
+
+  
+
+
+<article class="post-entry post-card">
   <a class="post-card__media " href="http://localhost:1313/blog/articles/censurer-internet/" aria-label="Peut-on vraiment censurer Internet ?">
     
       <img src="http://localhost:1313/images/articles/censurer-internet-cover.png" loading="lazy" alt="Illustration sur la censure d’Internet">

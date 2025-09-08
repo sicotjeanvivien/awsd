@@ -6,8 +6,22 @@
     <description>Recent content in Réseau on AWSD</description>
     <generator>Hugo -- 0.148.2</generator>
     <language>fr</language>
-    <lastBuildDate>Mon, 25 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 28 Aug 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/r%C3%A9seau/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>🌐 Attaques Réseau : comprendre et se protéger</title>
+      <link>http://localhost:1313/blog/articles/attaques-reseaux/</link>
+      <pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/articles/attaques-reseaux/</guid>
+      <description>Panorama des attaques ciblant les communications réseau (sniffing, MITM, DDoS, DNS spoofing, BGP hijacking, etc.) et des contre-mesures pour assurer confidentialité, intégrité et disponibilité.</description>
+    </item>
+    <item>
+      <title>Panorama des principales attaques en cybersécurité</title>
+      <link>http://localhost:1313/blog/articles/panorame-attaque-cybersecurite/</link>
+      <pubDate>Wed, 27 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/articles/panorame-attaque-cybersecurite/</guid>
+      <description>Un guide clair des grandes familles d’attaques en cybersécurité : réseau, applications, identité, systèmes, physique et communications. Avec liens vers les fiches détaillées.</description>
+    </item>
     <item>
       <title>Peut-on vraiment censurer Internet ?</title>
       <link>http://localhost:1313/blog/articles/censurer-internet/</link>

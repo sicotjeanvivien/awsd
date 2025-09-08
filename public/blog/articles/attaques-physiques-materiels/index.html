@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="fr" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>💪 Attaques physiques et matérielles | AWSD</title>
+<meta name="keywords" content="matériel, hardware, attaque physique, firmware, side-channel, Rowhammer">
+<meta name="description" content="Vol d’équipements, Evil Maid, implants matériels, side-channels, Rowhammer… Tour d’horizon des attaques qui ciblent directement le matériel informatique et des défenses possibles.">
+<meta name="author" content="Jean-Vivien Sicot">
+<link rel="canonical" href="http://localhost:1313/blog/articles/attaques-physiques-materiels/">
+<link crossorigin="anonymous" href="http://localhost:1313/assets/css/stylesheet.4c4d394febed31c30ab21b1578f631ffae89f9be36ded464f922d06db45e30e2.css" integrity="sha256-TE05T&#43;vtMcMKshsVePYx/66J&#43;b423tRk&#43;SLQbbReMOI=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="fr" href="http://localhost:1313/blog/articles/attaques-physiques-materiels/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><link rel="stylesheet" href="http://localhost:1313/css/blog-cards.min.48d78ddb211625a7cca964a2bb0389f3a581e1fe32ba9f0154693250a4ea9a2b.css" integrity="sha256-SNeN2yEWJafMqWSiuwOJ86WB4f4yup8BVGkyUKTqmis=">
+
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="AWSD (Alt + H)">
+                <img src="http://localhost:1313/favicon-32x32.png" alt="" aria-label="logo"
+                    height="32">AWSD</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/blog/" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/projets/" title="Portfolio">
+                    <span>Portfolio</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/services/" title="Services">
+                    <span>Services</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about-me/" title="Qui suis-je ?">
+                    <span>Qui suis-je ?</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/contact/" title="Contact">
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Accueil</a>&nbsp;»&nbsp;<a href="http://localhost:1313/blog/">Blogs</a></div>
+    <h1 class="post-title entry-hint-parent">
+      💪 Attaques physiques et matérielles
+    </h1>
+    <div class="post-description">
+      Vol d’équipements, Evil Maid, implants matériels, side-channels, Rowhammer… Tour d’horizon des attaques qui ciblent directement le matériel informatique et des défenses possibles.
+    </div>
+    <div class="post-meta"><span title='2025-08-28 00:00:00 +0000 UTC'>août 28, 2025</span>&nbsp;·&nbsp;17 min&nbsp;·&nbsp;Jean-Vivien Sicot
+
+</div>
+  </header> 
+<figure class="entry-cover">
+        <img loading="eager" src="http://localhost:1313/images/articles/physical-attacks-cover.png" alt="Illustration abstraite représentant les attaques matérielles">
+        <figcaption>Les attaques physiques exploitent directement l’accès au matériel et aux composants.</figcaption>
+</figure><div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table des matières</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#attaques-physiques-et-mat%c3%a9rielles" aria-label="Attaques physiques et matérielles">Attaques physiques et matérielles</a><ul>
+                        
+                <li>
+                    <a href="#1-vol-ou-perte-d%c3%a9quipements" aria-label="1. Vol ou perte d’équipements">1. Vol ou perte d’équipements</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-chiffrement-complet-du-disque-bitlocker-luks-filevault" aria-label="✅ Chiffrement complet du disque (BitLocker, LUKS, FileVault)">✅ Chiffrement complet du disque (BitLocker, LUKS, FileVault)</a></li>
+                <li>
+                    <a href="#-authentification-forte" aria-label="✅ Authentification forte">✅ Authentification forte</a></li>
+                <li>
+                    <a href="#-gestion-de-flotte-mdm" aria-label="✅ Gestion de flotte (MDM)">✅ Gestion de flotte (MDM)</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#2-evil-maid-attack-attaque-femme-de-m%c3%a9nage" aria-label="2. Evil Maid Attack (attaque “femme de ménage”)">2. Evil Maid Attack (attaque “femme de ménage”)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-1" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-1" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-1" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-1" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-1" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-secure-boot--mot-de-passe-biosuefi" aria-label="✅ Secure Boot &#43; mot de passe BIOS/UEFI">✅ Secure Boot + mot de passe BIOS/UEFI</a></li>
+                <li>
+                    <a href="#-tpm--chiffrement-disque" aria-label="✅ TPM &#43; chiffrement disque">✅ TPM + chiffrement disque</a></li>
+                <li>
+                    <a href="#-transport-s%c3%a9curis%c3%a9" aria-label="✅ Transport sécurisé">✅ Transport sécurisé</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#3-attaques-par-ports-physiques-usb-firewire-thunderbolt" aria-label="3. Attaques par ports physiques (USB, FireWire, Thunderbolt)">3. Attaques par ports physiques (USB, FireWire, Thunderbolt)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-2" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-2" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-2" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-2" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-2" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-d%c3%a9sactivation-des-ports-inutiles" aria-label="✅ Désactivation des ports inutiles">✅ Désactivation des ports inutiles</a></li>
+                <li>
+                    <a href="#-usb-whitelisting" aria-label="✅ USB whitelisting">✅ USB whitelisting</a></li>
+                <li>
+                    <a href="#-sensibilisation-utilisateurs" aria-label="✅ Sensibilisation utilisateurs">✅ Sensibilisation utilisateurs</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#4-attaques-par-canaux-auxiliaires-side-channel" aria-label="4. Attaques par canaux auxiliaires (Side-Channel)">4. Attaques par canaux auxiliaires (Side-Channel)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-3" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-3" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-3" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-3" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-3" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-blindage-mat%c3%a9riel" aria-label="✅ Blindage matériel">✅ Blindage matériel</a></li>
+                <li>
+                    <a href="#-algorithmes-r%c3%a9sistants-aux-side-channels" aria-label="✅ Algorithmes résistants aux side-channels">✅ Algorithmes résistants aux side-channels</a></li>
+                <li>
+                    <a href="#-monitoring-danomalies-mat%c3%a9rielles" aria-label="✅ Monitoring d’anomalies matérielles">✅ Monitoring d’anomalies matérielles</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#5-attaques-rfid--badges" aria-label="5. Attaques RFID / Badges">5. Attaques RFID / Badges</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-4" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-4" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-4" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-4" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-4" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-badges-cryptographiques-mifare-desfire-iclass-se" aria-label="✅ Badges cryptographiques (MIFARE DESFire, iCLASS SE)">✅ Badges cryptographiques (MIFARE DESFire, iCLASS SE)</a></li>
+                <li>
+                    <a href="#-multi-factor-physique" aria-label="✅ Multi-factor physique">✅ Multi-factor physique</a></li>
+                <li>
+                    <a href="#-d%c3%a9tection-dacc%c3%a8s-suspects" aria-label="✅ Détection d’accès suspects">✅ Détection d’accès suspects</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#6-cold-boot-attack" aria-label="6. Cold Boot Attack">6. Cold Boot Attack</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-5" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-5" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-5" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-5" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-5" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-forcer-larr%c3%aat-complet" aria-label="✅ Forcer l’arrêt complet">✅ Forcer l’arrêt complet</a></li>
+                <li>
+                    <a href="#-tpm--chiffrement-avec-cl%c3%a9-mat%c3%a9rielle" aria-label="✅ TPM &#43; chiffrement avec clé matérielle">✅ TPM + chiffrement avec clé matérielle</a></li>
+                <li>
+                    <a href="#-remplissage-m%c3%a9moire-au-shutdown" aria-label="✅ Remplissage mémoire au shutdown">✅ Remplissage mémoire au shutdown</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#7-supply-chain-mat%c3%a9rielle" aria-label="7. Supply Chain matérielle">7. Supply Chain matérielle</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-6" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-6" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-6" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-6" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-6" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-sourcing-v%c3%a9rifi%c3%a9" aria-label="✅ Sourcing vérifié">✅ Sourcing vérifié</a></li>
+                <li>
+                    <a href="#-v%c3%a9rification-mat%c3%a9rielle" aria-label="✅ Vérification matérielle">✅ Vérification matérielle</a></li>
+                <li>
+                    <a href="#-diversification" aria-label="✅ Diversification">✅ Diversification</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#8-implants-mat%c3%a9riels-hardware-implants" aria-label="8. Implants matériels (hardware implants)">8. Implants matériels (hardware implants)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-7" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-7" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-7" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-7" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-7" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-scell%c3%a9s-de-s%c3%a9curit%c3%a9" aria-label="✅ Scellés de sécurité">✅ Scellés de sécurité</a></li>
+                <li>
+                    <a href="#-inventaire-mat%c3%a9riel" aria-label="✅ Inventaire matériel">✅ Inventaire matériel</a></li>
+                <li>
+                    <a href="#-zones-s%c3%a9curis%c3%a9es" aria-label="✅ Zones sécurisées">✅ Zones sécurisées</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#9-attaques-cpu--spectre--meltdown" aria-label="9. Attaques CPU – Spectre &amp; Meltdown">9. Attaques CPU – Spectre &amp; Meltdown</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-8" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-8" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-8" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-8" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-8" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-patches-microcode-et-kernel" aria-label="✅ Patches microcode et kernel">✅ Patches microcode et kernel</a></li>
+                <li>
+                    <a href="#-isolation-des-workloads-sensibles" aria-label="✅ Isolation des workloads sensibles">✅ Isolation des workloads sensibles</a></li>
+                <li>
+                    <a href="#-techniques-de-mitigation-logicielle" aria-label="✅ Techniques de mitigation logicielle">✅ Techniques de mitigation logicielle</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#10-dma-attacks-direct-memory-access" aria-label="10. DMA Attacks (Direct Memory Access)">10. DMA Attacks (Direct Memory Access)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-9" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-9" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-9" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-9" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-9" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-iommu-input-output-memory-management-unit" aria-label="✅ IOMMU (Input-Output Memory Management Unit)">✅ IOMMU (Input-Output Memory Management Unit)</a></li>
+                <li>
+                    <a href="#-d%c3%a9sactivation-des-ports-sensibles" aria-label="✅ Désactivation des ports sensibles">✅ Désactivation des ports sensibles</a></li>
+                <li>
+                    <a href="#-authentification-p%c3%a9riph%c3%a9rique" aria-label="✅ Authentification périphérique">✅ Authentification périphérique</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#11-attaques-sur-les-cartes-r%c3%a9seau-nic-attacks" aria-label="11. Attaques sur les cartes réseau (NIC attacks)">11. Attaques sur les cartes réseau (NIC attacks)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-10" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-10" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-10" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-10" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-10" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-mise-%c3%a0-jour-des-firmwares" aria-label="✅ Mise à jour des firmwares">✅ Mise à jour des firmwares</a></li>
+                <li>
+                    <a href="#-secure-boot-mat%c3%a9riel-pour-nic" aria-label="✅ Secure Boot matériel pour NIC">✅ Secure Boot matériel pour NIC</a></li>
+                <li>
+                    <a href="#-segmentation-physique" aria-label="✅ Segmentation physique">✅ Segmentation physique</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#12-evil-peripheral-implants-dans-p%c3%a9riph%c3%a9riques" aria-label="12. Evil Peripheral (implants dans périphériques)">12. Evil Peripheral (implants dans périphériques)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-11" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-11" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-11" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-11" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-11" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-achat-uniquement-aupr%c3%a8s-de-sources-fiables" aria-label="✅ Achat uniquement auprès de sources fiables">✅ Achat uniquement auprès de sources fiables</a></li>
+                <li>
+                    <a href="#-usb-whitelisting-1" aria-label="✅ USB whitelisting">✅ USB whitelisting</a></li>
+                <li>
+                    <a href="#-audit-mat%c3%a9riel" aria-label="✅ Audit matériel">✅ Audit matériel</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#13-rowhammer" aria-label="13. Rowhammer">13. Rowhammer</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-12" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-12" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-12" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-12" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-12" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-ecc-ram-error-correcting-code" aria-label="✅ ECC RAM (Error-Correcting Code)">✅ ECC RAM (Error-Correcting Code)</a></li>
+                <li>
+                    <a href="#-randomisation-dallocation-m%c3%a9moire" aria-label="✅ Randomisation d’allocation mémoire">✅ Randomisation d’allocation mémoire</a></li>
+                <li>
+                    <a href="#-rafra%c3%aechissement-m%c3%a9moire-trr--target-row-refresh" aria-label="✅ Rafraîchissement mémoire (TRR – Target Row Refresh)">✅ Rafraîchissement mémoire (TRR – Target Row Refresh)</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#14-foreshadow-l1-terminal-fault" aria-label="14. Foreshadow (L1 Terminal Fault)">14. Foreshadow (L1 Terminal Fault)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-13" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-13" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-13" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-13" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-13" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-microcode-updates" aria-label="✅ Microcode updates">✅ Microcode updates</a></li>
+                <li>
+                    <a href="#-d%c3%a9sactivation-sgx-si-inutile" aria-label="✅ Désactivation SGX (si inutile)">✅ Désactivation SGX (si inutile)</a></li>
+                <li>
+                    <a href="#-isolation-stricte-en-cloud" aria-label="✅ Isolation stricte en cloud">✅ Isolation stricte en cloud</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#15-zombieload-et-autres-mds--microarchitectural-data-sampling" aria-label="15. ZombieLoad (et autres MDS – Microarchitectural Data Sampling)">15. ZombieLoad (et autres MDS – Microarchitectural Data Sampling)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-14" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-14" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-14" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-14" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-14" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-patches-microcode--kernel" aria-label="✅ Patches microcode &#43; kernel">✅ Patches microcode + kernel</a></li>
+                <li>
+                    <a href="#-ht-hyper-threading-d%c3%a9sactiv%c3%a9" aria-label="✅ HT (Hyper-Threading) désactivé">✅ HT (Hyper-Threading) désactivé</a></li>
+                <li>
+                    <a href="#-workload-isolation" aria-label="✅ Workload isolation">✅ Workload isolation</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#16-attaques-cold-boot-avanc%c3%a9es" aria-label="16. Attaques Cold Boot avancées">16. Attaques Cold Boot avancées</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-15" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-15" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-15" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-15" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-15" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-forcer-effacement-ram" aria-label="✅ Forcer effacement RAM">✅ Forcer effacement RAM</a></li>
+                <li>
+                    <a href="#-tpm--secure-boot" aria-label="✅ TPM &#43; Secure Boot">✅ TPM + Secure Boot</a></li>
+                <li>
+                    <a href="#-%c3%a9teindre-compl%c3%a8tement-pas-veille" aria-label="✅ Éteindre complètement (pas veille)">✅ Éteindre complètement (pas veille)</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#17-attaques-physiques-sur-gpu-extraction-via-vram" aria-label="17. Attaques physiques sur GPU (extraction via VRAM)">17. Attaques physiques sur GPU (extraction via VRAM)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-16" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-16" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-16" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-16" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-16" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-effacement-m%c3%a9moire-gpu" aria-label="✅ Effacement mémoire GPU">✅ Effacement mémoire GPU</a></li>
+                <li>
+                    <a href="#-isolation-des-workloads-gpu" aria-label="✅ Isolation des workloads GPU">✅ Isolation des workloads GPU</a></li>
+                <li>
+                    <a href="#-drivers-s%c3%a9curis%c3%a9s" aria-label="✅ Drivers sécurisés">✅ Drivers sécurisés</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#18-fault-injection-glitching" aria-label="18. Fault Injection (Glitching)">18. Fault Injection (Glitching)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-17" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-17" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-17" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-17" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-17" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-capteurs-anti-tamper" aria-label="✅ Capteurs anti-tamper">✅ Capteurs anti-tamper</a></li>
+                <li>
+                    <a href="#-redondance-dex%c3%a9cution" aria-label="✅ Redondance d’exécution">✅ Redondance d’exécution</a></li>
+                <li>
+                    <a href="#-blindage-physique" aria-label="✅ Blindage physique">✅ Blindage physique</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#19-rambleed-exploitation-m%c3%a9moire-type-rowhammer-%c3%a9tendu" aria-label="19. RAMBleed (exploitation mémoire type Rowhammer étendu)">19. RAMBleed (exploitation mémoire type Rowhammer étendu)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-18" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-18" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-18" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-18" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-18" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-dram-r%c3%a9sistante-ddr4-avec-trr" aria-label="✅ DRAM résistante (DDR4&#43; avec TRR)">✅ DRAM résistante (DDR4+ avec TRR)</a></li>
+                <li>
+                    <a href="#-isolation-forte-en-cloud" aria-label="✅ Isolation forte en cloud">✅ Isolation forte en cloud</a></li>
+                <li>
+                    <a href="#-monitoring-m%c3%a9moire" aria-label="✅ Monitoring mémoire">✅ Monitoring mémoire</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#20-pre-compromised-biosuefi-supply-chain-firmware" aria-label="20. Pre-compromised BIOS/UEFI (supply chain firmware)">20. Pre-compromised BIOS/UEFI (supply chain firmware)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-19" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-19" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-19" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-19" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-19" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-v%c3%a9rification-de-lempreinte-firmware" aria-label="✅ Vérification de l’empreinte firmware">✅ Vérification de l’empreinte firmware</a></li>
+                <li>
+                    <a href="#-secure-boot--tpm" aria-label="✅ Secure Boot &#43; TPM">✅ Secure Boot + TPM</a></li>
+                <li>
+                    <a href="#-approvisionnement-s%c3%a9curis%c3%a9" aria-label="✅ Approvisionnement sécurisé">✅ Approvisionnement sécurisé</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#21-attaques-sur-bus-mat%c3%a9riels-pcie-ic-spi" aria-label="21. Attaques sur bus matériels (PCIe, I²C, SPI)">21. Attaques sur bus matériels (PCIe, I²C, SPI)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-20" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-20" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-20" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-20" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-20" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-chiffrement-interne-bus-encryption" aria-label="✅ Chiffrement interne (bus encryption)">✅ Chiffrement interne (bus encryption)</a></li>
+                <li>
+                    <a href="#-blindage-physique-1" aria-label="✅ Blindage physique">✅ Blindage physique</a></li>
+                <li>
+                    <a href="#-monitoring-mat%c3%a9riel" aria-label="✅ Monitoring matériel">✅ Monitoring matériel</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#22-side-channels-via-consommation-d%c3%a9nergie-power-analysis" aria-label="22. Side-channels via consommation d’énergie (Power Analysis)">22. Side-channels via consommation d’énergie (Power Analysis)</a><ul>
+                        
+                <li>
+                    <a href="#1-situation-de-d%c3%a9part-21" aria-label="1. Situation de départ">1. Situation de départ</a></li>
+                <li>
+                    <a href="#2-ce-que-fait-lattaquant-21" aria-label="2. Ce que fait l’attaquant">2. Ce que fait l’attaquant</a></li>
+                <li>
+                    <a href="#3-cons%c3%a9quence-21" aria-label="3. Conséquence">3. Conséquence</a></li>
+                <li>
+                    <a href="#4-pourquoi-cest-possible-21" aria-label="4. Pourquoi c’est possible">4. Pourquoi c’est possible</a></li>
+                <li>
+                    <a href="#5-contre-mesures-21" aria-label="5. Contre-mesures">5. Contre-mesures</a><ul>
+                        
+                <li>
+                    <a href="#-algorithmes-masqu%c3%a9s-masking" aria-label="✅ Algorithmes masqués (masking)">✅ Algorithmes masqués (masking)</a></li>
+                <li>
+                    <a href="#-blindage-alimentation" aria-label="✅ Blindage alimentation">✅ Blindage alimentation</a></li>
+                <li>
+                    <a href="#-d%c3%a9tection-dintrusion" aria-label="✅ Détection d’intrusion">✅ Détection d’intrusion</a></li></ul>
+                </li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#conclusion" aria-label="Conclusion">Conclusion</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="attaques-physiques-et-matérielles">Attaques physiques et matérielles<a hidden class="anchor" aria-hidden="true" href="#attaques-physiques-et-matérielles">#</a></h1>
+<p>Les attaques physiques et matérielles visent directement les équipements : ordinateurs, serveurs,
+périphériques, badges, processeurs.<br>
+Elles s’appuient sur un accès physique, temporaire ou permanent, ou exploitent des propriétés
+intrinsèques du matériel (signaux électromagnétiques, consommation d’énergie, bus internes).</p>
+<p>Contrairement aux attaques réseau ou logicielles, elles sont souvent invisibles pour les systèmes
+de détection classiques (antivirus, IDS). Elles peuvent impliquer :</p>
+<ul>
+<li>le vol ou la compromission d’appareils (laptops, disques, smartphones),</li>
+<li>l’insertion d’implants matériels (périphériques piégés, circuits espions),</li>
+<li>l’exploitation de failles micro-architecturales (Spectre, Meltdown, Rowhammer),</li>
+<li>ou encore des manipulations physiques directes (glitching, sondes électriques, cold boot).</li>
+</ul>
+<p>Leur danger réside dans leur <strong>furtivité</strong> et leur <strong>persistance</strong> : un implant matériel ou un
+firmware compromis peut survivre à toute réinstallation logicielle et donner un accès caché
+durant des années.</p>
+<hr>
+<h2 id="1-vol-ou-perte-déquipements">1. Vol ou perte d’équipements<a hidden class="anchor" aria-hidden="true" href="#1-vol-ou-perte-déquipements">#</a></h2>
+<h3 id="1-situation-de-départ">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ">#</a></h3>
+<p>Un employé travaille avec un laptop contenant des données sensibles.<br>
+Il le perd dans un train ou il est volé dans un café.</p>
+<h3 id="2-ce-que-fait-lattaquant">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant">#</a></h3>
+<ul>
+<li>Il accède directement au disque dur.</li>
+<li>Il copie ou vole les fichiers présents.</li>
+</ul>
+<h3 id="3-conséquence">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence">#</a></h3>
+<ul>
+<li>Fuite de données confidentielles.</li>
+<li>Usurpation d’identité (si credentials stockés).</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible">#</a></h3>
+<ul>
+<li>Le disque n’est pas chiffré.</li>
+<li>Aucun mot de passe BIOS/UEFI.</li>
+</ul>
+<h3 id="5-contre-mesures">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures">#</a></h3>
+<h4 id="-chiffrement-complet-du-disque-bitlocker-luks-filevault">✅ Chiffrement complet du disque (BitLocker, LUKS, FileVault)<a hidden class="anchor" aria-hidden="true" href="#-chiffrement-complet-du-disque-bitlocker-luks-filevault">#</a></h4>
+<ul>
+<li>Les données sont chiffrées au repos.</li>
+<li><strong>Pourquoi ça protège</strong> : même avec un accès physique, impossible de lire le disque sans clé.</li>
+</ul>
+<h4 id="-authentification-forte">✅ Authentification forte<a hidden class="anchor" aria-hidden="true" href="#-authentification-forte">#</a></h4>
+<ul>
+<li>Mot de passe fort + MFA.</li>
+<li><strong>Pourquoi ça protège</strong> : empêche l’attaquant d’utiliser directement la session.</li>
+</ul>
+<h4 id="-gestion-de-flotte-mdm">✅ Gestion de flotte (MDM)<a hidden class="anchor" aria-hidden="true" href="#-gestion-de-flotte-mdm">#</a></h4>
+<ul>
+<li>Capacité de verrouiller ou effacer un appareil à distance.</li>
+<li><strong>Pourquoi ça protège</strong> : limite l’impact d’un vol.</li>
+</ul>
+<hr>
+<h2 id="2-evil-maid-attack-attaque-femme-de-ménage">2. Evil Maid Attack (attaque “femme de ménage”)<a hidden class="anchor" aria-hidden="true" href="#2-evil-maid-attack-attaque-femme-de-ménage">#</a></h2>
+<h3 id="1-situation-de-départ-1">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-1">#</a></h3>
+<p>Un voyageur laisse son laptop dans une chambre d’hôtel.</p>
+<h3 id="2-ce-que-fait-lattaquant-1">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-1">#</a></h3>
+<ul>
+<li>Il démarre la machine avec une clé USB bootable.</li>
+<li>Il installe un bootkit ou modifie le chargeur de démarrage.</li>
+</ul>
+<h3 id="3-conséquence-1">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-1">#</a></h3>
+<ul>
+<li>Persistance au démarrage (keylogger avant OS).</li>
+<li>Vol des credentials au prochain login.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-1">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-1">#</a></h3>
+<ul>
+<li>Boot non protégé.</li>
+<li>Pas de Secure Boot ni mot de passe BIOS/UEFI.</li>
+</ul>
+<h3 id="5-contre-mesures-1">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-1">#</a></h3>
+<h4 id="-secure-boot--mot-de-passe-biosuefi">✅ Secure Boot + mot de passe BIOS/UEFI<a hidden class="anchor" aria-hidden="true" href="#-secure-boot--mot-de-passe-biosuefi">#</a></h4>
+<ul>
+<li>Empêche le boot depuis un média externe non autorisé.</li>
+<li><strong>Pourquoi ça protège</strong> : l’attaquant ne peut pas charger son bootkit.</li>
+</ul>
+<h4 id="-tpm--chiffrement-disque">✅ TPM + chiffrement disque<a hidden class="anchor" aria-hidden="true" href="#-tpm--chiffrement-disque">#</a></h4>
+<ul>
+<li>Stocke et vérifie l’intégrité du bootloader.</li>
+<li><strong>Pourquoi ça protège</strong> : toute modification déclenche une alerte ou empêche le déchiffrement.</li>
+</ul>
+<h4 id="-transport-sécurisé">✅ Transport sécurisé<a hidden class="anchor" aria-hidden="true" href="#-transport-sécurisé">#</a></h4>
+<ul>
+<li>Garder le laptop avec soi, cadenas pour portables.</li>
+<li><strong>Pourquoi ça protège</strong> : réduit le risque d’accès physique furtif.</li>
+</ul>
+<hr>
+<h2 id="3-attaques-par-ports-physiques-usb-firewire-thunderbolt">3. Attaques par ports physiques (USB, FireWire, Thunderbolt)<a hidden class="anchor" aria-hidden="true" href="#3-attaques-par-ports-physiques-usb-firewire-thunderbolt">#</a></h2>
+<h3 id="1-situation-de-départ-2">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-2">#</a></h3>
+<p>Un employé branche une clé USB inconnue trouvée dans le parking de l’entreprise.</p>
+<h3 id="2-ce-que-fait-lattaquant-2">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-2">#</a></h3>
+<ul>
+<li>La clé contient un firmware malveillant (Rubber Ducky, BadUSB).</li>
+<li>À la connexion, elle se présente comme un clavier et envoie des commandes rapides.</li>
+</ul>
+<h3 id="3-conséquence-2">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-2">#</a></h3>
+<ul>
+<li>Exécution de commandes (ex. créer un compte admin).</li>
+<li>Déploiement de malwares.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-2">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-2">#</a></h3>
+<ul>
+<li>Les ports physiques font confiance aux périphériques branchés.</li>
+<li>Pas de contrôle ou de politique sur les périphériques USB.</li>
+</ul>
+<h3 id="5-contre-mesures-2">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-2">#</a></h3>
+<h4 id="-désactivation-des-ports-inutiles">✅ Désactivation des ports inutiles<a hidden class="anchor" aria-hidden="true" href="#-désactivation-des-ports-inutiles">#</a></h4>
+<ul>
+<li>Bloquer USB pour tout sauf les périphériques autorisés.</li>
+<li><strong>Pourquoi ça protège</strong> : empêche un périphérique inconnu de s’exécuter.</li>
+</ul>
+<h4 id="-usb-whitelisting">✅ USB whitelisting<a hidden class="anchor" aria-hidden="true" href="#-usb-whitelisting">#</a></h4>
+<ul>
+<li>Autoriser uniquement les périphériques connus via leur ID.</li>
+<li><strong>Pourquoi ça protège</strong> : une clé pirate n’est pas reconnue.</li>
+</ul>
+<h4 id="-sensibilisation-utilisateurs">✅ Sensibilisation utilisateurs<a hidden class="anchor" aria-hidden="true" href="#-sensibilisation-utilisateurs">#</a></h4>
+<ul>
+<li>Expliquer que brancher une clé inconnue est dangereux.</li>
+<li><strong>Pourquoi ça protège</strong> : réduit l’erreur humaine.</li>
+</ul>
+<hr>
+<h2 id="4-attaques-par-canaux-auxiliaires-side-channel">4. Attaques par canaux auxiliaires (Side-Channel)<a hidden class="anchor" aria-hidden="true" href="#4-attaques-par-canaux-auxiliaires-side-channel">#</a></h2>
+<h3 id="1-situation-de-départ-3">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-3">#</a></h3>
+<p>Un attaquant a un accès physique ou proche d’une machine.</p>
+<h3 id="2-ce-que-fait-lattaquant-3">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-3">#</a></h3>
+<ul>
+<li>Exploite les émissions électromagnétiques, la consommation électrique ou le temps d’exécution.</li>
+<li>Déduit des clés cryptographiques ou informations sensibles.</li>
+</ul>
+<h3 id="3-conséquence-3">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-3">#</a></h3>
+<ul>
+<li>Vol de clés privées.</li>
+<li>Compromission de systèmes sécurisés (cartes à puce, TPM).</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-3">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-3">#</a></h3>
+<ul>
+<li>Les composants physiques émettent toujours des signaux mesurables.</li>
+<li>Pas de contre-mesure matérielle en place.</li>
+</ul>
+<h3 id="5-contre-mesures-3">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-3">#</a></h3>
+<h4 id="-blindage-matériel">✅ Blindage matériel<a hidden class="anchor" aria-hidden="true" href="#-blindage-matériel">#</a></h4>
+<ul>
+<li>Coques anti-EM, chambres de Faraday.</li>
+<li><strong>Pourquoi ça protège</strong> : bloque la fuite électromagnétique.</li>
+</ul>
+<h4 id="-algorithmes-résistants-aux-side-channels">✅ Algorithmes résistants aux side-channels<a hidden class="anchor" aria-hidden="true" href="#-algorithmes-résistants-aux-side-channels">#</a></h4>
+<ul>
+<li>Ajouter du bruit, randomiser les opérations cryptographiques.</li>
+<li><strong>Pourquoi ça protège</strong> : rend l’analyse des signaux inutile.</li>
+</ul>
+<h4 id="-monitoring-danomalies-matérielles">✅ Monitoring d’anomalies matérielles<a hidden class="anchor" aria-hidden="true" href="#-monitoring-danomalies-matérielles">#</a></h4>
+<ul>
+<li>Surveiller les variations inhabituelles de consommation.</li>
+<li><strong>Pourquoi ça protège</strong> : alerte sur une tentative de side-channel.</li>
+</ul>
+<hr>
+<h2 id="5-attaques-rfid--badges">5. Attaques RFID / Badges<a hidden class="anchor" aria-hidden="true" href="#5-attaques-rfid--badges">#</a></h2>
+<h3 id="1-situation-de-départ-4">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-4">#</a></h3>
+<p>L’entreprise utilise des badges RFID pour contrôler l’accès physique.</p>
+<h3 id="2-ce-que-fait-lattaquant-4">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-4">#</a></h3>
+<ul>
+<li>Il approche un lecteur portable du badge d’un employé (ex. dans le métro).</li>
+<li>Il copie l’identifiant RFID.</li>
+<li>Il clone le badge et accède aux locaux.</li>
+</ul>
+<h3 id="3-conséquence-4">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-4">#</a></h3>
+<ul>
+<li>Intrusion physique dans les bâtiments.</li>
+<li>Vol de matériel ou accès aux serveurs.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-4">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-4">#</a></h3>
+<ul>
+<li>Les badges RFID basiques ne sont pas chiffrés.</li>
+<li>L’authentification repose sur un simple identifiant.</li>
+</ul>
+<h3 id="5-contre-mesures-4">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-4">#</a></h3>
+<h4 id="-badges-cryptographiques-mifare-desfire-iclass-se">✅ Badges cryptographiques (MIFARE DESFire, iCLASS SE)<a hidden class="anchor" aria-hidden="true" href="#-badges-cryptographiques-mifare-desfire-iclass-se">#</a></h4>
+<ul>
+<li>Les échanges sont chiffrés.</li>
+<li><strong>Pourquoi ça protège</strong> : impossible de cloner un badge sans la clé secrète.</li>
+</ul>
+<h4 id="-multi-factor-physique">✅ Multi-factor physique<a hidden class="anchor" aria-hidden="true" href="#-multi-factor-physique">#</a></h4>
+<ul>
+<li>Badge + code PIN ou empreinte.</li>
+<li><strong>Pourquoi ça protège</strong> : le clonage seul ne suffit pas.</li>
+</ul>
+<h4 id="-détection-daccès-suspects">✅ Détection d’accès suspects<a hidden class="anchor" aria-hidden="true" href="#-détection-daccès-suspects">#</a></h4>
+<ul>
+<li>Alerter si un badge utilisé simultanément en deux endroits.</li>
+<li><strong>Pourquoi ça protège</strong> : permet de repérer un badge cloné.</li>
+</ul>
+<hr>
+<h2 id="6-cold-boot-attack">6. Cold Boot Attack<a hidden class="anchor" aria-hidden="true" href="#6-cold-boot-attack">#</a></h2>
+<h3 id="1-situation-de-départ-5">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-5">#</a></h3>
+<p>Un laptop est en veille avec la session ouverte.</p>
+<h3 id="2-ce-que-fait-lattaquant-5">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-5">#</a></h3>
+<ul>
+<li>Il redémarre brutalement la machine avec une clé USB spéciale.</li>
+<li>La RAM, encore chargée, contient des clés de chiffrement.</li>
+<li>Il extrait ces clés pour déchiffrer le disque.</li>
+</ul>
+<h3 id="3-conséquence-5">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-5">#</a></h3>
+<ul>
+<li>Contournement du chiffrement disque.</li>
+<li>Accès aux fichiers protégés.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-5">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-5">#</a></h3>
+<ul>
+<li>La mémoire vive conserve les données quelques secondes après extinction.</li>
+<li>Pas de protection contre ce type d’attaque.</li>
+</ul>
+<h3 id="5-contre-mesures-5">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-5">#</a></h3>
+<h4 id="-forcer-larrêt-complet">✅ Forcer l’arrêt complet<a hidden class="anchor" aria-hidden="true" href="#-forcer-larrêt-complet">#</a></h4>
+<ul>
+<li>Toujours éteindre, pas juste mettre en veille.</li>
+<li><strong>Pourquoi ça protège</strong> : supprime les clés de la RAM.</li>
+</ul>
+<h4 id="-tpm--chiffrement-avec-clé-matérielle">✅ TPM + chiffrement avec clé matérielle<a hidden class="anchor" aria-hidden="true" href="#-tpm--chiffrement-avec-clé-matérielle">#</a></h4>
+<ul>
+<li>Clés stockées dans le TPM, pas en RAM.</li>
+<li><strong>Pourquoi ça protège</strong> : même en dumpant la RAM, pas de clé disponible.</li>
+</ul>
+<h4 id="-remplissage-mémoire-au-shutdown">✅ Remplissage mémoire au shutdown<a hidden class="anchor" aria-hidden="true" href="#-remplissage-mémoire-au-shutdown">#</a></h4>
+<ul>
+<li>Écraser la RAM avant extinction.</li>
+<li><strong>Pourquoi ça protège</strong> : évite la persistance des clés.</li>
+</ul>
+<hr>
+<h2 id="7-supply-chain-matérielle">7. Supply Chain matérielle<a hidden class="anchor" aria-hidden="true" href="#7-supply-chain-matérielle">#</a></h2>
+<h3 id="1-situation-de-départ-6">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-6">#</a></h3>
+<p>Une entreprise achète des serveurs ou composants réseau auprès d’un fournisseur tiers.</p>
+<h3 id="2-ce-que-fait-lattaquant-6">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-6">#</a></h3>
+<ul>
+<li>Il insère un micro-contrôleur espion dans une carte mère, un routeur ou un disque dur.</li>
+<li>Le composant malveillant transmet des données à distance ou ouvre une backdoor matérielle.</li>
+</ul>
+<h3 id="3-conséquence-6">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-6">#</a></h3>
+<ul>
+<li>Espionnage furtif de tout le trafic réseau.</li>
+<li>Persistance difficile à détecter même après réinstallation logicielle.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-6">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-6">#</a></h3>
+<ul>
+<li>Confiance aveugle dans la chaîne d’approvisionnement.</li>
+<li>Composants complexes et opaques (firmwares propriétaires).</li>
+</ul>
+<h3 id="5-contre-mesures-6">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-6">#</a></h3>
+<h4 id="-sourcing-vérifié">✅ Sourcing vérifié<a hidden class="anchor" aria-hidden="true" href="#-sourcing-vérifié">#</a></h4>
+<ul>
+<li>Acheter auprès de fournisseurs certifiés et audités.</li>
+<li><strong>Pourquoi ça protège</strong> : réduit les risques d’introduire un composant compromis.</li>
+</ul>
+<h4 id="-vérification-matérielle">✅ Vérification matérielle<a hidden class="anchor" aria-hidden="true" href="#-vérification-matérielle">#</a></h4>
+<ul>
+<li>Contrôler les circuits imprimés, scanner les firmwares.</li>
+<li><strong>Pourquoi ça protège</strong> : permet de détecter des composants ajoutés.</li>
+</ul>
+<h4 id="-diversification">✅ Diversification<a hidden class="anchor" aria-hidden="true" href="#-diversification">#</a></h4>
+<ul>
+<li>Ne pas dépendre d’un seul fournisseur critique.</li>
+<li><strong>Pourquoi ça protège</strong> : limite l’impact d’une compromission.</li>
+</ul>
+<hr>
+<h2 id="8-implants-matériels-hardware-implants">8. Implants matériels (hardware implants)<a hidden class="anchor" aria-hidden="true" href="#8-implants-matériels-hardware-implants">#</a></h2>
+<h3 id="1-situation-de-départ-7">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-7">#</a></h3>
+<p>Un attaquant a un accès physique temporaire à un serveur.</p>
+<h3 id="2-ce-que-fait-lattaquant-7">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-7">#</a></h3>
+<ul>
+<li>Il ajoute un petit module espion branché sur un port PCIe, USB ou directement soudé sur la carte mère.</li>
+<li>L’implant intercepte les communications (ex. keylogger hardware, sniff réseau).</li>
+</ul>
+<h3 id="3-conséquence-7">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-7">#</a></h3>
+<ul>
+<li>Espionnage silencieux et durable.</li>
+<li>Difficulté de détection (le composant semble légitime).</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-7">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-7">#</a></h3>
+<ul>
+<li>Les machines ne sont pas inspectées physiquement après installation.</li>
+<li>Les firmwares ne sont pas audités.</li>
+</ul>
+<h3 id="5-contre-mesures-7">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-7">#</a></h3>
+<h4 id="-scellés-de-sécurité">✅ Scellés de sécurité<a hidden class="anchor" aria-hidden="true" href="#-scellés-de-sécurité">#</a></h4>
+<ul>
+<li>Ajouter des scellés inviolables sur les boîtiers.</li>
+<li><strong>Pourquoi ça protège</strong> : permet de détecter toute ouverture non autorisée.</li>
+</ul>
+<h4 id="-inventaire-matériel">✅ Inventaire matériel<a hidden class="anchor" aria-hidden="true" href="#-inventaire-matériel">#</a></h4>
+<ul>
+<li>Lister tous les périphériques détectés par le BIOS/UEFI.</li>
+<li><strong>Pourquoi ça protège</strong> : repère l’ajout d’un composant inconnu.</li>
+</ul>
+<h4 id="-zones-sécurisées">✅ Zones sécurisées<a hidden class="anchor" aria-hidden="true" href="#-zones-sécurisées">#</a></h4>
+<ul>
+<li>Restreindre l’accès physique aux serveurs critiques.</li>
+<li><strong>Pourquoi ça protège</strong> : réduit la possibilité d’implanter un module espion.</li>
+</ul>
+<hr>
+<h2 id="9-attaques-cpu--spectre--meltdown">9. Attaques CPU – Spectre &amp; Meltdown<a hidden class="anchor" aria-hidden="true" href="#9-attaques-cpu--spectre--meltdown">#</a></h2>
+<h3 id="1-situation-de-départ-8">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-8">#</a></h3>
+<p>Un serveur multi-utilisateurs partage un CPU moderne (Intel, AMD).</p>
+<h3 id="2-ce-que-fait-lattaquant-8">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-8">#</a></h3>
+<ul>
+<li>Il exploite l’exécution spéculative du processeur.</li>
+<li>En mesurant les temps d’accès mémoire, il récupère des données appartenant à d’autres processus.</li>
+</ul>
+<h3 id="3-conséquence-8">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-8">#</a></h3>
+<ul>
+<li>Vol de clés cryptographiques, mots de passe.</li>
+<li>Compromission inter-VM sur un même hôte cloud.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-8">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-8">#</a></h3>
+<ul>
+<li>Les processeurs modernes optimisent les performances avec l’exécution spéculative.</li>
+<li>Mais ces optimisations laissent fuiter des informations par effet de cache.</li>
+</ul>
+<h3 id="5-contre-mesures-8">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-8">#</a></h3>
+<h4 id="-patches-microcode-et-kernel">✅ Patches microcode et kernel<a hidden class="anchor" aria-hidden="true" href="#-patches-microcode-et-kernel">#</a></h4>
+<ul>
+<li>Correctifs limitant ou désactivant certaines optimisations CPU.</li>
+<li><strong>Pourquoi ça protège</strong> : ferme les canaux d’information cachés.</li>
+</ul>
+<h4 id="-isolation-des-workloads-sensibles">✅ Isolation des workloads sensibles<a hidden class="anchor" aria-hidden="true" href="#-isolation-des-workloads-sensibles">#</a></h4>
+<ul>
+<li>Exécuter les processus critiques sur des machines dédiées.</li>
+<li><strong>Pourquoi ça protège</strong> : empêche un attaquant de cohabiter sur le même CPU.</li>
+</ul>
+<h4 id="-techniques-de-mitigation-logicielle">✅ Techniques de mitigation logicielle<a hidden class="anchor" aria-hidden="true" href="#-techniques-de-mitigation-logicielle">#</a></h4>
+<ul>
+<li>Insertion de barrières mémoire dans le code sensible.</li>
+<li><strong>Pourquoi ça protège</strong> : empêche l’exploitation du cache.</li>
+</ul>
+<hr>
+<h2 id="10-dma-attacks-direct-memory-access">10. DMA Attacks (Direct Memory Access)<a hidden class="anchor" aria-hidden="true" href="#10-dma-attacks-direct-memory-access">#</a></h2>
+<h3 id="1-situation-de-départ-9">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-9">#</a></h3>
+<p>Un laptop est équipé de ports Thunderbolt/FireWire permettant un accès direct à la mémoire.</p>
+<h3 id="2-ce-que-fait-lattaquant-9">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-9">#</a></h3>
+<ul>
+<li>Il branche un périphérique malveillant (ex. Thunderclap).</li>
+<li>Celui-ci lit directement la mémoire RAM via DMA.</li>
+</ul>
+<h3 id="3-conséquence-9">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-9">#</a></h3>
+<ul>
+<li>Vol de clés cryptographiques, mots de passe.</li>
+<li>Contournement du système d’exploitation.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-9">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-9">#</a></h3>
+<ul>
+<li>DMA permet un accès rapide à la mémoire sans contrôle.</li>
+<li>Les périphériques branchés sont implicitement “dignes de confiance”.</li>
+</ul>
+<h3 id="5-contre-mesures-9">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-9">#</a></h3>
+<h4 id="-iommu-input-output-memory-management-unit">✅ IOMMU (Input-Output Memory Management Unit)<a hidden class="anchor" aria-hidden="true" href="#-iommu-input-output-memory-management-unit">#</a></h4>
+<ul>
+<li>Contrôle les accès mémoire des périphériques.</li>
+<li><strong>Pourquoi ça protège</strong> : empêche un périphérique d’accéder à des zones mémoire non autorisées.</li>
+</ul>
+<h4 id="-désactivation-des-ports-sensibles">✅ Désactivation des ports sensibles<a hidden class="anchor" aria-hidden="true" href="#-désactivation-des-ports-sensibles">#</a></h4>
+<ul>
+<li>Bloquer Thunderbolt/FireWire si inutiles.</li>
+<li><strong>Pourquoi ça protège</strong> : supprime le vecteur d’attaque.</li>
+</ul>
+<h4 id="-authentification-périphérique">✅ Authentification périphérique<a hidden class="anchor" aria-hidden="true" href="#-authentification-périphérique">#</a></h4>
+<ul>
+<li>Thunderbolt 3+ inclut un mode de sécurité avec autorisation explicite.</li>
+<li><strong>Pourquoi ça protège</strong> : empêche un périphérique inconnu d’accéder à la mémoire.</li>
+</ul>
+<hr>
+<h2 id="11-attaques-sur-les-cartes-réseau-nic-attacks">11. Attaques sur les cartes réseau (NIC attacks)<a hidden class="anchor" aria-hidden="true" href="#11-attaques-sur-les-cartes-réseau-nic-attacks">#</a></h2>
+<h3 id="1-situation-de-départ-10">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-10">#</a></h3>
+<p>Un serveur utilise une carte réseau intelligente (NIC avec firmware).</p>
+<h3 id="2-ce-que-fait-lattaquant-10">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-10">#</a></h3>
+<ul>
+<li>Il compromet le firmware de la carte réseau.</li>
+<li>La carte intercepte, modifie ou redirige le trafic.</li>
+</ul>
+<h3 id="3-conséquence-10">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-10">#</a></h3>
+<ul>
+<li>MITM permanent au niveau matériel.</li>
+<li>Invisible pour le système d’exploitation.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-10">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-10">#</a></h3>
+<ul>
+<li>Les firmwares réseau sont rarement vérifiés ou mis à jour.</li>
+<li>Peu de visibilité sur ce qui s’exécute dans la NIC.</li>
+</ul>
+<h3 id="5-contre-mesures-10">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-10">#</a></h3>
+<h4 id="-mise-à-jour-des-firmwares">✅ Mise à jour des firmwares<a hidden class="anchor" aria-hidden="true" href="#-mise-à-jour-des-firmwares">#</a></h4>
+<ul>
+<li>Installer régulièrement les patchs du constructeur.</li>
+<li><strong>Pourquoi ça protège</strong> : corrige les failles connues.</li>
+</ul>
+<h4 id="-secure-boot-matériel-pour-nic">✅ Secure Boot matériel pour NIC<a hidden class="anchor" aria-hidden="true" href="#-secure-boot-matériel-pour-nic">#</a></h4>
+<ul>
+<li>Vérifier la signature du firmware avant exécution.</li>
+<li><strong>Pourquoi ça protège</strong> : empêche le chargement d’un firmware modifié.</li>
+</ul>
+<h4 id="-segmentation-physique">✅ Segmentation physique<a hidden class="anchor" aria-hidden="true" href="#-segmentation-physique">#</a></h4>
+<ul>
+<li>Dédié une carte réseau aux flux sensibles.</li>
+<li><strong>Pourquoi ça protège</strong> : réduit l’impact d’une carte compromise.</li>
+</ul>
+<hr>
+<h2 id="12-evil-peripheral-implants-dans-périphériques">12. Evil Peripheral (implants dans périphériques)<a hidden class="anchor" aria-hidden="true" href="#12-evil-peripheral-implants-dans-périphériques">#</a></h2>
+<h3 id="1-situation-de-départ-11">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-11">#</a></h3>
+<p>Une entreprise reçoit une clé USB “cadeau” ou un clavier offert lors d’un salon.</p>
+<h3 id="2-ce-que-fait-lattaquant-11">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-11">#</a></h3>
+<ul>
+<li>Le périphérique contient un microcontrôleur espion.</li>
+<li>Exemple : clavier qui enregistre toutes les frappes et les envoie en Wi-Fi.</li>
+</ul>
+<h3 id="3-conséquence-11">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-11">#</a></h3>
+<ul>
+<li>Espionnage discret et permanent.</li>
+<li>Vol de données sensibles.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-11">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-11">#</a></h3>
+<ul>
+<li>Les périphériques USB sont de véritables mini-ordinateurs.</li>
+<li>Le système fait confiance aux périphériques branchés.</li>
+</ul>
+<h3 id="5-contre-mesures-11">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-11">#</a></h3>
+<h4 id="-achat-uniquement-auprès-de-sources-fiables">✅ Achat uniquement auprès de sources fiables<a hidden class="anchor" aria-hidden="true" href="#-achat-uniquement-auprès-de-sources-fiables">#</a></h4>
+<ul>
+<li>Ne jamais accepter de périphérique inconnu.</li>
+<li><strong>Pourquoi ça protège</strong> : réduit le risque d’introduire du matériel piégé.</li>
+</ul>
+<h4 id="-usb-whitelisting-1">✅ USB whitelisting<a hidden class="anchor" aria-hidden="true" href="#-usb-whitelisting-1">#</a></h4>
+<ul>
+<li>Autoriser uniquement les périphériques connus et validés.</li>
+<li><strong>Pourquoi ça protège</strong> : un périphérique espion n’est pas reconnu.</li>
+</ul>
+<h4 id="-audit-matériel">✅ Audit matériel<a hidden class="anchor" aria-hidden="true" href="#-audit-matériel">#</a></h4>
+<ul>
+<li>Démonter et inspecter périodiquement les périphériques critiques.</li>
+<li><strong>Pourquoi ça protège</strong> : permet d’identifier un implant physique caché.</li>
+</ul>
+<hr>
+<h2 id="13-rowhammer">13. Rowhammer<a hidden class="anchor" aria-hidden="true" href="#13-rowhammer">#</a></h2>
+<h3 id="1-situation-de-départ-12">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-12">#</a></h3>
+<p>Un attaquant exécute du code sur une machine (local ou VM).<br>
+Il n’a pas les droits admin mais peut manipuler la mémoire (RAM).</p>
+<h3 id="2-ce-que-fait-lattaquant-12">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-12">#</a></h3>
+<ul>
+<li>Il accède de façon répétée à certaines cellules mémoire (“martelage” de lignes adjacentes).</li>
+<li>Ce stress électrique provoque des inversions de bits dans les cellules voisines.</li>
+</ul>
+<h3 id="3-conséquence-12">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-12">#</a></h3>
+<ul>
+<li>Modification de la mémoire sans droits.</li>
+<li>Possibilité d’élever ses privilèges (ex. changer un bit dans une structure critique).</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-12">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-12">#</a></h3>
+<ul>
+<li>La RAM DRAM est sensible aux interférences électriques entre cellules.</li>
+<li>Pas de protection matérielle par défaut.</li>
+</ul>
+<h3 id="5-contre-mesures-12">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-12">#</a></h3>
+<h4 id="-ecc-ram-error-correcting-code">✅ ECC RAM (Error-Correcting Code)<a hidden class="anchor" aria-hidden="true" href="#-ecc-ram-error-correcting-code">#</a></h4>
+<ul>
+<li>Corrige les erreurs mémoire à la volée.</li>
+<li><strong>Pourquoi ça protège</strong> : réduit la probabilité d’exploitation.</li>
+</ul>
+<h4 id="-randomisation-dallocation-mémoire">✅ Randomisation d’allocation mémoire<a hidden class="anchor" aria-hidden="true" href="#-randomisation-dallocation-mémoire">#</a></h4>
+<ul>
+<li>Déplacer les données critiques dans la mémoire.</li>
+<li><strong>Pourquoi ça protège</strong> : rend difficile de cibler une cellule précise.</li>
+</ul>
+<h4 id="-rafraîchissement-mémoire-trr--target-row-refresh">✅ Rafraîchissement mémoire (TRR – Target Row Refresh)<a hidden class="anchor" aria-hidden="true" href="#-rafraîchissement-mémoire-trr--target-row-refresh">#</a></h4>
+<ul>
+<li>Certains constructeurs ajoutent un mécanisme de protection DRAM.</li>
+<li><strong>Pourquoi ça protège</strong> : détecte le martelage et rafraîchit les lignes affectées.</li>
+</ul>
+<hr>
+<h2 id="14-foreshadow-l1-terminal-fault">14. Foreshadow (L1 Terminal Fault)<a hidden class="anchor" aria-hidden="true" href="#14-foreshadow-l1-terminal-fault">#</a></h2>
+<h3 id="1-situation-de-départ-13">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-13">#</a></h3>
+<p>Un attaquant exécute du code sur une machine avec processeur Intel.</p>
+<h3 id="2-ce-que-fait-lattaquant-13">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-13">#</a></h3>
+<ul>
+<li>Il exploite une faille dans la gestion du cache L1.</li>
+<li>Il peut lire des données protégées (même dans SGX enclaves ou VM).</li>
+</ul>
+<h3 id="3-conséquence-13">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-13">#</a></h3>
+<ul>
+<li>Vol de clés cryptographiques.</li>
+<li>Fuite d’informations entre VM sur cloud partagé.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-13">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-13">#</a></h3>
+<ul>
+<li>Mauvaise isolation entre le cache CPU et la mémoire protégée.</li>
+<li>Vulnérabilité dans l’architecture Intel.</li>
+</ul>
+<h3 id="5-contre-mesures-13">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-13">#</a></h3>
+<h4 id="-microcode-updates">✅ Microcode updates<a hidden class="anchor" aria-hidden="true" href="#-microcode-updates">#</a></h4>
+<ul>
+<li>Patches fournis par Intel pour corriger la gestion du cache.</li>
+<li><strong>Pourquoi ça protège</strong> : ferme la faille au niveau du CPU.</li>
+</ul>
+<h4 id="-désactivation-sgx-si-inutile">✅ Désactivation SGX (si inutile)<a hidden class="anchor" aria-hidden="true" href="#-désactivation-sgx-si-inutile">#</a></h4>
+<ul>
+<li>Ne pas activer les enclaves si elles ne sont pas utilisées.</li>
+<li><strong>Pourquoi ça protège</strong> : réduit la surface d’attaque.</li>
+</ul>
+<h4 id="-isolation-stricte-en-cloud">✅ Isolation stricte en cloud<a hidden class="anchor" aria-hidden="true" href="#-isolation-stricte-en-cloud">#</a></h4>
+<ul>
+<li>Ne pas cohéberger des workloads sensibles avec d’autres clients.</li>
+<li><strong>Pourquoi ça protège</strong> : empêche la fuite inter-VM.</li>
+</ul>
+<hr>
+<h2 id="15-zombieload-et-autres-mds--microarchitectural-data-sampling">15. ZombieLoad (et autres MDS – Microarchitectural Data Sampling)<a hidden class="anchor" aria-hidden="true" href="#15-zombieload-et-autres-mds--microarchitectural-data-sampling">#</a></h2>
+<h3 id="1-situation-de-départ-14">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-14">#</a></h3>
+<p>Un attaquant a accès à un serveur partagé.<br>
+Il n’est pas admin mais peut exécuter du code.</p>
+<h3 id="2-ce-que-fait-lattaquant-14">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-14">#</a></h3>
+<ul>
+<li>Il exploite des fuites dans les buffers internes du CPU (MDS).</li>
+<li>Il récupère des données utilisées récemment par d’autres processus.</li>
+</ul>
+<h3 id="3-conséquence-14">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-14">#</a></h3>
+<ul>
+<li>Vol de données sensibles (clés, requêtes, mots de passe).</li>
+<li>Fuite inter-processus ou inter-VM.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-14">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-14">#</a></h3>
+<ul>
+<li>Les processeurs utilisent des buffers internes (fill buffers, load ports).</li>
+<li>Pas de cloisonnement parfait entre processus.</li>
+</ul>
+<h3 id="5-contre-mesures-14">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-14">#</a></h3>
+<h4 id="-patches-microcode--kernel">✅ Patches microcode + kernel<a hidden class="anchor" aria-hidden="true" href="#-patches-microcode--kernel">#</a></h4>
+<ul>
+<li>Désactivation partielle de certaines optimisations CPU.</li>
+<li><strong>Pourquoi ça protège</strong> : supprime les fuites par buffers internes.</li>
+</ul>
+<h4 id="-ht-hyper-threading-désactivé">✅ HT (Hyper-Threading) désactivé<a hidden class="anchor" aria-hidden="true" href="#-ht-hyper-threading-désactivé">#</a></h4>
+<ul>
+<li>Isoler les threads physiques.</li>
+<li><strong>Pourquoi ça protège</strong> : réduit la fuite entre deux threads partageant le même cœur.</li>
+</ul>
+<h4 id="-workload-isolation">✅ Workload isolation<a hidden class="anchor" aria-hidden="true" href="#-workload-isolation">#</a></h4>
+<ul>
+<li>Déployer les tâches sensibles sur des serveurs dédiés.</li>
+<li><strong>Pourquoi ça protège</strong> : évite les attaques cross-tenant en cloud.</li>
+</ul>
+<hr>
+<h2 id="16-attaques-cold-boot-avancées">16. Attaques Cold Boot avancées<a hidden class="anchor" aria-hidden="true" href="#16-attaques-cold-boot-avancées">#</a></h2>
+<h3 id="1-situation-de-départ-15">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-15">#</a></h3>
+<p>Un laptop ou serveur est redémarré brutalement alors qu’il est encore allumé.</p>
+<h3 id="2-ce-que-fait-lattaquant-15">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-15">#</a></h3>
+<ul>
+<li>Il refroidit la RAM avec de l’air comprimé inversé ou de l’azote liquide.</li>
+<li>Cela ralentit la perte des données en mémoire.</li>
+<li>Il extrait les clés de chiffrement disque stockées en RAM.</li>
+</ul>
+<h3 id="3-conséquence-15">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-15">#</a></h3>
+<ul>
+<li>Contournement du chiffrement complet du disque.</li>
+<li>Accès aux fichiers protégés.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-15">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-15">#</a></h3>
+<ul>
+<li>La mémoire volatile ne s’efface pas instantanément à l’arrêt.</li>
+<li>Les clés sont souvent stockées en RAM lors d’une session active.</li>
+</ul>
+<h3 id="5-contre-mesures-15">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-15">#</a></h3>
+<h4 id="-forcer-effacement-ram">✅ Forcer effacement RAM<a hidden class="anchor" aria-hidden="true" href="#-forcer-effacement-ram">#</a></h4>
+<ul>
+<li>Écraser la mémoire au shutdown.</li>
+<li><strong>Pourquoi ça protège</strong> : supprime les clés avant extinction complète.</li>
+</ul>
+<h4 id="-tpm--secure-boot">✅ TPM + Secure Boot<a hidden class="anchor" aria-hidden="true" href="#-tpm--secure-boot">#</a></h4>
+<ul>
+<li>Stocker les clés dans TPM plutôt qu’en RAM.</li>
+<li><strong>Pourquoi ça protège</strong> : évite que les clés critiques soient récupérables.</li>
+</ul>
+<h4 id="-éteindre-complètement-pas-veille">✅ Éteindre complètement (pas veille)<a hidden class="anchor" aria-hidden="true" href="#-éteindre-complètement-pas-veille">#</a></h4>
+<ul>
+<li>Ne jamais laisser une machine sensible en veille/hibernation.</li>
+<li><strong>Pourquoi ça protège</strong> : supprime les données sensibles de la RAM.</li>
+</ul>
+<hr>
+<h2 id="17-attaques-physiques-sur-gpu-extraction-via-vram">17. Attaques physiques sur GPU (extraction via VRAM)<a hidden class="anchor" aria-hidden="true" href="#17-attaques-physiques-sur-gpu-extraction-via-vram">#</a></h2>
+<h3 id="1-situation-de-départ-16">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-16">#</a></h3>
+<p>Une machine utilise un GPU pour accélérer les calculs (IA, chiffrement, crypto mining).</p>
+<h3 id="2-ce-que-fait-lattaquant-16">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-16">#</a></h3>
+<ul>
+<li>Il exploite le fait que la mémoire VRAM garde temporairement des données.</li>
+<li>Il lit directement la VRAM pour extraire modèles, clés ou données traitées.</li>
+</ul>
+<h3 id="3-conséquence-16">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-16">#</a></h3>
+<ul>
+<li>Vol de données sensibles (weights IA, images traitées, clés).</li>
+<li>Espionnage d’applications graphiques ou de calcul scientifique.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-16">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-16">#</a></h3>
+<ul>
+<li>La VRAM n’est pas toujours effacée correctement après usage.</li>
+<li>Peu de contrôles d’accès sur certaines architectures GPU.</li>
+</ul>
+<h3 id="5-contre-mesures-16">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-16">#</a></h3>
+<h4 id="-effacement-mémoire-gpu">✅ Effacement mémoire GPU<a hidden class="anchor" aria-hidden="true" href="#-effacement-mémoire-gpu">#</a></h4>
+<ul>
+<li>Nettoyer la VRAM après chaque job.</li>
+<li><strong>Pourquoi ça protège</strong> : évite la récupération de données résiduelles.</li>
+</ul>
+<h4 id="-isolation-des-workloads-gpu">✅ Isolation des workloads GPU<a hidden class="anchor" aria-hidden="true" href="#-isolation-des-workloads-gpu">#</a></h4>
+<ul>
+<li>Pas de partage GPU entre tenants sensibles.</li>
+<li><strong>Pourquoi ça protège</strong> : empêche les fuites inter-clients en cloud GPU.</li>
+</ul>
+<h4 id="-drivers-sécurisés">✅ Drivers sécurisés<a hidden class="anchor" aria-hidden="true" href="#-drivers-sécurisés">#</a></h4>
+<ul>
+<li>Installer les dernières mises à jour GPU.</li>
+<li><strong>Pourquoi ça protège</strong> : corrige les vulnérabilités d’accès mémoire.</li>
+</ul>
+<hr>
+<h2 id="18-fault-injection-glitching">18. Fault Injection (Glitching)<a hidden class="anchor" aria-hidden="true" href="#18-fault-injection-glitching">#</a></h2>
+<h3 id="1-situation-de-départ-17">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-17">#</a></h3>
+<p>Un attaquant cible un équipement matériel (carte bancaire, IoT, puce embarquée).</p>
+<h3 id="2-ce-que-fait-lattaquant-17">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-17">#</a></h3>
+<ul>
+<li>Il provoque volontairement une erreur physique (glitch).</li>
+<li>Techniques : impulsion laser, surtension, variation rapide de l’horloge.</li>
+<li>Objectif : perturber l’exécution du processeur pour contourner un contrôle (ex. bypass d’un PIN).</li>
+</ul>
+<h3 id="3-conséquence-17">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-17">#</a></h3>
+<ul>
+<li>Contournement d’authentification matérielle.</li>
+<li>Extraction de secrets stockés dans une puce sécurisée.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-17">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-17">#</a></h3>
+<ul>
+<li>Les circuits électroniques ne gèrent pas toujours les perturbations électriques extrêmes.</li>
+<li>Pas de protections contre les fautes physiques.</li>
+</ul>
+<h3 id="5-contre-mesures-17">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-17">#</a></h3>
+<h4 id="-capteurs-anti-tamper">✅ Capteurs anti-tamper<a hidden class="anchor" aria-hidden="true" href="#-capteurs-anti-tamper">#</a></h4>
+<ul>
+<li>Détectent anomalies électriques, laser, température.</li>
+<li><strong>Pourquoi ça protège</strong> : bloque ou efface les données si une attaque est détectée.</li>
+</ul>
+<h4 id="-redondance-dexécution">✅ Redondance d’exécution<a hidden class="anchor" aria-hidden="true" href="#-redondance-dexécution">#</a></h4>
+<ul>
+<li>Répéter les opérations sensibles et comparer les résultats.</li>
+<li><strong>Pourquoi ça protège</strong> : un glitch isolé est détecté par incohérence.</li>
+</ul>
+<h4 id="-blindage-physique">✅ Blindage physique<a hidden class="anchor" aria-hidden="true" href="#-blindage-physique">#</a></h4>
+<ul>
+<li>Ajouter un packaging anti-intrusion autour de la puce.</li>
+<li><strong>Pourquoi ça protège</strong> : rend l’accès matériel direct plus difficile.</li>
+</ul>
+<hr>
+<h2 id="19-rambleed-exploitation-mémoire-type-rowhammer-étendu">19. RAMBleed (exploitation mémoire type Rowhammer étendu)<a hidden class="anchor" aria-hidden="true" href="#19-rambleed-exploitation-mémoire-type-rowhammer-étendu">#</a></h2>
+<h3 id="1-situation-de-départ-18">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-18">#</a></h3>
+<p>Un attaquant exécute du code sur une machine partagée (ex. cloud).</p>
+<h3 id="2-ce-que-fait-lattaquant-18">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-18">#</a></h3>
+<ul>
+<li>Il utilise une variante de Rowhammer :<br>
+au lieu de modifier des bits, il <strong>observe</strong> les fuites d’information induites par les inversions de bits voisines.</li>
+<li>Cela lui permet de lire des données sensibles en mémoire.</li>
+</ul>
+<h3 id="3-conséquence-18">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-18">#</a></h3>
+<ul>
+<li>Vol de clés cryptographiques d’un autre processus.</li>
+<li>Espionnage inter-VM en cloud.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-18">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-18">#</a></h3>
+<ul>
+<li>DRAM vulnérable aux interférences électromagnétiques.</li>
+<li>ECC RAM corrige mais ne masque pas toujours la fuite d’information.</li>
+</ul>
+<h3 id="5-contre-mesures-18">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-18">#</a></h3>
+<h4 id="-dram-résistante-ddr4-avec-trr">✅ DRAM résistante (DDR4+ avec TRR)<a hidden class="anchor" aria-hidden="true" href="#-dram-résistante-ddr4-avec-trr">#</a></h4>
+<ul>
+<li>Protection intégrée contre Rowhammer/RAMBleed.</li>
+<li><strong>Pourquoi ça protège</strong> : empêche le martelage ciblé.</li>
+</ul>
+<h4 id="-isolation-forte-en-cloud">✅ Isolation forte en cloud<a hidden class="anchor" aria-hidden="true" href="#-isolation-forte-en-cloud">#</a></h4>
+<ul>
+<li>Ne pas cohéberger des workloads critiques avec d’autres clients.</li>
+<li><strong>Pourquoi ça protège</strong> : limite les fuites inter-tenant.</li>
+</ul>
+<h4 id="-monitoring-mémoire">✅ Monitoring mémoire<a hidden class="anchor" aria-hidden="true" href="#-monitoring-mémoire">#</a></h4>
+<ul>
+<li>Détecter accès répétitifs suspects aux mêmes lignes.</li>
+<li><strong>Pourquoi ça protège</strong> : alerte sur une tentative Rowhammer/RAMBleed.</li>
+</ul>
+<hr>
+<h2 id="20-pre-compromised-biosuefi-supply-chain-firmware">20. Pre-compromised BIOS/UEFI (supply chain firmware)<a hidden class="anchor" aria-hidden="true" href="#20-pre-compromised-biosuefi-supply-chain-firmware">#</a></h2>
+<h3 id="1-situation-de-départ-19">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-19">#</a></h3>
+<p>Une entreprise achète des serveurs préconfigurés.</p>
+<h3 id="2-ce-que-fait-lattaquant-19">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-19">#</a></h3>
+<ul>
+<li>Le BIOS/UEFI livré contient déjà un rootkit caché.</li>
+<li>Dès le premier boot, l’attaquant contrôle la machine.</li>
+</ul>
+<h3 id="3-conséquence-19">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-19">#</a></h3>
+<ul>
+<li>Persistance indétectable même après réinstallation OS.</li>
+<li>Espionnage ou détournement permanent.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-19">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-19">#</a></h3>
+<ul>
+<li>Firmware fermé, peu audité.</li>
+<li>Confiance aveugle dans le constructeur ou le revendeur.</li>
+</ul>
+<h3 id="5-contre-mesures-19">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-19">#</a></h3>
+<h4 id="-vérification-de-lempreinte-firmware">✅ Vérification de l’empreinte firmware<a hidden class="anchor" aria-hidden="true" href="#-vérification-de-lempreinte-firmware">#</a></h4>
+<ul>
+<li>Comparer le hash du BIOS/UEFI avec la version constructeur.</li>
+<li><strong>Pourquoi ça protège</strong> : détecte toute modification malveillante.</li>
+</ul>
+<h4 id="-secure-boot--tpm">✅ Secure Boot + TPM<a hidden class="anchor" aria-hidden="true" href="#-secure-boot--tpm">#</a></h4>
+<ul>
+<li>Empêche le boot si le firmware n’est pas signé.</li>
+<li><strong>Pourquoi ça protège</strong> : bloque l’exécution d’un BIOS compromis.</li>
+</ul>
+<h4 id="-approvisionnement-sécurisé">✅ Approvisionnement sécurisé<a hidden class="anchor" aria-hidden="true" href="#-approvisionnement-sécurisé">#</a></h4>
+<ul>
+<li>Travailler uniquement avec des constructeurs certifiés.</li>
+<li><strong>Pourquoi ça protège</strong> : réduit le risque de recevoir un matériel altéré.</li>
+</ul>
+<hr>
+<h2 id="21-attaques-sur-bus-matériels-pcie-ic-spi">21. Attaques sur bus matériels (PCIe, I²C, SPI)<a hidden class="anchor" aria-hidden="true" href="#21-attaques-sur-bus-matériels-pcie-ic-spi">#</a></h2>
+<h3 id="1-situation-de-départ-20">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-20">#</a></h3>
+<p>Un attaquant a un accès physique temporaire à une machine.</p>
+<h3 id="2-ce-que-fait-lattaquant-20">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-20">#</a></h3>
+<ul>
+<li>Il branche un sniffer sur un bus interne (PCIe, I²C, SPI).</li>
+<li>Il capture les communications entre CPU et périphériques.</li>
+<li>Exemple : récupération de clés échangées entre CPU et TPM.</li>
+</ul>
+<h3 id="3-conséquence-20">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-20">#</a></h3>
+<ul>
+<li>Vol de données sensibles en transit interne.</li>
+<li>Injection de commandes malveillantes dans les périphériques.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-20">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-20">#</a></h3>
+<ul>
+<li>Les bus matériels ne sont pas chiffrés.</li>
+<li>L’architecture suppose un environnement “de confiance”.</li>
+</ul>
+<h3 id="5-contre-mesures-20">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-20">#</a></h3>
+<h4 id="-chiffrement-interne-bus-encryption">✅ Chiffrement interne (bus encryption)<a hidden class="anchor" aria-hidden="true" href="#-chiffrement-interne-bus-encryption">#</a></h4>
+<ul>
+<li>Certains processeurs modernes chiffrent les communications sur le bus.</li>
+<li><strong>Pourquoi ça protège</strong> : empêche la lecture directe des échanges.</li>
+</ul>
+<h4 id="-blindage-physique-1">✅ Blindage physique<a hidden class="anchor" aria-hidden="true" href="#-blindage-physique-1">#</a></h4>
+<ul>
+<li>Difficulté d’accès aux bus (scellés, boîtiers renforcés).</li>
+<li><strong>Pourquoi ça protège</strong> : complique l’installation d’un sniffer.</li>
+</ul>
+<h4 id="-monitoring-matériel">✅ Monitoring matériel<a hidden class="anchor" aria-hidden="true" href="#-monitoring-matériel">#</a></h4>
+<ul>
+<li>Détecter des périphériques PCIe inconnus.</li>
+<li><strong>Pourquoi ça protège</strong> : alerte sur un implant espion branché en interne.</li>
+</ul>
+<hr>
+<h2 id="22-side-channels-via-consommation-dénergie-power-analysis">22. Side-channels via consommation d’énergie (Power Analysis)<a hidden class="anchor" aria-hidden="true" href="#22-side-channels-via-consommation-dénergie-power-analysis">#</a></h2>
+<h3 id="1-situation-de-départ-21">1. Situation de départ<a hidden class="anchor" aria-hidden="true" href="#1-situation-de-départ-21">#</a></h3>
+<p>Un attaquant cible une carte à puce (paiement, HSM).</p>
+<h3 id="2-ce-que-fait-lattaquant-21">2. Ce que fait l’attaquant<a hidden class="anchor" aria-hidden="true" href="#2-ce-que-fait-lattaquant-21">#</a></h3>
+<ul>
+<li>Il mesure la consommation électrique de la puce lors d’opérations cryptographiques.</li>
+<li>Il corrèle les variations de consommation avec les bits calculés.</li>
+</ul>
+<h3 id="3-conséquence-21">3. Conséquence<a hidden class="anchor" aria-hidden="true" href="#3-conséquence-21">#</a></h3>
+<ul>
+<li>Extraction de clés privées (RSA, AES).</li>
+<li>Compromission de systèmes supposés inviolables.</li>
+</ul>
+<h3 id="4-pourquoi-cest-possible-21">4. Pourquoi c’est possible<a hidden class="anchor" aria-hidden="true" href="#4-pourquoi-cest-possible-21">#</a></h3>
+<ul>
+<li>Les calculs cryptographiques consomment plus ou moins d’énergie selon les bits manipulés.</li>
+<li>Pas de contre-mesure matérielle.</li>
+</ul>
+<h3 id="5-contre-mesures-21">5. Contre-mesures<a hidden class="anchor" aria-hidden="true" href="#5-contre-mesures-21">#</a></h3>
+<h4 id="-algorithmes-masqués-masking">✅ Algorithmes masqués (masking)<a hidden class="anchor" aria-hidden="true" href="#-algorithmes-masqués-masking">#</a></h4>
+<ul>
+<li>Ajouter du bruit aléatoire dans les calculs.</li>
+<li><strong>Pourquoi ça protège</strong> : rend la corrélation consommation/clé inutilisable.</li>
+</ul>
+<h4 id="-blindage-alimentation">✅ Blindage alimentation<a hidden class="anchor" aria-hidden="true" href="#-blindage-alimentation">#</a></h4>
+<ul>
+<li>Ajouter des filtres et régulateurs.</li>
+<li><strong>Pourquoi ça protège</strong> : aplanit les variations de consommation.</li>
+</ul>
+<h4 id="-détection-dintrusion">✅ Détection d’intrusion<a hidden class="anchor" aria-hidden="true" href="#-détection-dintrusion">#</a></h4>
+<ul>
+<li>Capteurs qui arrêtent la puce si une sonde électrique est branchée.</li>
+<li><strong>Pourquoi ça protège</strong> : empêche l’attaquant de mesurer la consommation.</li>
+</ul>
+<hr>
+<h1 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h1>
+<p>Les attaques physiques rappellent que la cybersécurité n’est pas qu’un problème logiciel :<br>
+un attaquant motivé peut exploiter le <strong>contact direct avec le matériel</strong> ou détourner les
+comportements naturels des composants.</p>
+<p>Trois grands principes de défense ressortent :</p>
+<ul>
+<li><strong>Durcissement physique</strong> → chiffrement disque, scellés de sécurité, blindage, TPM, Secure Boot.</li>
+<li><strong>Gestion opérationnelle</strong> → procédures de destruction des déchets, contrôle des accès physiques, politique stricte sur les périphériques.</li>
+<li><strong>Surveillance avancée</strong> → monitoring matériel, audits de firmware, détection d’anomalies électromagnétiques ou de consommation.</li>
+</ul>
+<p>En résumé, la protection matérielle exige de traiter les équipements comme des actifs critiques,
+au même titre que les applications et les données : <strong>sécuriser le logiciel ne suffit pas si
+le matériel peut être compromis</strong>.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/mat%C3%A9riel/">Matériel</a></li>
+      <li><a href="http://localhost:1313/tags/hardware/">Hardware</a></li>
+      <li><a href="http://localhost:1313/tags/attaque-physique/">Attaque Physique</a></li>
+      <li><a href="http://localhost:1313/tags/firmware/">Firmware</a></li>
+      <li><a href="http://localhost:1313/tags/side-channel/">Side-Channel</a></li>
+      <li><a href="http://localhost:1313/tags/rowhammer/">Rowhammer</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/blog/articles/attaques-identite-humain/">
+    <span class="title">« Précédent</span>
+    <br>
+    <span>👨‍👨‍👧‍👦 Attaques sur l’identité et l’humain (Ingénierie sociale)</span>
+  </a>
+  <a class="next" href="http://localhost:1313/blog/articles/panorame-attaque-cybersecurite/">
+    <span class="title">Suivant »</span>
+    <br>
+    <span>Panorama des principales attaques en cybersécurité</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">AWSD</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'Copier';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'Copié !';
+            setTimeout(() => {
+                copybutton.innerHTML = 'Copier';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
