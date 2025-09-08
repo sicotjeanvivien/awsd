@@ -7,6 +7,7 @@ links:
   github: "https://github.com/tonrepo/tonprojet"
   demo: ""
 weight: 0   # optionnel : ordre manuel (plus petit = plus haut)
-draft: false
+draft: true
 ---
-Brève présentation (2–3 phrases). Tu peux ajouter des sections détaillées si tu veux.
+
+En construction . . .

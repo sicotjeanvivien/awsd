@@ -6,6 +6,7 @@ ShowBreadCrumbs: false
 ShowReadingTime: false
 title: "Services"
 description: "Développement Symfony, sites vitrines, sécurité applicative — des solutions claires et adaptées à vos besoins."
+draft: true
 services:
   - icon: "🧱"
     title: "Développement & Architecture Symfony"
