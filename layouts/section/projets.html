@@ -2,7 +2,7 @@
 <main class="projets-container">
   <header class="projets-header">
     <h1>{{ .Title | default "Projets" }}</h1>
-    {{ with .Content }}<div class="projets-intro">{{ . }}</div>{{ end }}
+    {{ with .Summary }}<div class="projets-intro">{{ . }}</div>{{ end }}
   </header>
 
   <section class="projets-list">
