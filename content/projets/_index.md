@@ -1,13 +1,5 @@
 ---
-title: ""
-date: ""
-description: "Courte description du projet."
-image: "images/projects/placeholder.jpg"   # chemin relatif à /assets/ ou /static/
-links:
-  github: "https://github.com/tonrepo/tonprojet"
-  demo: ""
-weight: 0   # optionnel : ordre manuel (plus petit = plus haut)
-draft: true
+title: "Projets"
+summary: "Sélection de projets. Cliquez pour les détails."
+# pas besoin de layout si tu as mis layouts/section/projets.html
 ---
-
-En construction . . .

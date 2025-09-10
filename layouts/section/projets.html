@@ -1,0 +1,41 @@
+{{ define "main" }}
+<main class="projets-container">
+  <header class="projets-header">
+    <h1>{{ .Title | default "Projets" }}</h1>
+    {{ with .Content }}<div class="projets-intro">{{ . }}</div>{{ end }}
+  </header>
+
+  <section class="projets-list">
+    {{ range .Pages.ByDate.Reverse }}
+    <article class="projet-card">
+      <a class="projet-cover" href="{{ .RelPermalink }}">
+        {{ with .Params.cover.image }}
+        <img src="{{ . | relURL }}" alt="{{ $.Params.cover.alt | default $.Title }}">
+        {{ else }}
+        <div class="projet-cover--placeholder">{{ $.Title }}</div>
+        {{ end }}
+      </a>
+
+      <div class="projet-body">
+        <h2 class="projet-title">
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </h2>
+
+        <p class="projet-summary">
+          {{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 140 }}{{ end }}
+        </p>
+
+        <div class="projet-meta">
+          {{ with .Params.status }}<span class="projet-status">{{ . }}</span>{{ end }}
+          {{ with .Params.tags }}
+          <span class="projet-tags">
+            {{ range first 3 . }}<span class="tag">#{{ . }}</span>{{ end }}
+          </span>
+          {{ end }}
+        </div>
+      </div>
+    </article>
+    {{ end }}
+  </section>
+</main>
+{{ end }}

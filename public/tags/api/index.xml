@@ -6,8 +6,15 @@
     <description>Recent content in API on AWSD</description>
     <generator>Hugo -- 0.148.2</generator>
     <language>fr</language>
-    <lastBuildDate>Thu, 28 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 10 Sep 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/api/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SDK CoinGecko (TypeScript, Node.js)</title>
+      <link>http://localhost:1313/projets/sdk-coingecko-typescript-node.js/</link>
+      <pubDate>Wed, 10 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projets/sdk-coingecko-typescript-node.js/</guid>
+      <description>SDK en TypeScript pour interagir avec l’API CoinGecko : endpoints courants, typage fort et distribution npm.</description>
+    </item>
     <item>
       <title>📲 Attaques Applicatives</title>
       <link>http://localhost:1313/blog/articles/attaques-applicatives/</link>
