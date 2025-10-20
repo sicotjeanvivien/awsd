@@ -1,9 +1,33 @@
 # sws.toml
 [advanced]
 
-# Rediriger tout le trafic de www.awsd.fr -> https://awsd.fr (301)
+# 1) Rediriger tout le trafic de www.awsd.fr -> https://awsd.fr (301)
 [[advanced.redirects]]
 host = "www.awsd.fr"
 source = "/{*}"
 destination = "https://awsd.fr/$1"
 kind = 301
+
+# 2) En-têtes sécurité (appliqués à toutes les réponses)
+[[advanced.headers]]
+source = "**/*"
+[advanced.headers.headers]
+Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+Referrer-Policy            = "strict-origin-when-cross-origin"
+X-Content-Type-Options     = "nosniff"
+Permissions-Policy         = "geolocation=(), microphone=(), camera=()"
+# CSP minimaliste compatible site statique / PaperMod
+# ⚠️ Si tu ajoutes analytics/embeds, on ajustera (script-src, img-src, connect-src…)
+Content-Security-Policy    = "default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; frame-ancestors 'self'"
+
+# 3) Cache agressif pour assets fingerprintés (images/CSS/JS/icônes)
+[[advanced.headers]]
+source = "**/*.{css,js,svg,ico,png,jpg,jpeg,webp,avif}"
+[advanced.headers.headers]
+Cache-Control = "public, max-age=31536000, immutable"
+
+# 4) Eviter le cache long sur HTML
+[[advanced.headers]]
+source = "**/*.html"
+[advanced.headers.headers]
+Cache-Control = "no-cache"

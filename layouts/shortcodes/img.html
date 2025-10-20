@@ -1,0 +1,37 @@
+{{/* Usage:
+{{< img src="monimage.png" alt="Description" class="w-100" >}}
+Si la page est un bundle, on peut aussi faire {{< img src="monimage.png" >}}
+*/}}
+{{- $alt := .Get "alt" | default .Page.Title -}}
+{{- $class := .Get "class" -}}
+{{- $src := .Get "src" -}}
+
+{{- $res := "" -}}
+{{- if .Page.Resources.GetMatch $src -}}
+  {{- $res = .Page.Resources.GetMatch $src -}}
+{{- end -}}
+
+{{- if $res -}}
+  {{- $w := slice 480 768 1024 1440 -}}
+  {{- $webp := slice -}}
+  {{- $jpg := slice -}}
+  {{- range $w }}
+    {{- $img := $res.Fit (printf "%dx webp q80" .) -}}
+    {{- $webp = $webp | append (printf "%s %dw" $img.RelPermalink .) -}}
+    {{- $img2 := $res.Fit (printf "%dx jpg q80" .) -}}
+    {{- $jpg = $jpg | append (printf "%s %dw" $img2.RelPermalink .) -}}
+  {{- end -}}
+  <picture>
+    <source type="image/avif" srcset="{{ range $w }}{{ ($res.Fit (printf "%dx avif q50" .)).RelPermalink }} {{ . }}w,{{ end }}">
+    <source type="image/webp" srcset="{{ delimit $webp ", " }}">
+    <img
+      loading="lazy" decoding="async"
+      src="{{ ($res.Fit "1024x jpg q80").RelPermalink }}"
+      srcset="{{ delimit $jpg ", " }}"
+      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      alt="{{ $alt | plainify }}"
+      class="{{ $class }}">
+  </picture>
+{{- else -}}
+  <img loading="lazy" decoding="async" src="{{ $src | absURL }}" alt="{{ $alt | plainify }}" class="{{ $class }}">
+{{- end -}}

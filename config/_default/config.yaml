@@ -28,3 +28,15 @@ outputs:
   home: ["HTML", "RSS", "JSON"]
   section: ["HTML", "RSS"]
   taxonomy: ["HTML", "RSS"]
+
+# Minification & post-process
+minify:
+  disableXML: true
+  tdewolff:
+    html:
+      keepWhitespace: false
+
+# Contrôle qualité images (Hugo imaging)
+imaging:
+  quality: 80
+  resampleFilter: lanczos
