@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Cloud on AWSD</title>
+    <title>Cloud on AWSD — Artisan Web Software &amp; Defense</title>
     <link>http://localhost:1313/tags/cloud/</link>
-    <description>Recent content in Cloud on AWSD</description>
+    <description>Recent content in Cloud on AWSD — Artisan Web Software &amp; Defense</description>
     <generator>Hugo -- 0.148.2</generator>
     <language>fr</language>
     <lastBuildDate>Thu, 28 Aug 2025 00:00:00 +0000</lastBuildDate>

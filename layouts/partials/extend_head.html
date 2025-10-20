@@ -1,2 +1,73 @@
+{{- /* --------- TITLE --------- */ -}}
+<title>
+  {{- if .IsHome -}}
+    {{ .Site.Title }}
+  {{- else if .Title -}}
+    {{ .Title }} — {{ .Site.Title }}
+  {{- else -}}
+    {{ .Site.Title }}
+  {{- end -}}
+</title>
+
+{{- /* --------- DESCRIPTION --------- */ -}}
+{{- $desc := .Params.description | default .Summary | default .Site.Params.description -}}
+<meta name="description" content="{{ $desc | plainify | htmlUnescape | truncate 160 }}"/>
+
+{{- /* --------- CANONICAL --------- */ -}}
+<link rel="canonical" href="{{ .Permalink }}"/>
+
+{{- /* --------- OG/Twitter image (cover > images[0] > site default) --------- */ -}}
+{{- $ogimg := "" -}}
+{{- with .Params.cover.image }}{{ $ogimg = . | absURL }}{{ end -}}
+{{- if and (not $ogimg) .Params.images }}{{ $ogimg = (index .Params.images 0) | absURL }}{{ end -}}
+{{- if and (not $ogimg) .Site.Params.images }}{{ $ogimg = (index .Site.Params.images 0) | absURL }}{{ end -}}
+
+{{- /* --------- OPEN GRAPH --------- */ -}}
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} — {{ .Site.Title }}{{ end }}">
+<meta property="og:description" content="{{ $desc | plainify | htmlUnescape | truncate 200 }}">
+<meta property="og:url" content="{{ .Permalink }}">
+{{ if $ogimg }}<meta property="og:image" content="{{ $ogimg }}">{{ end }}
+
+{{- /* --------- TWITTER --------- */ -}}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} — {{ .Site.Title }}{{ end }}">
+<meta name="twitter:description" content="{{ $desc | plainify | htmlUnescape | truncate 200 }}">
+{{ if $ogimg }}<meta name="twitter:image" content="{{ $ogimg }}">{{ end }}
+
+{{- /* --------- JSON-LD --------- */ -}}
+{{- if .IsHome -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Jean-Vivien Sicot",
+  "url": "https://awsd.fr/",
+  "jobTitle": "Développeur PHP/Symfony & AppSec",
+  "sameAs": [
+    "https://www.linkedin.com/in/...", 
+    "https://github.com/..."
+  ],
+  "image": "{{ $ogimg }}"
+}
+</script>
+{{- else if .IsPage -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ .Title | jsonify }},
+  "description": {{ ($desc | plainify | htmlUnescape | truncate 200) | jsonify }},
+  "mainEntityOfPage": {{ .Permalink | jsonify }},
+  "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+  "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+  "author": { "@type": "Person", "name": "Jean-Vivien Sicot" },
+  "publisher": { "@type": "Organization", "name": "AWSD", "logo": { "@type": "ImageObject", "url": "{{ (index .Site.Params.images 0) | absURL }}" } },
+  "image": {{ $ogimg | jsonify }}
+}
+</script>
+{{- end -}}
+
 {{- $cards := resources.Get "css/blog-cards.css" | minify | fingerprint -}}
 <link rel="stylesheet" href="{{ $cards.RelPermalink }}" integrity="{{ $cards.Data.Integrity }}">

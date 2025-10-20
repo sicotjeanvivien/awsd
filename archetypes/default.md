@@ -1,5 +1,14 @@
 ---
-date: '{{ .Date }}'
+title: "{{ replace .Name "-" " " | title }}"
+description: ""
+date: {{ .Date }}
 draft: true
-title: '{{ replace .File.ContentBaseName "-" " " | title }}'
+categories: []
+tags: []
+cover:
+  image: ""
+  alt: ""
+  caption: ""
+images: []     # fallback éventuel si pas de cover
+summary: ""
 ---
