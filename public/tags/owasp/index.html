@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="canonical" href="http://localhost:1313/tags/owasp/">
-<link crossorigin="anonymous" href="http://localhost:1313/assets/css/stylesheet.57576ef2d13b93aed7e212ed3734ad2f06722f96c3432d50dd70b3afdec1b65e.css" integrity="sha256-V1du8tE7k67X4hLtNzStLwZyL5bDQy1Q3XCzr97Btl4=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="http://localhost:1313/assets/css/stylesheet.6f8487f4795a342f5a0e5e39d3dc7a3e6d8271980509cc7d4b0e52fbde0ca40a.css" integrity="sha256-b4SH9HlaNC9aDl4509x6Pm2CcZgFCcx9Sw5S&#43;94MpAo=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
@@ -130,394 +130,38 @@
         </ul>
     </nav>
 </header>
-<main class="main">
+<main class="main"> 
+<header class="page-header"><div class="breadcrumbs"><a href="http://localhost:1313/">Accueil</a>&nbsp;»&nbsp;<a href="http://localhost:1313/tags/">Tags</a></div>
+  <h1>
+    OWASP
+    <a href="http://localhost:1313/tags/owasp/index.xml" title="RSS" aria-label="RSS">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" height="23">
+        <path d="M4 11a9 9 0 0 1 9 9" />
+        <path d="M4 4a16 16 0 0 1 16 16" />
+        <circle cx="5" cy="19" r="1" />
+      </svg>
+    </a>
+  </h1>
+</header>
 
-  
-    <div class="breadcrumbs"><a href="http://localhost:1313/">Accueil</a>&nbsp;»&nbsp;<a href="http://localhost:1313/tags/">Tags</a></div>
-  
-
-  <header class="page-header">
-    <h1>OWASP</h1>
-    <p class="taxonomy-desc">Filtré par : <strong>OWASP</strong></p>
-  </header>
-
-  
-  <section class="posts-grid">
-    
-      
-
-
-
-  
-
-
-<article class="post-entry post-card">
-  <a class="post-card__media " href="http://localhost:1313/blog/articles/owasp_top_10/" aria-label="OWASP Top 10 (2021)">
-    
-      <img src="http://localhost:1313/images/articles/owasp-top10-cover.png" loading="lazy" alt="OWASP Top 10 - Logo officiel de la guêpe">
-    
-  </a>
-
+<article class="post-entry tag-entry"> 
+<figure class="entry-cover">
+        <img loading="lazy" src="http://localhost:1313/images/articles/owasp-top10-cover.png" alt="OWASP Top 10 - Logo officiel de la guêpe">
+</figure>
   <header class="entry-header">
-    <h2 class="post-card__title"><a href="http://localhost:1313/blog/articles/owasp_top_10/">OWASP Top 10 (2021)</a></h2>
+    <h2 class="entry-hint-parent">OWASP Top 10 (2021)
+    </h2>
   </header>
-
-  <section class="entry-content">
-    <p><h1 id="-owasp-top-10--2021">🛡️ OWASP Top 10 – 2021</h1>
-<p>Le <strong>OWASP Top 10</strong> est le classement des risques de sécurité applicative les plus critiques.<br>
-Il sert de référence aux développeurs, pentesters et responsables sécurité.</p>
-<hr>
-<h2 id="a01-broken-access-control"><strong>A01: Broken Access Control</strong></h2>
-<ul>
-<li><strong>Définition</strong> : Les contrôles d’accès sont absents, mal implémentés ou contournables.</li>
-<li><strong>Mécanisme</strong> :
-<ul>
-<li>Contrôles uniquement côté client.</li>
-<li>Références directes non sécurisées (<code>/user?id=124</code>).</li>
-<li>Bypass de contrôles via paramètres cachés.</li>
-</ul>
-</li>
-<li><strong>Exemples</strong> :
-<ul>
-<li>Accès à <code>/admin</code> sans être administrateur.</li>
-<li>Téléchargement de fichiers appartenant à d’autres utilisateurs.</li>
-</ul>
-</li>
-<li><strong>Impacts</strong> :
-<ul>
-<li>Exposition de données sensibles.</li>
-<li>Escalade de privilèges.</li>
-</ul>
-</li>
-<li><strong>Mitigation</strong> :
-<ul>
-<li>Vérifications <strong>côté serveur</strong> obligatoires.</li>
-<li>Politiques d’accès centralisées.</li>
-<li>Principe du <strong>moindre privilège</strong>.</li>
-<li>Tests automatiques sur les autorisations.</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="a02-cryptographic-failures"><strong>A02: Cryptographic Failures</strong></h2>
-<ul>
-<li><strong>Définition</strong> : Mauvaise protection des données sensibles.</li>
-<li><strong>Mécanisme</strong> :
-<ul>
-<li>Stockage en clair.</li>
-<li>Protocole faible (MD5, SHA1, SSLv3).</li>
-<li>Mauvaise gestion des clés ou certificats.</li>
-</ul>
-</li>
-<li><strong>Exemples</strong> :
-<ul>
-<li>Mots de passe stockés en MD5.</li>
-<li>Site en HTTP intercepté (attaque <em>Man-in-the-Middle</em>).</li>
-<li>Clés API dans un repo GitHub public.</li>
-</ul>
-</li>
-<li><strong>Impacts</strong> :
-<ul>
-<li>Fuite d’identifiants, données médicales ou bancaires.</li>
-<li>Responsabilité légale (RGPD, PCI DSS).</li>
-</ul>
-</li>
-<li><strong>Mitigation</strong> :
-<ul>
-<li>TLS 1.2+ obligatoire (HSTS).</li>
-<li>Hashage fort des mots de passe (bcrypt, Argon2).</li>
-<li>Rotation et protection des clés.</li>
-<li>Ne jamais stocker plus de données que nécessaire.</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="a03-injection"><strong>A03: Injection</strong></h2>
-<ul>
-<li><strong>Définition</strong> : L’application interprète les données utilisateur comme du code.</li>
-<li><strong>Mécanisme</strong> :
-<ul>
-<li>Entrées concaténées dans des requêtes.</li>
-<li>Absence de validation/échappement.</li>
-</ul>
-</li>
-<li><strong>Exemples</strong> :
-<ul>
-<li><strong>SQL Injection</strong> :
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> users <span style="color:#66d9ef">WHERE</span> name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#66d9ef">OR</span> <span style="color:#e6db74">&#39;1&#39;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;1&#39;</span>;
-</span></span></code></pre></div></li>
-<li><strong>Command Injection</strong> :<br>
-<code>ping 8.8.8.8 &amp;&amp; rm -rf /</code></li>
-<li><strong>LDAP Injection</strong>.</li>
-</ul>
-</li>
-<li><strong>Impacts</strong> :
-<ul>
-<li>Fuite massive de données.</li>
-<li>Exécution de commandes arbitraires.</li>
-<li>Contrôle total de l’application.</li>
-</ul>
-</li>
-<li><strong>Mitigation</strong> :
-<ul>
-<li>Requêtes préparées.</li>
-<li>Validation stricte des entrées.</li>
-<li>Principe &ldquo;deny by default&rdquo;.</li>
-<li>WAF en complément.</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="a04-insecure-design"><strong>A04: Insecure Design</strong></h2>
-<ul>
-<li><strong>Définition</strong> : Vulnérabilités liées à la conception de l’application.</li>
-<li><strong>Mécanisme</strong> :
-<ul>
-<li>Pas de <em>threat modeling</em>.</li>
-<li>Règles métier insuffisantes.</li>
-<li>Pas de limite d’utilisation des ressources.</li>
-</ul>
-</li>
-<li><strong>Exemples</strong> :
-<ul>
-<li>API bancaire sans limite de virement journalier.</li>
-<li>Application sans MFA prévue dès le design.</li>
-</ul>
-</li>
-<li><strong>Impacts</strong> :
-<ul>
-<li>Attaques exploitables même avec du code “propre”.</li>
-<li>Défauts structurels impossibles à corriger rapidement.</li>
-</ul>
-</li>
-<li><strong>Mitigation</strong> :
-<ul>
-<li><strong>Security by design</strong>.</li>
-<li>Scénarios d’attaque dès la phase projet.</li>
-<li>Revues d’architecture.</li>
-<li>Défense en profondeur.</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="a05-security-misconfiguration"><strong>A05: Security Misconfiguration</strong></h2>
-<ul>
-<li><strong>Définition</strong> : Paramétrage non sécurisé ou défaut par défaut.</li>
-<li><strong>Mécanisme</strong> :
-<ul>
-<li>Services inutiles activés.</li>
-<li>Erreurs trop verbeuses.</li>
-<li>Ports ou consoles admin exposés.</li>
-</ul>
-</li>
-<li><strong>Exemples</strong> :
-<ul>
-<li>Tomcat Manager accessible sans restriction.</li>
-<li>Stack-trace affichée en production.</li>
-</ul>
-</li>
-<li><strong>Impacts</strong> :
-<ul>
-<li>Attaques automatisées faciles.</li>
-<li>Compromission rapide d’un serveur.</li>
-</ul>
-</li>
-<li><strong>Mitigation</strong> :
-<ul>
-<li><strong>Hardening</strong> des environnements.</li>
-<li>Configurations standardisées (infrastructure as code).</li>
-<li>Suppression des services inutiles.</li>
-<li>Tests de configuration réguliers.</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="a06-vulnerable-and-outdated-components"><strong>A06: Vulnerable and Outdated Components</strong></h2>
-<ul>
-<li><strong>Définition</strong> : Utilisation de composants tiers vulnérables ou non maintenus.</li>
-<li><strong>Mécanisme</strong> :
-<ul>
-<li>Dépendances obsolètes.</li>
-<li>Libs open-source non mises à jour.</li>
-</ul>
-</li>
-<li><strong>Exemples</strong> :
-<ul>
-<li>Faille Apache Struts → Equifax.</li>
-<li>jQuery 1.x vulnérable à XSS.</li>
-</ul>
-</li>
-<li><strong>Impacts</strong> :
-<ul>
-<li>Exploitation de failles connues publiques.</li>
-<li>Chaîne de dépendances compromise.</li>
-</ul>
-</li>
-<li><strong>Mitigation</strong> :
-<ul>
-<li>Inventaire des dépendances.</li>
-<li>Outils SCA (OWASP Dependency-Check, Snyk).</li>
-<li>Mises à jour régulières.</li>
-<li>Suppression des dépendances inutiles.</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="a07-identification-and-authentication-failures"><strong>A07: Identification and Authentication Failures</strong></h2>
-<ul>
-<li><strong>Définition</strong> : Failles dans l’authentification et gestion de session.</li>
-<li><strong>Mécanisme</strong> :
-<ul>
-<li>Sessions non sécurisées.</li>
-<li>MFA absent.</li>
-<li>Identifiants par défaut laissés.</li>
-</ul>
-</li>
-<li><strong>Exemples</strong> :
-<ul>
-<li>Attaque brute force sans limite de tentatives.</li>
-<li>JWT sans expiration.</li>
-<li>Cookies sans <code>HttpOnly</code> ni <code>Secure</code>.</li>
-</ul>
-</li>
-<li><strong>Impacts</strong> :
-<ul>
-<li>Compromission de comptes utilisateurs/admin.</li>
-<li>Usurpation d’identité.</li>
-</ul>
-</li>
-<li><strong>Mitigation</strong> :
-<ul>
-<li>MFA obligatoire.</li>
-<li>Politique de mots de passe robustes.</li>
-<li>Expiration/renouvellement des sessions.</li>
-<li>Tokens signés et vérifiés.</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="a08-software-and-data-integrity-failures"><strong>A08: Software and Data Integrity Failures</strong></h2>
-<ul>
-<li><strong>Définition</strong> : Données ou code non protégés contre modification.</li>
-<li><strong>Mécanisme</strong> :
-<ul>
-<li>Dépendances non vérifiées.</li>
-<li>CI/CD non sécurisé.</li>
-</ul>
-</li>
-<li><strong>Exemples</strong> :
-<ul>
-<li>Dépendance npm compromise (<code>event-stream</code>).</li>
-<li>Update non signée d’un logiciel.</li>
-</ul>
-</li>
-<li><strong>Impacts</strong> :
-<ul>
-<li>Exécution de code malveillant.</li>
-<li>Supply Chain Attack.</li>
-</ul>
-</li>
-<li><strong>Mitigation</strong> :
-<ul>
-<li>Signatures numériques obligatoires.</li>
-<li>CI/CD sécurisé avec contrôle d’intégrité.</li>
-<li>Contrôle d’origine des dépendances.</li>
-<li>Séparation des environnements.</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="a09-security-logging-and-monitoring-failures"><strong>A09: Security Logging and Monitoring Failures</strong></h2>
-<ul>
-<li><strong>Définition</strong> : Manque de surveillance et de journalisation efficace.</li>
-<li><strong>Mécanisme</strong> :
-<ul>
-<li>Absence de logs.</li>
-<li>Logs insuffisants ou non surveillés.</li>
-</ul>
-</li>
-<li><strong>Exemples</strong> :
-<ul>
-<li>Attaques brute force non détectées.</li>
-<li>Absence d’alerte sur des accès critiques.</li>
-</ul>
-</li>
-<li><strong>Impacts</strong> :
-<ul>
-<li>Détection tardive (voire inexistante) des attaques.</li>
-<li>Investigation impossible.</li>
-</ul>
-</li>
-<li><strong>Mitigation</strong> :
-<ul>
-<li>Centralisation des logs (ELK, Splunk).</li>
-<li>SIEM avec alertes.</li>
-<li>Tests de <em>incident response</em>.</li>
-<li>Rétention des logs sécurisée.</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="a10-server-side-request-forgery-ssrf"><strong>A10: Server-Side Request Forgery (SSRF)</strong></h2>
-<ul>
-<li><strong>Définition</strong> : L’application récupère des ressources externes sans contrôle.</li>
-<li><strong>Mécanisme</strong> :
-<ul>
-<li>L’attaquant fournit une URL malveillante.</li>
-<li>Le serveur fait la requête à sa place.</li>
-</ul>
-</li>
-<li><strong>Exemples</strong> :
-<ul>
-<li>App qui va chercher <code>http://localhost:8080/admin</code>.</li>
-<li>Accès aux métadonnées AWS via <code>http://169.254.169.254/</code>.</li>
-</ul>
-</li>
-<li><strong>Impacts</strong> :
-<ul>
-<li>Accès non autorisé aux services internes.</li>
-<li>Mouvement latéral dans le réseau.</li>
-</ul>
-</li>
-<li><strong>Mitigation</strong> :
-<ul>
-<li><strong>Whitelist</strong> des domaines.</li>
-<li>Bloquer les plages IP internes.</li>
-<li>Timeout stricts.</li>
-<li>Filtrage DNS et proxy.</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h1 id="-synthèse">🚨 Synthèse</h1>
-<ul>
-<li>Le <strong>Top 10 OWASP est une base minimale</strong> pour toute organisation.</li>
-<li>Il couvre 3 grands axes :
-<ol>
-<li><strong>Failles techniques</strong> (injection, SSRF, crypto).</li>
-<li><strong>Failles humaines/organisationnelles</strong> (config, logs, design).</li>
-<li><strong>Chaîne logicielle</strong> (dépendances, CI/CD, supply chain).</li>
-</ol>
-</li>
-<li>C’est une <strong>référence mondiale</strong> utilisée dans les normes (ISO, PCI DSS, etc.).</li>
-</ul>
-<p><img alt="Schéma OWASP Top 10" loading="lazy" src="http://localhost:1313/images/articles/owasp-top10-mindmap.png" title="OWASP Mindmap"></p></p>
-  </section>
-
-  <footer class="entry-footer">
-    <span>2025-09-03</span>
-     · <span>Articles</span>
-     · <span>4 min</span>
-  </footer>
-
-  <a class="entry-link" aria-label="post link to OWASP Top 10 (2021)" href="http://localhost:1313/blog/articles/owasp_top_10/"></a>
+  <div class="entry-content">
+    <p>Le OWASP Top 10 est le classement des risques de sécurité applicative les plus critiques.
+Il sert de référence aux développeurs, pentesters et responsables sécurité.
+A01: Broken Access Control Définition : Les contrôles d’accès sont absents, mal implémentés ou contournables. Mécanisme : Contrôles uniquement côté client. Références directes non sécurisées (/user?id=124). Bypass de contrôles via paramètres cachés. Exemples : Accès à /admin sans être administrateur. Téléchargement de fichiers appartenant à d’autres utilisateurs. Impacts : Exposition de données sensibles. Escalade de privilèges. Mitigation : Vérifications côté serveur obligatoires. Politiques d’accès centralisées. Principe du moindre privilège. Tests automatiques sur les autorisations. A02: Cryptographic Failures Définition : Mauvaise protection des données sensibles. Mécanisme : Stockage en clair. Protocole faible (MD5, SHA1, SSLv3). Mauvaise gestion des clés ou certificats. Exemples : Mots de passe stockés en MD5. Site en HTTP intercepté (attaque Man-in-the-Middle). Clés API dans un repo GitHub public. Impacts : Fuite d’identifiants, données médicales ou bancaires. Responsabilité légale (RGPD, PCI DSS). Mitigation : TLS 1.2&#43; obligatoire (HSTS). Hashage fort des mots de passe (bcrypt, Argon2). Rotation et protection des clés. Ne jamais stocker plus de données que nécessaire. A03: Injection Définition : L’application interprète les données utilisateur comme du code. Mécanisme : Entrées concaténées dans des requêtes. Absence de validation/échappement. Exemples : SQL Injection : SELECT * FROM users WHERE name = &#39; &#39; OR &#39;1&#39;=&#39;1&#39;; Command Injection :
+ping 8.8.8.8 &amp;&amp; rm -rf / LDAP Injection. Impacts : Fuite massive de données. Exécution de commandes arbitraires. Contrôle total de l’application. Mitigation : Requêtes préparées. Validation stricte des entrées. Principe “deny by default”. WAF en complément. A04: Insecure Design Définition : Vulnérabilités liées à la conception de l’application. Mécanisme : Pas de threat modeling. Règles métier insuffisantes. Pas de limite d’utilisation des ressources. Exemples : API bancaire sans limite de virement journalier. Application sans MFA prévue dès le design. Impacts : Attaques exploitables même avec du code “propre”. Défauts structurels impossibles à corriger rapidement. Mitigation : Security by design. Scénarios d’attaque dès la phase projet. Revues d’architecture. Défense en profondeur. A05: Security Misconfiguration Définition : Paramétrage non sécurisé ou défaut par défaut. Mécanisme : Services inutiles activés. Erreurs trop verbeuses. Ports ou consoles admin exposés. Exemples : Tomcat Manager accessible sans restriction. Stack-trace affichée en production. Impacts : Attaques automatisées faciles. Compromission rapide d’un serveur. Mitigation : Hardening des environnements. Configurations standardisées (infrastructure as code). Suppression des services inutiles. Tests de configuration réguliers. A06: Vulnerable and Outdated Components Définition : Utilisation de composants tiers vulnérables ou non maintenus. Mécanisme : Dépendances obsolètes. Libs open-source non mises à jour. Exemples : Faille Apache Struts → Equifax. jQuery 1.x vulnérable à XSS. Impacts : Exploitation de failles connues publiques. Chaîne de dépendances compromise. Mitigation : Inventaire des dépendances. Outils SCA (OWASP Dependency-Check, Snyk). Mises à jour régulières. Suppression des dépendances inutiles. A07: Identification and Authentication Failures Définition : Failles dans l’authentification et gestion de session. Mécanisme : Sessions non sécurisées. MFA absent. Identifiants par défaut laissés. Exemples : Attaque brute force sans limite de tentatives. JWT sans expiration. Cookies sans HttpOnly ni Secure. Impacts : Compromission de comptes utilisateurs/admin. Usurpation d’identité. Mitigation : MFA obligatoire. Politique de mots de passe robustes. Expiration/renouvellement des sessions. Tokens signés et vérifiés. A08: Software and Data Integrity Failures Définition : Données ou code non protégés contre modification. Mécanisme : Dépendances non vérifiées. CI/CD non sécurisé. Exemples : Dépendance npm compromise (event-stream). Update non signée d’un logiciel. Impacts : Exécution de code malveillant. Supply Chain Attack. Mitigation : Signatures numériques obligatoires. CI/CD sécurisé avec contrôle d’intégrité. Contrôle d’origine des dépendances. Séparation des environnements. A09: Security Logging and Monitoring Failures Définition : Manque de surveillance et de journalisation efficace. Mécanisme : Absence de logs. Logs insuffisants ou non surveillés. Exemples : Attaques brute force non détectées. Absence d’alerte sur des accès critiques. Impacts : Détection tardive (voire inexistante) des attaques. Investigation impossible. Mitigation : Centralisation des logs (ELK, Splunk). SIEM avec alertes. Tests de incident response. Rétention des logs sécurisée. A10: Server-Side Request Forgery (SSRF) Définition : L’application récupère des ressources externes sans contrôle. Mécanisme : L’attaquant fournit une URL malveillante. Le serveur fait la requête à sa place. Exemples : App qui va chercher http://localhost:8080/admin. Accès aux métadonnées AWS via http://169.254.169.254/. Impacts : Accès non autorisé aux services internes. Mouvement latéral dans le réseau. Mitigation : Whitelist des domaines. Bloquer les plages IP internes. Timeout stricts. Filtrage DNS et proxy. 🚨 Synthèse Le Top 10 OWASP est une base minimale pour toute organisation. Il couvre 3 grands axes : Failles techniques (injection, SSRF, crypto). Failles humaines/organisationnelles (config, logs, design). Chaîne logicielle (dépendances, CI/CD, supply chain). C’est une référence mondiale utilisée dans les normes (ISO, PCI DSS, etc.). ...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-09-03 00:00:00 +0000 UTC'>septembre 3, 2025</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Jean-Vivien Sicot</footer>
+  <a class="entry-link" aria-label="post link to OWASP Top 10 (2021)" href="http://localhost:1313/blog/owasp_top_10/"></a>
 </article>
-
-    
-  </section>
-
-  
-
     </main>
     
 <footer class="footer">

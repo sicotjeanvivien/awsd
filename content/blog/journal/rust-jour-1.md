@@ -2,7 +2,7 @@
 title: "Mes premiers pas avec Rust - Jour 1"
 date: 2025-08-25T10:30:00+02:00
 draft: false
-categories: ["journal"]
+categories: ["Journal"]
 tags: ["rust", "apprentissage", "développement"]
 description: "Mes premières impressions et ressentis en découvrant le langage Rust."
 cover:

@@ -10,9 +10,9 @@
     <atom:link href="http://localhost:1313/tags/ing%C3%A9nierie-sociale/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>👨‍👨‍👧‍👦 Attaques sur l’identité et l’humain (Ingénierie sociale)</title>
-      <link>http://localhost:1313/blog/articles/attaques-identite-humain/</link>
+      <link>http://localhost:1313/blog/attaques-identite-humain/</link>
       <pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/articles/attaques-identite-humain/</guid>
+      <guid>http://localhost:1313/blog/attaques-identite-humain/</guid>
       <description>Phishing, vishing, smishing, fraude au président, tailgating… Tour d’horizon des attaques qui exploitent les faiblesses humaines et sociales pour contourner la sécurité technique.</description>
     </item>
   </channel>

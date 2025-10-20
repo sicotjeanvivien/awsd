@@ -10,23 +10,23 @@
     <atom:link href="http://localhost:1313/tags/s%C3%A9curit%C3%A9-applicative/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>OWASP Top 10 (2021)</title>
-      <link>http://localhost:1313/blog/articles/owasp_top_10/</link>
+      <link>http://localhost:1313/blog/owasp_top_10/</link>
       <pubDate>Wed, 03 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/articles/owasp_top_10/</guid>
+      <guid>http://localhost:1313/blog/owasp_top_10/</guid>
       <description>Top 10 OWASP avec définitions, mécanismes, exemples concrets, impacts et solutions.</description>
     </item>
     <item>
       <title>📲 Attaques Applicatives</title>
-      <link>http://localhost:1313/blog/articles/attaques-applicatives/</link>
+      <link>http://localhost:1313/blog/attaques-applicatives/</link>
       <pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/articles/attaques-applicatives/</guid>
+      <guid>http://localhost:1313/blog/attaques-applicatives/</guid>
       <description>Injection SQL, XSS, CSRF, RCE, SSRF, IDOR, JWT… Panorama des principales attaques applicatives et des contre-mesures pour sécuriser vos applications.</description>
     </item>
     <item>
       <title>Panorama des principales attaques en cybersécurité</title>
-      <link>http://localhost:1313/blog/articles/panorame-attaque-cybersecurite/</link>
+      <link>http://localhost:1313/blog/panorame-attaque-cybersecurite/</link>
       <pubDate>Wed, 27 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/articles/panorame-attaque-cybersecurite/</guid>
+      <guid>http://localhost:1313/blog/panorame-attaque-cybersecurite/</guid>
       <description>Un guide clair des grandes familles d’attaques en cybersécurité : réseau, applications, identité, systèmes, physique et communications. Avec liens vers les fiches détaillées.</description>
     </item>
   </channel>

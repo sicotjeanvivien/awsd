@@ -1,44 +1,145 @@
-/* Conteneur global du bloc filtres */
-.awsd-blog-filters {
-  margin-bottom: 2rem; /* espace avec la liste des articles */
+/* ---------- Variables basiques ---------- */
+:root{
+  --bg: #ffffff;
+  --bg-soft: #f3f4f6;
+  --text: #111827;
+  --text-soft: #4b5563;
+  --primary: #111827;
+  --chip-bg: #e5e7eb;
+  --chip-bg-hover: #d1d5db;
+  --card-bg: #ffffff;
+  --card-shadow: rgba(0,0,0,.08);
 }
 
-/* Ligne du haut: Articles (gauche) / Journal (droite) */
-.awsd-filter-top {
-  display: flex;
-  justify-content: space-between;  /* demandé: flex-between */
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 0.75rem;          /* petit espace avec les tags */
+.dark{
+  --bg: #0b0f14;
+  --bg-soft: #0f141a;
+  --text: #e5e7eb;
+  --text-soft: #c7ccd5;
+  --primary: #e5e7eb;
+  --chip-bg: #1f2937;
+  --chip-bg-hover: #2b3442;
+  --card-bg: #0f141a;
+  --card-shadow: rgba(0,0,0,.35);
 }
 
-/* Liens "pills" du haut (style neutre, pas bouton flashy) */
-.awsd-pill {
-  font-weight: 600;
-  text-decoration: none;
-  padding: .25rem 0;
-  border-bottom: 2px solid transparent;
-}
-.awsd-pill:hover {
-  border-bottom-color: currentColor;
+/* ---------- Wrapper générique ---------- */
+.main.wrapper{
+  max-width: 1120px; /* ~container lg */
+  margin: 0 auto;
+  padding: 1.25rem;
+  /* background: var(--bg); */
+  color: var(--text);
 }
 
-/* Ligne des tags: wrap + #tag discret */
-.awsd-filter-tags {
-  display: flex;
-  flex-wrap: wrap;                  /* demandé: wrap */
-  gap: .5rem .75rem;
-  margin-bottom: 1rem;              /* espace avant la liste d’articles */
+/* ---------- Titres ---------- */
+.categories h1,
+.articles h2{
+  line-height: 1.2;
+  margin: 0 0 .75rem 0;
+  color: var(--primary);
 }
-.awsd-tag {
-  font-size: 0.9rem;                /* plus petit que le haut */
-  text-decoration: none;
-  opacity: .85;
-}
-.awsd-tag:hover { text-decoration: underline; opacity: 1; }
+.categories h1{ font-size: 1.5rem; font-weight: 600; }
+.articles h2{ font-size: 1.5rem; font-weight: 600; }
 
-/* Responsive: au besoin, la ligne du haut reste lisible en wrap */
-@media (max-width: 600px) {
-  .awsd-filter-top { gap: .5rem; }
+/* ---------- Bloc Catégories ---------- */
+.categories{ margin-bottom: 2.5rem; }
+.categories .flex{ display:flex; flex-wrap:wrap; gap:.5rem; }
+
+.categories a{
+  display:inline-block;
+  padding:.35rem .75rem;
+  font-size:.875rem;
+  line-height:1;
+  border-radius:999px;
+  background:var(--chip-bg);
+  color:var(--text);
+  text-decoration:none;
+  transition:background-color .15s ease, transform .06s ease;
+}
+.categories a:hover{ background:var(--chip-bg-hover); }
+.categories a:active{ transform:translateY(1px); }
+
+/* ---------- Grille d’articles ---------- */
+.articles .grid{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
 }
 
+/* ≥640px : 2 colonnes */
+@media (min-width: 640px){
+  .articles .grid{ grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ≥1024px : 3 colonnes */
+@media (min-width: 1024px){
+  .articles .grid{ grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ---------- Card ---------- */
+.card{
+  background: var(--card-bg);
+  border-radius: 1rem;
+  box-shadow: 0 10px 20px -10px var(--card-shadow);
+  overflow: hidden;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px -12px var(--card-shadow);
+}
+.card a{ color: inherit; text-decoration: none; display:block; }
+
+/* Image top (16:9, cover) */
+.card img{
+  display:block;
+  width:100%;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  background: var(--bg-soft);
+}
+
+/* Body card */
+.card .p-4{ padding:1rem; }
+.card h3{
+  margin:.25rem 0 .5rem;
+  font-size:1.0625rem;
+  font-weight:600;
+  line-height:1.3;
+}
+.card p{ margin:0; }
+.card .meta{
+  font-size:.875rem;
+  color:var(--text-soft);
+  margin-bottom:.25rem;
+}
+.card .excerpt{
+  font-size:.9375rem;
+  color:var(--text-soft);
+}
+
+/* ---------- Marges utilitaires (compat noms du layout) ---------- */
+.mb-10{ margin-bottom: 2.5rem; }
+.mb-6{ margin-bottom: 1.5rem; }
+
+/* ---------- Pagination Hugo interne ---------- */
+.pagination{
+  display:flex; gap:.5rem; justify-content:center; align-items:center;
+  margin:2rem 0 0;
+}
+.pagination li{ list-style:none; }
+.pagination a, .pagination span{
+  display:inline-block; min-width:2.25rem; text-align:center;
+  padding:.5rem .65rem; border-radius:.5rem; text-decoration:none;
+  background:var(--chip-bg); color:var(--text);
+  transition: background-color .15s ease;
+}
+.pagination a:hover{ background:var(--chip-bg-hover); }
+.pagination .active span{
+  background:var(--primary); color: var(--bg);
+}
+
+/* ---------- Liens généraux ---------- */
+a{ color: inherit; }
+a:hover{ text-decoration: underline; }

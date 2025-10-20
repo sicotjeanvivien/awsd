@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 03 Sep 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Articles</title>
-      <link>http://localhost:1313/categories/articles/</link>
+      <title>Cybersécurité</title>
+      <link>http://localhost:1313/categories/cybers%C3%A9curit%C3%A9/</link>
       <pubDate>Wed, 03 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/categories/articles/</guid>
+      <guid>http://localhost:1313/categories/cybers%C3%A9curit%C3%A9/</guid>
       <description></description>
     </item>
     <item>
@@ -20,6 +20,20 @@
       <link>http://localhost:1313/categories/journal/</link>
       <pubDate>Mon, 25 Aug 2025 10:30:00 +0200</pubDate>
       <guid>http://localhost:1313/categories/journal/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Architecture</title>
+      <link>http://localhost:1313/categories/architecture/</link>
+      <pubDate>Mon, 25 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/architecture/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Articles</title>
+      <link>http://localhost:1313/categories/articles/</link>
+      <pubDate>Mon, 25 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/articles/</guid>
       <description></description>
     </item>
   </channel>

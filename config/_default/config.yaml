@@ -13,7 +13,7 @@ languages:
 
 pagination:
   disableAliases: false
-  pagerSize: 10
+  pagerSize: 9
   path: page
 
 permalinks:

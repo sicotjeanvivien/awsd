@@ -10,9 +10,9 @@
     <atom:link href="http://localhost:1313/tags/firmware/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>💪 Attaques physiques et matérielles</title>
-      <link>http://localhost:1313/blog/articles/attaques-physiques-materielles/</link>
+      <link>http://localhost:1313/blog/attaques-physiques-materielles/</link>
       <pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/articles/attaques-physiques-materielles/</guid>
+      <guid>http://localhost:1313/blog/attaques-physiques-materielles/</guid>
       <description>Vol d’équipements, Evil Maid, implants matériels, side-channels, Rowhammer… Tour d’horizon des attaques qui ciblent directement le matériel informatique et des défenses possibles.</description>
     </item>
   </channel>

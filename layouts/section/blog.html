@@ -1,55 +1,51 @@
 {{ define "main" }}
+<main class="main wrapper">
 
-{{ if site.Params.ShowBreadCrumbs }}
-  {{ partial "breadcrumbs.html" . }}
-{{ end }}
-
-{{ $all := where site.RegularPages "Section" "blog" }}
-{{ $paginator := .Paginate (sort $all "Date" "desc") }}
-
-{{ partial "blog-filters.html" (dict "pages" $all) }}
-
-<section class="posts-grid">
-  {{ range $paginator.Pages }}
-  {{/* Trouver une image de couverture : front-matter cover.image, sinon une ressource "cover*" dans le bundle, sinon
-  params.images[0] */}}
-  {{ $cover := "" }}
-  {{ if .Params.cover.image }}
-  {{ $cover = .Params.cover.image | absURL }}
-  {{ else if .Resources.GetMatch "cover*" }}
-  {{ $img := .Resources.GetMatch "cover*" }}{{ $cover = $img.Permalink }}
-  {{ else if .Params.images }}
-  {{ $cover = (index .Params.images 0) | absURL }}
-  {{ end }}
-
-  <article class="post-entry post-card">
-    <a class="post-card__media {{ if eq .Params.cover.fit " contain" }}is-contain{{ end }}" href="{{ .RelPermalink }}"
-      aria-label="{{ .Title }}">
-      {{ with $cover }}
-      <img src="{{ . }}" loading="lazy" alt="{{ $.Params.cover.alt | default $.Title }}">
-      {{ else }}
-      <div class="post-card__placeholder" aria-hidden="true"></div>
+  <!-- Bloc Catégories -->
+  <section class="categories mb-10">
+    <div class="flex flex-wrap gap-2">
+      {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
+        <a href="{{ "/categories/" | relLangURL }}{{ $name | urlize }}"
+           class="inline-block px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-sm transition">
+          {{ $name }} ({{ len $taxonomy }})
+        </a>
       {{ end }}
-    </a>
+    </div>
+  </section>
 
-    <header class="entry-header">
-      <h2 class="post-card__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-    </header>
+  <!-- Bloc Articles -->
+  <section class="articles">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {{ range .Paginator.Pages }}
+      <article class="card bg-white dark:bg-gray-800 rounded-2xl shadow hover:shadow-lg transition overflow-hidden">
+        <a href="{{ .Permalink }}">
+          {{ with .Params.cover }}
+            {{ with .image }}
+              <img src="{{ . | absURL }}"
+                  alt="{{ $.Params.cover.alt | default $.Title }}"
+                  class="w-full h-48 object-cover">
+            {{ end }}
+          {{ end }}
+          <div class="p-4">
+            <h3 class="text-lg font-semibold mb-2">{{ .Title }}</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
+              {{ .Date.Format "02 Jan 2006" }}
+              {{ with .Params.categories }}
+                — <span class="italic">{{ index . 0 }}</span>
+              {{ end }}
+            </p>
+            {{ with .Summary }}
+              <p class="text-gray-700 dark:text-gray-400 text-sm">{{ . | truncate 120 }}</p>
+            {{ end }}
+          </div>
+        </a>
+      </article>
+      {{ end }}
+    </div>
 
-    <section class="entry-content">
-      <p>{{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary }}{{ end }}</p>
-    </section>
+    <!-- Pagination -->
+    {{ template "_internal/pagination.html" . }}
+  </section>
 
-    <footer class="entry-footer">
-      <span>{{ .Date | time.Format "2006-01-02" }}</span>
-      {{ with .Params.categories }} · <span>{{ delimit . ", " }}</span>{{ end }}
-      {{ with .ReadingTime }} · <span>{{ . }} min</span>{{ end }}
-    </footer>
-
-    <a class="entry-link" aria-label="post link to {{ .Title }}" href="{{ .RelPermalink }}"></a>
-  </article>
-  {{ end }}
-</section>
-
-{{ partial "pagination.html" . }}
+</main>
 {{ end }}

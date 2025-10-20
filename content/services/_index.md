@@ -40,7 +40,6 @@ services:
 Je propose des prestations **orientées résultats**, avec documentation et échanges clairs.  
 Choisissez l’offre qui correspond à votre besoin :
 
-{{< services-cards >}}
 
 ---
 

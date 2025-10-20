@@ -65,9 +65,6 @@
     <loc>http://localhost:1313/tags/appsec/</loc>
     <lastmod>2025-09-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/articles/</loc>
-    <lastmod>2025-09-03T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/blog/</loc>
     <lastmod>2025-09-03T00:00:00+00:00</lastmod>
   </url><url>
@@ -77,10 +74,13 @@
     <loc>http://localhost:1313/tags/cheat-sheet/</loc>
     <lastmod>2025-09-03T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/categories/cybers%C3%A9curit%C3%A9/</loc>
+    <lastmod>2025-09-03T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/tags/owasp/</loc>
     <lastmod>2025-09-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/articles/owasp_top_10/</loc>
+    <loc>http://localhost:1313/blog/owasp_top_10/</loc>
     <lastmod>2025-09-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/s%C3%A9curit%C3%A9-applicative/</loc>
@@ -89,19 +89,19 @@
     <loc>http://localhost:1313/tags/top-10/</loc>
     <lastmod>2025-09-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/articles/attaques-systemes/</loc>
+    <loc>http://localhost:1313/blog/attaques-systemes/</loc>
     <lastmod>2025-08-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/articles/attaques-reseaux/</loc>
+    <loc>http://localhost:1313/blog/attaques-reseaux/</loc>
     <lastmod>2025-08-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/articles/attaques-identite-humain/</loc>
+    <loc>http://localhost:1313/blog/attaques-identite-humain/</loc>
     <lastmod>2025-08-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/articles/attaques-physiques-materielles/</loc>
+    <loc>http://localhost:1313/blog/attaques-physiques-materielles/</loc>
     <lastmod>2025-08-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/articles/attaques-applicatives/</loc>
+    <loc>http://localhost:1313/blog/attaques-applicatives/</loc>
     <lastmod>2025-08-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/attaque-physique/</loc>
@@ -197,13 +197,13 @@
     <loc>http://localhost:1313/tags/xss/</loc>
     <lastmod>2025-08-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/articles/attaques-communications-vie-privee/</loc>
+    <loc>http://localhost:1313/blog/attaques-communications-vie-privee/</loc>
     <lastmod>2025-08-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/attaques/</loc>
     <lastmod>2025-08-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/articles/panorame-attaque-cybersecurite/</loc>
+    <loc>http://localhost:1313/blog/panorame-attaque-cybersecurite/</loc>
     <lastmod>2025-08-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/vie-priv%C3%A9e/</loc>
@@ -224,10 +224,16 @@
     <loc>http://localhost:1313/tags/rust/</loc>
     <lastmod>2025-08-25T10:30:00+02:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/categories/architecture/</loc>
+    <lastmod>2025-08-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/articles/</loc>
+    <lastmod>2025-08-25T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/tags/censure/</loc>
     <lastmod>2025-08-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/articles/type-orm/</loc>
+    <loc>http://localhost:1313/blog/type-orm/</loc>
     <lastmod>2025-08-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/ddd/</loc>
@@ -245,7 +251,7 @@
     <loc>http://localhost:1313/tags/libert%C3%A9/</loc>
     <lastmod>2025-08-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/articles/censurer-internet/</loc>
+    <loc>http://localhost:1313/blog/censurer-internet/</loc>
     <lastmod>2025-08-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/contact/</loc>

@@ -10,9 +10,9 @@
     <atom:link href="http://localhost:1313/tags/vie-priv%C3%A9e/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Panorama des principales attaques en cybersécurité</title>
-      <link>http://localhost:1313/blog/articles/panorame-attaque-cybersecurite/</link>
+      <link>http://localhost:1313/blog/panorame-attaque-cybersecurite/</link>
       <pubDate>Wed, 27 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/articles/panorame-attaque-cybersecurite/</guid>
+      <guid>http://localhost:1313/blog/panorame-attaque-cybersecurite/</guid>
       <description>Un guide clair des grandes familles d’attaques en cybersécurité : réseau, applications, identité, systèmes, physique et communications. Avec liens vers les fiches détaillées.</description>
     </item>
   </channel>
