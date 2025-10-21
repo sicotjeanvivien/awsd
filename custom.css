@@ -1,0 +1,7 @@
+.btn{
+  display:inline-block; padding:.55rem .9rem; border-radius:.65rem;
+  background:var(--primary); color:var(--bg); text-decoration:none;
+  transition:opacity .15s ease;
+}
+.btn:hover{ opacity:.9; text-decoration:none; }
+.prose p{ margin: .5rem 0 1rem; }

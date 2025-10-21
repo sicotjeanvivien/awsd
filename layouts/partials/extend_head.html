@@ -71,3 +71,27 @@
 
 {{- $cards := resources.Get "css/blog-cards.css" | minify | fingerprint -}}
 <link rel="stylesheet" href="{{ $cards.RelPermalink }}" integrity="{{ $cards.Data.Integrity }}">
+
+{{ if or (eq .Section "services") .Params.service }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": {{ .Title | jsonify }},
+  "description": {{ (.Params.description | default .Summary) | plainify | jsonify }},
+  "provider": {
+    "@type": "Organization",
+    "name": "AWSD",
+    "url": "https://awsd.fr/"
+  },
+  "areaServed": "FR",
+  "offers": {
+    "@type": "Offer",
+    "price": {{ (replace (.Params.price | default "") "€" "" ) | jsonify }},
+    "priceCurrency": "EUR",
+    "url": {{ .Permalink | jsonify }},
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+{{ end }}

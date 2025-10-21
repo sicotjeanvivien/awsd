@@ -61,7 +61,7 @@
 .categories a:active{ transform:translateY(1px); }
 
 /* ---------- Grille d’articles ---------- */
-.articles .grid{
+.grid{
   display:grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
@@ -69,12 +69,12 @@
 
 /* ≥640px : 2 colonnes */
 @media (min-width: 640px){
-  .articles .grid{ grid-template-columns: repeat(2, 1fr); }
+.grid{ grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ≥1024px : 3 colonnes */
 @media (min-width: 1024px){
-  .articles .grid{ grid-template-columns: repeat(3, 1fr); }
+.grid{ grid-template-columns: repeat(3, 1fr); }
 }
 
 /* ---------- Card ---------- */

@@ -99,5 +99,26 @@
       <guid>http://localhost:1313/blog/censurer-internet/</guid>
       <description>On parle souvent de censure d’Internet. Mais techniquement, est-elle seulement possible ?</description>
     </item>
+    <item>
+      <title>Accompagnement DevSecOps (3 mois)</title>
+      <link>http://localhost:1313/services/devsecops/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/services/devsecops/</guid>
+      <description>Mettre en place une culture et des pratiques DevSecOps pragmatiques.</description>
+    </item>
+    <item>
+      <title>Audit Performance &amp; Sécurité (5 jours)</title>
+      <link>http://localhost:1313/services/audit-perf-securite/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/services/audit-perf-securite/</guid>
+      <description>Audit technique express de votre application/site : performance, sécurité, dette technique.</description>
+    </item>
+    <item>
+      <title>MVP Symfony (10 jours)</title>
+      <link>http://localhost:1313/services/mvp-symfony/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/services/mvp-symfony/</guid>
+      <description>Concevoir et livrer un MVP robuste en Symfony avec bonnes pratiques.</description>
+    </item>
   </channel>
 </rss>
