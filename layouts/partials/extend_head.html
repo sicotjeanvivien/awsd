@@ -95,3 +95,7 @@
 }
 </script>
 {{ end }}
+
+{{ if eq .RelPermalink "/404.html" }}
+  <meta name="robots" content="noindex, nofollow">
+{{ end }}

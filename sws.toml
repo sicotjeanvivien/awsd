@@ -31,3 +31,9 @@ Cache-Control = "public, max-age=31536000, immutable"
 source = "**/*.html"
 [advanced.headers.headers]
 Cache-Control = "no-cache"
+
+# Empêcher le cache long sur la 404
+[[advanced.headers]]
+source = "/404.html"
+[advanced.headers.headers]
+Cache-Control = "no-store"

@@ -1,0 +1,138 @@
+.nf-page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+}
+
+.nf-hero {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.nf-emoji {
+  font-size: 3rem;
+  margin-bottom: .25rem;
+}
+
+.nf-sub {
+  color: var(--text-soft);
+  margin-top: .25rem;
+}
+
+.nf-search {
+  display: flex;
+  gap: .5rem;
+  justify-content: center;
+  margin: 1.25rem 0 1.5rem;
+}
+
+.nf-search input[type="text"] {
+  flex: 1;
+  max-width: 520px;
+  padding: .65rem .8rem;
+  border-radius: .6rem;
+  border: 1px solid var(--chip-bg-hover);
+  background: var(--bg-soft);
+  color: var(--text);
+}
+
+.nf-search button {
+  padding: .65rem .9rem;
+  border-radius: .6rem;
+  border: none;
+  background: var(--primary);
+  color: var(--bg);
+  cursor: pointer;
+}
+
+.nf-search button:hover {
+  opacity: .9;
+}
+
+.nf-quick {
+  display: flex;
+  gap: .5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: .55rem .9rem;
+  border-radius: .65rem;
+  background: var(--primary);
+  color: var(--bg);
+  text-decoration: none;
+}
+
+.btn:hover {
+  opacity: .9;
+  text-decoration: none;
+}
+
+.nf-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 1rem 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .nf-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.nf-card {
+  background: var(--card-bg);
+  border-radius: 1rem;
+  box-shadow: 0 10px 20px -10px var(--card-shadow);
+  padding: 1rem 1.1rem;
+}
+
+.nf-h2 {
+  font-size: 1.1rem;
+  margin: .25rem 0 .75rem;
+}
+
+.nf-list {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.nf-list li {
+  margin: .35rem 0;
+}
+
+.nf-date {
+  color: var(--text-soft);
+  font-size: .9rem;
+  margin-left: .35rem;
+}
+
+.nf-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.chip {
+  display: inline-block;
+  padding: .35rem .75rem;
+  border-radius: 999px;
+  background: var(--chip-bg);
+  color: var(--text);
+  text-decoration: none;
+  font-size: .9rem;
+}
+
+.chip:hover {
+  background: var(--chip-bg-hover);
+}
+
+.nf-tip {
+  text-align: center;
+  color: var(--text-soft);
+}
+
