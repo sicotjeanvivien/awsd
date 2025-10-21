@@ -40,4 +40,4 @@ Site statique **Hugo + PaperMod** de Jean-Vivien Sicot (AWSD).
 
 ## 📄 Licence
 
-© 2025 Jean-Vivien Sicot — Tous droits réservés (ou une licence si tu veux publier le thème/ressources).
+© 2025 Jean-Vivien Sicot — Tous droits réservés.
