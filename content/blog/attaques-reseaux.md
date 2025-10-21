@@ -9,7 +9,7 @@ tags: ["réseau", "cybersécurité", "MITM", "DDoS", "DNSSEC", "BGP"]
 author: "Jean-Vivien Sicot"
 draft: false
 showToc: true
-tocOpen: true
+tocOpen: false
 cover:
   image: "images/articles/chat-cyberhacker-network-attacks.png"
   alt: "Illustration abstraite de la cybersécurité réseau"
