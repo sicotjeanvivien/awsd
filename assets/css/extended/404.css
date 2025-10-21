@@ -57,7 +57,7 @@
   margin-bottom: 1.25rem;
 }
 
-.btn {
+.nf-btn {
   display: inline-block;
   padding: .55rem .9rem;
   border-radius: .65rem;
@@ -66,7 +66,7 @@
   text-decoration: none;
 }
 
-.btn:hover {
+.nf-btn:hover {
   opacity: .9;
   text-decoration: none;
 }

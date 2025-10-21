@@ -7,7 +7,7 @@ Site statique **Hugo + PaperMod** de Jean-Vivien Sicot (AWSD).
 - Lancer en local :
   ```bash
   hugo server
-````
+  ````
 
 * Build :
 
