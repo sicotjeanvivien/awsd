@@ -1,0 +1,27 @@
+/public/
+/resources/
+/node_modules/# Hugo
+/public/
+/resources/
+/hugo_stats.json
+
+# OS / éditeurs
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Node (si tu ajoutes des outils front plus tard)
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Logs & temporaires
+*.log
+*.tmp
+*.swp
+
+# Clever Cloud (si tu gardes des secrets locaux)
+.clever.json
+.env
