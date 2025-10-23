@@ -1,0 +1,26 @@
+<div class="fa-grid">
+  <!-- Derniers articles -->
+  <section class="fa-card">
+    <h2 class="fa-h2">Derniers articles</h2>
+    <ul class="fa-list">
+      {{ range first 6 (where .Site.RegularPages "Section" "blog") }}
+      <li>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <span class="fa-date">· {{ .Date.Format "02 Jan 2006" }}</span>
+      </li>
+      {{ end }}
+    </ul>
+  </section>
+
+  <!-- Catégories -->
+  <section class="fa-card">
+    <h2 class="fa-h2">Catégories</h2>
+    <div class="fa-chips">
+      {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
+      <a class="chip" href="{{ " /categories/" | relLangURL }}{{ $name | urlize }}">
+        {{ $name }} ({{ len $taxonomy }})
+      </a>
+      {{ end }}
+    </div>
+  </section>
+</div>

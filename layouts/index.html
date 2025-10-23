@@ -1,0 +1,15 @@
+{{ define "main" }}
+<main id="main-content" class="main wrapper">
+  {{ if .Site.Params.profileMode.enabled }}
+    {{ partial "index_profile.html" . }}
+  {{ else }}
+    {{ partial "home_info.html" . }}
+    {{ partial "recent-posts.html" . }}
+  {{ end }}
+
+  <!-- Ton ajout dans le corps de la page, après le contenu d'origine -->
+  <div class="home-extra" style="margin-top:2rem">
+    {{ partial "fast_acces.html" . }}
+  </div>
+</main>
+{{ end }}

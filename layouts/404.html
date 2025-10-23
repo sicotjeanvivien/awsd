@@ -1,17 +1,8 @@
 {{ define "main" }}
 <main id="main-content" class="main wrapper nf-page">
-  <section class="nf-hero">
-    <div class="nf-emoji" aria-hidden="true">🧭</div>
-    <h1>Page introuvable (404)</h1>
-    <p class="nf-sub">Désolé, cette page n’existe plus — ou l’URL a changé.</p>
+  <section class="nf-hero custom-illustration">
+    <img src="/images/error404.png" alt="Illustration Azathoth - page non trouvée" class="nf-illustration">
   </section>
-
-  <!-- Recherche site (DuckDuckGo, pas de JS) -->
-  <form class="nf-search" action="https://duckduckgo.com/" method="get" role="search" aria-label="Rechercher sur le site">
-    <input type="hidden" name="sites" value="awsd.fr">
-    <input type="text" name="q" placeholder="Rechercher sur awsd.fr…" aria-label="Requête de recherche" required>
-    <button type="submit">Rechercher</button>
-  </form>
 
   <!-- Liens rapides -->
   <nav class="nf-quick">
@@ -21,32 +12,7 @@
     <a class="nf-btn" href="/contact/">Contact</a>
   </nav>
 
-  <div class="nf-grid">
-    <!-- Derniers articles -->
-    <section class="nf-card">
-      <h2 class="nf-h2">Derniers articles</h2>
-      <ul class="nf-list">
-        {{ range first 6 (where .Site.RegularPages "Section" "blog") }}
-          <li>
-            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-            <span class="nf-date">· {{ .Date.Format "02 Jan 2006" }}</span>
-          </li>
-        {{ end }}
-      </ul>
-    </section>
-
-    <!-- Catégories -->
-    <section class="nf-card">
-      <h2 class="nf-h2">Catégories</h2>
-      <div class="nf-chips">
-        {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
-          <a class="chip" href="{{ "/categories/" | relLangURL }}{{ $name | urlize }}">
-            {{ $name }} ({{ len $taxonomy }})
-          </a>
-        {{ end }}
-      </div>
-    </section>
-  </div>
+  {{ partial "fast_acces.html" . }}
 
   <p class="nf-tip">
     Si vous pensez qu’il s’agit d’une erreur, <a href="/contact/">dites-le moi</a> — je corrigerai rapidement.

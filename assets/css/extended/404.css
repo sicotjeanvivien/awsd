@@ -19,36 +19,6 @@
   margin-top: .25rem;
 }
 
-.nf-search {
-  display: flex;
-  gap: .5rem;
-  justify-content: center;
-  margin: 1.25rem 0 1.5rem;
-}
-
-.nf-search input[type="text"] {
-  flex: 1;
-  max-width: 520px;
-  padding: .65rem .8rem;
-  border-radius: .6rem;
-  border: 1px solid var(--chip-bg-hover);
-  background: var(--bg-soft);
-  color: var(--text);
-}
-
-.nf-search button {
-  padding: .65rem .9rem;
-  border-radius: .6rem;
-  border: none;
-  background: var(--primary);
-  color: var(--bg);
-  cursor: pointer;
-}
-
-.nf-search button:hover {
-  opacity: .9;
-}
-
 .nf-quick {
   display: flex;
   gap: .5rem;
@@ -71,68 +41,38 @@
   text-decoration: none;
 }
 
-.nf-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  margin: 1rem 0 1.5rem;
-}
-
-@media (min-width: 768px) {
-  .nf-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.nf-card {
-  background: var(--card-bg);
-  border-radius: 1rem;
-  box-shadow: 0 10px 20px -10px var(--card-shadow);
-  padding: 1rem 1.1rem;
-}
-
-.nf-h2 {
-  font-size: 1.1rem;
-  margin: .25rem 0 .75rem;
-}
-
-.nf-list {
-  margin: 0;
-  padding-left: 1rem;
-}
-
-.nf-list li {
-  margin: .35rem 0;
-}
-
-.nf-date {
-  color: var(--text-soft);
-  font-size: .9rem;
-  margin-left: .35rem;
-}
-
-.nf-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .5rem;
-}
-
-.chip {
-  display: inline-block;
-  padding: .35rem .75rem;
-  border-radius: 999px;
-  background: var(--chip-bg);
-  color: var(--text);
-  text-decoration: none;
-  font-size: .9rem;
-}
-
-.chip:hover {
-  background: var(--chip-bg-hover);
-}
-
 .nf-tip {
   text-align: center;
   color: var(--text-soft);
 }
 
+/* --- Illustration personnalisée pour la 404 --- */
+.custom-illustration {
+  text-align: center;
+}
+
+.custom-illustration img.nf-illustration {
+  height: auto;
+  margin: 0 auto 1.5rem;
+  display: block;
+  mask-image: radial-gradient(circle, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle, black 40%, transparent 100%);
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-position: center;
+  mask-size: cover;
+  -webkit-mask-size: cover;
+  transition: transform 0.3s ease;
+}
+
+
+@keyframes float404 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.custom-illustration .nf-sub {
+  font-style: italic;
+  color: var(--secondary);
+}
