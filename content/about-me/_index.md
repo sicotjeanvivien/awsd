@@ -26,7 +26,7 @@ Parmi mes réalisations, le développement d’un **ORM maison en PHP 8.4**, con
 
 ### Expériences principales
 
-➜ **MaVilleMonShopping — Développeur Full Stack (CDI)** *(mai 2023 – présent)*  
+➜ **MaVilleMonShopping — Développeur Full Stack (CDI)** *(mai 2023 – janvier 2026)*  
   Développement et optimisation d’une plateforme d’e‑commerce **pour améliorer les performances et l’expérience utilisateur**.  
   *Stack :* `Ruby on Rails` `TurboStream` `Stimulus`
 
@@ -94,7 +94,7 @@ Parmi mes réalisations, le développement d’un **ORM maison en PHP 8.4**, con
 
 ## 👨🏻‍🎓 Formation
 
-🔐 **BootCamp — Cybersécurité (OpenClassrooms)** *(prévu pour septembre 2025)*  
+🔐 **BootCamp — Cybersécurité (OpenClassrooms)** *(novembre 2025)*  
   Formation intensive orientée sécurité offensive et défensive : audit de code, prévention des vulnérabilités (OWASP), protection des données et bonnes pratiques DevSecOps.
 
 📃 **Opquast** — Certificat Qualité Web *(2018)*  
@@ -102,3 +102,6 @@ Parmi mes réalisations, le développement d’un **ORM maison en PHP 8.4**, con
 
 🎓 **La Piscine** — RNCP Développeur logiciel (niveau III, Bac+2) *(2018)*  
   Formation intensive en développement d’applications web et mobiles.
+
+🎓 **Baccalauréat Général** — Série Scientifique *(2011)*  
+  Collège Lycée Saint Thomas d'Aquin à Saint-Jean-de-Luz
