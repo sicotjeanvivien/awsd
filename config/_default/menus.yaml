@@ -2,16 +2,10 @@ main:
   - name: "Blog"
     url: "/blog/"
     weight: 1
-  - name: "Portfolio"
-    url: "/projets/"
-    weight: 2
   - name: Services
     url: "/services/"
-    weight: 3 
+    weight: 2 
   - name: "Qui suis-je ?"
     url: "/about-me/"
     layout: single
-    weight: 4
-  - name: "Contact"
-    url: "/contact/"
-    weight: 5
+    weight: 3

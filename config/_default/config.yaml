@@ -1,6 +1,6 @@
 baseURL: "http://localhost/"
-title: "AWSD — Artisan Web Software & Defense"
-theme: "PaperMod"
+title: "AWSD — Artisan Web Software"
+theme: "TailBliss"
 languageCode: "fr-FR"
 defaultContentLanguage: fr
 enableRobotsTXT: true
@@ -25,7 +25,7 @@ taxonomies:
   category: "categories"
 
 outputs:
-  home: ["HTML", "RSS", "JSON"]
+  home: ["HTML", "RSS"]
   section: ["HTML", "RSS"]
   taxonomy: ["HTML", "RSS"]
 
@@ -40,3 +40,8 @@ minify:
 imaging:
   quality: 80
   resampleFilter: lanczos
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true

@@ -1,4 +1,4 @@
-description: "Développeur PHP/Symfony & AppSec. Audits performance/sécurité, MVP, accompagnement DevSecOps. Portfolio & blog technique."
+description: "Cabinet technique indépendant spécialisé en structuration backend et architecture logicielle. Interventions pragmatiques, orientées maintenabilité et décisions techniques durables."
 author: "Jean-Vivien Sicot"
 defaultTheme: auto
 
@@ -29,14 +29,7 @@ label:
   text: "AWSD"
   icon: "favicon-32x32.png"
   iconHeight: 32
-
-profileMode:
-  enabled: true
-  title: "Jean‑Vivien Sicot"
-  subtitle: "Développeur web — Portfolio & Journal technique"
-  imageUrl: "/images/avatar.jpg"
-  imageWidth: 250
-  imageHeight: 300
-  buttons:
-    - { name: "Portfolio", url: "/projets/" }
-    - { name: "Blog", url: "/blog/" }
+    
+socialIcons:
+  - name: email
+    url: "mailto:contact@awsd.fr"
