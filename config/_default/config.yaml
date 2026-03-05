@@ -1,47 +1,14 @@
-baseURL: "http://localhost/"
-title: "AWSD — Artisan Web Software"
-theme: "TailBliss"
+baseURL: 'http://localhost:1313/'
+title: "AWSD"
 languageCode: "fr-FR"
-defaultContentLanguage: fr
+theme: "TailBliss"
+DefaultContentLanguage: fr
+enableEmoji: true
+enableGitInfo: false
 enableRobotsTXT: true
-canonifyURLs: true
-
-languages:
-  fr:
-    languageName: "Français"
-    weight: 1
-
+canonifyURLs: false
 pagination:
-  disableAliases: false
   pagerSize: 9
-  path: page
-
-permalinks:
-  posts: "/blog/:year/:slug/"
-  projets: "/projets/:slug/"
-
-taxonomies:
-  tag: "tags"
-  category: "categories"
-
-outputs:
-  home: ["HTML", "RSS"]
-  section: ["HTML", "RSS"]
-  taxonomy: ["HTML", "RSS"]
-
-# Minification & post-process
-minify:
-  disableXML: true
-  tdewolff:
-    html:
-      keepWhitespace: false
-
-# Contrôle qualité images (Hugo imaging)
-imaging:
-  quality: 80
-  resampleFilter: lanczos
-
-markup:
-  goldmark:
-    renderer:
-      unsafe: true
+darkmode_js:
+  - assets/js/darkmode.js
+enableInlineShortcodes: true

@@ -1,35 +1,19 @@
-description: "Cabinet technique indépendant spécialisé en structuration backend et architecture logicielle. Interventions pragmatiques, orientées maintenabilité et décisions techniques durables."
 author: "Jean-Vivien Sicot"
-defaultTheme: auto
+authorimage: "images/a_vector_style_digital_logo_features_a_stylized_le.png"
+og_image: "images/a_vector_style_digital_logo_features_a_stylized_le.png"
+moto: "Artisan Web Software Development"
+description: "Conception, audit et développement d’applications performantes et sécurisées. Une approche orientée architecture, qualité logicielle et durabilité."
 
-ShowBreadCrumbs: true
-ShowPostNavLinks: true
-ShowReadingTime: true
-ShowCodeCopyButtons: true
-Showtoc: true
-TocOpen: false
+Hero:
+  Image: "images/earth_is_shown_from_space.png"
 
-hideSummary: false
-ShowRssButtonInSectionTermList: true
-ShowPageNums: true
+disable_theme_toggle: false
+disable_stay_uptodate: false
 
-DisableSpecial1stPost: true
-mainSections: ["blog"]
-
-assets:
-  favicon: "favicon.ico"
-  favicon16x16: "favicon-16x16.png"
-  favicon32x32: "favicon-32x32.png"
-  apple_touch_icon: "apple-touch-icon.png"
-  css: 
-    - "css/extended/layout-wide.css"   # global (largeur)
-    - "css/extended/blog-images.css"   # blog (images)
-    - "css/extended/services.css"      # services (cartes)
-label:
-  text: "AWSD"
-  icon: "favicon-32x32.png"
-  iconHeight: 32
-    
-socialIcons:
-  - name: email
-    url: "mailto:contact@awsd.fr"
+p1:
+    heading: "Notre mission"
+    image: "images/pages/our-mission.png"
+    content:
+      - text: "Chez AWSD, chaque projet est unique. Nous concevons des applications web sur-mesure, adaptées aux besoins spécifiques de chaque client, avec une architecture pensée pour durer et évoluer facilement."
+      - text: "Notre approche combine rigueur technique et bonnes pratiques. Chaque ligne de code est écrite avec soin pour garantir performance, sécurité et maintenabilité, afin que vos applications restent fiables sur le long terme."
+      - text: "Au-delà du développement, nous accompagnons nos clients à chaque étape : conseil, audit, optimisation et suivi post-livraison. AWSD se positionne comme un véritable partenaire technique, garantissant que votre projet atteigne ses objectifs efficacement."

@@ -3,7 +3,7 @@ title: "AWSD"
 ---
 
 <div class="home-hero">
-  <h1 class="home-hero__title">AWSD — Artisan Web Software & Defense</h1>
+  <h1 class="home-hero__title">AWSD — Artisan Web Software</h1>
   <div class="home-hero__kicker">Structurer un backend pour livrer vite, sans casser le long terme.</div>
   <p class="home-hero__lead">
     J’interviens quand l’architecture devient floue, que la dette technique ralentit, ou qu’un projet doit partir sur des bases saines.
