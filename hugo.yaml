@@ -4,4 +4,4 @@ title: "AWSD"
 minify:
   disableCSS: false
 postCSS:
-  disable: true   # <-- important
+  disable: true

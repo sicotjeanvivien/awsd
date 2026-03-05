@@ -5,3 +5,5 @@ enableRobotsTXT: true
 minify:
   disableXML: false
   minifyOutput: true
+postCSS:
+  disable: true

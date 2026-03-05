@@ -12,3 +12,5 @@ pagination:
 darkmode_js:
   - assets/js/darkmode.js
 enableInlineShortcodes: true
+postCSS:
+  disable: true
