@@ -11,9 +11,83 @@ disable_theme_toggle: false
 disable_stay_uptodate: false
 
 p1:
-    heading: "Notre mission"
-    image: "images/pages/our-mission.png"
-    content:
-      - text: "Chez AWSD, chaque projet est unique. Nous concevons des applications web sur-mesure, adaptées aux besoins spécifiques de chaque client, avec une architecture pensée pour durer et évoluer facilement."
-      - text: "Notre approche combine rigueur technique et bonnes pratiques. Chaque ligne de code est écrite avec soin pour garantir performance, sécurité et maintenabilité, afin que vos applications restent fiables sur le long terme."
-      - text: "Au-delà du développement, nous accompagnons nos clients à chaque étape : conseil, audit, optimisation et suivi post-livraison. AWSD se positionne comme un véritable partenaire technique, garantissant que votre projet atteigne ses objectifs efficacement."
+  heading: "Notre mission"
+  image: "images/pages/our-mission.png"
+  content:
+    - text: "Chez AWSD, chaque projet est unique. Nous concevons des applications web sur-mesure, adaptées aux besoins spécifiques de chaque client, avec une architecture pensée pour durer et évoluer facilement."
+    - text: "Notre approche combine rigueur technique et bonnes pratiques. Chaque ligne de code est écrite avec soin pour garantir performance, sécurité et maintenabilité, afin que vos applications restent fiables sur le long terme."
+    - text: "Au-delà du développement, nous accompagnons nos clients à chaque étape : conseil, audit, optimisation et suivi post-livraison. AWSD se positionne comme un véritable partenaire technique, garantissant que votre projet atteigne ses objectifs efficacement."
+
+p2:
+  heading: "Nos services"
+  image: "images/pages/hacktoberfest.jpg"
+  content:
+    text: "AWSD accompagne les entreprises dans la conception et l’amélioration d’applications web fiables, performantes et maintenables."
+  services:
+    - title: "Renfort backend structurant"
+      description: "Développement et évolution de backends existants sans dégrader l’architecture."
+      icon: "🧱"
+      list:
+        - li: "développement de fonctionnalités"
+        - li: "refactoring ciblé"
+        - li: "amélioration de la lisibilité du code"
+        - li: "sécurisation des flux critiques"
+
+    - title: "Cadrage technique"
+      description: "Analyse du projet, choix technologiques et définition d’une architecture claire avant le développement."
+      icon: "🧭"
+      list:
+        - li: "analyse du besoin et des contraintes"
+        - li: "définition d’une architecture cohérente"
+        - li: "identification des risques techniques"
+        - li: "plan d’actions priorisé"
+
+    - title: "Accompagnement technique"
+      description: "Pair programming, revues de code et structuration des bonnes pratiques pour renforcer l’autonomie des équipes."
+      icon: "🤝"
+      list:
+        - li: " pair programming ciblé"
+        - li: " revues de code guidées"
+        - li: " structuration des bonnes pratiques"
+        - li: " montée en compétence des équipes"
+
+P3:
+  heading: "Technologies utilisées"
+  content:
+    - text: "AWSD s’appuie sur un écosystème technologique éprouvé pour concevoir des applications robustes et maintenables."
+    - text: "Ces technologies sont utilisées régulièrement dans les projets backend et les architectures web modernes."
+  logos:
+    - alt: PHP
+      image: "images/tech/php.svg"
+
+    - alt: Symfony
+      image: "images/tech/symfony_dynamic.svg"
+
+    - alt: Rust
+      image: "images/tech/rust.svg"
+
+    - alt: Node.js
+      image: "images/tech/node.svg"
+
+    - alt: React
+      image: "images/tech/react.svg"
+
+    - alt: PostgreSQL
+      image: "images/tech/postgresql.svg"
+
+    - alt: Docker
+      image: "images/tech/docker.svg"
+
+p4:
+  heading: "From the blog"
+  content:
+    - text: "Réflexions techniques, architecture logicielle et retours d’expérience"
+
+p5:
+  heading: "Stop Machin"
+  content:
+    - text: "Sagittis scelerisque nulla cursus in enim consectetur quam. Dictum urna sed consectetur neque tristique pellentesque."
+  action: "#"
+  label: "Email address"
+  placeholder: "Enter your email"
+  button: "Notify me"

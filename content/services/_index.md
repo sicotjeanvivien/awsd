@@ -6,9 +6,9 @@ summary: "Cadrage technique · Renfort backend · Accompagnement technique"
 draft: false
 ---
 
-### Je conçois et fais évoluer des backends **robustes, lisibles et maintenables**.
+### AWSD conçois et fais évoluer des backends **robustes, lisibles et maintenables**.
 
-J’interviens sur des projets logiciels lorsque les enjeux sont clairs :  
+Nous interviennons sur des projets logiciels lorsque les enjeux sont clairs :  
 **qualité du code, fiabilité des flux métier et décisions techniques durables.**
 
 ---

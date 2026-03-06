@@ -1,0 +1,28 @@
+<div class="px-4 mx-auto max-w-md md:pt-24 md:pb-16 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8 bg-gray-100 dark:bg-gray-800 py-20">
+  <div class="lg:grid lg:grid-cols-2 lg:items-center lg:gap-24 ">
+
+    <!-- Logos -->
+    <div class="grid grid-cols-2 gap-1 mt-12 md:grid-cols-3 lg:mt-0 lg:grid-cols-2">
+      {{ range .Site.Params.P3.Logos }}
+      <div class="flex justify-center px-4 py-6 ">
+        {{ $logo := resources.Get .image }}
+        <img src="{{ $logo.RelPermalink }}" alt="{{ .alt }}"
+          class="max-h-12 opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition" loading="lazy">
+      </div>
+      {{ end }}
+    </div>
+
+    <!-- Texte -->
+    <div>
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-4xl">
+        {{ .Site.Params.P3.Heading }}
+      </h2>
+      {{ range .Site.Params.P3.Content }}
+      <p class="mt-6 max-w-3xl text-lg leading-7 text-gray-700 dark:text-gray-300">
+        {{ .text }}
+      </p>
+      {{ end }}
+    </div>
+    
+  </div>
+</div>

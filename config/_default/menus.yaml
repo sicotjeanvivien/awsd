@@ -9,3 +9,20 @@ main:
     url: "/about-me/"
     layout: single
     weight: 3
+footer:
+  - identifier: Blog
+    name: Blog
+    url: /blog/
+    weight: 10
+  - identifier: Services
+    name: Services
+    url: /services/
+    weight: 20
+  - identifier: "Qui suis-je ?"
+    name: "Qui suis-je ?"
+    url: "/about-me/"
+    weight: 30
+  - identifier: contact
+    name: Contact
+    url: /contact/
+    weight: 40
