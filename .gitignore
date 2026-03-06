@@ -2,7 +2,6 @@
 /resources/
 /node_modules/# Hugo
 /public/
-/resources/
 /hugo_stats.json
 
 # OS / éditeurs
