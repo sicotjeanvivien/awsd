@@ -13,7 +13,7 @@ Thumbs.db
 
 # Node (si tu ajoutes des outils front plus tard)
 node_modules/
-package-lock.json
+# package-lock.json
 yarn.lock
 pnpm-lock.yaml
 
