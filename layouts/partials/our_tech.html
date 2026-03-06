@@ -1,4 +1,5 @@
-<div class="px-4 mx-auto max-w-md md:pt-24 md:pb-16 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8 bg-gray-100 dark:bg-gray-800 py-20">
+<div
+  class="px-4 mx-auto max-w-md md:pt-24 md:pb-16 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8 bg-gray-100 dark:bg-gray-800 py-20">
   <div class="lg:grid lg:grid-cols-2 lg:items-center lg:gap-24 ">
 
     <!-- Logos -->
@@ -6,8 +7,11 @@
       {{ range .Site.Params.P3.Logos }}
       <div class="flex justify-center px-4 py-6 ">
         {{ $logo := resources.Get .image }}
-        <img src="{{ $logo.RelPermalink }}" alt="{{ .alt }}"
-          class="max-h-12 opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition" loading="lazy">
+        {{ $alt := .alt }}
+
+        {{ with $logo }}
+        <img src="{{ .RelPermalink }}" alt="{{ $alt }}">
+        {{ end }}
       </div>
       {{ end }}
     </div>
@@ -23,6 +27,6 @@
       </p>
       {{ end }}
     </div>
-    
+
   </div>
 </div>
