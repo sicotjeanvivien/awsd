@@ -3,7 +3,7 @@ title: "Services"
 description: "Conception technique, renfort backend structurant et accompagnement des équipes. Interventions pragmatiques, orientées qualité et maintenabilité."
 images: ["/images/og/og-services.jpg"]
 summary: "Cadrage technique · Renfort backend · Accompagnement technique"
-layout: list
+layout: single
 ---
 
 ### AWSD conçois et fais évoluer des backends **robustes, lisibles et maintenables**.
