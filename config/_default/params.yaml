@@ -12,7 +12,7 @@ disable_stay_uptodate: false
 
 p1:
   heading: "Notre mission"
-  image: "images/pages/our-mission.png"
+  image: "images/futuristic_software_engineering_control_room.png"
   content:
     - text: "Chez AWSD, chaque projet est unique. Nous concevons des applications web sur-mesure, adaptées aux besoins spécifiques de chaque client, avec une architecture pensée pour durer et évoluer facilement."
     - text: "Notre approche combine rigueur technique et bonnes pratiques. Chaque ligne de code est écrite avec soin pour garantir performance, sécurité et maintenabilité, afin que vos applications restent fiables sur le long terme."
@@ -20,7 +20,7 @@ p1:
 
 p2:
   heading: "Nos services"
-  image: "images/pages/hacktoberfest.jpg"
+  image: "images/futuristic_software_engineering_control_room.webp"
   content:
     text: "AWSD accompagne les entreprises dans la conception et l’amélioration d’applications web fiables, performantes et maintenables."
   services:
@@ -61,7 +61,7 @@ P3:
       image: "images/tech/php.svg"
 
     - alt: Symfony
-      image: "images/tech/symfony_dynamic.svg"
+      image: "images/tech/symfony_dynamic_h.svg"
 
     - alt: Rust
       image: "images/tech/rust.svg"
@@ -70,7 +70,10 @@ P3:
       image: "images/tech/node.svg"
 
     - alt: React
-      image: "images/tech/react.svg"
+      image: "images/tech/react_js.svg"
+    
+    - alt: JavaScript
+      image: "images/tech/javascript_i.svg"
 
     - alt: PostgreSQL
       image: "images/tech/postgresql.svg"
