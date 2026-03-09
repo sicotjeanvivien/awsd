@@ -1,26 +1,29 @@
 main:  
-  - name: "Blog"
-    url: "/blog/"
-    weight: 1
   - name: Services
     url: "/services/"
-    weight: 2 
+    weight: 1 
   - name: "Qui suis-je ?"
     url: "/about-me/"
     layout: single
+    weight: 2
+  - name: "Blog"
+    url: "/blog/"
     weight: 3
+  - name: "Contact"
+    url: "/contact/"
+    weight: 4
 footer:
-  - identifier: Blog
-    name: Blog
-    url: /blog/
-    weight: 10
   - identifier: Services
     name: Services
     url: /services/
-    weight: 20
+    weight: 10
   - identifier: "Qui suis-je ?"
     name: "Qui suis-je ?"
     url: "/about-me/"
+    weight: 20
+  - identifier: Blog
+    name: Blog
+    url: /blog/
     weight: 30
   - identifier: contact
     name: Contact

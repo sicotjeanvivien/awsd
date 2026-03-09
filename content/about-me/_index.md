@@ -12,7 +12,6 @@ J’accompagne entreprises et porteurs de projets dans la **conception d’appli
 Spécialisé en **PHP/Symfony** et bases de données **SQL**, je poursuis actuellement une montée en compétence approfondie en **Rust**, avec un intérêt marqué pour la conception système et la robustesse logicielle.
 
 Mon parcours, entre **freelance** et **salariat**, m’a permis de développer autonomie, sens des responsabilités et capacité à prendre des **décisions techniques explicites**.  
-Parmi mes projets personnels structurants : la conception d’un **ORM en PHP 8.4**, pensé pour être strict, modulaire et indépendant du SGBD.
 
 ### Ce qui me guide
 

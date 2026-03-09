@@ -1,0 +1,24 @@
+<!-- Footer section -->
+<footer class="bg-gray-900">
+  <div class="overflow-hidden px-4 py-12 mx-auto max-w-md sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
+    <nav class="flex flex-wrap justify-center -mx-5 -my-2" aria-label="Footer">
+      {{ range site.Menus.footer }}
+      <div class="px-5 py-2">
+        <a href="{{ .URL | absLangURL }}" class="text-base text-gray-400 hover:text-gray-300">{{ .Name }}</a>
+      </div>
+      {{ end }}
+    </nav>
+    <p class="mt-8 text-base text-center text-gray-400">&copy; {{ now.Format "2006" }}
+      {{ .Site.Title }}. All rights reserved.</p>
+  </div>
+</footer>
+
+{{/* Load JavaScript at the end for better performance and CLS prevention */}}
+{{ if not .Site.Params.Disable_theme_toggle }}
+{{ $js := resources.Get "js/darkmode.js" | js.Build }}
+<script defer src="{{ $js.RelPermalink }}"></script>
+{{ end }}
+
+{{/* Load Alpine.js after DOM is ready to prevent layout shifts */}}
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js" crossorigin="anonymous"
+  rel=preconnect></script>

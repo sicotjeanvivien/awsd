@@ -85,12 +85,3 @@ p4:
   heading: "From the blog"
   content:
     - text: "Réflexions techniques, architecture logicielle et retours d’expérience"
-
-p5:
-  heading: "Stop Machin"
-  content:
-    - text: "Sagittis scelerisque nulla cursus in enim consectetur quam. Dictum urna sed consectetur neque tristique pellentesque."
-  action: "#"
-  label: "Email address"
-  placeholder: "Enter your email"
-  button: "Notify me"
