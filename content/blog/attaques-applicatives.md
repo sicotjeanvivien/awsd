@@ -7,7 +7,7 @@ summary: "Les attaques applicatives ciblent directement le code métier, les API
 categories: ["Cybersécurité"]
 tags: ["cybersécurité", "sécurité applicative", "XSS", "SQLi", "RCE", "API", "JWT"]
 author: "Jean-Vivien Sicot"
-draft: false
+draft: true
 showToc: true
 tocOpen: false
 cover:

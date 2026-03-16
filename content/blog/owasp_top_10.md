@@ -5,7 +5,7 @@ description: "Top 10 OWASP avec définitions, mécanismes, exemples concrets, im
 tags: ["OWASP", "AppSec", "Sécurité applicative", "Top 10", "Cheat Sheet"]
 categories: ["Cybersécurité"]
 author: "Jean-Vivien Sicot"
-draft: false
+draft: true
 showToc: true
 tocOpen: false
 cover:

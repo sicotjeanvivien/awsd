@@ -7,7 +7,7 @@ summary: "Sniffing, MITM, DDoS, DNS spoofing, BGP hijacking : découvrez les att
 categories: ["Cybersécurité"]
 tags: ["réseau", "cybersécurité", "MITM", "DDoS", "DNSSEC", "BGP"]
 author: "Jean-Vivien Sicot"
-draft: false
+draft: true
 showToc: true
 tocOpen: false
 cover:

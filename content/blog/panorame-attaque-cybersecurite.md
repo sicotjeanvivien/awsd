@@ -7,7 +7,7 @@ summary: "Comprendre les grandes familles d’attaques : réseau, applicatif, hu
 categories: ["Cybersécurité"]
 tags: ["Cybersécurité", "Attaques", "Sécurité applicative", "Réseau", "Vie privée"]
 author: "Jean-Vivien Sicot"
-draft: false
+draft: true
 showToc: true
 tocOpen: false
 cover:

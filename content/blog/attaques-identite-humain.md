@@ -7,7 +7,7 @@ summary: "Les attaques d’ingénierie sociale visent l’humain plus que la mac
 categories: ["Cybersécurité"]
 tags: ["ingénierie sociale", "identité", "phishing", "fraude", "cybersécurité"]
 author: "Jean-Vivien Sicot"
-draft: false
+draft: true
 showToc: true
 tocOpen: false
 cover:

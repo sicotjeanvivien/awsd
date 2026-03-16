@@ -1,4 +1,4 @@
 baseURL: "http://localhost/"
-buildDrafts: true
+buildDrafts: false
 buildFuture: true
 disableFastRender: false

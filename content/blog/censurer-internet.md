@@ -4,6 +4,7 @@ date: 2025-08-25
 tags: ["internet", "censure", "réseau", "liberté"]
 categories: ["Articles"]
 summary: "On parle souvent de censure d’Internet. Mais techniquement, est-elle seulement possible ?"
+draft: true
 cover:
   image: "images/articles/censurer-internet-cover.png"
   alt: "Illustration sur la censure d’Internet"

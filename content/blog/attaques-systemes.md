@@ -7,7 +7,7 @@ summary: "Des malwares aux attaques sur la chaîne CI/CD : découvrez les princi
 categories: ["Cybersécurité"]
 tags: ["systèmes", "cybersécurité", "cloud", "DevSecOps", "CI/CD", "ransomware"]
 author: "Jean-Vivien Sicot"
-draft: false
+draft: true
 showToc: true
 tocOpen: false
 cover:

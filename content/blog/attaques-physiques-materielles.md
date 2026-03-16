@@ -7,7 +7,7 @@ summary: "Les attaques physiques et matérielles exploitent l’accès direct au
 categories: ["Cybersécurité"]
 tags: ["matériel", "hardware", "attaque physique", "firmware", "side-channel", "Rowhammer", "cybersécurité"]
 author: "Jean-Vivien Sicot"
-draft: false
+draft: true
 showToc: true
 tocOpen: false
 cover:
