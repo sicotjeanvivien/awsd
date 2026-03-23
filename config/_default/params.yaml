@@ -78,8 +78,8 @@ P3:
     - alt: PostgreSQL
       image: "images/tech/postgresql.svg"
 
-    - alt: Docker
-      image: "images/tech/docker.svg"
+    # - alt: Docker
+    #   image: "images/tech/docker.svg"
 
 p4:
   heading: "From the blog"
