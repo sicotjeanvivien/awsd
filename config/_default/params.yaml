@@ -57,27 +57,26 @@ P3:
     - text: "AWSD s’appuie sur un écosystème technologique éprouvé pour concevoir des applications robustes et maintenables."
     - text: "Ces technologies sont utilisées régulièrement dans les projets backend et les architectures web modernes."
   logos:
+    - alt: Node.js
+      image: "images/tech/node.svg"
+    
+    - alt: TypeScript
+      image: "images/tech/typescript.svg"
+
+    - alt: React
+      image: "images/tech/react_js.svg"
+
+    - alt: Rust
+      image: "images/tech/rust.svg"
+
+    - alt: PostgreSQL
+      image: "images/tech/postgresql.svg"
+    
     - alt: PHP
       image: "images/tech/php.svg"
 
     - alt: Symfony
       image: "images/tech/symfony_dynamic_h.svg"
-
-    - alt: Rust
-      image: "images/tech/rust.svg"
-
-    - alt: Node.js
-      image: "images/tech/node.svg"
-
-    - alt: React
-      image: "images/tech/react_js.svg"
-    
-    - alt: JavaScript
-      image: "images/tech/javascript_i.svg"
-
-    - alt: PostgreSQL
-      image: "images/tech/postgresql.svg"
-
     # - alt: Docker
     #   image: "images/tech/docker.svg"
 
