@@ -47,7 +47,6 @@
                                         </path>
                                     </svg>
                                     {{ end }}
-
                                 </div>
                                 <div class="ml-3">
                                     <p class="font-semibold">{{ .Name }}</p>
@@ -81,6 +80,36 @@
             </a>
             {{ end }}
             {{ end }}
+
+            {{/* ======== LANGUAGE SWITCHER ======== */}}
+            {{ if .IsTranslated }}
+            <div class="flex items-center md:ml-4">
+                {{ range .Translations }}
+                <a href="{{ .Permalink }}"
+                   class="px-3 py-1 mt-2 text-xs font-semibold tracking-wide uppercase border border-gray-600 rounded-lg md:mt-0 hover:text-white hover:border-white focus:outline-none focus:shadow-outline transition-colors duration-200"
+                   aria-label="Switch to {{ .Language.LanguageName }}"
+                   title="{{ .Language.LanguageName }}">
+                    {{ .Language.Lang | upper }}
+                </a>
+                {{ end }}
+            </div>
+            {{ else }}
+            {{/* Page non traduite : on pointe vers la racine de l'autre langue */}}
+            <div class="flex items-center md:ml-4">
+                {{ range .Site.Languages }}
+                {{ if ne .Lang $.Site.Language.Lang }}
+                <a href="{{ .Lang | relLangURL }}"
+                   class="px-3 py-1 mt-2 text-xs font-semibold tracking-wide uppercase border border-gray-600 rounded-lg md:mt-0 hover:text-white hover:border-white focus:outline-none focus:shadow-outline transition-colors duration-200"
+                   aria-label="Switch to {{ .LanguageName }}"
+                   title="{{ .LanguageName }}">
+                    {{ .Lang | upper }}
+                </a>
+                {{ end }}
+                {{ end }}
+            </div>
+            {{ end }}
+            {{/* ======== FIN LANGUAGE SWITCHER ======== */}}
+
             {{ if not .Site.Params.Disable_theme_toggle }}
             <button id="theme-toggle" type="button" class="p-2 text-sm text-gray-500 rounded-lg md: dark:text-gray-400 md:hover:bg-gray-100 dark:md:hover:bg-gray-700 md:focus:outline-none md:focus:ring-4 md:focus:ring-gray-200 dark:md:focus:ring-gray-700 md:ml-2 xs:hidden">
                 <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

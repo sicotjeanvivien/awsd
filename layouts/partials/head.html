@@ -10,6 +10,11 @@
 <meta name="theme-color" content="#ffffff">
 {{ partial "meta" . }}
 
+{{/* hreflang pour le SEO multilingue */}}
+{{ range .AllTranslations }}
+<link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" />
+{{ end }}
+
 {{/* DNS prefetch and preconnect for external resources */}}
 <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
 <link href="https://cdn.jsdelivr.net" rel="preconnect" crossorigin="anonymous">

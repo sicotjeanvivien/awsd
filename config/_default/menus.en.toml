@@ -1,0 +1,43 @@
+[[main]]
+  name = "Services"
+  url = "/en/services/"
+  weight = 1
+
+[[main]]
+  name = "About me"
+  url = "/en/about-me/"
+  weight = 2
+
+[[main]]
+  name = "Blog"
+  url = "/en/blog/"
+  weight = 3
+
+[[main]]
+  name = "Contact"
+  url = "/en/contact/"
+  weight = 4
+
+[[footer]]
+  identifier = "services"
+  name = "Services"
+  url = "/en/services/"
+  weight = 10
+
+[[footer]]
+  identifier = "about"
+  name = "About me"
+  url = "/en/about-me/"
+  weight = 20
+
+[[footer]]
+  identifier = "blog"
+  name = "Blog"
+  url = "/en/blog/"
+  weight = 30
+
+[[footer]]
+  identifier = "contact"
+  name = "Contact"
+  url = "/en/contact/"
+  weight = 40

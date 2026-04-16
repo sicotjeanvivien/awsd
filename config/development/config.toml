@@ -1,0 +1,4 @@
+baseURL = "http://localhost/"
+buildDrafts = false
+buildFuture = true
+disableFastRender = false

@@ -1,0 +1,8 @@
+baseURL = "https://awsd.fr"
+buildDrafts = false
+buildFuture = false
+enableRobotsTXT = true
+
+[minify]
+  disableXML = false
+  minifyOutput = true

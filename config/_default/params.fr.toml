@@ -1,0 +1,96 @@
+author = "Jean-Vivien Sicot"
+authorimage = "images/a_vector_style_digital_logo_features_a_stylized_le.png"
+og_image = "images/a_vector_style_digital_logo_features_a_stylized_le.png"
+moto = "Artisan Web Software Development"
+description = "Conception, audit et développement d'applications performantes et sécurisées. Une approche orientée architecture, qualité logicielle et durabilité."
+
+disable_theme_toggle = false
+disable_stay_uptodate = false
+
+[Hero]
+  Image = "images/earth_is_shown_from_space.png"
+
+[p1]
+  heading = "Notre mission"
+  image = "images/futuristic_software_engineering_control_room.png"
+  [[p1.content]]
+    text = "Chez AWSD, chaque projet est unique. Nous concevons des applications web sur-mesure, adaptées aux besoins spécifiques de chaque client, avec une architecture pensée pour durer et évoluer facilement."
+  [[p1.content]]
+    text = "Notre approche combine rigueur technique et bonnes pratiques. Chaque ligne de code est écrite avec soin pour garantir performance, sécurité et maintenabilité, afin que vos applications restent fiables sur le long terme."
+  [[p1.content]]
+    text = "Au-delà du développement, nous accompagnons nos clients à chaque étape : conseil, audit, optimisation et suivi post-livraison. AWSD se positionne comme un véritable partenaire technique, garantissant que votre projet atteigne ses objectifs efficacement."
+
+[p2]
+  heading = "Nos services"
+  image = "images/futuristic_software_engineering_control_room.webp"
+  [p2.content]
+    text = "AWSD accompagne les entreprises dans la conception et l'amélioration d'applications web fiables, performantes et maintenables."
+  [[p2.services]]
+    title = "Renfort backend structurant"
+    description = "Développement et évolution de backends existants sans dégrader l'architecture."
+    icon = "🧱"
+    [[p2.services.list]]
+      li = "développement de fonctionnalités"
+    [[p2.services.list]]
+      li = "refactoring ciblé"
+    [[p2.services.list]]
+      li = "amélioration de la lisibilité du code"
+    [[p2.services.list]]
+      li = "sécurisation des flux critiques"
+  [[p2.services]]
+    title = "Cadrage technique"
+    description = "Analyse du projet, choix technologiques et définition d'une architecture claire avant le développement."
+    icon = "🧭"
+    [[p2.services.list]]
+      li = "analyse du besoin et des contraintes"
+    [[p2.services.list]]
+      li = "définition d'une architecture cohérente"
+    [[p2.services.list]]
+      li = "identification des risques techniques"
+    [[p2.services.list]]
+      li = "plan d'actions priorisé"
+  [[p2.services]]
+    title = "Accompagnement technique"
+    description = "Pair programming, revues de code et structuration des bonnes pratiques pour renforcer l'autonomie des équipes."
+    icon = "🤝"
+    [[p2.services.list]]
+      li = "pair programming ciblé"
+    [[p2.services.list]]
+      li = "revues de code guidées"
+    [[p2.services.list]]
+      li = "structuration des bonnes pratiques"
+    [[p2.services.list]]
+      li = "montée en compétence des équipes"
+
+[P3]
+  heading = "Technologies utilisées"
+  [[P3.content]]
+    text = "AWSD s'appuie sur un écosystème technologique éprouvé pour concevoir des applications robustes et maintenables."
+  [[P3.content]]
+    text = "Ces technologies sont utilisées régulièrement dans les projets backend et les architectures web modernes."
+  [[P3.logos]]
+    alt = "Node.js"
+    image = "images/tech/node.svg"
+  [[P3.logos]]
+    alt = "TypeScript"
+    image = "images/tech/typescript.svg"
+  [[P3.logos]]
+    alt = "React"
+    image = "images/tech/react_js.svg"
+  [[P3.logos]]
+    alt = "Rust"
+    image = "images/tech/rust.svg"
+  [[P3.logos]]
+    alt = "PostgreSQL"
+    image = "images/tech/postgresql.svg"
+  [[P3.logos]]
+    alt = "PHP"
+    image = "images/tech/php.svg"
+  [[P3.logos]]
+    alt = "Symfony"
+    image = "images/tech/symfony_dynamic_h.svg"
+
+[p4]
+  heading = "Depuis le blog"
+  [[p4.content]]
+    text = "Réflexions techniques, architecture logicielle et retours d'expérience"

@@ -1,0 +1,96 @@
+author = "Jean-Vivien Sicot"
+authorimage = "images/a_vector_style_digital_logo_features_a_stylized_le.png"
+og_image = "images/a_vector_style_digital_logo_features_a_stylized_le.png"
+moto = "Artisan Web Software Development"
+description = "Design, audit and development of high-performance, secure applications. An approach focused on architecture, software quality and sustainability."
+
+disable_theme_toggle = false
+disable_stay_uptodate = false
+
+[Hero]
+  Image = "images/earth_is_shown_from_space.png"
+
+[p1]
+  heading = "Our mission"
+  image = "images/futuristic_software_engineering_control_room.png"
+  [[p1.content]]
+    text = "At AWSD, every project is unique. We design custom web applications tailored to each client's specific needs, with an architecture built to last and evolve easily."
+  [[p1.content]]
+    text = "Our approach combines technical rigour and best practices. Every line of code is written with care to ensure performance, security and maintainability, so your applications stay reliable over the long term."
+  [[p1.content]]
+    text = "Beyond development, we support our clients at every stage: consulting, auditing, optimisation and post-delivery follow-up. AWSD acts as a true technical partner, ensuring your project meets its goals effectively."
+
+[p2]
+  heading = "Our services"
+  image = "images/futuristic_software_engineering_control_room.webp"
+  [p2.content]
+    text = "AWSD helps companies design and improve reliable, high-performance and maintainable web applications."
+  [[p2.services]]
+    title = "Structured backend support"
+    description = "Development and evolution of existing backends without degrading the architecture."
+    icon = "🧱"
+    [[p2.services.list]]
+      li = "feature development"
+    [[p2.services.list]]
+      li = "targeted refactoring"
+    [[p2.services.list]]
+      li = "code readability improvements"
+    [[p2.services.list]]
+      li = "securing critical flows"
+  [[p2.services]]
+    title = "Technical scoping"
+    description = "Project analysis, technology choices and clear architecture definition before development begins."
+    icon = "🧭"
+    [[p2.services.list]]
+      li = "requirements and constraints analysis"
+    [[p2.services.list]]
+      li = "coherent architecture definition"
+    [[p2.services.list]]
+      li = "technical risk identification"
+    [[p2.services.list]]
+      li = "prioritised action plan"
+  [[p2.services]]
+    title = "Technical mentoring"
+    description = "Pair programming, code reviews and best-practice structuring to strengthen team autonomy."
+    icon = "🤝"
+    [[p2.services.list]]
+      li = "targeted pair programming"
+    [[p2.services.list]]
+      li = "guided code reviews"
+    [[p2.services.list]]
+      li = "best-practice structuring"
+    [[p2.services.list]]
+      li = "team skill development"
+
+[P3]
+  heading = "Technologies we use"
+  [[P3.content]]
+    text = "AWSD relies on a proven technology stack to build robust and maintainable applications."
+  [[P3.content]]
+    text = "These technologies are used regularly in backend projects and modern web architectures."
+  [[P3.logos]]
+    alt = "Node.js"
+    image = "images/tech/node.svg"
+  [[P3.logos]]
+    alt = "TypeScript"
+    image = "images/tech/typescript.svg"
+  [[P3.logos]]
+    alt = "React"
+    image = "images/tech/react_js.svg"
+  [[P3.logos]]
+    alt = "Rust"
+    image = "images/tech/rust.svg"
+  [[P3.logos]]
+    alt = "PostgreSQL"
+    image = "images/tech/postgresql.svg"
+  [[P3.logos]]
+    alt = "PHP"
+    image = "images/tech/php.svg"
+  [[P3.logos]]
+    alt = "Symfony"
+    image = "images/tech/symfony_dynamic_h.svg"
+
+[p4]
+  heading = "From the blog"
+  [[p4.content]]
+    text = "Technical insights, software architecture and lessons learned"
