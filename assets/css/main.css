@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+/* Plugin typography (équivalent v4 de require('@tailwindcss/typography')) */
+@plugin "@tailwindcss/typography";
+
+/* Activation du mode sombre par classe (équivalent v3 darkMode: 'class') */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================================
+   PALETTE PRIMARY : bleu-ardoise sobre pour AWSD
+   En v4, la config se fait dans le CSS via @theme
+   ============================================================ */
+@theme {
+  --color-primary-50:  #f0f4f8;
+  --color-primary-100: #d9e2ec;
+  --color-primary-200: #bcccdc;
+  --color-primary-300: #9fb3c8;
+  --color-primary-400: #829ab1;
+  --color-primary-500: #627d98;
+  --color-primary-600: #486581;
+  --color-primary-700: #334e68;
+  --color-primary-800: #243b53;
+  --color-primary-900: #102a43;
+  --color-primary-950: #0a1929;
+}
+
+/* ============================================================
+   THÈME PROSE PERSONNALISÉ
+   En v4, on personnalise prose via les CSS variables que le
+   plugin typography expose. On les surcharge ici.
+   ============================================================ */
+.prose {
+  --tw-prose-body: var(--color-gray-700);
+  --tw-prose-headings: var(--color-gray-900);
+  --tw-prose-lead: var(--color-gray-600);
+  --tw-prose-links: var(--color-primary-600);
+  --tw-prose-bold: var(--color-gray-900);
+  --tw-prose-counters: var(--color-gray-500);
+  --tw-prose-bullets: var(--color-gray-300);
+  --tw-prose-hr: var(--color-gray-200);
+  --tw-prose-quotes: var(--color-gray-900);
+  --tw-prose-quote-borders: var(--color-primary-600);
+  --tw-prose-captions: var(--color-gray-500);
+  --tw-prose-code: var(--color-primary-800);
+  --tw-prose-pre-code: var(--color-gray-100);
+  --tw-prose-pre-bg: var(--color-gray-900);
+  --tw-prose-th-borders: var(--color-gray-300);
+  --tw-prose-td-borders: var(--color-gray-200);
+}
+
+.dark .prose,
+.prose-invert {
+  --tw-prose-body: var(--color-gray-300);
+  --tw-prose-headings: var(--color-white);
+  --tw-prose-lead: var(--color-gray-400);
+  --tw-prose-links: var(--color-primary-400);
+  --tw-prose-bold: var(--color-white);
+  --tw-prose-counters: var(--color-gray-400);
+  --tw-prose-bullets: var(--color-gray-600);
+  --tw-prose-hr: var(--color-gray-700);
+  --tw-prose-quotes: var(--color-gray-100);
+  --tw-prose-quote-borders: var(--color-primary-400);
+  --tw-prose-captions: var(--color-gray-400);
+  --tw-prose-code: var(--color-primary-300);
+  --tw-prose-pre-code: var(--color-gray-300);
+  --tw-prose-pre-bg: rgb(0 0 0 / 50%);
+  --tw-prose-th-borders: var(--color-gray-600);
+  --tw-prose-td-borders: var(--color-gray-700);
+}
+
+/* ============================================================
+   SOURCES À SCANNER POUR GÉNÉRER LES CLASSES
+   En v4, l'équivalent de "content" en v3 se fait via @source
+   ============================================================ */
+@source "../../layouts/**/*.html";
+@source "../../content/**/*.md";
+@source "../../themes/TailBliss/layouts/**/*.html";
