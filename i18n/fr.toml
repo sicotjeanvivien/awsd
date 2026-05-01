@@ -12,3 +12,6 @@ other = "Accueil"
 
 [language_switch]
 other = "English"
+
+[reading_time]
+other="min de lecture"

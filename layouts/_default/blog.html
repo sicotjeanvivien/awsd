@@ -30,11 +30,11 @@
         <span class="font-medium text-gray-700 dark:text-gray-300">{{ . }}</span>
         {{ end }}
         <span aria-hidden="true">·</span>
-        <time datetime="{{ .Date.Format "2006-01-02" }}">
+        <time datetime="{{ .Date.Format " 2006-01-02" }}">
           {{ .Date.Format "2 January 2006" }}
         </time>
         <span aria-hidden="true">·</span>
-        <span>{{ .ReadingTime }} min de lecture</span>
+        {{ .ReadingTime }} {{ i18n "reading_time"}}
       </div>
     </div>
   </header>
@@ -47,15 +47,12 @@
   {{ $large := (.Resize "900x webp q80").RelPermalink }}
   {{ $featuredimage := (.Resize "1500x webp q80").RelPermalink }}
   <div class="max-w-4xl mx-auto px-6 pt-10">
-    <img src="{{ $featuredimage }}"
-      srcset="
+    <img src="{{ $featuredimage }}" srcset="
         {{- with $small -}}{{.}} 400w,{{- end -}}
         {{- with $medium -}}{{.}} 550w,{{- end -}}
         {{- with $large -}}{{.}} 900w,{{- end -}}
-        {{- with $featuredimage -}}{{.}} 1500w{{- end -}}"
-      sizes="(max-width: 768px) 100vw, 900px"
-      class="w-full rounded-lg shadow-md"
-      alt="{{ $.Title }}" />
+        {{- with $featuredimage -}}{{.}} 1500w{{- end -}}" sizes="(max-width: 768px) 100vw, 900px"
+      class="w-full rounded-lg shadow-md" alt="{{ $.Title }}" />
   </div>
   {{ end }}
   {{ end }}
@@ -81,8 +78,7 @@
     <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-800">
       <div class="flex flex-wrap gap-2">
         {{ range . }}
-        <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}"
-           class="inline-block px-3 py-1 text-sm rounded-full
+        <a href="{{ " /tags/" | relLangURL }}{{ . | urlize }}" class="inline-block px-3 py-1 text-sm rounded-full
                   bg-gray-100 hover:bg-gray-200
                   dark:bg-gray-800 dark:hover:bg-gray-700
                   text-gray-700 dark:text-gray-300 transition-colors">
