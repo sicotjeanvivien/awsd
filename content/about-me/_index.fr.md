@@ -22,12 +22,7 @@ Mon parcours, entre **freelance** et **salariat**, m'a permis de développer aut
 
 {{< imgc
     src="parcours_pro.png"
-    alt="Vue d'une montagne enneigée"
-    width="80%"
-    height="auto"
-    caption="Une vue imprenable sur les Alpes"
-    link="/galerie/montagnes"
-    loading="lazy"
+    alt="Illustration du parcours professionnel de Jean-Vivien Sicot"
 >}}
 
 ## 💼 Parcours

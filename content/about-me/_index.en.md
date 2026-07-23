@@ -22,12 +22,7 @@ My career, split between **freelance** and **employed** roles, has helped me bui
 
 {{< imgc
     src="parcours_pro.png"
-    alt="View of a snow-covered mountain"
-    width="80%"
-    height="auto"
-    caption="A breathtaking view of the Alps"
-    link="/galerie/montagnes"
-    loading="lazy"
+    alt="Illustration of Jean-Vivien Sicot's professional journey"
 >}}
 
 ## 💼 Experience

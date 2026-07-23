@@ -1,7 +1,6 @@
 ---
 title: "Services"
 description: "Technical scoping, structured backend support and team mentoring. Pragmatic engagements focused on quality and maintainability."
-images: ["/images/og/og-services.jpg"]
 summary: "Technical scoping · Backend support · Technical mentoring"
 layout: single
 ---

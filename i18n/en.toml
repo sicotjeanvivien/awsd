@@ -30,3 +30,12 @@ other = "Explore the services"
 
 [hero_availability]
 other = "Available for new engagements"
+
+[notfound_heading]
+other = "Oops, something is missing."
+
+[notfound_text]
+other = "Sorry, we can't find that page. There's plenty to explore back on the home page."
+
+[back_home]
+other = "Back to the home page"
