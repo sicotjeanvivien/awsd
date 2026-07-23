@@ -1,0 +1,84 @@
+{{/* ============================================================
+     META / SEO — surcharge projet du partial du thème TailBliss
+     ============================================================ */}}
+{{ $desc := cond (ne .Description "") .Description .Site.Params.description }}
+{{ $title := cond .IsHome (printf "%s — %s" .Site.Title .Site.Params.moto) (printf "%s | %s" .Title .Site.Title) }}
+
+<title itemprop="name">{{ $title }}</title>
+<meta name="description" content="{{ $desc }}" />
+<link rel="canonical" href="{{ .Permalink }}" />
+
+{{/* Open Graph */}}
+<meta property="og:title" content="{{ $title }}" />
+<meta property="og:description" content="{{ $desc }}" />
+<meta property="og:site_name" content="{{ .Site.Title }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:locale" content="{{ replace .Site.Language.LanguageCode "-" "_" }}" />
+{{ range .Translations }}
+<meta property="og:locale:alternate" content="{{ replace .Site.Language.LanguageCode "-" "_" }}" />
+{{ end }}
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
+
+{{/* Image de partage */}}
+{{ $ogImage := "" }}
+{{ with .Params.featured_image }}{{ with resources.Get (strings.TrimPrefix "../assets/" .) }}{{ $ogImage = .Permalink }}{{ end }}{{ end }}
+{{ if not $ogImage }}{{ with resources.Get .Site.Params.og_image }}{{ $ogImage = .Permalink }}{{ else }}{{ $ogImage = .Site.Params.og_image | absURL }}{{ end }}{{ end }}
+<meta property="og:image" content="{{ $ogImage }}" />
+<meta property="og:image:secure_url" content="{{ $ogImage }}" />
+
+{{/* Twitter */}}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ $title }}" />
+<meta name="twitter:description" content="{{ $desc }}" />
+<meta name="twitter:image" content="{{ $ogImage }}" />
+
+{{/* ============================================================
+     DONNÉES STRUCTURÉES JSON-LD
+     ============================================================ */}}
+{{ if .IsHome }}
+{{ $ld := dict
+    "@context" "https://schema.org"
+    "@type" "ProfessionalService"
+    "name" .Site.Title
+    "description" $desc
+    "url" .Site.BaseURL
+    "image" $ogImage
+    "email" .Site.Params.email
+    "slogan" .Site.Params.moto
+    "areaServed" "FR"
+    "founder" (dict
+        "@type" "Person"
+        "name" .Site.Params.author
+        "url" .Site.Params.linkedin
+    )
+    "sameAs" (slice .Site.Params.linkedin .Site.Params.github)
+}}
+<script type="application/ld+json">
+{{ $ld | jsonify (dict "indent" "  ") | safeJS }}
+</script>
+{{ else if .IsPage }}
+{{ $ld := dict
+    "@context" "https://schema.org"
+    "@type" (cond (eq .Section "blog") "BlogPosting" "WebPage")
+    "headline" .Title
+    "description" $desc
+    "url" .Permalink
+    "image" $ogImage
+    "inLanguage" .Site.Language.Lang
+    "datePublished" (cond (not .Date.IsZero) (.Date.Format "2006-01-02") "")
+    "dateModified" (cond (not .Lastmod.IsZero) (.Lastmod.Format "2006-01-02") "")
+    "author" (dict
+        "@type" "Person"
+        "name" (cond (ne (string .Params.author) "") .Params.author .Site.Params.author)
+        "url" .Site.Params.linkedin
+    )
+    "publisher" (dict
+        "@type" "Organization"
+        "name" .Site.Title
+        "url" .Site.BaseURL
+    )
+}}
+<script type="application/ld+json">
+{{ $ld | jsonify (dict "indent" "  ") | safeJS }}
+</script>
+{{ end }}

@@ -15,28 +15,19 @@
 <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" />
 {{ end }}
 
-{{/* DNS prefetch and preconnect for external resources */}}
-<link href="//cdn.jsdelivr.net" rel="dns-prefetch">
-<link href="https://cdn.jsdelivr.net" rel="preconnect" crossorigin="anonymous">
-<link href="https://static.cloudflareinsights.com" rel="preconnect" rel="dns-prefetch">
-<link href="https://static.cloudflareinsights.com" crossorigin="anonymous" rel="preconnect">
-
 {{/* Preload critical hero image for better LCP performance */}}
 {{ if .IsHome }}
-{{ $heroImage := resources.Get "images/pages/tailbliss-rocket-indigo.png" }}
+{{ $heroImage := resources.Get .Site.Params.Hero.Image }}
 {{ if $heroImage }}
 {{ $heroWebP := $heroImage.Resize "576x576 webp q85" }}
-<link href="{{ $heroWebP.RelPermalink }}" rel="preload" as="image" fetchpriority="high" loading="eager">
-{{ else }}
-<link as="image" href="/images/tailbliss-rocket-indigo.webp" rel="preload" fetchpriority="high" loading="eager">
+<link href="{{ $heroWebP.RelPermalink }}" rel="preload" as="image" fetchpriority="high">
 {{ end }}
 {{ end }}
 
-{{/* Preload critical navigation logo to prevent CLS */}}
-<link href="/images/site-logo.svg" rel="preload" as="image" fetchpriority="high" loading="eager">
-
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"></script>
+{{/* Alpine.js auto-hébergé (bundlé depuis node_modules) — pas de CDN tiers */}}
+{{ $alpine := resources.Get "js/app.js" | js.Build (dict "minify" hugo.IsProduction) }}
+{{ if hugo.IsProduction }}{{ $alpine = $alpine | fingerprint }}{{ end }}
+<script defer src="{{ $alpine.RelPermalink }}"></script>
 
 <script>
   // On page load or when changing themes, best to add inline in `head` to avoid FOUC

@@ -15,3 +15,18 @@ other = "English"
 
 [reading_time]
 other="min de lecture"
+
+[rights_reserved]
+other = "Tous droits réservés."
+
+[all_services]
+other = "Voir tous les services"
+
+[cta_project]
+other = "Discuter de votre projet"
+
+[cta_services]
+other = "Découvrir les services"
+
+[hero_availability]
+other = "Disponible pour de nouvelles missions"

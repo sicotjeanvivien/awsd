@@ -6,6 +6,9 @@
 /* Activation du mode sombre par classe (équivalent v3 darkMode: 'class') */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Alpine.js : masque les éléments x-cloak avant l'initialisation (anti-FOUC) */
+[x-cloak] { display: none !important; }
+
 /* ============================================================
    PALETTE PRIMARY : bleu-ardoise sobre pour AWSD
    En v4, la config se fait dans le CSS via @theme

@@ -1,8 +1,11 @@
 author = "Jean-Vivien Sicot"
-authorimage = "images/a_vector_style_digital_logo_features_a_stylized_le.png"
-og_image = "images/a_vector_style_digital_logo_features_a_stylized_le.png"
+authorimage = "images/digital_logo.png"
+og_image = "images/digital_logo.png"
 moto = "Artisan Web Software Development"
 description = "Design, audit and development of high-performance, secure applications. An approach focused on architecture, software quality and sustainability."
+linkedin = "https://www.linkedin.com/in/jean-vivien-sicot-6a3523162/"
+github = "https://github.com/sicotjeanvivien"
+email = "jeanvivien.sicot@lapiscine.pro"
 
 disable_theme_toggle = false
 disable_stay_uptodate = false

@@ -41,3 +41,15 @@
   name = "Contact"
   url = "/en/contact/"
   weight = 40
+
+[[footer]]
+  identifier = "legal-notice"
+  name = "Legal notice"
+  url = "/en/legal-notice/"
+  weight = 50
+
+[[footer]]
+  identifier = "privacy-policy"
+  name = "Privacy policy"
+  url = "/en/privacy-policy/"
+  weight = 60
