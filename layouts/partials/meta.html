@@ -13,9 +13,9 @@
 <meta property="og:description" content="{{ $desc }}" />
 <meta property="og:site_name" content="{{ .Site.Title }}" />
 <meta property="og:url" content="{{ .Permalink }}" />
-<meta property="og:locale" content="{{ replace .Site.Language.LanguageCode "-" "_" }}" />
+<meta property="og:locale" content="{{ replace .Site.Language.Locale "-" "_" }}" />
 {{ range .Translations }}
-<meta property="og:locale:alternate" content="{{ replace .Site.Language.LanguageCode "-" "_" }}" />
+<meta property="og:locale:alternate" content="{{ replace .Site.Language.Locale "-" "_" }}" />
 {{ end }}
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
 

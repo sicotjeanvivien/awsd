@@ -87,8 +87,8 @@
                 {{ range .Translations }}
                 <a href="{{ .Permalink }}"
                    class="px-3 py-1 mt-2 text-xs font-semibold tracking-wide uppercase border border-gray-600 rounded-lg md:mt-0 hover:text-white hover:border-white focus:outline-none focus:shadow-outline transition-colors duration-200"
-                   aria-label="Switch to {{ .Language.LanguageName }}"
-                   title="{{ .Language.LanguageName }}">
+                   aria-label="Switch to {{ .Language.Label }}"
+                   title="{{ .Language.Label }}">
                     {{ .Language.Lang | upper }}
                 </a>
                 {{ end }}
@@ -96,13 +96,13 @@
             {{ else }}
             {{/* Page non traduite : on pointe vers la racine de l'autre langue */}}
             <div class="flex items-center md:ml-4">
-                {{ range .Site.Languages }}
-                {{ if ne .Lang $.Site.Language.Lang }}
-                <a href="{{ .Lang | relLangURL }}"
+                {{ range hugo.Sites }}
+                {{ if ne .Language.Lang $.Site.Language.Lang }}
+                <a href="{{ .Home.RelPermalink }}"
                    class="px-3 py-1 mt-2 text-xs font-semibold tracking-wide uppercase border border-gray-600 rounded-lg md:mt-0 hover:text-white hover:border-white focus:outline-none focus:shadow-outline transition-colors duration-200"
-                   aria-label="Switch to {{ .LanguageName }}"
-                   title="{{ .LanguageName }}">
-                    {{ .Lang | upper }}
+                   aria-label="Switch to {{ .Language.Label }}"
+                   title="{{ .Language.Label }}">
+                    {{ .Language.Lang | upper }}
                 </a>
                 {{ end }}
                 {{ end }}
