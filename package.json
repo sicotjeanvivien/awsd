@@ -4,6 +4,7 @@
   "description": "Hugo + Alpine.js + TailwindCSS",
   "main": "index.js",
   "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/postcss": "^4.2.4",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.4",
@@ -26,6 +27,7 @@
     "build": "npm run build:css && hugo --minify --gc --cleanDestinationDir",
     "rebuild": "find static/css/ -name 'main.*.css' -delete 2>/dev/null || true && npm run build:css:dev",
     "test": "hugo",
+    "og": "node scripts/gen-og.js",
     "optimize": "npm run build && echo 'Build optimized for production'"
   },
   "repository": {
