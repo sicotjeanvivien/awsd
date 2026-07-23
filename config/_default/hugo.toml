@@ -1,8 +1,26 @@
 baseURL = 'http://localhost/'
 title = "AWSD"
-theme = "TailBliss"
 defaultContentLanguage = "fr"
 defaultContentLanguageInSubdir = false
+
+# Le thème est importé via [module] plutôt que `theme = "TailBliss"` afin de
+# NE PAS monter son dossier content/ (pages de démo blog-post-*, about, prose…).
+# On monte explicitement tout le reste du thème, sauf content.
+[module]
+  [[module.imports]]
+    path = "TailBliss"
+    [[module.imports.mounts]]
+      source = "layouts"
+      target = "layouts"
+    [[module.imports.mounts]]
+      source = "assets"
+      target = "assets"
+    [[module.imports.mounts]]
+      source = "static"
+      target = "static"
+    [[module.imports.mounts]]
+      source = "archetypes"
+      target = "archetypes"
 
 enableEmoji = true
 enableGitInfo = false
