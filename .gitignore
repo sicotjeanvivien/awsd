@@ -4,3 +4,6 @@ public/
 # Windows (WSL)
 *:Zone.Identifier
 Thumbs.db
+
+# Cache d'images de Zola, régénéré à chaque build
+static/processed_images/

@@ -3,9 +3,10 @@
     parente (un article sous Blog). L'accueil est exclu du second cas. -#}
 {%- set cur = current_url | default(value="") -%}
 <header class="site-header wrap">
-  <a class="brand" href="{{ home_url | safe }}" aria-label="{{ trans(key='home_label', lang=lang) }}">
+  <a class="brand" href="{{ home_url | safe }}">
     <span class="brand__name">{{ config.title }}</span>
     <span class="brand__tagline label">{{ trans(key="tagline", lang=lang) }}</span>
+    <span class="visually-hidden">— {{ trans(key="home", lang=lang) }}</span>
   </a>
 
   <nav class="site-nav" aria-label="{{ trans(key='nav_main', lang=lang) }}">

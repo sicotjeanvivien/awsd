@@ -41,8 +41,9 @@ taxonomies = [
 # ---------------------------------------------------------------------------
 [translations]
 language_name = "Français"
+og_locale = "fr_FR"
 skip_to_content = "Aller au contenu"
-home_label = "AWSD, accueil"
+home = "accueil"
 tagline = "société logicielle"
 nav_main = "Navigation principale"
 nav_footer = "Pied de page"
@@ -106,8 +107,9 @@ back_home = "Retour à l'accueil"
 
 [languages.en.translations]
 language_name = "English"
+og_locale = "en_US"
 skip_to_content = "Skip to content"
-home_label = "AWSD, home"
+home = "home"
 tagline = "software company"
 nav_main = "Main navigation"
 nav_footer = "Footer"
@@ -179,6 +181,8 @@ author = "Jean-Vivien Sicot"
 email = "awsd.contact@gmail.com"
 copyright = "AWSD"
 og_image = "images/og/og-default.png"
+# Image de partage par langue (repli sur og_image).
+og_image_en = "images/og/og-default-en.png"
 github = "https://github.com/sicotjeanvivien"
 linkedin = "https://www.linkedin.com/in/jean-vivien-sicot-6a3523162/"
 
