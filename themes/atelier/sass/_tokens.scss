@@ -1,0 +1,30 @@
+// Toutes les couleurs passent par ces variables : un mode sombre se limitera
+// à les redéfinir (non implémenté pour l'instant).
+:root {
+  --paper: #F1EADC;          // fond de page
+  --paper-light: #FAF5EA;    // cartes, encarts
+  --paper-dark: #EDE4D2;     // emplacements d'image
+  --code-bg: #E6DCC8;        // code en ligne
+  --ink: #2A2622;            // texte, traits, fond des bandes sombres
+  --ink-2: #5A524A;          // texte secondaire
+  --ink-3: #6A6159;          // étiquettes mono, traits pointillés
+  --accent: #A2482A;         // terre cuite
+  --on-dark: #F1EADC;        // texte sur bande sombre
+  --on-dark-2: #CBBFAE;      // texte secondaire sur bande sombre
+  --accent-on-dark: #E59C7E;
+  --rule-on-dark: #8C8174;   // pointillés sur bande sombre
+  --grid-line: rgba(42, 38, 34, .055);
+
+  --font-serif: "Young Serif", Georgia, serif;
+  --font-sans: "Instrument Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-hand: "Caveat", cursive;
+
+  --wrap: 1260px;
+  --gutter: 40px;
+  --line: 1.5px solid var(--ink);
+  --dash: 1px dashed var(--ink-3);
+}
+
+// Point de rupture unique de la maquette.
+$narrow: 760px;

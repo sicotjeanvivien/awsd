@@ -1,0 +1,4 @@
+{#- Flux RSS publié sous le nom index.xml (URL héritée du site Hugo).
+    Zola choisit le template d'un flux d'après son nom de fichier : celui-ci
+    reprend simplement le template RSS intégré. -#}
+{% include "rss.xml" %}

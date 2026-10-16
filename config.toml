@@ -1,0 +1,113 @@
+base_url = "https://awsd.fr"
+title = "AWSD"
+description = "AWSD est une société indépendante qui développe et maintient ses propres produits logiciels."
+default_language = "fr"
+theme = "atelier"
+
+compile_sass = true
+minify_html = true
+build_search_index = false
+generate_sitemap = true
+generate_robots_txt = true
+
+# Le site Hugo exposait ses flux RSS en index.xml : on garde le même nom
+# (template themes/atelier/templates/index.xml).
+generate_feeds = true
+feed_filenames = ["index.xml"]
+
+taxonomies = [
+    { name = "tags", feed = true },
+    { name = "categories", feed = true },
+]
+
+[markdown]
+smart_punctuation = false
+external_links_target_blank = false
+external_links_no_referrer = true
+bottom_footnotes = true
+
+[languages.en]
+title = "AWSD"
+description = "AWSD is an independent company that builds and maintains its own software products."
+generate_feeds = true
+feed_filenames = ["index.xml"]
+taxonomies = [
+    { name = "tags", feed = true },
+    { name = "categories", feed = true },
+]
+
+# ---------------------------------------------------------------------------
+# Chaînes d'interface (FR, langue par défaut)
+# ---------------------------------------------------------------------------
+[translations]
+language_name = "Français"
+skip_to_content = "Aller au contenu"
+home_label = "AWSD, accueil"
+tagline = "société logicielle"
+menu = "Menu"
+nav_main = "Navigation principale"
+nav_footer = "Pied de page"
+nav_language = "Langue"
+nav_products = "Produits"
+nav_blog = "Blog"
+nav_about = "À propos"
+nav_contact = "Contact"
+nav_legal = "Mentions légales"
+nav_privacy = "Confidentialité"
+footer_about = "Société logicielle indépendante."
+footer_freelance = "Pour une mission d'accompagnement technique :"
+footer_freelance_link = "contact"
+rss = "Flux RSS"
+
+[languages.en.translations]
+language_name = "English"
+skip_to_content = "Skip to content"
+home_label = "AWSD, home"
+tagline = "software company"
+menu = "Menu"
+nav_main = "Main navigation"
+nav_footer = "Footer"
+nav_language = "Language"
+nav_products = "Products"
+nav_blog = "Blog"
+nav_about = "About"
+nav_contact = "Contact"
+nav_legal = "Legal notice"
+nav_privacy = "Privacy"
+footer_about = "Independent software company."
+footer_freelance = "For a technical consulting engagement:"
+footer_freelance_link = "contact"
+rss = "RSS feed"
+
+# ---------------------------------------------------------------------------
+# Paramètres du site, lus par le thème
+# ---------------------------------------------------------------------------
+[extra]
+# Langues, dans l'ordre du sélecteur de l'en-tête.
+languages = ["fr", "en"]
+author = "Jean-Vivien Sicot"
+copyright = "AWSD"
+og_image = "images/og/og-default.png"
+github = "https://github.com/sicotjeanvivien"
+linkedin = "https://www.linkedin.com/in/jean-vivien-sicot-6a3523162/"
+
+# Menu principal (en-tête). `path` = fichier de contenu, résolu dans la langue courante.
+menu = [
+    { key = "nav_products", path = "@/products/_index.md" },
+    { key = "nav_blog", path = "@/blog/_index.md" },
+    { key = "nav_about", path = "@/about-me.md" },
+]
+# Bouton à droite de l'en-tête.
+menu_cta = { key = "nav_contact", path = "@/contact.md" }
+
+# Pied de page, lu ligne par ligne sur 2 colonnes.
+footer_menu = [
+    { key = "nav_products", path = "@/products/_index.md" },
+    { key = "nav_legal", path = "@/mentions-legales.md" },
+    { key = "nav_blog", path = "@/blog/_index.md" },
+    { key = "nav_privacy", path = "@/politique-de-confidentialite.md" },
+    { key = "nav_about", path = "@/about-me.md" },
+    { key = "nav_contact", path = "@/contact.md" },
+]
+# Lien de la ligne « mission » du pied de page.
+footer_note_link = "@/contact.md"

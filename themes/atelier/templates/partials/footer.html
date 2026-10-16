@@ -1,0 +1,28 @@
+{%- set cur = current_url | default(value="") -%}
+<footer class="site-footer">
+  <div class="wrap site-footer__inner">
+    <div class="site-footer__top">
+      <div class="site-footer__about">
+        <span class="site-footer__name">{{ config.title }}</span>
+        <p>
+          {{ trans(key="footer_about", lang=lang) }}
+          {%- if config.extra.footer_note_link %}
+          {{ trans(key="footer_freelance", lang=lang) }}
+          <a href="{{ get_url(path=config.extra.footer_note_link, lang=lang) | safe }}">{{ trans(key="footer_freelance_link", lang=lang) }}</a>.
+          {%- endif %}
+        </p>
+      </div>
+      {%- if config.extra.footer_menu %}
+      <nav class="site-footer__nav" aria-label="{{ trans(key='nav_footer', lang=lang) }}">
+        {%- for item in config.extra.footer_menu %}
+        {%- set url = get_url(path=item.path, lang=lang) %}
+        <a href="{{ url | safe }}"{% if url == cur %} aria-current="page"{% endif %}>{{ trans(key=item.key, lang=lang) }}</a>
+        {%- endfor %}
+      </nav>
+      {%- endif %}
+    </div>
+    <div class="site-footer__bottom">
+      <span class="label">© {{ now() | date(format="%Y") }} {{ config.extra.copyright | default(value=config.title) }}</span>
+    </div>
+  </div>
+</footer>

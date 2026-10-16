@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{#- Accueil générique du thème. Le site le remplace par son propre templates/index.html. -#}
+{% block content %}
+<section class="wrap page-head">
+  <h1>{{ section.title | default(value=config.title) }}</h1>
+  {%- if section.description %}<p class="lead">{{ section.description }}</p>{% endif %}
+</section>
+{%- if section.content %}
+<div class="wrap prose">{{ section.content | safe }}</div>
+{%- endif %}
+{% endblock content %}

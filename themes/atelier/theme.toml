@@ -1,0 +1,15 @@
+name = "atelier"
+description = "Thème clair et sobre : papier, encre, terre cuite, quadrillage. Sans JavaScript, polices auto-hébergées."
+license = "MIT"
+homepage = "https://github.com/sicotjeanvivien/awsd"
+min_version = "0.19.0"
+
+[author]
+name = "Jean-Vivien Sicot"
+homepage = "https://awsd.fr"
+
+# Valeurs par défaut, surchargeables dans [extra] du config.toml du site.
+[extra]
+languages = []
+menu = []
+footer_menu = []
