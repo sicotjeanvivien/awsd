@@ -1,0 +1,6 @@
+# Zola
+public/
+
+# Windows (WSL)
+*:Zone.Identifier
+Thumbs.db
