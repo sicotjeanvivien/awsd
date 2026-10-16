@@ -4,6 +4,7 @@
 {% block title %}{{ trans(key="notfound_title", lang=lang) }} — {{ config.title }}{% endblock title %}
 {% block content %}
 <section class="wrap page-head notfound">
+  {%- include "partials/logo-large.html" %}
   <span class="label">{{ trans(key="notfound_label", lang=lang) | upper }}</span>
   {%- for code in config.extra.languages %}
   <div class="notfound__block" lang="{{ code }}">

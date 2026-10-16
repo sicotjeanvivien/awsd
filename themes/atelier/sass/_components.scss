@@ -52,6 +52,9 @@
 .brand {
   gap: 12px;
   &__name { font-family: var(--font-serif); font-size: 26px; }
+  &__logo { flex: none; }
+  &__logo-accent { stroke: var(--accent); }
+  &__logo-ink { stroke: var(--ink); }
 }
 
 .site-nav {

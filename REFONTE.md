@@ -198,6 +198,15 @@ background-size: 40px 40px;
 - **Pages légales** : sommaire latéral + sections séparées par des pointillés, listes `dl` (libellé mono / valeur).
 - **Pied de page** : « AWSD » serif + ligne freelance (« Pour une mission d'accompagnement technique : contact. »), navigation en 2 colonnes, © en mono.
 
+### Logo et favicon
+
+Fichiers prêts dans `design/identite/` (voir son `LISEZMOI.md`). Logo retenu : **« Tampon »**, un cachet circulaire incliné de −8° avec un A au centre.
+
+- En-tête : `logo-compact.svg` (~38 px) à gauche du mot « AWSD », intégré **en SVG inline** pour hériter des couleurs, comme dans les maquettes.
+- Favicon et icônes : copier `favicon.svg`, `favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512-maskable.png` et `site.webmanifest` à la racine de `static/` (ils remplacent `static/favicon/` et l'ancien manifest). Les balises `<head>` sont dans le `LISEZMOI.md`.
+- Open Graph : `og-default.png` remplace `static/images/og/og-default.png`.
+- Grands formats (À propos, 404…) : `logo-tampon.svg`. Bande sombre : variantes `-sombre`.
+
 ### Mise en page et accessibilité
 
 - Conteneur `max-width: 1260px`, padding latéral 40px (20px sous 760px). Grilles en `repeat(auto-fit, minmax(min(Xpx, 100%), 1fr))`.

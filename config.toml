@@ -183,8 +183,6 @@ author = "Jean-Vivien Sicot"
 email = "awsd.contact@gmail.com"
 copyright = "AWSD"
 og_image = "images/og/og-default.png"
-# Image de partage par langue (repli sur og_image).
-og_image_en = "images/og/og-default-en.png"
 github = "https://github.com/sicotjeanvivien"
 linkedin = "https://www.linkedin.com/in/jean-vivien-sicot-6a3523162/"
 

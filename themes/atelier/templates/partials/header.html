@@ -4,6 +4,7 @@
 {%- set cur = current_url | default(value="") -%}
 <header class="site-header wrap">
   <a class="brand" href="{{ home_url | safe }}">
+    {%- include "partials/logo.html" %}
     <span class="brand__name">{{ config.title }}</span>
     <span class="brand__tagline label">{{ trans(key="tagline", lang=lang) }}</span>
     <span class="visually-hidden">— {{ trans(key="home", lang=lang) }}</span>

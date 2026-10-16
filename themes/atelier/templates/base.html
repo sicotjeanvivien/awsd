@@ -65,11 +65,10 @@
 {%- if page.updated %}<meta property="article:modified_time" content="{{ page.updated }}">{% endif %}
 {%- endif %}
 <meta name="theme-color" content="#F1EADC">
-<link rel="icon" href="{{ get_url(path='favicon.ico') | safe }}" sizes="32x32">
-<link rel="icon" type="image/png" sizes="32x32" href="{{ get_url(path='favicon/favicon-32x32.png') | safe }}">
-<link rel="icon" type="image/png" sizes="16x16" href="{{ get_url(path='favicon/favicon-16x16.png') | safe }}">
-<link rel="apple-touch-icon" sizes="180x180" href="{{ get_url(path='favicon/apple-touch-icon.png') | safe }}">
-<link rel="manifest" href="{{ get_url(path='favicon/site.webmanifest') | safe }}">
+<link rel="icon" href="{{ get_url(path='favicon.ico') | safe }}" sizes="48x48">
+<link rel="icon" href="{{ get_url(path='favicon.svg') | safe }}" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{{ get_url(path='apple-touch-icon.png') | safe }}">
+<link rel="manifest" href="{{ get_url(path='site.webmanifest') | safe }}">
 <link rel="alternate" type="application/rss+xml" title="{{ config.title }} — {{ trans(key='rss', lang=lang) }}" href="{{ get_url(path='index.xml', lang=lang) | safe }}">
 <link rel="preload" href="{{ get_url(path='fonts/instrument-sans-latin-400-normal.woff2') | safe }}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{{ get_url(path='fonts/young-serif-latin-400-normal.woff2') | safe }}" as="font" type="font/woff2" crossorigin>

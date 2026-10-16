@@ -3,9 +3,12 @@
 {% block content %}
 {%- set x = page.extra -%}
 <section class="wrap page-head about-head">
-  <span class="label">{{ page.title | upper }}</span>
-  <h1 class="page-head__title">{{ x.heading }}</h1>
-  <p class="lead">{{ x.lead }}</p>
+  <div class="about-head__text">
+    <span class="label">{{ page.title | upper }}</span>
+    <h1 class="page-head__title">{{ x.heading }}</h1>
+    <p class="lead">{{ x.lead }}</p>
+  </div>
+  <img class="about-head__logo" src="{{ get_url(path='images/logo/logo-tampon.svg') | safe }}" width="200" height="200" alt="">
 </section>
 
 <section class="wrap about-intro">

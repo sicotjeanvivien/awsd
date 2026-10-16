@@ -53,9 +53,31 @@
 // --- À propos -------------------------------------------------------------------
 
 .about-head {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px 48px;
   padding-bottom: 88px;
   .page-head__title { max-width: 980px; }
   .lead { max-width: 680px; }
+
+  &__text {
+    flex: 1 1 560px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__logo {
+    flex: none;
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (max-width: $narrow) {
+  .about-head__logo { width: 120px; height: 120px; }
 }
 
 .about-intro { padding-bottom: 104px; }
@@ -346,6 +368,8 @@
 
 .notfound {
   gap: 40px;
+
+  &__logo { width: 140px; height: 140px; }
   padding-bottom: 112px;
 
   &__block {
