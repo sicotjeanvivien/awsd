@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{#- Zola ne génère qu'une page 404, dans la langue par défaut : le message est
+    donc donné dans chaque langue du site. -#}
+{% block title %}{{ trans(key="notfound_title", lang=lang) }} — {{ config.title }}{% endblock title %}
+{% block content %}
+<section class="wrap page-head notfound">
+  <span class="label">{{ trans(key="notfound_label", lang=lang) | upper }}</span>
+  {%- for code in config.extra.languages %}
+  <div class="notfound__block" lang="{{ code }}">
+    {%- if loop.first %}
+    <h1 class="page-head__title">{{ trans(key="notfound_title", lang=code) }}</h1>
+    {%- else %}
+    <h2>{{ trans(key="notfound_title", lang=code) }}</h2>
+    {%- endif %}
+    <p class="lead">{{ trans(key="notfound_text", lang=code) }}</p>
+    <div class="actions">
+      <a class="btn {% if loop.first %}btn--primary{% else %}btn--secondary{% endif %}" href="{{ get_url(path='@/_index.md', lang=code) | safe }}">{{ trans(key="back_home", lang=code) }}</a>
+    </div>
+  </div>
+  {%- endfor %}
+</section>
+{% endblock content %}

@@ -1,0 +1,358 @@
+// --- Éléments communs -------------------------------------------------------
+
+.stack-16 { display: flex; flex-direction: column; gap: 16px; }
+
+// Encart papier clair bordé.
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 32px;
+  background: var(--paper-light);
+  border: var(--line);
+}
+
+.kv--wide { grid-template-columns: 160px minmax(0, 1fr); gap: 10px 16px; }
+
+.strong-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-weight: 600;
+  align-self: flex-start;
+}
+
+// Liste de pastilles non cliquables.
+.tags {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  li {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 0 12px;
+    border: var(--line);
+    border-radius: 999px;
+    background: var(--paper-light);
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+}
+
+@media (max-width: $narrow) {
+  .kv, .kv--wide { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .kv dd { margin-bottom: 10px; }
+}
+
+// --- À propos -------------------------------------------------------------------
+
+.about-head {
+  padding-bottom: 88px;
+  .page-head__title { max-width: 980px; }
+  .lead { max-width: 680px; }
+}
+
+.about-intro { padding-bottom: 104px; }
+
+.founder {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+
+  &__photo {
+    flex: none;
+    width: 160px;
+    img {
+      display: block;
+      width: 160px;
+      height: 200px;
+      object-fit: cover;
+      border: var(--line);
+      background: var(--paper-dark);
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__name {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    line-height: 1.1;
+  }
+}
+
+@media (max-width: 520px) {
+  .founder { flex-direction: column; }
+}
+
+.band__inner--tight {
+  gap: 48px;
+  padding-top: 96px;
+  padding-bottom: 104px;
+  h2 { font-size: 52px; }
+}
+
+.band__item-title { font-size: 24px; }
+
+.timeline-section {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-top: 96px;
+  padding-bottom: 96px;
+  .sec-head h2 { font-size: 52px; }
+  .hand { font-size: 24px; transform: none; }
+}
+
+.timeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: var(--dash);
+
+  &__row {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr) minmax(0, 1fr);
+    gap: 24px;
+    align-items: baseline;
+    padding: 18px 0;
+    border-top: var(--dash);
+  }
+
+  &__role {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: $narrow) {
+  .timeline__row { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+}
+
+.about-skills {
+  padding-bottom: 104px;
+  &__title { font-size: 36px; }
+}
+
+.education {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: var(--dash);
+  li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 0;
+    border-top: var(--dash);
+  }
+}
+
+// --- Contact --------------------------------------------------------------------
+
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px;
+  align-items: flex-start;
+  padding-bottom: 96px;
+
+  &__main {
+    flex: 999 1 560px;
+    min-width: 0;
+    gap: 20px;
+    padding: 40px 36px 32px;
+  }
+
+  &__email {
+    font-family: var(--font-serif);
+    font-size: 34px;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+  }
+
+  &__hints {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 20px;
+    border-top: var(--dash);
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+      gap: 8px 24px;
+    }
+    li::before { content: "— "; }
+  }
+
+  &__side {
+    flex: 1 1 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    > .label { padding-bottom: 6px; }
+  }
+
+  &__note {
+    margin-top: 16px;
+    font-size: 15px;
+    color: var(--ink-2);
+  }
+}
+
+@media (max-width: $narrow) {
+  .contact__main { padding: 36px 22px 24px; }
+  .contact__email { font-size: 26px; }
+}
+
+.link-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: var(--dash);
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 56px;
+    border-top: var(--dash);
+    text-decoration: none;
+    font-weight: 600;
+  }
+}
+
+// --- Pages légales -----------------------------------------------------------------
+
+.legal-head {
+  gap: 16px;
+  &__title { font-size: 72px; }
+}
+
+@media (max-width: $narrow) {
+  .legal-head__title { font-size: 48px; }
+}
+
+.legal-facts {
+  margin: 0;
+  max-width: 900px;
+  padding-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+  gap: 12px;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px 18px;
+    background: var(--paper-light);
+    border: var(--line);
+    dd {
+      margin: 0;
+      font-family: var(--font-serif);
+      font-size: 22px;
+    }
+  }
+}
+
+.legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 56px;
+  align-items: flex-start;
+  padding-bottom: 104px;
+
+  &__side {
+    flex: 1 1 220px;
+    max-width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 14px;
+    border-top: var(--line);
+    > .label { padding-bottom: 6px; }
+    a {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+      color: var(--ink-2);
+      text-decoration: none;
+      line-height: 1.3;
+    }
+    a:hover { color: var(--accent); }
+  }
+
+  &__see-also {
+    color: var(--ink) !important;
+    font-weight: 600;
+  }
+
+  &__body {
+    flex: 999 1 560px;
+    min-width: 0;
+    max-width: 720px;
+
+    // Chaque titre ouvre une section séparée par des pointillés.
+    h2 {
+      font-size: 30px;
+      margin: 0 0 16px;
+      padding-top: 32px;
+      border-top: var(--dash);
+    }
+    > h2:first-child { padding-top: 0; border-top: 0; }
+    p, ul { margin: 0 0 12px; line-height: 1.7; }
+    ul { padding-left: 20px; }
+    * + h2 { margin-top: 20px; }
+
+    dl {
+      margin: 0 0 12px;
+      display: grid;
+      grid-template-columns: 200px minmax(0, 1fr);
+      gap: 10px 20px;
+    }
+    dt {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      padding-top: 3px;
+    }
+    dd { margin: 0; }
+  }
+}
+
+@media (max-width: $narrow) {
+  .legal__side { max-width: none; }
+  .legal__body dl { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .legal__body dd { margin-bottom: 10px; }
+}
+
+// --- 404 ---------------------------------------------------------------------------
+
+.notfound {
+  gap: 40px;
+  padding-bottom: 112px;
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    & + & { padding-top: 32px; border-top: var(--dash); }
+    h2 { font-size: 40px; }
+  }
+}

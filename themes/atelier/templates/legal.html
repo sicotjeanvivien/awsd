@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{#- Pages légales : sommaire latéral (généré depuis les titres ##), sections
+    séparées par des pointillés, listes <dl> libellé / valeur. -#}
+{% block content %}
+{%- set x = page.extra -%}
+<section class="wrap page-head legal-head">
+  <span class="label">
+    {%- if x.label %}{{ x.label | upper }}{% endif -%}
+    {%- if x.label and page.updated %} · {% endif -%}
+    {%- if page.updated %}{{ trans(key="updated_on", lang=lang) | upper }} {{ <ui.date_short d={page.updated} lang={lang} /> }}{% endif -%}
+  </span>
+  <h1 class="legal-head__title">{{ page.title }}</h1>
+  {%- if x.facts %}
+  <dl class="legal-facts">
+    {%- for f in x.facts %}
+    <div class="legal-facts__item"><dt class="label">{{ f.label | upper }}</dt><dd>{{ f.value }}</dd></div>
+    {%- endfor %}
+  </dl>
+  {%- endif %}
+</section>
+
+<div class="wrap legal">
+  {%- if page.toc or x.see_also %}
+  <nav class="legal__side" aria-label="{{ trans(key='sections', lang=lang) }}">
+    <span class="label">{{ trans(key="sections", lang=lang) | upper }}</span>
+    {%- for h in page.toc %}
+    <a href="{{ h.permalink | safe }}">{{ h.title }}</a>
+    {%- endfor %}
+    {%- if x.see_also %}
+    <a class="legal__see-also" href="{{ get_url(path=x.see_also.path, lang=lang) | safe }}">{{ x.see_also.label }} →</a>
+    {%- endif %}
+  </nav>
+  {%- endif %}
+  <div class="legal__body">
+    {{ page.content | safe }}
+  </div>
+</div>
+{% endblock content %}

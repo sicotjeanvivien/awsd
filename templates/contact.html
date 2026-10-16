@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{#- Page « Contact » d'AWSD : données dans content/contact*.md ([extra]),
+    adresse e-mail dans config.toml (extra.email). -#}
+{% block content %}
+{%- set x = page.extra -%}
+{%- set mailto = "mailto:" ~ config.extra.email ~ "?subject=" ~ x.email_subject | urlencode_strict -%}
+<section class="wrap page-head">
+  <span class="label">{{ page.title | upper }}</span>
+  <h1 class="page-head__title">{{ x.heading }}</h1>
+  <p class="lead">{{ x.lead }}</p>
+</section>
+
+<section class="wrap contact">
+  <div class="contact__main card">
+    {%- if x.stamp %}<span class="stamp stamp--production">{{ x.stamp }}</span>{% endif %}
+    <span class="label">{{ x.email_label | upper }}</span>
+    <a class="contact__email" href="{{ mailto | safe }}">{{ config.extra.email }}</a>
+    <div class="actions">
+      <a class="btn btn--primary" href="{{ mailto | safe }}">{{ x.email_button }}</a>
+    </div>
+    {%- if x.hints %}
+    <div class="contact__hints">
+      <span class="label">{{ x.hints_label | upper }}</span>
+      <ul>
+        {%- for h in x.hints %}<li>{{ h }}</li>{% endfor %}
+      </ul>
+    </div>
+    {%- endif %}
+  </div>
+
+  <aside class="contact__side">
+    <span class="label">{{ x.elsewhere_label | upper }}</span>
+    <ul class="link-list">
+      {%- for l in x.links %}
+      <li><a href="{{ l.url | safe }}">{{ l.label }} <span aria-hidden="true">↗</span></a></li>
+      {%- endfor %}
+    </ul>
+    {%- if x.privacy_note %}
+    <p class="contact__note">{{ x.privacy_note }} <a href="{{ get_url(path='@/politique-de-confidentialite.md', lang=lang) | safe }}">{{ x.privacy_link }}</a></p>
+    {%- endif %}
+  </aside>
+</section>
+{% endblock content %}

@@ -97,6 +97,12 @@ articles_on_blog = "sur le blog"
 no_articles = "Aucun pour l'instant"
 related_product = "Produit associé"
 related_note = "article lié à"
+sections = "Sections"
+updated_on = "Mise à jour le"
+notfound_label = "Erreur 404"
+notfound_title = "Page introuvable"
+notfound_text = "Cette adresse ne correspond à aucune page du site. Elle a peut-être été déplacée ou supprimée."
+back_home = "Retour à l'accueil"
 
 [languages.en.translations]
 language_name = "English"
@@ -156,6 +162,12 @@ articles_on_blog = "on the blog"
 no_articles = "None yet"
 related_product = "Related product"
 related_note = "post related to"
+sections = "Sections"
+updated_on = "Updated on"
+notfound_label = "Error 404"
+notfound_title = "Page not found"
+notfound_text = "This address does not match any page on the site. It may have been moved or removed."
+back_home = "Back to the home page"
 
 # ---------------------------------------------------------------------------
 # Paramètres du site, lus par le thème
@@ -164,6 +176,7 @@ related_note = "post related to"
 # Langues, dans l'ordre du sélecteur de l'en-tête.
 languages = ["fr", "en"]
 author = "Jean-Vivien Sicot"
+email = "jeanvivien.sicot@lapiscine.pro"
 copyright = "AWSD"
 og_image = "images/og/og-default.png"
 github = "https://github.com/sicotjeanvivien"
