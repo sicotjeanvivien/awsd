@@ -69,6 +69,8 @@
     gap: 24px;
   }
 
+  > picture { flex: none; }
+
   &__logo {
     flex: none;
     width: 200px;

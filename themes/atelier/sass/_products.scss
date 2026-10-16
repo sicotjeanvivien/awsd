@@ -155,9 +155,9 @@
 }
 
 .btn--light {
-  background: var(--paper);
-  border-color: var(--paper);
-  color: var(--ink);
+  background: var(--on-dark);
+  border-color: var(--on-dark);
+  color: var(--band);
   &:hover { background: var(--paper-light); color: var(--accent); }
 }
 
@@ -328,7 +328,7 @@
 .product-arch {
   border-top: var(--line);
   border-bottom: var(--line);
-  background: rgba(250, 245, 234, .6);
+  background: var(--paper-veil);
 
   &__inner {
     display: flex;
@@ -421,5 +421,5 @@
 }
 
 // La bande sombre colore ses liens en clair : le bouton clair garde l'encre.
-.band .btn--light { color: var(--ink); }
+.band .btn--light { color: var(--band); }
 .band .btn--light:hover { color: var(--accent); }

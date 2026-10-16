@@ -1,6 +1,7 @@
-// Toutes les couleurs passent par ces variables : un mode sombre se limitera
-// à les redéfinir (non implémenté pour l'instant).
+// Toutes les couleurs passent par ces variables. Le mode sombre (« papier de
+// nuit », maquette AccueilSombre) les redéfinit selon le réglage du système.
 :root {
+  color-scheme: light dark;
   --paper: #F1EADC;          // fond de page
   --paper-light: #FAF5EA;    // cartes, encarts
   --paper-dark: #EDE4D2;     // emplacements d'image
@@ -13,6 +14,8 @@
   --on-dark-2: #CBBFAE;      // texte secondaire sur bande sombre
   --accent-on-dark: #E59C7E;
   --rule-on-dark: #8C8174;   // pointillés sur bande sombre
+  --band: #2A2622;           // fond des bandes sombres et des blocs de code
+  --paper-veil: rgba(250, 245, 234, .6); // fond voilé (architecture produit)
   --grid-line: rgba(42, 38, 34, .055);
 
   --font-serif: "Young Serif", Georgia, serif;
@@ -24,6 +27,28 @@
   --gutter: 40px;
   --line: 1.5px solid var(--ink);
   --dash: 1px dashed var(--ink-3);
+}
+
+// Papier de nuit : brun très sombre, encre crème, terre cuite éclaircie.
+// Les bandes passent sous la page (plus sombres) au lieu de s'inverser.
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #1F1A16;
+    --paper-light: #28221D;
+    --paper-dark: #322A24;
+    --code-bg: #352D26;
+    --ink: #ECE4D4;
+    --ink-2: #B9AD9C;
+    --ink-3: #9C9080;
+    --accent: #D9805E;
+    --on-dark: #ECE4D4;
+    --on-dark-2: #CBBFAE;
+    --accent-on-dark: #E59C7E;
+    --rule-on-dark: #6E6458;
+    --band: #14110E;
+    --paper-veil: rgba(40, 34, 29, .6);
+    --grid-line: rgba(236, 228, 212, .045);
+  }
 }
 
 // Point de rupture unique de la maquette.

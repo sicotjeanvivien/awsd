@@ -8,7 +8,10 @@
     <h1 class="page-head__title">{{ x.heading }}</h1>
     <p class="lead">{{ x.lead }}</p>
   </div>
-  <img class="about-head__logo" src="{{ get_url(path='images/logo/logo-tampon.svg') | safe }}" width="200" height="200" alt="">
+  <picture>
+    <source srcset="{{ get_url(path='images/logo/logo-tampon-sombre.svg') | safe }}" media="(prefers-color-scheme: dark)">
+    <img class="about-head__logo" src="{{ get_url(path='images/logo/logo-tampon.svg') | safe }}" width="200" height="200" alt="">
+  </picture>
 </section>
 
 <section class="wrap about-intro">
