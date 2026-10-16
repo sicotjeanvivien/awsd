@@ -176,7 +176,7 @@ back_home = "Back to the home page"
 # Langues, dans l'ordre du sélecteur de l'en-tête.
 languages = ["fr", "en"]
 author = "Jean-Vivien Sicot"
-email = "jeanvivien.sicot@lapiscine.pro"
+email = "awsd.contact@gmail.com"
 copyright = "AWSD"
 og_image = "images/og/og-default.png"
 github = "https://github.com/sicotjeanvivien"
