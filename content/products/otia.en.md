@@ -10,6 +10,7 @@ status_label = "In development"
 release = "[To be defined]"
 url = ""
 platform = "Android"
+app_category = "LifestyleApplication"   # schema.org
 kicker = ["React Native", "Android"]
 stack = ["React Native"]
 access = "[To be defined]"

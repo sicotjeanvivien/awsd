@@ -186,6 +186,10 @@ og_image = "images/og/og-default.png"
 github = "https://github.com/sicotjeanvivien"
 linkedin = "https://www.linkedin.com/in/jean-vivien-sicot-6a3523162/"
 
+# Société, pour les données structurées schema.org (partials/jsonld.html).
+# Le logo doit être carré, en PNG, d'au moins 112 px (consigne Google).
+organization = { name = "AWSD", alternate_name = "Artisan Web Software Development", logo = "icon-512-maskable.png", locality = "Paris", country = "FR" }
+
 # Menu principal (en-tête). `path` = fichier de contenu, résolu dans la langue courante.
 menu = [
     { key = "nav_products", path = "@/products/_index.md" },

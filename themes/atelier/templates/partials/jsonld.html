@@ -1,0 +1,84 @@
+{#- Données structurées schema.org (JSON-LD), incluses dans le <head> de base.html.
+    Toujours : la société (config.extra.organization), son fondateur
+    (config.extra.author) et le site. Selon la page : BlogPosting pour un
+    article, SoftwareApplication pour une fiche produit, et le fil d'Ariane.
+    Utilise og_url, calculé dans base.html. Chaînes passées par json_encode. -#}
+{%- set org = config.extra.organization | default(value={}) -%}
+{%- set home = config.base_url | trim_end(pat="/") ~ "/" -%}
+{%- set org_id = home ~ "#organization" -%}
+{%- set person_id = home ~ "#founder" -%}
+{%- set website_id = home ~ "#website" -%}
+{%- set about = get_page(path="about-me.md", lang=lang, required=false) -%}
+{%- set in_product = page and page.relative_path is starting_with(pat="products/") -%}
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@graph": [
+  {"@type": "Organization", "@id": {{ org_id | json_encode | safe }},
+   "name": {{ org.name | default(value=config.title) | json_encode | safe }},
+   {%- if org.alternate_name %} "alternateName": {{ org.alternate_name | json_encode | safe }},{% endif %}
+   "url": {{ home | json_encode | safe }},
+   {%- if org.logo %} "logo": {{ get_url(path=org.logo) | json_encode | safe }},{% endif %}
+   {%- if config.extra.email %} "email": {{ config.extra.email | json_encode | safe }},{% endif %}
+   {%- if org.locality %} "address": {"@type": "PostalAddress", "addressLocality": {{ org.locality | json_encode | safe }}, "addressCountry": {{ org.country | default(value="") | json_encode | safe }}},{% endif %}
+   "description": {{ config.description | json_encode | safe }},
+   "founder": {"@id": {{ person_id | json_encode | safe }}}},
+  {"@type": "Person", "@id": {{ person_id | json_encode | safe }},
+   "name": {{ config.extra.author | json_encode | safe }},
+   {%- if about %} "url": {{ about.permalink | json_encode | safe }},{% endif %}
+   "sameAs": [{% if config.extra.github %}{{ config.extra.github | json_encode | safe }}{% endif %}{% if config.extra.github and config.extra.linkedin %}, {% endif %}{% if config.extra.linkedin %}{{ config.extra.linkedin | json_encode | safe }}{% endif %}],
+   "worksFor": {"@id": {{ org_id | json_encode | safe }}}},
+  {"@type": "WebSite", "@id": {{ website_id | json_encode | safe }},
+   "url": {{ home | json_encode | safe }},
+   "name": {{ config.title | json_encode | safe }},
+   "inLanguage": {{ config.extra.languages | default(value=[lang]) | json_encode | safe }},
+   "publisher": {"@id": {{ org_id | json_encode | safe }}}}
+
+{%- if page and page.date %}
+  {%- set x = page.extra %}
+  ,{"@type": "BlogPosting", "@id": {{ (page.permalink ~ "#article") | json_encode | safe }},
+   "headline": {{ page.title | json_encode | safe }},
+   "description": {{ meta_description | json_encode | safe }},
+   "url": {{ page.permalink | json_encode | safe }},
+   "mainEntityOfPage": {{ page.permalink | json_encode | safe }},
+   "inLanguage": {{ lang | json_encode | safe }},
+   "datePublished": {{ page.date | json_encode | safe }},
+   "dateModified": {{ page.updated | default(value=page.date) | json_encode | safe }},
+   {%- if og_url is defined %} "image": {{ og_url | json_encode | safe }},{% endif %}
+   {%- if page.taxonomies.tags %} "keywords": {{ page.taxonomies.tags | json_encode | safe }},{% endif %}
+   {%- if page.taxonomies.categories %} "articleSection": {{ page.taxonomies.categories | json_encode | safe }},{% endif %}
+   "wordCount": {{ page.word_count }},
+   {%- if not x.author or x.author == config.extra.author %}
+   "author": {"@id": {{ person_id | json_encode | safe }}},
+   {%- else %}
+   "author": {"@type": "Person", "name": {{ x.author | json_encode | safe }}},
+   {%- endif %}
+   "publisher": {"@id": {{ org_id | json_encode | safe }}},
+   "isPartOf": {"@id": {{ website_id | json_encode | safe }}}}
+{%- endif %}
+
+{%- if in_product %}
+  {%- set x = page.extra %}
+  ,{"@type": "SoftwareApplication", "@id": {{ (page.permalink ~ "#software") | json_encode | safe }},
+   "name": {{ page.title | json_encode | safe }},
+   "description": {{ x.summary | default(value=meta_description) | json_encode | safe }},
+   "url": {% if x.url %}{{ x.url | json_encode | safe }}{% else %}{{ page.permalink | json_encode | safe }}{% endif %},
+   {%- if x.app_category %} "applicationCategory": {{ x.app_category | json_encode | safe }},{% endif %}
+   {%- if x.platform %} "operatingSystem": {{ x.platform | json_encode | safe }},{% endif %}
+   {%- if og_url is defined %} "image": {{ og_url | json_encode | safe }},{% endif %}
+   {%- if x.price is defined and x.price is not none %} "offers": {"@type": "Offer", "price": {{ x.price | json_encode | safe }}, "priceCurrency": {{ x.currency | default(value="EUR") | json_encode | safe }}},{% endif %}
+   "inLanguage": {{ lang | json_encode | safe }},
+   "author": {"@id": {{ org_id | json_encode | safe }}},
+   "publisher": {"@id": {{ org_id | json_encode | safe }}}}
+{%- endif %}
+
+{#- Fil d'Ariane : accueil > section > page (articles et fiches produit). -#}
+{%- if page and page.ancestors | length > 1 %}
+  {%- set parent = get_section(path=page.ancestors | last, metadata_only=true) %}
+  {%- set home_section = get_section(path=page.ancestors | first, metadata_only=true) %}
+  ,{"@type": "BreadcrumbList", "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": {{ config.title | json_encode | safe }}, "item": {{ home_section.permalink | json_encode | safe }}},
+    {"@type": "ListItem", "position": 2, "name": {{ parent.title | json_encode | safe }}, "item": {{ parent.permalink | json_encode | safe }}},
+    {"@type": "ListItem", "position": 3, "name": {{ page.title | json_encode | safe }}, "item": {{ page.permalink | json_encode | safe }}}
+  ]}
+{%- endif %}
+]}
+</script>
