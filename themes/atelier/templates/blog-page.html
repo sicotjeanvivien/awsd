@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
 {%- set blog = get_section(path="blog/_index.md", lang=lang) -%}
+{#- Produit associé : le premier produit dont le terme (extra.blog_term) figure
+    dans la taxonomie correspondante de l'article. -#}
+{%- set_global related = "" -%}
+{%- set products = get_section(path="products/_index.md", lang=lang, required=false) -%}
+{%- if products -%}
+  {%- for p in products.pages -%}
+    {%- if not related and p.extra.blog_term -%}
+      {%- set tax = p.extra.blog_taxonomy | default(value="categories") -%}
+      {%- if page.taxonomies[tax] and p.extra.blog_term in page.taxonomies[tax] %}{% set_global related = p %}{% endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
 <article class="article">
   <header class="wrap article__head">
     <a class="label back-link" href="{{ blog.permalink | safe }}">← {{ blog.title | upper }}</a>
@@ -46,12 +58,27 @@
         </div>
       </div>
       {%- endif %}
-      {% block side_extra %}{% endblock side_extra %}
+      {%- if related %}
+      <span class="hand" aria-hidden="true">{{ trans(key="related_note", lang=lang) }} {{ related.title }} ↓</span>
+      {%- endif %}
     </aside>
 
     <div class="article__body prose">
       {{ page.content | safe }}
-      {% block body_extra %}{% endblock body_extra %}
+      {%- if related %}
+      <aside class="related" aria-label="{{ trans(key='related_product', lang=lang) }}">
+        {{ <ui.stamp status={related.extra.status} label={related.extra.status_label} /> }}
+        <span class="label">{{ trans(key="related_product", lang=lang) | upper }}</span>
+        <span class="related__title">{{ related.title }}</span>
+        <p class="muted">{{ related.description }}</p>
+        <div class="related__links">
+          <a href="{{ related.permalink | safe }}">{{ trans(key="product_sheet", lang=lang) }} →</a>
+          {%- if related.extra.url %}
+          {{ <ui.external url={related.extra.url} label={related.extra.url | regex_replace(pattern="^https?://|/$", rep="")} /> }}
+          {%- endif %}
+        </div>
+      </aside>
+      {%- endif %}
     </div>
   </div>
 </article>

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+{%- set x = section.extra -%}
+<section class="wrap page-head">
+  <span class="label">{{ section.title | upper }}</span>
+  <h1 class="page-head__title">{{ x.heading | default(value=section.title) }}</h1>
+  <div class="page-head__row">
+    {%- if section.description %}<p class="lead">{{ section.description }}</p>{% endif %}
+    <span class="hand">{{ section.pages | length }} {{ trans(key="products_count", lang=lang) }}{% if x.upcoming_label %} · 1 {{ trans(key="upcoming", lang=lang) }}{% endif %}</span>
+  </div>
+</section>
+
+<section class="wrap product-list">
+  {%- for p in section.pages %}
+  {%- set px = p.extra %}
+  <article class="product-row">
+    {{ <ui.stamp status={px.status} label={px.status_label} /> }}
+    <div class="product-row__main">
+      <span class="label">{{ <ui.num n={loop.index} /> }} —
+        {%- if px.since %} {{ trans(key="since", lang=lang) | upper }} {{ px.since | upper }}
+        {%- elif px.release %} {{ trans(key="release", lang=lang) | upper }} {{ px.release | upper }}{% endif %}</span>
+      <h2>{{ p.title }}</h2>
+      <p class="lead">{% if px.summary %}{{ px.summary }}{% else %}{{ p.description }}{% endif %}</p>
+      <div class="actions product-row__actions">
+        <a class="btn btn--primary" href="{{ p.permalink | safe }}">{{ trans(key="view_product", lang=lang) }}</a>
+        {%- if px.url %}
+        {{ <ui.external url={px.url} label={px.url | regex_replace(pattern="^https?://|/$", rep="")} class="btn btn--secondary" /> }}
+        {%- endif %}
+      </div>
+    </div>
+    <div class="product-row__side">
+      {%- if px.flow %}{{ <ui.flow steps={px.flow} caption={px.flow_caption | default(value="")} /> }}{% endif %}
+      <dl class="kv">
+        {%- if px.platform %}<dt>{{ trans(key="platform", lang=lang) | upper }}</dt><dd>{{ px.platform }}</dd>{% endif %}
+        {%- if px.stack %}<dt>{{ trans(key="stack", lang=lang) | upper }}</dt><dd>{{ px.stack | join(sep=", ") }}</dd>{% endif %}
+        {%- if px.access %}<dt>{{ trans(key="access", lang=lang) | upper }}</dt><dd>{{ px.access }}</dd>{% endif %}
+        <dt>{{ trans(key="blog_articles", lang=lang) | upper }}</dt>
+        <dd>
+          {%- set n = 0 -%}
+          {%- if px.blog_term -%}
+            {%- set term = get_taxonomy_term(kind=px.blog_taxonomy | default(value="categories"), term=px.blog_term, lang=lang, required=false) -%}
+            {%- if term %}{% set n = term.pages | length %}{% endif -%}
+          {%- endif -%}
+          {%- if n > 0 %}{{ n }} {{ trans(key="articles", lang=lang) }} {{ trans(key="articles_on_blog", lang=lang) }}{% else %}{{ trans(key="no_articles", lang=lang) }}{% endif -%}
+        </dd>
+      </dl>
+    </div>
+  </article>
+  {%- endfor %}
+
+  {%- if x.upcoming_label %}
+  <div class="upcoming">
+    <span class="label">{{ <ui.num n={section.pages | length + 1} /> }} — {{ x.upcoming_label | upper }}</span>
+    <span class="hand">{{ trans(key="upcoming", lang=lang) }}</span>
+  </div>
+  {%- endif %}
+</section>
+{% endblock content %}

@@ -80,3 +80,53 @@
 {%- endif %}
 {%- endfor %}
 {%- endcomponent ui.post_list %}
+
+{#- Numéro sur deux chiffres : 1 -> « 01 ». -#}
+{% component ui.num(n: integer) -%}
+  {% if n < 10 %}0{% endif %}{{ n }}
+{%- endcomponent ui.num %}
+
+{#- Tampon de statut d'un produit (terre cuite si en production). -#}
+{% component ui.stamp(status: string, label: string, inline: bool = false) -%}
+<span class="stamp stamp--{{ status }}{% if inline %} stamp--inline{% endif %}">{{ label }}</span>
+{%- endcomponent ui.stamp %}
+
+{#- Schéma de flux : nœuds reliés par des flèches, légende manuscrite. -#}
+{% component ui.flow(steps: array, caption: string = "") -%}
+<figure class="flow">
+  <div class="flow__nodes">
+    {%- for s in steps %}
+    {%- if not loop.first %}<span class="flow__arrow" aria-hidden="true"></span>{% endif %}
+    <span class="flow__node">{{ s }}</span>
+    {%- endfor %}
+  </div>
+  {%- if caption %}
+  <figcaption class="hand">{{ caption }}</figcaption>
+  {%- endif %}
+</figure>
+{%- endcomponent ui.flow %}
+
+{#- Lien externe avec flèche. -#}
+{% component ui.external(url: string, label: string, class: string = "") -%}
+<a{% if class %} class="{{ class }}"{% endif %} href="{{ url | safe }}">{{ label }} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+{%- endcomponent ui.external %}
+
+{#- Carte produit de l'accueil (« planche »). -#}
+{% component ui.product_card(p, index: integer, lang: string) -%}
+{%- set x = p.extra -%}
+<article class="planche">
+  {{ <ui.stamp status={x.status} label={x.status_label} /> }}
+  <span class="label rule-line"><span>{{ <ui.num n={index} /> }}</span><span class="rule-line__dash"></span><span>{% if x.kicker %}{{ x.kicker | join(sep=" · ") | upper }}{% endif %}</span></span>
+  <h3 class="planche__title">{{ p.title }}</h3>
+  <p class="muted">{% if x.summary %}{{ x.summary }}{% else %}{{ p.description }}{% endif %}</p>
+  {%- if x.flow %}{{ <ui.flow steps={x.flow} caption={x.flow_caption | default(value="")} /> }}{% endif %}
+  <div class="planche__links">
+    <a href="{{ p.permalink | safe }}">{{ trans(key="product_sheet", lang=lang) }} →</a>
+    {%- if x.url %}
+    {{ <ui.external url={x.url} label={x.url | regex_replace(pattern="^https?://|/$", rep="")} /> }}
+    {%- else %}
+    <span class="label">{{ trans(key="link_soon", lang=lang) | upper }}</span>
+    {%- endif %}
+  </div>
+</article>
+{%- endcomponent ui.product_card %}

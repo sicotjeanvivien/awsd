@@ -14,9 +14,27 @@
     <span class="hand hand--large" aria-hidden="true">{{ x.hero_note }}</span>
   </div>
   <div class="actions">
-    <a class="btn btn--primary" href="{{ products.permalink | safe }}">{{ x.cta_products }}</a>
+    <a class="btn btn--primary" href="#produits">{{ x.cta_products }}</a>
     <a class="btn btn--secondary" href="{{ blog.permalink | safe }}">{{ x.cta_blog }}</a>
   </div>
+</section>
+
+<section id="produits" class="wrap home-products" aria-labelledby="home-products-title">
+  <div class="sec-head">
+    <h2 id="home-products-title">{{ x.products_title }}</h2>
+    <a class="label sec-head__link" href="{{ products.permalink | safe }}">{{ x.products_all | upper }} →</a>
+  </div>
+  <div class="grid-2 planches">
+    {%- for p in products.pages %}
+    {{ <ui.product_card p={p} index={loop.index} lang={lang} /> }}
+    {%- endfor %}
+  </div>
+  {%- if products.extra.upcoming_label %}
+  <div class="upcoming">
+    <span class="label">{{ <ui.num n={products.pages | length + 1} /> }} — {{ products.extra.upcoming_label | upper }}</span>
+    <span class="hand">{{ trans(key="upcoming", lang=lang) }}</span>
+  </div>
+  {%- endif %}
 </section>
 
 <section class="band">

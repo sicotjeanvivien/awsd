@@ -1,0 +1,425 @@
+// --- Éléments communs -------------------------------------------------------
+
+.label--accent { color: var(--accent); }
+.label--ink { color: var(--ink); }
+
+// En-tête de section : titre à gauche, étiquette ou lien à droite.
+.sec-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px 16px;
+  padding-bottom: 16px;
+  border-bottom: var(--line);
+  h2 { font-size: 48px; line-height: 1.05; }
+
+  &--plain { border-bottom: 0; padding-bottom: 0; align-items: center; }
+  .hand { transform: rotate(-3deg); }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--ink);
+  }
+}
+
+// Tampon de statut.
+.stamp {
+  position: absolute;
+  top: -18px;
+  right: 24px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 14px;
+  background: var(--paper-light);
+  border: 2px solid currentColor;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transform: rotate(-2deg);
+
+  &--production { color: var(--accent); transform: rotate(3deg); }
+
+  &--inline {
+    position: static;
+    min-height: 36px;
+    background: transparent;
+  }
+}
+
+// Schéma de flux : nœuds bordés reliés par des flèches.
+.flow {
+  margin: 4px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px 18px;
+  border: var(--dash);
+
+  &__nodes {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__node {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0 12px;
+    border: var(--line);
+    background: var(--paper);
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  &__arrow {
+    flex: 1;
+    min-width: 20px;
+    height: 0;
+    border-top: 1.5px solid var(--ink-3);
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      right: -1px;
+      top: -5px;
+      border: 4.5px solid transparent;
+      border-left: 7px solid var(--ink-3);
+      border-right: 0;
+    }
+  }
+
+  .hand { font-size: 22px; align-self: flex-start; }
+}
+
+// Schéma seul sous les chiffres clés : pas d'étirement sur toute la page.
+.product-facts .flow { max-width: 720px; }
+
+// Petit écran : le schéma passe en colonne, flèches vers le bas.
+@media (max-width: $narrow) {
+  .flow__nodes {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .flow__arrow {
+    flex: none;
+    min-width: 0;
+    width: 0;
+    height: 18px;
+    margin-left: 20px;
+    border-top: 0;
+    border-left: 1.5px solid var(--ink-3);
+    &::after {
+      right: auto;
+      top: auto;
+      bottom: -1px;
+      left: -5.25px;
+      border: 4.5px solid transparent;
+      border-top: 7px solid var(--ink-3);
+      border-bottom: 0;
+    }
+  }
+}
+
+.upcoming {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 22px 28px;
+  border: 1.5px dashed var(--ink-3);
+  .hand { font-size: 24px; }
+}
+
+// Liens d'une carte : hauteur tactile, gras.
+.planche__links, .related__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+  a, .label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+  }
+  a { font-weight: 600; }
+}
+
+.btn--light {
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--ink);
+  &:hover { background: var(--paper-light); color: var(--accent); }
+}
+
+// --- Accueil : planches produits ---------------------------------------------
+
+.home-products {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  padding-top: 40px;
+  padding-bottom: 112px;
+  .sec-head { align-items: flex-end; }
+  .sec-head h2 { font-size: 56px; line-height: 1; }
+}
+
+.planche {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 36px 32px 28px;
+  background: var(--paper-light);
+  border: var(--line);
+
+  &__title { font-size: 48px; line-height: 1; }
+  .planche__links { flex-direction: column; gap: 0; }
+}
+
+// --- Liste des produits -------------------------------------------------------
+
+.product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  padding-top: 16px;
+  padding-bottom: 112px;
+}
+
+.product-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr));
+  background: var(--paper-light);
+  border: var(--line);
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 40px 36px 32px;
+    border-right: var(--line);
+    h2 { font-size: 56px; line-height: 1; }
+    .lead { font-size: 19px; }
+  }
+
+  &__actions { margin-top: auto; padding-top: 12px; gap: 14px; }
+
+  &__side {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 40px 36px 32px;
+    .flow { margin: 0; padding: 20px 16px; }
+  }
+}
+
+@media (max-width: 1000px) {
+  .product-row__main { border-right: 0; border-bottom: var(--line); }
+}
+
+.kv {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 8px 16px;
+  dt {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: .05em;
+    color: var(--ink-3);
+    padding-top: 3px;
+  }
+  dd { margin: 0; }
+}
+
+// --- Fiche produit ------------------------------------------------------------
+
+.product-head {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding-top: 48px;
+  padding-bottom: 64px;
+
+  &__title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    h1 { font-size: 104px; line-height: 1; letter-spacing: -.025em; }
+  }
+
+  .lead { font-size: 22px; max-width: 680px; }
+  .actions { gap: 14px; }
+}
+
+@media (max-width: $narrow) {
+  .product-head__title h1 { font-size: 56px; }
+  .product-row__main, .product-row__side { padding: 32px 22px 24px; }
+  .product-row__main h2 { font-size: 44px; }
+}
+
+.product-facts {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-bottom: 96px;
+}
+
+.facts {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  border: var(--line);
+  background: var(--paper-light);
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 22px;
+  border-right: var(--dash);
+  &:last-child { border-right: 0; }
+  dd {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 22px;
+    line-height: 1.2;
+  }
+}
+
+@media (max-width: $narrow) {
+  .fact { border-right: 0; border-bottom: var(--dash); }
+  .fact:last-child { border-bottom: 0; }
+}
+
+.product-features {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-bottom: 104px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 32px;
+}
+
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  h3 { font-size: 26px; }
+}
+
+.product-arch {
+  border-top: var(--line);
+  border-bottom: var(--line);
+  background: rgba(250, 245, 234, .6);
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-top: 96px;
+    padding-bottom: 104px;
+  }
+
+  &__stack {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 20px;
+    padding-top: 20px;
+    border-top: var(--dash);
+  }
+}
+
+.pipeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+  gap: 20px;
+
+  &__step {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 22px 20px;
+    background: var(--paper-light);
+    border: var(--line);
+    p { font-size: 15px; }
+  }
+}
+
+.product-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-top: 96px;
+  padding-bottom: 104px;
+}
+
+.post-card--plain {
+  border-top: 0;
+  padding: 24px 0;
+  gap: 10px;
+  h3 { font-size: 28px; }
+}
+
+// Appel final sur bande sombre.
+.band__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  .stack-10 { max-width: 640px; }
+}
+
+.band__cta-title { font-size: 44px; line-height: 1.05; }
+.band__muted { color: var(--on-dark-2); }
+
+// --- Article : encart « Produit associé » ------------------------------------
+
+.related {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 64px !important;
+  padding: 28px 28px 24px;
+  background: var(--paper-light);
+  border: var(--line);
+  font-size: 16px;
+  line-height: 1.55;
+
+  .stamp { top: -16px; right: 20px; min-height: 30px; padding: 0 12px; font-size: 11px; }
+
+  &__title {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    line-height: 1;
+  }
+}
+
+// La bande sombre colore ses liens en clair : le bouton clair garde l'encre.
+.band .btn--light { color: var(--ink); }
+.band .btn--light:hover { color: var(--accent); }

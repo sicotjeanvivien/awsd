@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{#- Fiche produit. Chaque bloc ne s'affiche que si ses données existent. -#}
+{% block content %}
+{%- set x = page.extra -%}
+{%- set products = get_section(path="products/_index.md", lang=lang) -%}
+{%- if x.url %}{% set domain = x.url | regex_replace(pattern="^https?://|/$", rep="") %}{% endif -%}
+
+<section class="wrap product-head">
+  <a class="label back-link" href="{{ products.permalink | safe }}">← {{ products.title | upper }}</a>
+  <div class="product-head__title">
+    <h1>{{ page.title }}</h1>
+    {{ <ui.stamp status={x.status} label={x.status_label} inline={true} /> }}
+  </div>
+  {%- if page.description %}<p class="lead">{{ page.description }}</p>{% endif %}
+  {%- if x.url or x.source %}
+  <div class="actions">
+    {%- if x.url %}{{ <ui.external url={x.url} label={trans(key="open_link", lang=lang) ~ " " ~ domain} class="btn btn--primary" /> }}{% endif %}
+    {%- if x.source %}{{ <ui.external url={x.source} label={trans(key="source_code", lang=lang)} class="btn btn--secondary" /> }}{% endif %}
+  </div>
+  {%- endif %}
+</section>
+
+{#- Chiffres clés : ceux de la fiche, sinon plateforme / stack / accès / sortie. -#}
+{%- if x.facts or x.platform or x.stack or x.access or x.release %}
+<section class="wrap product-facts">
+  <dl class="facts">
+    {%- if x.facts %}
+    {%- for f in x.facts %}
+    <div class="fact"><dt class="label">{{ f.label | upper }}</dt><dd>{{ f.value }}</dd></div>
+    {%- endfor %}
+    {%- else %}
+    {%- if x.platform %}<div class="fact"><dt class="label">{{ trans(key="platform", lang=lang) | upper }}</dt><dd>{{ x.platform }}</dd></div>{% endif %}
+    {%- if x.stack %}<div class="fact"><dt class="label">{{ trans(key="stack", lang=lang) | upper }}</dt><dd>{{ x.stack | join(sep=", ") }}</dd></div>{% endif %}
+    {%- if x.access %}<div class="fact"><dt class="label">{{ trans(key="access", lang=lang) | upper }}</dt><dd>{{ x.access }}</dd></div>{% endif %}
+    {%- if x.release %}<div class="fact"><dt class="label">{{ trans(key="release", lang=lang) | upper }}</dt><dd>{{ x.release }}</dd></div>{% endif %}
+    {%- endif %}
+  </dl>
+  {%- if x.flow and not x.pipeline %}
+  {{ <ui.flow steps={x.flow} caption={x.flow_caption | default(value="")} /> }}
+  {%- endif %}
+</section>
+{%- endif %}
+
+{%- if x.features %}
+<section class="wrap product-features">
+  <div class="sec-head">
+    <h2>{{ x.features_title | default(value=trans(key="features", lang=lang)) }}</h2>
+    <span class="label">{{ trans(key="features", lang=lang) | upper }}</span>
+  </div>
+  <div class="grid-4">
+    {%- for f in x.features %}
+    <div class="feature-item">
+      <span class="label label--accent">{{ <ui.num n={loop.index} /> }}</span>
+      <h3>{{ f.title }}</h3>
+      <p class="muted">{{ f.text }}</p>
+    </div>
+    {%- endfor %}
+  </div>
+</section>
+{%- endif %}
+
+{%- if x.pipeline %}
+<section class="product-arch">
+  <div class="wrap product-arch__inner">
+    <div class="sec-head sec-head--plain">
+      <div class="stack-10">
+        <span class="label">{{ trans(key="architecture", lang=lang) | upper }}</span>
+        {%- if x.pipeline_title %}<h2>{{ x.pipeline_title }}</h2>{% endif %}
+      </div>
+      {%- if x.pipeline_note %}<span class="hand">{{ x.pipeline_note }}</span>{% endif %}
+    </div>
+    <ol class="pipeline">
+      {%- for s in x.pipeline %}
+      <li class="pipeline__step">
+        <span class="label label--accent">{{ <ui.num n={loop.index} /> }} · {{ s.step | upper }}</span>
+        <p class="muted">{{ s.text }}</p>
+      </li>
+      {%- endfor %}
+    </ol>
+    {%- if x.stack %}
+    <p class="product-arch__stack">
+      <span class="label">{{ trans(key="stack", lang=lang) | upper }}</span>
+      <span class="label label--ink">{{ x.stack | join(sep=" · ") }}{% if x.crates %} · {{ x.crates | join(sep=" · ") }}{% endif %}</span>
+    </p>
+    {%- endif %}
+  </div>
+</section>
+{%- endif %}
+
+{%- if x.blog_term %}
+{%- set term = get_taxonomy_term(kind=x.blog_taxonomy | default(value="categories"), term=x.blog_term, lang=lang, required=false) %}
+{%- if term and term.pages %}
+{%- set blog = get_section(path="blog/_index.md", lang=lang) %}
+<section class="wrap product-posts">
+  <div class="sec-head">
+    <h2>{{ trans(key="on_the_blog", lang=lang) }}</h2>
+    <a class="label sec-head__link" href="{{ blog.permalink | safe }}">{{ trans(key="all_posts", lang=lang) | upper }} →</a>
+  </div>
+  <div class="grid-2 post-cards">
+    {%- for p in term.pages[:4] %}
+    <a class="post-card post-card--plain" href="{{ p.permalink | safe }}">
+      <span class="label">{{ <ui.date_long d={p.date} lang={lang} /> }} · {{ p.reading_time }} {{ trans(key="minutes", lang=lang) | upper }}</span>
+      <h3>{{ p.title }}</h3>
+      <p class="muted">{{ <ui.summary p={p} /> }}</p>
+    </a>
+    {%- endfor %}
+  </div>
+</section>
+{%- endif %}
+{%- endif %}
+
+{%- if x.cta_title and x.url %}
+<section class="band">
+  <div class="wrap band__cta">
+    <div class="stack-10">
+      <h2 class="band__cta-title">{{ x.cta_title }}</h2>
+      {%- if x.cta_text %}<p class="band__muted">{{ x.cta_text }}</p>{% endif %}
+    </div>
+    {{ <ui.external url={x.url} label={trans(key="open_link", lang=lang) ~ " " ~ domain} class="btn btn--light" /> }}
+  </div>
+</section>
+{%- endif %}
+{% endblock content %}
