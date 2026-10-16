@@ -4,8 +4,6 @@ description = "Chaque produit est conçu, développé et maintenu par AWSD. Cert
 sort_by = "weight"
 template = "products.html"
 page_template = "product.html"
-# Ancienne page du site Hugo, supprimée : redirection vers les produits.
-aliases = ["/services/"]
 
 [extra]
 heading = "Les produits AWSD"

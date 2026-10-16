@@ -1,5 +1,7 @@
 +++
 title = "AWSD"
+# Removed URLs of the former Hugo site: redirect to the home page.
+aliases = ["/en/services/"]
 
 [extra]
 eyebrow = "Artisan Web Software Development"
