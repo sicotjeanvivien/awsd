@@ -106,9 +106,10 @@
 </figure>
 {%- endcomponent ui.flow %}
 
-{#- Lien externe avec flèche. -#}
-{% component ui.external(url: string, label: string, class: string = "") -%}
-<a{% if class %} class="{{ class }}"{% endif %} href="{{ url | safe }}">{{ label }} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+{#- Lien vers un autre site : nouvel onglet, flèche, et mention « nouvel
+    onglet » pour les lecteurs d'écran. -#}
+{% component ui.external(url: string, label: string, lang: string, class: string = "") -%}
+<a{% if class %} class="{{ class }}"{% endif %} href="{{ url | safe }}" target="_blank" rel="noopener">{{ label }} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg><span class="visually-hidden"> ({{ trans(key="new_tab", lang=lang) }})</span></a>
 {%- endcomponent ui.external %}
 
 {#- Carte produit de l'accueil (« planche »). -#}
@@ -123,7 +124,7 @@
   <div class="planche__links">
     <a href="{{ p.permalink | safe }}">{{ trans(key="product_sheet", lang=lang) }} →</a>
     {%- if x.url %}
-    {{ <ui.external url={x.url} label={x.url | regex_replace(pattern="^https?://|/$", rep="")} /> }}
+    {{ <ui.external url={x.url} label={x.url | regex_replace(pattern="^https?://|/$", rep="")} lang={lang} /> }}
     {%- else %}
     <span class="label">{{ trans(key="link_soon", lang=lang) | upper }}</span>
     {%- endif %}

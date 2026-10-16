@@ -27,7 +27,7 @@
         <span class="founder__name">{{ x.founder_name }}</span>
         <p class="muted">{{ x.founder_text }}</p>
         {%- if x.founder_link %}
-        {{ <ui.external url={x.founder_link.url} label={x.founder_link.label} class="strong-link" /> }}
+        {{ <ui.external url={x.founder_link.url} label={x.founder_link.label} class="strong-link" lang={lang} /> }}
         {%- endif %}
       </div>
     </div>

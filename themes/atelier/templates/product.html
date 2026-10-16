@@ -14,8 +14,8 @@
   {%- if page.description %}<p class="lead">{{ page.description }}</p>{% endif %}
   {%- if x.url or x.source %}
   <div class="actions">
-    {%- if x.url %}{{ <ui.external url={x.url} label={trans(key="open_link", lang=lang) ~ " " ~ domain} class="btn btn--primary" /> }}{% endif %}
-    {%- if x.source %}{{ <ui.external url={x.source} label={trans(key="source_code", lang=lang)} class="btn btn--secondary" /> }}{% endif %}
+    {%- if x.url %}{{ <ui.external url={x.url} label={trans(key="open_link", lang=lang) ~ " " ~ domain} class="btn btn--primary" lang={lang} /> }}{% endif %}
+    {%- if x.source %}{{ <ui.external url={x.source} label={trans(key="source_code", lang=lang)} class="btn btn--secondary" lang={lang} /> }}{% endif %}
   </div>
   {%- endif %}
 </section>
@@ -116,7 +116,7 @@
       <h2 class="band__cta-title">{{ x.cta_title }}</h2>
       {%- if x.cta_text %}<p class="band__muted">{{ x.cta_text }}</p>{% endif %}
     </div>
-    {{ <ui.external url={x.url} label={trans(key="open_link", lang=lang) ~ " " ~ domain} class="btn btn--light" /> }}
+    {{ <ui.external url={x.url} label={trans(key="open_link", lang=lang) ~ " " ~ domain} class="btn btn--light" lang={lang} /> }}
   </div>
 </section>
 {%- endif %}

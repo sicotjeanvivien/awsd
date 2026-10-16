@@ -24,7 +24,7 @@
       <div class="actions product-row__actions">
         <a class="btn btn--primary" href="{{ p.permalink | safe }}">{{ trans(key="view_product", lang=lang) }}</a>
         {%- if px.url %}
-        {{ <ui.external url={px.url} label={px.url | regex_replace(pattern="^https?://|/$", rep="")} class="btn btn--secondary" /> }}
+        {{ <ui.external url={px.url} label={px.url | regex_replace(pattern="^https?://|/$", rep="")} class="btn btn--secondary" lang={lang} /> }}
         {%- endif %}
       </div>
     </div>

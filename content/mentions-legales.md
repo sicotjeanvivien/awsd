@@ -27,7 +27,7 @@ see_also = { label = "Politique de confidentialité", path = "@/politique-de-con
 <dt>Raison sociale</dt><dd>Scaleway SAS</dd>
 <dt>Adresse</dt><dd>8 rue de la Ville-l'Évêque, 75008 Paris, France</dd>
 <dt>Téléphone</dt><dd><a href="tel:+33184130000">+33 1 84 13 00 00</a></dd>
-<dt>Site</dt><dd><a href="https://www.scaleway.com">scaleway.com</a></dd>
+<dt>Site</dt><dd><a href="https://www.scaleway.com" target="_blank" rel="noopener">scaleway.com</a></dd>
 </dl>
 
 ## Propriété intellectuelle

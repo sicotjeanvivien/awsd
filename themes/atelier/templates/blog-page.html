@@ -74,7 +74,7 @@
         <div class="related__links">
           <a href="{{ related.permalink | safe }}">{{ trans(key="product_sheet", lang=lang) }} →</a>
           {%- if related.extra.url %}
-          {{ <ui.external url={related.extra.url} label={related.extra.url | regex_replace(pattern="^https?://|/$", rep="")} /> }}
+          {{ <ui.external url={related.extra.url} label={related.extra.url | regex_replace(pattern="^https?://|/$", rep="")} lang={lang} /> }}
           {%- endif %}
         </div>
       </aside>

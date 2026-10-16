@@ -29,7 +29,7 @@ see_also = { label = "Privacy policy", path = "@/politique-de-confidentialite.md
 <dt>Company name</dt><dd>Scaleway SAS</dd>
 <dt>Address</dt><dd>8 rue de la Ville-l'Évêque, 75008 Paris, France</dd>
 <dt>Phone</dt><dd><a href="tel:+33184130000">+33 1 84 13 00 00</a></dd>
-<dt>Website</dt><dd><a href="https://www.scaleway.com">scaleway.com</a></dd>
+<dt>Website</dt><dd><a href="https://www.scaleway.com" target="_blank" rel="noopener">scaleway.com</a></dd>
 </dl>
 
 ## Intellectual property

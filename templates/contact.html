@@ -32,7 +32,7 @@
     <span class="label">{{ x.elsewhere_label | upper }}</span>
     <ul class="link-list">
       {%- for l in x.links %}
-      <li><a href="{{ l.url | safe }}">{{ l.label }} <span aria-hidden="true">↗</span></a></li>
+      <li><a href="{{ l.url | safe }}" target="_blank" rel="noopener">{{ l.label }} <span aria-hidden="true">↗</span><span class="visually-hidden"> ({{ trans(key="new_tab", lang=lang) }})</span></a></li>
       {%- endfor %}
     </ul>
     {%- if x.privacy_note %}
