@@ -27,7 +27,7 @@ The site has no form, no user account and no advertising. The only data processe
 
 ## Cookies
 
-No cookie is set and the site does not use the browser's local storage.
+No cookies and no browser storage.
 
 ## Retention period
 

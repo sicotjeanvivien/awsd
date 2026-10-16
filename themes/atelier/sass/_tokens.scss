@@ -1,5 +1,5 @@
 // Toutes les couleurs passent par ces variables. Le mode sombre (« papier de
-// nuit », maquette AccueilSombre) les redéfinit selon le réglage du système.
+// nuit », design/maquettes/accueil-sombre.html) les redéfinit selon le réglage du système.
 :root {
   color-scheme: light dark;
   --paper: #F1EADC;          // fond de page
@@ -14,7 +14,7 @@
   --on-dark-2: #CBBFAE;      // texte secondaire sur bande sombre
   --accent-on-dark: #E59C7E;
   --rule-on-dark: #8C8174;   // pointillés sur bande sombre
-  --band: #2A2622;           // fond des bandes sombres et des blocs de code
+  --band-bg: #2A2622;        // fond des bandes sombres et des blocs de code
   --paper-veil: rgba(250, 245, 234, .6); // fond voilé (architecture produit)
   --grid-line: rgba(42, 38, 34, .055);
 
@@ -35,8 +35,8 @@
   :root {
     --paper: #1F1A16;
     --paper-light: #28221D;
-    --paper-dark: #322A24;
-    --code-bg: #352D26;
+    --paper-dark: #2E2721;
+    --code-bg: #332B24;
     --ink: #ECE4D4;
     --ink-2: #B9AD9C;
     --ink-3: #9C9080;
@@ -45,7 +45,7 @@
     --on-dark-2: #CBBFAE;
     --accent-on-dark: #E59C7E;
     --rule-on-dark: #6E6458;
-    --band: #14110E;
+    --band-bg: #14110E;
     --paper-veil: rgba(40, 34, 29, .6);
     --grid-line: rgba(236, 228, 212, .045);
   }

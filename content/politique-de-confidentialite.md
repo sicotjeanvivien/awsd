@@ -25,7 +25,7 @@ Le site ne propose ni formulaire, ni compte utilisateur, ni publicité. Les seul
 
 ## Cookies
 
-Aucun cookie n'est déposé et le site n'utilise pas le stockage local du navigateur.
+Aucun cookie et aucun stockage dans le navigateur.
 
 ## Durée de conservation
 

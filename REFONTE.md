@@ -31,7 +31,7 @@ La nouvelle identité est **claire, chaude, matérielle** : direction « Atelier
 | Ton des textes | **Direct et sobre**, AWSD parle à la **3e personne** (« AWSD développe… »). Pas de métaphore d'atelier dans les textes (pas d'« établi », de « planches », de « règles de la maison »). Exception : les articles du blog restent dans la voix de l'auteur. |
 | Langues | FR (défaut, à la racine) + EN (sous `/en/`). |
 | Hébergement | Docker multi-stage (build Zola → image Caddy) sur le VPS Scaleway. `sws.toml` (Clever Cloud) est remplacé par un `Caddyfile`. |
-| Mode sombre | **Non décidé.** Ne pas l'implémenter pour l'instant, mais garder toutes les couleurs en variables CSS pour pouvoir l'ajouter. |
+| Mode sombre | **Oui, automatique uniquement** : suit `prefers-color-scheme`, sans bouton, sans JavaScript, sans `localStorage`. Palette « papier de nuit » (section 6). |
 
 ## 3. Contraintes d'URL (référencement — impératif)
 
@@ -100,6 +100,7 @@ Règles de conversion Hugo → Zola :
 - `featured_image: ../assets/images/x.png` → copier l'image dans `static/images/blog/` et `extra.featured_image = "/images/blog/x.png"`.
 - Shortcode Hugo `imgc` (utilisé dans `about-me`) → shortcode Zola `templates/shortcodes/img.html` simple (`<figure><img loading="lazy" …></figure>`), ou image Markdown standard.
 - Les textes des pages About, Contact, Mentions et Confidentialité sont **réécrits** selon les maquettes (ton sobre, 3e personne). Partir des textes Hugo existants pour les faits.
+- Politique de confidentialité, section Cookies : « Aucun cookie et aucun stockage dans le navigateur. » L'ancienne mention du `localStorage` pour le thème disparaît, puisque le mode sombre est automatique.
 - Le contenu de l'accueil (`config/_default/params.*.toml`) ne se migre pas : l'accueil est construit à partir de la section produits et des derniers articles.
 
 ### Schéma des produits (`content/products/*.md`)
@@ -176,6 +177,43 @@ background-image: linear-gradient(rgba(42,38,34,.055) 1px, transparent 1px),
 background-size: 40px 40px;
 ```
 
+### Mode sombre « papier de nuit »
+
+Référence : `design/maquettes/accueil-sombre.html`. Même design, mêmes composants : seules les variables changent.
+Principe : un brun-charbon **chaud**. Jamais de noir bleuté ni de violet (c'est le territoire de Yog-Scope).
+
+```scss
+:root { color-scheme: light dark; /* tokens clairs ci-dessus */ }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper:          #1F1A16;  // fond de page
+    --paper-light:    #28221D;  // cartes, encarts, planches
+    --paper-dark:     #2E2721;  // emplacements d'image
+    --code-bg:        #332B24;
+    --ink:            #ECE4D4;  // texte, traits, bordures
+    --ink-2:          #B9AD9C;
+    --ink-3:          #9C9080;
+    --accent:         #D9805E;  // terre cuite éclaircie
+    --band-bg:        #14110E;  // bandes sombres : plus profondes que le fond
+    --on-dark:        #ECE4D4;
+    --on-dark-2:      #CBBFAE;
+    --accent-on-dark: #E59C7E;
+    --grid-line:      rgba(236,228,212,.045);
+  }
+}
+```
+
+Règles :
+
+- **Aucune couleur en dur** dans les templates ou le CSS : tout passe par les variables, y compris la grille de fond (`--grid-line`, `rgba(42,38,34,.055)` en clair) et le fond des bandes (`--band-bg`, `#2A2622` en clair). Les bandes ne doivent **pas** utiliser `--ink` comme fond, sinon elles deviennent claires en mode sombre.
+- Les boutons primaires s'inversent naturellement : fond `--ink` (papier en sombre), texte `--paper` (charbon en sombre).
+- Logo : le SVG inline de l'en-tête utilise `currentColor` pour le A (`--ink`) et `var(--accent)` pour l'anneau et la barre. Il bascule tout seul. Les variantes `-sombre` du kit servent aux usages hors site.
+- Images : pas d'inversion automatique. Les images d'articles restent telles quelles.
+- `<meta name="theme-color">` en double : `#F1EADC` avec `media="(prefers-color-scheme: light)"`, `#1F1A16` avec `media="(prefers-color-scheme: dark)"`.
+- Contrastes : vérifier le niveau AA dans les deux modes, en particulier `--ink-3` sur `--paper-light` et `--accent` sur `--paper`.
+- **Pas de bouton clair/sombre.** S'il est demandé plus tard, ce sera une décision séparée (JS, `localStorage`, mention dans la politique de confidentialité).
+
 ### Typographie
 
 | Rôle | Police | Usage |
@@ -229,13 +267,12 @@ Fichiers prêts dans `design/identite/` (voir son `LISEZMOI.md`). Logo retenu : 
 3. **Produits** — section + fiches Yog-Scope et Otia selon le schéma de la section 5, accueil alimenté par la section.
 4. **Pages secondaires** — À propos, Contact, Mentions légales, Confidentialité (FR + EN), 404.
 5. **Finitions** — balises meta / Open Graph (reprendre `static/images/og/og-default.png`), sitemap, robots, flux, `hreflang`, favicon.
-   ✅ *Checkpoint* : Lighthouse ≥ 90 en performance, accessibilité et SEO ; aucune requête externe dans l'onglet réseau.
+   ✅ *Checkpoint* : Lighthouse ≥ 90 en performance, accessibilité et SEO, **dans les deux modes** (émulation `prefers-color-scheme: dark` des DevTools) ; aucune requête externe dans l'onglet réseau ; aucun JavaScript ni stockage navigateur.
 6. **Déploiement** — Dockerfile + Caddyfile, test local du conteneur (`docker build` + `docker run`, vérifier redirections et en-têtes avec `curl -I`).
 7. **Nettoyage** — suppression des fichiers Hugo listés en section 4, mise à jour du README.
 
 ## 9. Points ouverts (à demander à l'utilisateur, ne pas trancher seul)
 
-- Mode sombre : garder ou abandonner ?
 - Adresse e-mail de contact : garder `jeanvivien.sicot@lapiscine.pro` ou passer à une adresse `@awsd.fr` ?
 - Mentions légales : adresse de l'hébergeur Scaleway à compléter, à publier seulement après la migration.
 - Slug de la section produits : `products` (recommandé) ou `produits` ?
