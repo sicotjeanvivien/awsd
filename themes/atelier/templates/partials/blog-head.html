@@ -1,0 +1,15 @@
+{#- En-tête commun à la liste du blog et aux pages de sujet.
+    Attend : head_label, head_title, head_lead, head_count, active_url. -#}
+{%- set blog = get_section(path="blog/_index.md", lang=lang) -%}
+{%- set tags = get_taxonomy(kind="tags", lang=lang, required=false) -%}
+<section class="wrap page-head">
+  <span class="label">{{ head_label | upper }}</span>
+  <h1 class="page-head__title">{{ head_title }}</h1>
+  <div class="page-head__row">
+    {%- if head_lead %}<p class="lead">{{ head_lead }}</p>{% endif %}
+    <span class="hand">{{ head_count }} {{ trans(key="articles", lang=lang) }} · {{ config.extra.languages | join(sep=" / ") | upper }}</span>
+  </div>
+  {%- if tags %}
+  {{ <ui.tag_chips terms={tags.items} all_url={blog.permalink} active={active_url} lang={lang} /> }}
+  {%- endif %}
+</section>

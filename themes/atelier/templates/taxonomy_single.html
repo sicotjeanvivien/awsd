@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ term.name }} — {{ config.title }}{% endblock title %}
+{% block content %}
+{%- set head_label = trans(key="taxonomy_" ~ taxonomy.name, lang=lang) -%}
+{%- set head_title = term.name -%}
+{%- set head_lead = "" -%}
+{%- set head_count = term.pages | length -%}
+{%- set active_url = term.permalink -%}
+{% include "partials/blog-head.html" %}
+<section class="wrap post-list">
+  {{ <ui.post_list pages={term.pages} lang={lang} /> }}
+</section>
+{% endblock content %}

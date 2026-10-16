@@ -1,1 +1,72 @@
-{#- Macros partagées par les templates du thème (complétées aux étapes suivantes). -#}
+{#- Composants partagés par les templates du thème (Tera 2, embarqué par Zola ≥ 0.22).
+    Ils sont globaux : pas d'import, appel par {{ <ui.nom arg={valeur} /> }}.
+    Ils n'ont pas accès au contexte : tout (dont `lang`) est passé en argument. -#}
+
+{#- Image redimensionnée et convertie en WebP par Zola. -#}
+{% component ui.picture(path: string, width: integer, height: integer, alt: string = "", lazy: bool = true) -%}
+  {%- set img = resize_image(path=path, width=width, height=height, op="fill", format="webp", quality=80) -%}
+  <img src="{{ img.url | safe }}" width="{{ img.width }}" height="{{ img.height }}" alt="{{ alt }}"{% if lazy %} loading="lazy"{% endif %} decoding="async">
+{%- endcomponent ui.picture %}
+
+{#- Chapô d'un article : extra.summary, sinon description. -#}
+{% component ui.summary(p) -%}
+  {%- if p.extra.summary %}{{ p.extra.summary }}{% elif p.description %}{{ p.description }}{% endif -%}
+{%- endcomponent ui.summary %}
+
+{#- « 5 MIN · RUST · SOLANA » (tag_sep sépare les sujets entre eux). -#}
+{% component ui.post_meta(p, lang: string, tag_sep: string = " · ") -%}
+  {{ p.reading_time }} {{ trans(key="minutes", lang=lang) | upper }}
+  {%- if p.taxonomies.tags %} · {{ p.taxonomies.tags | join(sep=tag_sep) | upper }}{% endif -%}
+{%- endcomponent ui.post_meta %}
+
+{#- Date courte localisée : « 07.06.2026 ». -#}
+{% component ui.date_short(d, lang: string) -%}
+  {{ d | date(format=trans(key="date_short", lang=lang), locale=trans(key="date_locale", lang=lang)) }}
+{%- endcomponent ui.date_short %}
+
+{#- Date longue localisée en capitales : « 07 JUIN 2026 ». -#}
+{% component ui.date_long(d, lang: string) -%}
+  {{ d | date(format=trans(key="date_long", lang=lang), locale=trans(key="date_locale", lang=lang)) | upper }}
+{%- endcomponent ui.date_long %}
+
+{#- Pastilles de sujets. `active` = permalien de la pastille courante. -#}
+{% component ui.tag_chips(terms: array, all_url: string, active: string, lang: string) -%}
+<nav class="chips" aria-label="{{ trans(key='filter_by_topic', lang=lang) }}">
+  <a class="chip" href="{{ all_url | safe }}"{% if active == all_url %} aria-current="page"{% endif %}>{{ trans(key="all_topics", lang=lang) }}</a>
+  {%- for term in terms %}
+  <a class="chip" href="{{ term.permalink | safe }}"{% if active == term.permalink %} aria-current="page"{% endif %}>{{ term.name }}</a>
+  {%- endfor %}
+</nav>
+{%- endcomponent ui.tag_chips %}
+
+{#- Liste d'articles : le plus récent en vedette, les autres en lignes. -#}
+{% component ui.post_list(pages: array, lang: string) -%}
+{%- for p in pages %}
+{%- if loop.first %}
+<a class="feature" href="{{ p.permalink | safe }}">
+  <div class="feature__media">
+    {%- if p.extra.featured_image %}{{ <ui.picture path={p.extra.featured_image} width={900} height={600} lazy={false} /> }}{% endif -%}
+  </div>
+  <div class="feature__body">
+    <span class="label rule-line"><span>{{ trans(key="latest_post", lang=lang) | upper }}</span><span class="rule-line__dash"></span><span>{{ <ui.date_short d={p.date} lang={lang} /> }}</span></span>
+    <h2>{{ p.title }}</h2>
+    <p class="muted">{{ <ui.summary p={p} /> }}</p>
+    <span class="label feature__meta">{{ <ui.post_meta p={p} lang={lang} /> }}</span>
+  </div>
+</a>
+<div class="post-rows">
+{%- else %}
+  <a class="post-row" href="{{ p.permalink | safe }}">
+    <span class="label">{{ <ui.date_short d={p.date} lang={lang} /> }}</span>
+    <div class="post-row__body">
+      <h3>{{ p.title }}</h3>
+      <p class="muted">{{ <ui.summary p={p} /> }}</p>
+    </div>
+    <span class="label post-row__meta">{{ <ui.post_meta p={p} lang={lang} /> }}</span>
+  </a>
+{%- endif %}
+{%- if loop.last %}
+</div>
+{%- endif %}
+{%- endfor %}
+{%- endcomponent ui.post_list %}

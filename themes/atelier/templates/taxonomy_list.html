@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ trans(key="taxonomy_" ~ taxonomy.name ~ "_list", lang=lang) }} — {{ config.title }}{% endblock title %}
+{% block content %}
+<section class="wrap page-head">
+  <span class="label">{{ trans(key="nav_blog", lang=lang) | upper }}</span>
+  <h1 class="page-head__title">{{ trans(key="taxonomy_" ~ taxonomy.name ~ "_list", lang=lang) }}</h1>
+  <nav class="chips" aria-label="{{ trans(key='taxonomy_' ~ taxonomy.name ~ '_list', lang=lang) }}">
+    {%- for term in terms %}
+    <a class="chip" href="{{ term.permalink | safe }}">{{ term.name }} <span class="chip__count">{{ term.pages | length }}</span></a>
+    {%- endfor %}
+  </nav>
+</section>
+{% endblock content %}

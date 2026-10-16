@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+{%- set head_label = section.title -%}
+{%- set head_title = section.extra.heading | default(value=section.title) -%}
+{%- set head_lead = section.description -%}
+{%- set head_count = section.pages | length -%}
+{%- set active_url = section.permalink -%}
+{% include "partials/blog-head.html" %}
+<section class="wrap post-list">
+  {{ <ui.post_list pages={section.pages} lang={lang} /> }}
+</section>
+{% endblock content %}

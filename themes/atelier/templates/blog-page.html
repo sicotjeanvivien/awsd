@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block content %}
+{%- set blog = get_section(path="blog/_index.md", lang=lang) -%}
+<article class="article">
+  <header class="wrap article__head">
+    <a class="label back-link" href="{{ blog.permalink | safe }}">← {{ blog.title | upper }}</a>
+    <h1 class="article__title">{{ page.title }}</h1>
+    {%- if page.description %}<p class="lead article__lead">{{ page.description }}</p>{% endif %}
+    <p class="label article__meta">
+      {%- if page.extra.author %}<span>{{ page.extra.author | upper }}</span><span aria-hidden="true">·</span>{% endif -%}
+      <time datetime="{{ page.date }}">{{ <ui.date_short d={page.date} lang={lang} /> }}</time><span aria-hidden="true">·</span>
+      <span>{{ page.reading_time }} {{ trans(key="minutes", lang=lang) | upper }}</span>
+    </p>
+  </header>
+
+  {%- if page.extra.featured_image %}
+  <div class="wrap article__figure">
+    <figure>
+      {{ <ui.picture path={page.extra.featured_image} width={1180} height={520} alt={page.extra.featured_alt | default(value="")} lazy={false} /> }}
+      {%- if page.extra.featured_caption %}
+      <figcaption class="label">{{ page.extra.featured_caption | upper }}</figcaption>
+      {%- endif %}
+    </figure>
+  </div>
+  {%- endif %}
+
+  <div class="wrap article__layout">
+    <aside class="article__side" aria-label="{{ trans(key='article_info', lang=lang) }}">
+      {%- if page.toc %}
+      <div class="side-block">
+        <span class="label">{{ trans(key="on_this_page", lang=lang) | upper }}</span>
+        <nav class="toc" aria-label="{{ trans(key='toc', lang=lang) }}">
+          {%- for h in page.toc %}
+          <a href="{{ h.permalink | safe }}">{{ h.title }}</a>
+          {%- endfor %}
+        </nav>
+      </div>
+      {%- endif %}
+      {%- if page.taxonomies.tags %}
+      <div class="side-block">
+        <span class="label">{{ trans(key="topics", lang=lang) | upper }}</span>
+        <div class="chips chips--small">
+          {%- for t in page.taxonomies.tags %}
+          <a class="chip" href="{{ get_taxonomy_url(kind='tags', name=t, lang=lang) | safe }}">{{ t }}</a>
+          {%- endfor %}
+        </div>
+      </div>
+      {%- endif %}
+      {% block side_extra %}{% endblock side_extra %}
+    </aside>
+
+    <div class="article__body prose">
+      {{ page.content | safe }}
+      {% block body_extra %}{% endblock body_extra %}
+    </div>
+  </div>
+</article>
+
+<nav class="page-nav" aria-label="{{ trans(key='all_posts', lang=lang) }}">
+  <div class="wrap page-nav__inner">
+    <a href="{{ blog.permalink | safe }}">
+      <span class="label">← {{ trans(key="all_posts", lang=lang) | upper }}</span>
+      <span class="page-nav__title">{{ trans(key="back_to_blog", lang=lang) }}</span>
+    </a>
+    {#- Tri par date : `higher` est l'article plus ancien, `lower` le plus récent. -#}
+    {%- if page.higher %}
+    <a class="page-nav__next" href="{{ page.higher.permalink | safe }}">
+      <span class="label">{{ trans(key="previous_post", lang=lang) | upper }} →</span>
+      <span class="page-nav__title">{{ page.higher.title }}</span>
+    </a>
+    {%- elif page.lower %}
+    <a class="page-nav__next" href="{{ page.lower.permalink | safe }}">
+      <span class="label">{{ trans(key="next_post", lang=lang) | upper }} →</span>
+      <span class="page-nav__title">{{ page.lower.title }}</span>
+    </a>
+    {%- endif %}
+  </div>
+</nav>
+{% endblock content %}

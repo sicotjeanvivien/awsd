@@ -13,13 +13,44 @@
 .grid-2 { grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); }
 .grid-3 { grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 40px; }
 
-// En-tête de page générique (titre + chapô).
+// En-tête de page générique (étiquette, titre, chapô).
 .page-head {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
   padding-top: 72px;
   padding-bottom: 56px;
+
+  &__title { font-size: 80px; }
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px;
+    .lead { font-size: 19px; max-width: 560px; }
+    .hand { transform: rotate(-3deg); }
+  }
+
+  .chips { padding-top: 16px; }
+}
+
+@media (max-width: $narrow) {
+  .page-head__title { font-size: 52px; }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+// Ligne d'étiquette avec pointillés : « 01 ------ STACK ».
+.rule-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  &__dash { flex: 1; border-top: var(--dash); }
 }
 
 // Texte courant (pages simples, articles).
@@ -27,4 +58,46 @@
   max-width: 760px;
   padding-bottom: 104px;
   > * + * { margin-top: 1.1em; }
+
+  h2 { font-size: 34px; line-height: 1.15; margin-top: 56px; }
+  h3 { font-size: 26px; margin-top: 40px; }
+  h2 + *, h3 + * { margin-top: 18px; }
+  a { text-decoration-color: var(--accent); text-underline-offset: 3px; }
+  ul, ol { padding-left: 1.3em; }
+  li + li { margin-top: .4em; }
+  hr { border: 0; border-top: var(--dash); margin: 48px 0; }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: .85em;
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+
+  pre {
+    margin: 8px 0 30px;
+    padding: 22px 24px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-x: auto;
+    border-radius: 2px;
+    code { background: none; padding: 0; font-size: inherit; color: inherit; }
+  }
+
+  blockquote {
+    margin: 40px 0;
+    padding: 0;
+    p {
+      font-family: var(--font-serif);
+      font-size: 34px;
+      line-height: 1.2;
+    }
+  }
+
+  figure { margin: 32px 0; }
+  img { display: block; border: var(--line); }
 }

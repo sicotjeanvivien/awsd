@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{#- Accueil AWSD : textes dans content/_index.md ([extra]), produits et articles
+    lus dans leurs sections. -#}
+{% block content %}
+{%- set x = section.extra -%}
+{%- set blog = get_section(path="blog/_index.md", lang=lang) -%}
+{%- set products = get_section(path="products/_index.md", lang=lang) -%}
+
+<section class="wrap hero">
+  <span class="label">{{ x.eyebrow | upper }}</span>
+  <h1 class="hero__title">{{ x.hero_title }} <span class="mark">{{ x.hero_mark }}</span>{{ x.hero_end }}</h1>
+  <div class="hero__row">
+    <p class="lead">{{ x.hero_lead }}</p>
+    <span class="hand hand--large" aria-hidden="true">{{ x.hero_note }}</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn--primary" href="{{ products.permalink | safe }}">{{ x.cta_products }}</a>
+    <a class="btn btn--secondary" href="{{ blog.permalink | safe }}">{{ x.cta_blog }}</a>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap band__inner">
+    <div class="band__head">
+      <span class="label">{{ x.principles_label | upper }}</span>
+      <h2>{{ x.principles_title }}</h2>
+    </div>
+    <div class="grid-3">
+      {%- for item in x.principles %}
+      <div class="band__item">
+        <span class="label band__num">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</span>
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.text }}</p>
+      </div>
+      {%- endfor %}
+    </div>
+    <p class="band__foot">
+      <span class="label">{{ x.technologies_label | upper }}</span>
+      <span class="label band__strong">{{ x.technologies | join(sep=" · ") }}</span>
+    </p>
+  </div>
+</section>
+
+<section class="wrap home-blog" aria-labelledby="home-blog-title">
+  <div class="home-blog__head">
+    <div class="stack-10">
+      <h2 id="home-blog-title">{{ x.blog_title }}</h2>
+      <p class="muted">{{ x.blog_lead }}</p>
+    </div>
+    <a class="btn btn--secondary" href="{{ blog.permalink | safe }}">{{ x.blog_all }}</a>
+  </div>
+  <div class="grid-2 post-cards">
+    {%- for p in blog.pages[:4] %}
+    <a class="post-card" href="{{ p.permalink | safe }}">
+      <span class="label">{{ <ui.date_long d={p.date} lang={lang} /> }} · {{ <ui.post_meta p={p} lang={lang} tag_sep=", " /> }}</span>
+      <h3>{{ p.title }}</h3>
+      <p class="muted">{{ <ui.summary p={p} /> }}</p>
+    </a>
+    {%- endfor %}
+  </div>
+</section>
+{% endblock content %}
