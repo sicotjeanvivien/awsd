@@ -2,26 +2,20 @@
 {#- aria-current : « page » sur la page elle-même, « true » sur la rubrique
     parente (un article sous Blog). L'accueil est exclu du second cas. -#}
 {%- set cur = current_url | default(value="") -%}
-{%- set nav_label = trans(key="nav_main", lang=lang) -%}
 <header class="site-header wrap">
   <a class="brand" href="{{ home_url | safe }}" aria-label="{{ trans(key='home_label', lang=lang) }}">
     <span class="brand__name">{{ config.title }}</span>
     <span class="brand__tagline label">{{ trans(key="tagline", lang=lang) }}</span>
   </a>
 
-  {#- Menu en double : en ligne sur grand écran, replié dans un <details> sur
-      petit écran. Une seule des deux versions est affichée (display: none
-      retire l'autre de l'arbre d'accessibilité). Aucun JavaScript. -#}
-  {%- set links -%}
-    {%- for item in config.extra.menu -%}
-      {%- set url = get_url(path=item.path, lang=lang) -%}
-      {%- set state = "" -%}
-      {%- if url == cur %}{% set state = "page" %}{% elif url in cur and url != home_url %}{% set state = "true" %}{% endif -%}
-      <a href="{{ url | safe }}"{% if state %} aria-current="{{ state }}"{% endif %}>{{ trans(key=item.key, lang=lang) }}</a>
-    {%- endfor -%}
-  {%- endset -%}
-
-  <nav class="site-nav" aria-label="{{ nav_label }}">{{ links | safe }}</nav>
+  <nav class="site-nav" aria-label="{{ trans(key='nav_main', lang=lang) }}">
+    {%- for item in config.extra.menu %}
+    {%- set url = get_url(path=item.path, lang=lang) -%}
+    {%- set state = "" -%}
+    {%- if url == cur %}{% set state = "page" %}{% elif url in cur and url != home_url %}{% set state = "true" %}{% endif %}
+    <a href="{{ url | safe }}"{% if state %} aria-current="{{ state }}"{% endif %}>{{ trans(key=item.key, lang=lang) }}</a>
+    {%- endfor %}
+  </nav>
 
   <div class="site-header__tools">
     <span class="lang-switch label" role="group" aria-label="{{ trans(key='nav_language', lang=lang) }}">
@@ -40,9 +34,5 @@
       {%- if url == cur %}{% set state = "page" %}{% endif %}
     <a class="btn btn--small {% if state %}btn--primary{% else %}btn--secondary{% endif %}" href="{{ url | safe }}"{% if state %} aria-current="{{ state }}"{% endif %}>{{ trans(key=config.extra.menu_cta.key, lang=lang) }}</a>
     {%- endif %}
-    <details class="site-menu">
-      <summary class="btn btn--small btn--secondary">{{ trans(key="menu", lang=lang) }}</summary>
-      <nav class="site-menu__panel" aria-label="{{ nav_label }}">{{ links | safe }}</nav>
-    </details>
   </div>
 </header>

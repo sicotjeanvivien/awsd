@@ -61,8 +61,8 @@
   font-weight: 500;
 }
 
-// Élément courant : souligné terre cuite (menu principal et menu mobile).
-.site-nav, .site-menu__panel {
+// Élément courant : souligné terre cuite.
+.site-nav {
   a[aria-current] {
     text-decoration: underline;
     text-decoration-color: var(--accent);
@@ -85,36 +85,15 @@
   a[aria-current] { color: var(--ink); font-weight: 500; }
 }
 
-// Menu replié (petit écran uniquement).
-.site-menu {
-  display: none;
-  position: relative;
-
-  summary {
-    list-style: none;
-    &::-webkit-details-marker { display: none; }
-  }
-  &[open] summary { background: var(--ink); color: var(--paper); }
-
-  &__panel {
-    position: absolute;
-    right: 0;
-    top: calc(100% + 8px);
-    z-index: 5;
-    min-width: 220px;
-    display: flex;
-    flex-direction: column;
-    padding: 8px 20px;
-    background: var(--paper-light);
-    border: var(--line);
-    font-weight: 500;
-  }
-}
-
+// Petit écran : l'en-tête passe sur trois lignes (marque, liens, outils),
+// les trois liens restent visibles.
 @media (max-width: $narrow) {
-  .site-nav { display: none; }
-  .site-menu { display: block; }
-  .brand__tagline { display: none; }
+  .site-header {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    gap: 4px 24px;
+  }
+  .site-nav { width: 100%; }
 }
 
 // --- Pied de page -----------------------------------------------------------

@@ -16,7 +16,7 @@
   {%- if page.extra.featured_image %}
   <div class="wrap article__figure">
     <figure>
-      {{ <ui.picture path={page.extra.featured_image} width={1180} height={520} alt={page.extra.featured_alt | default(value="")} lazy={false} /> }}
+      {{ <ui.picture path={page.extra.featured_image} width={1180} op="fit_width" alt={page.extra.featured_alt | default(value="")} lazy={false} /> }}
       {%- if page.extra.featured_caption %}
       <figcaption class="label">{{ page.extra.featured_caption | upper }}</figcaption>
       {%- endif %}
