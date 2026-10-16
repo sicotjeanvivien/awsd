@@ -12,18 +12,21 @@ see_also = { label = "Politique de confidentialité", path = "@/politique-de-con
 
 <dl>
 <dt>Raison sociale</dt><dd>AWSD</dd>
-<dt>Forme juridique</dt><dd>SASU au capital de 1 000 €</dd>
+<dt>Forme juridique</dt><dd>SASU (société par actions simplifiée à associé unique)</dd>
+<dt>Capital social</dt><dd>1 000 €</dd>
 <dt>Siège social</dt><dd>60 rue François Ier, 75008 Paris</dd>
-<dt>SIREN</dt><dd>100 091 446</dd>
-<dt>Directeur de publication</dt><dd>Jean-Vivien Sicot</dd>
-<dt>Contact</dt><dd><a href="mailto:jeanvivien.sicot@lapiscine.pro">jeanvivien.sicot@lapiscine.pro</a></dd>
+<dt>Immatriculation</dt><dd>RCS Paris 100 091 446</dd>
+<dt>Téléphone</dt><dd><a href="tel:+33982751425">09 82 75 14 25</a></dd>
+<dt>Directeur de la publication</dt><dd>Jean-Vivien Sicot</dd>
+<dt>E-mail</dt><dd><a href="mailto:awsd.contact@gmail.com">awsd.contact@gmail.com</a></dd>
 </dl>
 
 ## Hébergeur
 
 <dl>
-<dt>Société</dt><dd>Scaleway SAS</dd>
-<dt>Adresse</dt><dd>[Adresse de Scaleway à vérifier]</dd>
+<dt>Raison sociale</dt><dd>Scaleway SAS</dd>
+<dt>Adresse</dt><dd>8 rue de la Ville-l'Évêque, 75008 Paris, France</dd>
+<dt>Téléphone</dt><dd><a href="tel:+33184130000">+33 1 84 13 00 00</a></dd>
 <dt>Site</dt><dd><a href="https://www.scaleway.com">scaleway.com</a></dd>
 </dl>
 
