@@ -1,0 +1,6 @@
+# Seul ce dont `zola build` a besoin entre dans l'image.
+.git
+public/
+design/
+static/processed_images/
+*:Zone.Identifier

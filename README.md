@@ -85,7 +85,23 @@ UI labels live in `config.toml`: `[translations]` for FR, `[languages.en.transla
 
 ## Deployment
 
-Target: multi-stage Docker image (Zola build → Caddy) on a Scaleway VPS, with the `Caddyfile` handling redirects and security headers. **Not in place yet**: until the switch, awsd.fr is served by the old Hugo site ([`awsd_hugo`](https://github.com/sicotjeanvivien/awsd_hugo)).
+The site ships as a Docker image (`Dockerfile`): Zola builds `public/`, then Caddy serves it over plain HTTP on port 80. The `Caddyfile` holds everything specific to the site: 301 redirects (`www`, URLs of the old Hugo site), security headers and CSP, caching, 404 page.
+
+On the server, the container publishes no port. TLS and routing by host name are done by the server's entry Caddy (private `edge` repository), which reaches this container as `awsd` over the shared `edge` Docker network:
+
+```sh
+docker network create edge     # once per server
+docker compose up -d --build   # deploy or update
+```
+
+To try the image locally:
+
+```sh
+docker build -t awsd .
+docker run --rm -p 127.0.0.1:8080:80 awsd   # http://127.0.0.1:8080
+```
+
+**Not in production yet**: until the switch, awsd.fr is served by the old Hugo site ([`awsd_hugo`](https://github.com/sicotjeanvivien/awsd_hugo)).
 
 ## License
 

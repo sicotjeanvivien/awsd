@@ -1,0 +1,20 @@
+# compose.yml — le site sur le serveur.
+#
+#   docker compose up -d --build
+#
+# Aucun port publié : le Caddy d'entrée (dépôt edge) joint ce conteneur par
+# le réseau « edge », sous le nom `awsd`. Ce réseau est créé une fois sur
+# le serveur (`docker network create edge`) ; sans lui, la commande échoue.
+
+services:
+  awsd:
+    build: .
+    image: awsd:latest
+    networks:
+      - edge
+    mem_limit: 64m
+    restart: unless-stopped
+
+networks:
+  edge:
+    external: true

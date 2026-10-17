@@ -1,0 +1,81 @@
+# Caddyfile — le site awsd.fr, dans l'image du Dockerfile.
+#
+# Ce Caddy ne fait que servir le site, en HTTP : le TLS et l'aiguillage par
+# domaine sont faits par le Caddy d'entrée du serveur (dépôt edge). Tout ce
+# qui est propre au site est ici : redirections, en-têtes, cache, 404.
+#
+# Pas de journal d'accès : Caddy n'en écrit pas sans directive `log`.
+
+{
+	# Le Caddy d'entrée fait le HTTPS : ici, ni certificat ni redirection
+	# vers https.
+	auto_https off
+	# Pas d'API d'administration : la configuration change en reconstruisant
+	# l'image.
+	admin off
+}
+
+:80 {
+	root * /srv
+	encode zstd gzip
+
+	# --- Redirections 301 ----------------------------------------------------
+
+	@www host www.awsd.fr
+	redir @www https://awsd.fr{uri} permanent
+
+	# Anciennes URL du site Hugo. Zola génère aussi des pages d'alias pour
+	# certaines, mais elles redirigent en JavaScript inline, que la CSP bloque.
+	# Une page supprimée renvoie vers l'accueil de sa langue.
+	@fr_home path /fr /fr/ /services /services/
+	redir @fr_home / permanent
+	@en_services path /en/services /en/services/
+	redir @en_services /en/ permanent
+	@sitemaps path /fr/sitemap.xml /en/sitemap.xml
+	redir @sitemaps /sitemap.xml permanent
+	# Pagination Hugo (/blog/page/2/, /en/tags/rust/page/2/…) : la liste
+	# entière est sur la première page.
+	@paged path_regexp paged ^(.*/)page/[0-9]+/?$
+	redir @paged {re.paged.1} permanent
+
+	# --- En-têtes de sécurité --------------------------------------------------
+
+	header {
+		Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		X-Content-Type-Options "nosniff"
+		Permissions-Policy "geolocation=(), microphone=(), camera=()"
+		# Aucun style ni script inline sur le site : pas de 'unsafe-inline'.
+		# Les blocs JSON-LD ne sont pas exécutés, la CSP ne les concerne pas.
+		Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self'; font-src 'self'; frame-ancestors 'self'"
+	}
+
+	# --- Cache -----------------------------------------------------------------
+
+	# Fichiers versionnés : main.css est appelé avec son empreinte
+	# (cachebust=true), les images redimensionnées ont un hash dans leur nom.
+	@versioned path /main.css /processed_images/*
+	header @versioned Cache-Control "public, max-age=31536000, immutable"
+
+	# Autres fichiers statiques : leur nom ne change pas quand ils changent.
+	@static {
+		path *.svg *.ico *.png *.jpg *.jpeg *.webp *.woff2 *.webmanifest
+		not path /processed_images/*
+	}
+	header @static Cache-Control "public, max-age=86400"
+
+	# Pages, flux, sitemap, robots.txt : toujours revalidés.
+	@documents {
+		not path /main.css /processed_images/*
+		not path *.svg *.ico *.png *.jpg *.jpeg *.webp *.woff2 *.webmanifest
+	}
+	header @documents Cache-Control "no-cache"
+
+	file_server
+
+	handle_errors 404 {
+		rewrite * /404.html
+		header Cache-Control "no-store"
+		file_server
+	}
+}
