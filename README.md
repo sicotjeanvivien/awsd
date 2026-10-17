@@ -91,4 +91,8 @@ Target: multi-stage Docker image (Zola build → Caddy) on a Scaleway VPS, with 
 
 ## License
 
-The `themes/atelier` theme is MIT-licensed. Fonts are under the SIL OFL (`LICENSE-*.txt` files in `themes/atelier/static/fonts/`). Content (texts, images, logos) remains the property of AWSD.
+See [LICENSE](LICENSE). In short:
+
+- **Code** (the `atelier` theme, templates, Sass, `config.toml`): MIT.
+- **Content** (texts, articles, images, logos, mockups — `content/`, `static/`, `design/`): all rights reserved.
+- **Fonts**: SIL OFL 1.1 (`LICENSE-*.txt` files in `themes/atelier/static/fonts/`).
