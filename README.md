@@ -1,52 +1,52 @@
 # awsd.fr
 
-Site de [AWSD](https://awsd.fr), société logicielle indépendante qui développe et maintient ses propres produits (Yog-Scope, Otia).
+Website of [AWSD](https://awsd.fr), an independent software company that builds and maintains its own products (Yog-Scope, Otia).
 
-Site statique généré avec [Zola](https://www.getzola.org/), bilingue FR (racine) / EN (`/en/`), sans JavaScript, sans dépendance npm, polices auto-hébergées. Mode sombre automatique (suit `prefers-color-scheme`).
+Static site generated with [Zola](https://www.getzola.org/), bilingual FR (root) / EN (`/en/`), no JavaScript, no npm dependency, self-hosted fonts. Automatic dark mode (follows `prefers-color-scheme`).
 
-## Prérequis
+## Requirements
 
-- [Zola](https://www.getzola.org/documentation/getting-started/installation/) **0.23** ou plus récent (le thème utilise Tera 2). Rien d'autre.
+- [Zola](https://www.getzola.org/documentation/getting-started/installation/) **0.23** or later (the theme uses Tera 2). Nothing else.
 
-## Développement
+## Development
 
 ```sh
-zola serve          # http://127.0.0.1:1111, rechargement automatique
-zola build          # génère le site dans public/
-zola check          # vérifie aussi les liens externes
+zola serve          # http://127.0.0.1:1111, live reload
+zola build          # builds the site into public/
+zola check          # also checks external links
 ```
 
-`public/` et `static/processed_images/` (cache des images redimensionnées) sont régénérés à chaque build et ne sont pas versionnés.
+`public/` and `static/processed_images/` (resized image cache) are regenerated on every build and are not versioned.
 
-## Arborescence
+## Layout
 
 ```
-config.toml            configuration, langues, chaînes d'interface FR/EN, menus
-content/               contenus Markdown (page.md = FR, page.en.md = EN)
-  blog/                articles
-  products/            fiches produits
-templates/             surcharges propres à AWSD (accueil, À propos, Contact)
+config.toml            configuration, languages, FR/EN UI strings, menus
+content/               Markdown content (page.md = FR, page.en.md = EN)
+  blog/                posts
+  products/            product pages
+templates/             AWSD-specific overrides (home, About, Contact)
 static/                images, logos, favicons, manifest
-themes/atelier/        thème maison, indépendant du site
-  templates/           base, blog, produits, pages légales, taxonomies, 404, flux RSS
-  sass/                styles (un seul main.css compilé par Zola)
-  static/fonts/        polices woff2 (licences OFL incluses)
+themes/atelier/        in-house theme, independent from the site
+  templates/           base, blog, products, legal pages, taxonomies, 404, RSS feed
+  sass/                styles (a single main.css compiled by Zola)
+  static/fonts/        woff2 fonts (OFL licenses included)
 design/
-  maquettes/           maquettes HTML de référence (à ouvrir dans un navigateur)
-  identite/            logo « Tampon », favicons, image de partage (voir LISEZMOI.md)
-REFONTE.md             brief de la refonte Hugo → Zola
+  maquettes/           reference HTML mockups (open in a browser)
+  identite/            "Tampon" logo, favicons, share image (see LISEZMOI.md)
+REFONTE.md             brief for the Hugo → Zola rewrite (in French)
 ```
 
-## Contenus
+## Content
 
-### Ajouter un article
+### Adding a post
 
-Créer `content/blog/<slug>.md` (FR) et `content/blog/<slug>.en.md` (EN) avec le même nom de fichier, pour que les deux versions soient liées :
+Create `content/blog/<slug>.md` (FR) and `content/blog/<slug>.en.md` (EN) with the same file name, so both versions are linked:
 
 ```toml
 +++
-title = "Titre"
-description = "Résumé pour les moteurs de recherche et le partage."
+title = "Title"
+description = "Summary for search engines and social sharing."
 date = 2026-10-17
 updated = 2026-10-17
 draft = false
@@ -56,39 +56,39 @@ categories = ["Yog-Sothoth"]
 tags = ["Rust", "Solana"]
 
 [extra]
-summary = "Chapô affiché dans la liste des articles."
+summary = "Lead shown in the post list."
 author = "Jean-Vivien Sicot"
-featured_image = "images/blog/mon-image.png"   # dans static/images/blog/
+featured_image = "images/blog/my-image.png"   # in static/images/blog/
 +++
 ```
 
-### Ajouter un produit
+### Adding a product
 
-Créer `content/products/<slug>.md` et `.en.md`, en partant de `yog-scope.md` (schéma complet) ou `otia.md` (produit en développement). Les principaux champs de `[extra]` :
+Create `content/products/<slug>.md` and `.en.md`, starting from `yog-scope.md` (full schema) or `otia.md` (product in development). Main `[extra]` fields:
 
-- `status` : `production`, `development` ou `paused`, avec son libellé `status_label` ;
-- `url`, `source`, `platform`, `stack`, `facts`, `features`, `pipeline` : les blocs laissés vides ne sont pas affichés ;
-- `blog_tag` : catégorie ou tag des articles liés au produit.
+- `status`: `production`, `development` or `paused`, with its `status_label`;
+- `url`, `source`, `platform`, `stack`, `facts`, `features`, `pipeline`: empty blocks are not displayed;
+- `blog_tag`: category or tag of the posts related to the product.
 
-L'ordre d'affichage (page produits et accueil) suit `weight`.
+Display order (products page and home page) follows `weight`.
 
-### Chaînes d'interface et menus
+### UI strings and menus
 
-Les libellés de l'interface sont dans `config.toml` : `[translations]` pour le FR, `[languages.en.translations]` pour l'EN. Les menus (en-tête, pied de page) et les informations de la société (données schema.org) sont dans `[extra]`.
+UI labels live in `config.toml`: `[translations]` for FR, `[languages.en.translations]` for EN. Menus (header, footer) and company details (schema.org data) live in `[extra]`.
 
 ## Conventions
 
-- **Pas de JavaScript** ni de stockage navigateur (ni cookie, ni `localStorage`).
-- **Aucune requête externe** : polices, images et styles sont servis par le site.
-- **URL stables** : les URL héritées du site Hugo (articles, tags, catégories, pages légales, flux `/index.xml`) sont conservées à l'identique, avec slash final. Voir REFONTE.md §3 avant de renommer une page.
-- **Liens externes** : ils s'ouvrent dans un nouvel onglet (`external_links_target_blank` pour le Markdown, composant `ui.external` dans les templates).
-- **Ton** : AWSD s'exprime à la 3e personne, de façon directe et sobre. Les articles du blog restent dans la voix de leur auteur.
-- Le thème `atelier` ne contient rien de propre à AWSD : ce qui est spécifique au site va dans `templates/` et `config.toml`.
+- **No JavaScript** and no browser storage (no cookies, no `localStorage`).
+- **No external requests**: fonts, images and styles are all served by the site.
+- **Stable URLs**: URLs inherited from the Hugo site (posts, tags, categories, legal pages, `/index.xml` feed) are kept identical, with a trailing slash. See REFONTE.md §3 before renaming a page.
+- **External links** open in a new tab (`external_links_target_blank` for Markdown, `ui.external` component in templates).
+- **Tone**: AWSD speaks in the third person, plainly and soberly. Blog posts keep their author's voice.
+- The `atelier` theme holds nothing AWSD-specific: anything site-specific goes in `templates/` and `config.toml`.
 
-## Déploiement
+## Deployment
 
-Cible : image Docker multi-stage (build Zola → Caddy) sur un VPS Scaleway, le `Caddyfile` portant les redirections et les en-têtes de sécurité (voir REFONTE.md §7). **Pas encore en place** : la production awsd.fr est servie, en attendant la bascule, par l'ancien site Hugo ([`awsd_hugo`](https://github.com/sicotjeanvivien/awsd_hugo)).
+Target: multi-stage Docker image (Zola build → Caddy) on a Scaleway VPS, with the `Caddyfile` handling redirects and security headers (see REFONTE.md §7). **Not in place yet**: until the switch, awsd.fr is served by the old Hugo site ([`awsd_hugo`](https://github.com/sicotjeanvivien/awsd_hugo)).
 
-## Licence
+## License
 
-Le thème `themes/atelier` est sous licence MIT. Les polices sont sous licence SIL OFL (fichiers `LICENSE-*.txt` dans `themes/atelier/static/fonts/`). Les contenus (textes, images, logos) restent la propriété d'AWSD.
+The `themes/atelier` theme is MIT-licensed. Fonts are under the SIL OFL (`LICENSE-*.txt` files in `themes/atelier/static/fonts/`). Content (texts, images, logos) remains the property of AWSD.
