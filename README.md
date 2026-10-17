@@ -31,11 +31,9 @@ themes/atelier/        in-house theme, independent from the site
   templates/           base, blog, products, legal pages, taxonomies, 404, RSS feed
   sass/                styles (a single main.css compiled by Zola)
   static/fonts/        woff2 fonts (OFL licenses included)
-design/
-  maquettes/           reference HTML mockups (open in a browser)
-  identite/            "Tampon" logo, favicons, share image (see LISEZMOI.md)
-REFONTE.md             brief for the Hugo → Zola rewrite (in French)
 ```
+
+The working files of the redesign (brief, mockups, identity sources) live in `design/`, which is kept local and ignored by git.
 
 ## Content
 
@@ -80,19 +78,19 @@ UI labels live in `config.toml`: `[translations]` for FR, `[languages.en.transla
 
 - **No JavaScript** and no browser storage (no cookies, no `localStorage`).
 - **No external requests**: fonts, images and styles are all served by the site.
-- **Stable URLs**: URLs inherited from the Hugo site (posts, tags, categories, legal pages, `/index.xml` feed) are kept identical, with a trailing slash. See REFONTE.md §3 before renaming a page.
+- **Stable URLs**: URLs inherited from the Hugo site (posts, tags, categories, legal pages, `/index.xml` feed) are kept identical, with a trailing slash. Never rename an existing page without a 301 redirect.
 - **External links** open in a new tab (`external_links_target_blank` for Markdown, `ui.external` component in templates).
 - **Tone**: AWSD speaks in the third person, plainly and soberly. Blog posts keep their author's voice.
 - The `atelier` theme holds nothing AWSD-specific: anything site-specific goes in `templates/` and `config.toml`.
 
 ## Deployment
 
-Target: multi-stage Docker image (Zola build → Caddy) on a Scaleway VPS, with the `Caddyfile` handling redirects and security headers (see REFONTE.md §7). **Not in place yet**: until the switch, awsd.fr is served by the old Hugo site ([`awsd_hugo`](https://github.com/sicotjeanvivien/awsd_hugo)).
+Target: multi-stage Docker image (Zola build → Caddy) on a Scaleway VPS, with the `Caddyfile` handling redirects and security headers. **Not in place yet**: until the switch, awsd.fr is served by the old Hugo site ([`awsd_hugo`](https://github.com/sicotjeanvivien/awsd_hugo)).
 
 ## License
 
 See [LICENSE](LICENSE). In short:
 
 - **Code** (the `atelier` theme, templates, Sass, `config.toml`): MIT.
-- **Content** (texts, articles, images, logos, mockups — `content/`, `static/`, `design/`): all rights reserved.
+- **Content** (texts, articles, images, logos — `content/`, `static/`): all rights reserved.
 - **Fonts**: SIL OFL 1.1 (`LICENSE-*.txt` files in `themes/atelier/static/fonts/`).

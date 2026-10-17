@@ -7,3 +7,6 @@ Thumbs.db
 
 # Cache d'images de Zola, régénéré à chaque build
 static/processed_images/
+
+# Brief de refonte, maquettes et sources de l'identité : gardés en local
+design/
