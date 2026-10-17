@@ -23,6 +23,9 @@
     </div>
     <div class="site-footer__bottom">
       <span class="label">© {{ now() | date(format="%Y") }} {{ config.extra.copyright | default(value=config.title) }}</span>
+      {%- if config.extra.theme_source %}
+      <span class="label site-footer__credit">{{ trans(key="footer_built_with", lang=lang) }} {{ <ui.external url={config.extra.theme_source} label={trans(key="footer_theme", lang=lang)} lang={lang} /> }}</span>
+      {%- endif %}
     </div>
   </div>
 </footer>

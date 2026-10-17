@@ -13,3 +13,5 @@ homepage = "https://awsd.fr"
 languages = []
 menu = []
 footer_menu = []
+# Lien « Construit avec Zola · thème atelier » du pied de page ("" pour le masquer).
+theme_source = "https://github.com/sicotjeanvivien/awsd/tree/main/themes/atelier"

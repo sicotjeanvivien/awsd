@@ -154,4 +154,10 @@
     padding-top: 20px;
     border-top: var(--dash);
   }
+
+  &__credit svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: -.1em;
+  }
 }
