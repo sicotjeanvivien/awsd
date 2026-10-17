@@ -97,9 +97,11 @@ docker compose up -d --build   # deploy or update
 To try the image locally:
 
 ```sh
-docker build -t awsd .
+docker build --build-arg BASE_URL=http://127.0.0.1:8080 -t awsd .
 docker run --rm -p 127.0.0.1:8080:80 awsd   # http://127.0.0.1:8080
 ```
+
+`BASE_URL` (default `https://awsd.fr`) is written into every link: without it, a local container links to the production site for its CSS and images.
 
 **Not in production yet**: until the switch, awsd.fr is served by the old Hugo site ([`awsd_hugo`](https://github.com/sicotjeanvivien/awsd_hugo)).
 
