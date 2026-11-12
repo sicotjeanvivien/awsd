@@ -1,0 +1,20 @@
+{#- Sitemap de Zola, sans les pages de taxonomie (tags, catégories) : elles
+    sont en noindex (taxonomy_list.html, taxonomy_single.html). Une adresse
+    est écartée si elle commence par <site>[/<langue>]/<taxonomie>/. -#}
+{%- set base = config.base_url | trim_end(pat="/") -%}
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for entry in entries %}
+  {%- set_global skip = false %}
+  {%- for tax in config.taxonomies %}{% if entry.permalink is starting_with(pat=base ~ "/" ~ tax.name ~ "/") %}{% set_global skip = true %}{% endif %}{% endfor %}
+  {%- for code, language in config.languages %}{% for tax in language.taxonomies %}{% if entry.permalink is starting_with(pat=base ~ "/" ~ code ~ "/" ~ tax.name ~ "/") %}{% set_global skip = true %}{% endif %}{% endfor %}{% endfor %}
+  {%- if not skip %}
+    <url>
+        <loc>{{ entry.permalink | escape_xml | safe }}</loc>
+        {%- if entry.updated %}
+        <lastmod>{{ entry.updated }}</lastmod>
+        {%- endif %}
+    </url>
+  {%- endif %}
+{%- endfor %}
+</urlset>

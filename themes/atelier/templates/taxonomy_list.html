@@ -1,4 +1,8 @@
 {% extends "base.html" %}
+{#- Listes de liens vers les articles, sans contenu propre : hors index et
+    hors sitemap (sitemap.xml), les liens restent suivis. -#}
+{% block robots %}
+<meta name="robots" content="noindex, follow">{% endblock robots %}
 {% block title %}{{ trans(key="taxonomy_" ~ taxonomy.name ~ "_list", lang=lang) }} — {{ config.title }}{% endblock title %}
 {% block content %}
 <section class="wrap page-head">
