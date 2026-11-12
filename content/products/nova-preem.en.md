@@ -10,14 +10,14 @@ status_label = "In production"
 since = "Oct. 2026"
 url = "https://nova-preem.app"
 source = "https://github.com/sicotjeanvivien/nova-preem"
-platform = "Web (PWA)"
+platform = "Web (PWA) · Android, iPhone, PC"
 app_category = "UtilitiesApplication"   # schema.org
 price = 0                        # gratuit (schema.org Offer, en EUR)
 kicker = ["TypeScript", "PWA"]
-stack = ["TypeScript", "React", "Vite", "Dexie"]
+stack = ["React", "TypeScript", "Vite", "Dexie", "Cloudflare Pages"]
 access = "Free · no account"
-flow = ["catalog", "entry", "collection", "completion"]
-flow_caption = "collecting routine"
+flow = ["catalog", "CDN", "app (PWA)", "device"]
+flow_caption = "data flow"
 facts = [
     { label = "Platforms", value = "Android, iPhone, PC" },
     { label = "Printings", value = "Retail, Beta, promos, EN / FR" },
