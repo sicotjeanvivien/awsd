@@ -1,6 +1,6 @@
 # awsd.fr
 
-Website of [AWSD](https://awsd.fr), an independent software company that builds and maintains its own products (Yog-Scope, Otia).
+Website of [AWSD](https://awsd.fr), an independent software company that builds and maintains its own products (Yog-Scope, Nova Preem).
 
 Static site generated with [Zola](https://www.getzola.org/), bilingual FR (root) / EN (`/en/`), no JavaScript, no npm dependency, self-hosted fonts. Automatic dark mode (follows `prefers-color-scheme`).
 
@@ -62,10 +62,11 @@ featured_image = "images/blog/my-image.png"   # in static/images/blog/
 
 ### Adding a product
 
-Create `content/products/<slug>.md` and `.en.md`, starting from `yog-scope.md` (full schema) or `otia.md` (product in development). Main `[extra]` fields:
+Create `content/products/<slug>.md` and `.en.md`, starting from `yog-scope.md` or `nova-preem.md` (full schema). Main `[extra]` fields:
 
 - `status`: `production`, `development` or `paused`, with its `status_label`;
 - `url`, `source`, `platform`, `stack`, `facts`, `features`, `pipeline`: empty blocks are not displayed;
+- `notice`: short line shown at the bottom of the product page (e.g. an unofficial fan project disclaimer);
 - `blog_tag`: category or tag of the posts related to the product.
 
 Display order (products page and home page) follows `weight`.

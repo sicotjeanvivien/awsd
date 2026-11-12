@@ -37,6 +37,12 @@
 	# entière est sur la première page.
 	@paged path_regexp paged ^(.*/)page/[0-9]+/?$
 	redir @paged {re.paged.1} permanent
+	# Produit retiré du catalogue (Otia, remplacé par Nova Preem) : vers la
+	# liste des produits de sa langue.
+	@otia_fr path /products/otia /products/otia/
+	redir @otia_fr /products/ permanent
+	@otia_en path /en/products/otia /en/products/otia/
+	redir @otia_en /en/products/ permanent
 
 	# --- En-têtes de sécurité --------------------------------------------------
 

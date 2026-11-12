@@ -1,6 +1,6 @@
 +++
 title = "Products"
-description = "Every product is designed, built and maintained by AWSD. Some are in production, others are still in development."
+description = "Every product is designed, built and maintained by AWSD."
 sort_by = "weight"
 template = "products.html"
 page_template = "product.html"
