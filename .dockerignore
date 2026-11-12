@@ -4,3 +4,6 @@ public/
 design/
 static/processed_images/
 *:Zone.Identifier
+.github/
+deploy/
+.env

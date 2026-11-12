@@ -87,12 +87,17 @@ UI labels live in `config.toml`: `[translations]` for FR, `[languages.en.transla
 
 The site ships as a Docker image (`Dockerfile`): Zola builds `public/`, then Caddy serves it over plain HTTP on port 80. The `Caddyfile` holds everything specific to the site: 301 redirects (`www`, URLs of the old Hugo site), security headers and CSP, caching, 404 page.
 
-On the server, the container publishes no port. TLS and routing by host name are done by the server's entry Caddy (private `edge` repository), which reaches this container as `awsd` over the shared `edge` Docker network:
+On the server, the container publishes no port. TLS and routing by host name are done by the server's entry Caddy (private `edge` repository), which reaches this container as `awsd` over the shared `edge` Docker network (`docker network create edge`, once per server).
 
-```sh
-docker network create edge     # once per server
-docker compose up -d --build   # deploy or update
-```
+**Every push to `main` goes to production** (`.github/workflows/deploy.yml`):
+
+1. GitHub builds the image and pushes it to GHCR as `ghcr.io/sicotjeanvivien/awsd:sha-<commit>`;
+2. a single `ssh` to the server runs `deploy/deploy-entry.sh`, the deploy key's forced command, which only accepts a commit of `main` or `--check`;
+3. `deploy/update.sh` updates the `/srv/awsd` checkout, pulls the image, recreates the container and waits for its healthcheck. If the new container is not healthy, the previous image is put back. The image in service is recorded in `.env` (not versioned).
+
+Nothing is built on the server. From the Actions tab (deploy → Run workflow): `rollback` redeploys an older commit of `main` without rebuilding, `check` only checks what is running. The same scripts work by hand on the server: `deploy/update.sh <commit>` or `deploy/update.sh --check`, from `/srv/awsd`.
+
+One-time setup (deploy key, `authorized_keys` line, `production` environment and its secrets, public GHCR package): header of `deploy/deploy-entry.sh`.
 
 To try the image locally:
 
@@ -102,8 +107,6 @@ docker run --rm -p 127.0.0.1:8080:80 awsd   # http://127.0.0.1:8080
 ```
 
 `BASE_URL` (default `https://awsd.fr`) is written into every link: without it, a local container links to the production site for its CSS and images.
-
-**Not in production yet**: until the switch, awsd.fr is served by the old Hugo site ([`awsd_hugo`](https://github.com/sicotjeanvivien/awsd_hugo)).
 
 ## License
 
