@@ -21,7 +21,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% block title %}{% if title_tag %}{{ title_tag }}{% elif meta_title and meta_title != config.title %}{{ meta_title }} — {% endif %}{{ config.title }}{% endblock title %}</title>
+<title>{% block title %}{% if title_tag %}{{ title_tag }}{% else %}{% if meta_title and meta_title != config.title %}{{ meta_title }} — {% endif %}{{ config.title }}{% endif %}{% endblock title %}</title>
 <meta name="description" content="{% block description %}{{ meta_description }}{% endblock description %}">
 {%- block robots %}{% endblock robots %}
 {%- if current_url %}
