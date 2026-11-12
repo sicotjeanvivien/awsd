@@ -42,6 +42,7 @@ wait_healthy() {
 
 check() {
   local cid
+  [[ -s .env ]] || die "aucun déploiement ici : pas de .env (lancer deploy/update.sh <commit>)"
   cid=$(docker compose ps -q awsd)
   [[ -n $cid ]] || die "aucun conteneur awsd en service"
   wait_healthy || die "le conteneur awsd n'est pas sain"
