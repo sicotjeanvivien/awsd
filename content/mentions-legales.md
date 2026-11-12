@@ -1,6 +1,6 @@
 +++
 title = "Mentions légales"
-description = "Mentions légales du site awsd.fr : éditeur, hébergeur et propriété intellectuelle."
+description = "Mentions légales du site awsd.fr : éditeur, hébergeur, diffusion et propriété intellectuelle."
 template = "legal.html"
 
 [extra]
@@ -28,6 +28,16 @@ see_also = { label = "Politique de confidentialité", path = "@/politique-de-con
 <dt>Adresse</dt><dd>8 rue de la Ville-l'Évêque, 75008 Paris, France</dd>
 <dt>Téléphone</dt><dd><a href="tel:+33184130000">+33 1 84 13 00 00</a></dd>
 <dt>Site</dt><dd><a href="https://www.scaleway.com" target="_blank" rel="noopener">scaleway.com</a></dd>
+</dl>
+
+## Diffusion
+
+Les pages sont acheminées par le réseau de diffusion de Cloudflare.
+
+<dl>
+<dt>Raison sociale</dt><dd>Cloudflare, Inc.</dd>
+<dt>Adresse</dt><dd>101 Townsend St, San Francisco, CA 94107, États-Unis</dd>
+<dt>Site</dt><dd><a href="https://www.cloudflare.com" target="_blank" rel="noopener">cloudflare.com</a></dd>
 </dl>
 
 ## Propriété intellectuelle

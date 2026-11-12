@@ -1,6 +1,6 @@
 +++
 title = "Legal notice"
-description = "Legal notice for awsd.fr: publisher, host and intellectual property."
+description = "Legal notice for awsd.fr: publisher, host, delivery and intellectual property."
 # URL héritée du site Hugo : /en/legal-notice/
 slug = "legal-notice"
 template = "legal.html"
@@ -30,6 +30,16 @@ see_also = { label = "Privacy policy", path = "@/politique-de-confidentialite.md
 <dt>Address</dt><dd>8 rue de la Ville-l'Évêque, 75008 Paris, France</dd>
 <dt>Phone</dt><dd><a href="tel:+33184130000">+33 1 84 13 00 00</a></dd>
 <dt>Website</dt><dd><a href="https://www.scaleway.com" target="_blank" rel="noopener">scaleway.com</a></dd>
+</dl>
+
+## Delivery
+
+Pages are delivered through Cloudflare's content delivery network.
+
+<dl>
+<dt>Company name</dt><dd>Cloudflare, Inc.</dd>
+<dt>Address</dt><dd>101 Townsend St, San Francisco, CA 94107, United States</dd>
+<dt>Website</dt><dd><a href="https://www.cloudflare.com" target="_blank" rel="noopener">cloudflare.com</a></dd>
 </dl>
 
 ## Intellectual property

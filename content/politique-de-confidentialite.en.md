@@ -1,7 +1,7 @@
 +++
 title = "Privacy policy"
 description = "How awsd.fr processes personal data, in compliance with the GDPR."
-updated = 2026-10-16
+updated = 2026-11-12
 # URL héritée du site Hugo : /en/privacy-policy/
 slug = "privacy-policy"
 template = "legal.html"
@@ -12,7 +12,7 @@ facts = [
     { label = "Form", value = "None" },
     { label = "Tracking cookies", value = "None" },
     { label = "Analytics", value = "None" },
-    { label = "Hosting", value = "European Union" },
+    { label = "Hosting", value = "EU · Cloudflare network" },
 ]
 see_also = { label = "Legal notice", path = "@/mentions-legales.md" }
 +++
@@ -41,6 +41,8 @@ E-mails are kept for as long as it takes to handle the request, then archived or
 
 These rights are exercised by e-mail.
 
-## Hosting
+## Hosting and delivery
 
 The site is hosted by Scaleway SAS, on servers located in the European Union. The server's technical logs are processed in this context.
+
+The site is delivered through the network of Cloudflare, Inc. (United States): every visit goes through its servers, which process the IP address and the technical details of the request to deliver the pages and protect the site against attacks. This processing is based on AWSD's legitimate interest in delivering and securing its site. This data may be processed outside the European Union; Cloudflare participates in the EU–U.S. Data Privacy Framework. Details are in [Cloudflare's privacy policy](https://www.cloudflare.com/privacypolicy/).

@@ -1,0 +1,6 @@
+# Signaler une vulnérabilité dans awsd.fr ou un produit AWSD (RFC 9116).
+# To report a vulnerability in awsd.fr or an AWSD product.
+Contact: mailto:awsd.contact@gmail.com
+Expires: 2027-11-12T00:00:00Z
+Preferred-Languages: fr, en
+Canonical: https://awsd.fr/.well-known/security.txt
