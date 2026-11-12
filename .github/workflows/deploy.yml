@@ -1,0 +1,136 @@
+# deploy — met awsd.fr en production à chaque fusion sur main.
+#
+#   1. image  : construit l'image du Dockerfile et la pousse dans GHCR,
+#               ghcr.io/sicotjeanvivien/awsd:sha-<commit> ;
+#   2. deploy : un seul `ssh` vers le serveur, dont la clé a pour commande
+#               forcée deploy/deploy-entry.sh, qui tire l'image, relance le
+#               conteneur et vérifie le site (deploy/update.sh) ;
+#   3. puis une vérification de https://awsd.fr depuis l'extérieur.
+#
+# À la main (onglet Actions → deploy → Run workflow) :
+#   - deploy   : reconstruit et redéploie la tête de main ;
+#   - rollback : redéploie l'image d'un commit plus ancien de main, sans
+#                rien reconstruire ;
+#   - check    : vérifie seulement ce qui tourne.
+#
+# Mise en place (clé, ligne authorized_keys, environnement `production` et
+# ses trois secrets, visibilité du paquet GHCR) : en-tête de
+# deploy/deploy-entry.sh. Les secrets sont ceux de l'environnement
+# `production`, qui n'accepte que la branche main : une copie modifiée de ce
+# fichier lancée depuis une autre branche n'obtient pas la clé.
+
+name: deploy
+
+on:
+  push:
+    branches: [main]
+    # Ce qui n'entre pas dans le site ne le redéploie pas.
+    paths-ignore: ["README.md", "LICENSE"]
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "deploy : la tête de main · rollback : un commit plus ancien de main · check : vérifier seulement"
+        type: choice
+        options: [deploy, rollback, check]
+        default: deploy
+      commit:
+        description: "rollback seulement : le commit complet (40 caractères)"
+        type: string
+        required: false
+
+# Deux déploiements ne se chevauchent pas, et celui qui tourne n'est jamais
+# annulé. GitHub ne garde qu'UN lancement en attente par groupe : deux
+# fusions rapprochées pendant un déploiement, seule la dernière passe, ce
+# qui suffit (elle contient l'autre).
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+permissions: {}
+
+env:
+  IMAGE: ghcr.io/sicotjeanvivien/awsd
+  SITE_URL: https://awsd.fr/
+
+jobs:
+  image:
+    if: github.event_name == 'push' || inputs.mode == 'deploy'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Construction
+        run: |
+          docker build \
+            --label "org.opencontainers.image.source=https://github.com/${GITHUB_REPOSITORY}" \
+            --label "org.opencontainers.image.revision=${GITHUB_SHA}" \
+            -t "$IMAGE:sha-$GITHUB_SHA" .
+
+      - name: Push vers GHCR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          printf '%s' "$GH_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          docker push -q "$IMAGE:sha-$GITHUB_SHA"
+
+  deploy:
+    needs: image
+    # Le job image est sauté en rollback et en check : on part quand même,
+    # sauf s'il a échoué ou été annulé.
+    if: ${{ !failure() && !cancelled() }}
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 10
+    steps:
+      - name: deploy/update.sh sur le serveur
+        env:
+          MODE: ${{ github.event_name == 'push' && 'deploy' || inputs.mode }}
+          COMMIT: ${{ inputs.commit }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          # Le serveur (deploy/deploy-entry.sh) est le seul juge de ce qui
+          # passe ; le motif est vérifié ici aussi pour qu'une faute de frappe
+          # échoue avant d'ouvrir une connexion. Les valeurs arrivent par
+          # l'environnement, jamais interpolées dans le script.
+          case "$MODE" in
+            deploy) arg=$GITHUB_SHA ;;
+            rollback)
+              [[ $COMMIT =~ ^[0-9a-f]{40}$ ]] \
+                || { echo "commit invalide : « $COMMIT » (attendu : 40 caractères hexadécimaux)" >&2; exit 1; }
+              arg=$COMMIT ;;
+            check) arg=--check ;;
+            *) echo "mode inconnu : $MODE" >&2; exit 1 ;;
+          esac
+          for v in DEPLOY_HOST DEPLOY_SSH_KEY DEPLOY_KNOWN_HOSTS; do
+            [ -n "${!v}" ] || { echo "secret manquant : $v (voir deploy/deploy-entry.sh)" >&2; exit 1; }
+          done
+
+          key="$RUNNER_TEMP/deploy_key"; hosts="$RUNNER_TEMP/known_hosts"
+          trap 'rm -f "$key" "$hosts"' EXIT
+          ( umask 077; printf '%s\n' "$DEPLOY_SSH_KEY" > "$key"; printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > "$hosts" )
+
+          # Empreinte du serveur épinglée : un serveur qui ne la présente pas
+          # est refusé, jamais appris. Le `--` empêche OpenSSH de relire
+          # `--check` comme une option. -T -n : une exécution, pas un shell.
+          ssh -i "$key" -T -n \
+            -o IdentitiesOnly=yes -o BatchMode=yes \
+            -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$hosts" \
+            -o ServerAliveInterval=30 -o ServerAliveCountMax=4 \
+            -- "$DEPLOY_HOST" "$arg"
+
+      - name: Le site répond depuis l'extérieur
+        run: |
+          for _ in 1 2 3 4 5; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$SITE_URL") || true
+            [ "$code" = 200 ] && { echo "$SITE_URL : 200"; exit 0; }
+            sleep 5
+          done
+          echo "$SITE_URL répond $code" >&2
+          exit 1

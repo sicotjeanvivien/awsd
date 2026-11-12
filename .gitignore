@@ -10,3 +10,7 @@ static/processed_images/
 
 # Brief de refonte, maquettes et sources de l'identité : gardés en local
 design/
+
+# Image en service sur le serveur, écrite par deploy/update.sh
+.env
+.env.tmp

@@ -1,6 +1,9 @@
 # compose.yml — le site sur le serveur.
 #
-#   docker compose up -d --build
+# L'image est construite par GitHub (.github/workflows/deploy.yml) et tirée
+# de GHCR par deploy/update.sh, qui écrit celle en service dans .env
+# (AWSD_IMAGE=ghcr.io/sicotjeanvivien/awsd:sha-<commit>). Rien ne se
+# construit sur le serveur. Pour tester l'image en local : voir le Dockerfile.
 #
 # Aucun port publié : le Caddy d'entrée (dépôt edge) joint ce conteneur par
 # le réseau « edge », sous le nom `awsd`. Ce réseau est créé une fois sur
@@ -8,12 +11,20 @@
 
 services:
   awsd:
-    build: .
-    image: awsd:latest
+    image: ${AWSD_IMAGE:?AWSD_IMAGE absent de .env, lancer deploy/update.sh <commit>}
     networks:
       - edge
     mem_limit: 64m
     restart: unless-stopped
+    # Sert à deploy/update.sh pour savoir si le nouveau conteneur répond
+    # avant de déclarer le déploiement réussi.
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 15s
+      start_interval: 1s
 
 networks:
   edge:
