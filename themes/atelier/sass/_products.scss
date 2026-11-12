@@ -397,6 +397,13 @@
 .band__cta-title { font-size: 44px; line-height: 1.05; }
 .band__muted { color: var(--on-dark-2); }
 
+// Mention en bas de fiche (ex. projet de fan non officiel).
+.product-notice {
+  padding-top: 28px;
+  padding-bottom: 28px;
+  line-height: 1.6;
+}
+
 // --- Article : encart « Produit associé » ------------------------------------
 
 .related {

@@ -11,7 +11,7 @@ company = [
     { label = "Legal form", value = "SASU (French simplified joint-stock company)" },
     { label = "Head office", value = "Paris" },
     { label = "Business", value = "Software publishing and technical consulting" },
-    { label = "Products", value = "Yog-Scope, Otia" },
+    { label = "Products", value = "Yog-Scope, Nova Preem" },
 ]
 founder_label = "Founder"
 founder_name = "Jean-Vivien Sicot"

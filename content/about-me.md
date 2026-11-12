@@ -11,7 +11,7 @@ company = [
     { label = "Forme", value = "SASU" },
     { label = "Siège", value = "Paris" },
     { label = "Activité", value = "Édition de logiciels et accompagnement technique" },
-    { label = "Produits", value = "Yog-Scope, Otia" },
+    { label = "Produits", value = "Yog-Scope, Nova Preem" },
 ]
 founder_label = "Fondateur"
 founder_name = "Jean-Vivien Sicot"

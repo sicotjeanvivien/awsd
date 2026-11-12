@@ -120,4 +120,9 @@
   </div>
 </section>
 {%- endif %}
+
+{#- Mention en bas de fiche (avertissement légal, statut non officiel…). -#}
+{%- if x.notice %}
+<p class="wrap product-notice label">{{ x.notice }}</p>
+{%- endif %}
 {% endblock content %}
