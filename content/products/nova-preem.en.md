@@ -19,7 +19,7 @@ access = "Free · no account"
 flow = ["catalog", "CDN", "app (PWA)", "device"]
 flow_caption = "data flow"
 facts = [
-    { label = "Languages", value = "FR / EN" },
+    { label = "Languages", value = "French, English" },
     { label = "Printings", value = "Retail, Beta, promos, EN / FR" },
     { label = "Network", value = "Offline, no server" },
     { label = "Access", value = "Free · no account" },
