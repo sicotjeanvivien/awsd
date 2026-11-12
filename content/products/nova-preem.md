@@ -19,7 +19,7 @@ access = "Gratuit · sans compte"
 flow = ["catalogue", "CDN", "app (PWA)", "appareil"]
 flow_caption = "flux de données"
 facts = [
-    { label = "Plateformes", value = "Android, iPhone, PC" },
+    { label = "Langues", value = "FR / EN" },
     { label = "Impressions", value = "Retail, Beta, promos, FR / EN" },
     { label = "Réseau", value = "Hors ligne, sans serveur" },
     { label = "Accès", value = "Gratuit · sans compte" },
