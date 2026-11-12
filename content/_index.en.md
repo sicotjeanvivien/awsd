@@ -4,6 +4,8 @@ title = "AWSD"
 aliases = ["/en/services/"]
 
 [extra]
+# <title> de l'accueil, pour les moteurs de recherche.
+title_tag = "AWSD — independent software company"
 eyebrow = "Artisan Web Software Development"
 hero_title = "Software built"
 hero_mark = "to last"

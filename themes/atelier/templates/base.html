@@ -11,13 +11,19 @@
   {%- if section.title %}{% set meta_title = section.title %}{% endif -%}
   {%- if section.description %}{% set meta_description = section.description %}{% endif -%}
 {%- endif -%}
+{#- extra.title_tag remplace le <title> entier (et og:title), là où le titre
+    affiché ne suffit pas à un moteur de recherche (l'accueil : « AWSD »). -#}
+{%- set title_tag = "" -%}
+{%- if page and page.extra.title_tag %}{% set title_tag = page.extra.title_tag %}
+{%- elif section and section.extra.title_tag %}{% set title_tag = section.extra.title_tag %}{% endif -%}
 <!doctype html>
 <html lang="{{ lang }}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% block title %}{% if meta_title and meta_title != config.title %}{{ meta_title }} — {% endif %}{{ config.title }}{% endblock title %}</title>
+<title>{% block title %}{% if title_tag %}{{ title_tag }}{% elif meta_title and meta_title != config.title %}{{ meta_title }} — {% endif %}{{ config.title }}{% endblock title %}</title>
 <meta name="description" content="{% block description %}{{ meta_description }}{% endblock description %}">
+{%- block robots %}{% endblock robots %}
 {%- if current_url %}
 <link rel="canonical" href="{{ current_url | safe }}">
 {%- endif %}
@@ -44,7 +50,7 @@
 {%- endif %}
 <meta property="og:type" content="{{ og_type }}">
 <meta property="og:site_name" content="{{ config.title }}">
-<meta property="og:title" content="{% if meta_title %}{{ meta_title }}{% else %}{{ config.title }}{% endif %}">
+<meta property="og:title" content="{% if title_tag %}{{ title_tag }}{% elif meta_title %}{{ meta_title }}{% else %}{{ config.title }}{% endif %}">
 <meta property="og:description" content="{{ meta_description }}">
 {%- if current_url %}
 <meta property="og:url" content="{{ current_url | safe }}">

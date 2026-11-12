@@ -28,7 +28,7 @@ content/               Markdown content (page.md = FR, page.en.md = EN)
 templates/             AWSD-specific overrides (home, About, Contact)
 static/                images, logos, favicons, manifest
 themes/atelier/        in-house theme, independent from the site
-  templates/           base, blog, products, legal pages, taxonomies, 404, RSS feed
+  templates/           base, blog, products, legal pages, taxonomies, 404, RSS feed, sitemap
   sass/                styles (a single main.css compiled by Zola)
   static/fonts/        woff2 fonts (OFL licenses included)
 ```
@@ -74,6 +74,11 @@ Display order (products page and home page) follows `weight`.
 ### UI strings and menus
 
 UI labels live in `config.toml`: `[translations]` for FR, `[languages.en.translations]` for EN. Menus (header, footer) and company details (schema.org data) live in `[extra]`.
+
+### Search engines
+
+- Every page gets its `<title>` from its own title (`Title — AWSD`). `extra.title_tag` in a page's front matter replaces the whole `<title>` and `og:title`; the home page uses it (`content/_index.md`).
+- Tag and category pages are `noindex, follow` and left out of `sitemap.xml` (theme template `sitemap.xml`): they only list posts.
 
 ## Conventions
 
